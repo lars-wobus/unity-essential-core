@@ -126,6 +126,16 @@ namespace Essential.Core.Tests.Extensions
 
 			Assert.AreEqual(float.NaN, result, TestSettings.DoublePrecision);
 		}
+		
+		[Test]
+		public void Should_ReturnNewRangeMinium_When_InputValueWasNaNAndOldRangeHasLengthOfZero()
+		{
+			const float value = float.NaN;
+
+			var result = value.Remap(0, 0, -10, 10);
+
+			Assert.AreEqual(-10, result, TestSettings.DoublePrecision);
+		}
 
 		[Test]
 		public void Should_ReturnNaN_When_OldRangeContainsNaN()
@@ -145,6 +155,26 @@ namespace Essential.Core.Tests.Extensions
 			var result = value.Remap(0, 1, 0, float.NaN);
 
 			Assert.AreEqual(float.NaN, result, TestSettings.DoublePrecision);
+		}
+
+		[Test]
+		public void Should_ReturnNewRangeMinium_When_OldRangeHasLengthOfZero()
+		{
+			const float value = 0.5f;
+
+			var actual = value.Remap(0, 0, -10, 10);
+			
+			Assert.AreEqual(-10, actual, TestSettings.DoublePrecision);
+		}
+		
+		[Test]
+		public void Should_ReturnReliableResult_When_NewRangeHasLengthOfZero()
+		{
+			const float value = 0.5f;
+
+			var actual = value.Remap(0, 1, 0, 0);
+			
+			Assert.AreEqual(0, actual, TestSettings.DoublePrecision);
 		}
 	}
 
