@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Converter;
+using UnityEngine;
 
 namespace Essential.Core.Extensions
 {
@@ -22,6 +23,11 @@ namespace Essential.Core.Extensions
         public static float Remap(this float value, float aMin, float aMax, float bMin, float bMax)
         {
             return Mathf.Lerp(bMin, bMax, Mathf.InverseLerp(aMin, aMax, value));
+        }
+
+        public static byte[] Convert(this float[] array)
+        {
+            return ByteArray.BlockCopy(array, sizeof(float));
         }
     }
 }

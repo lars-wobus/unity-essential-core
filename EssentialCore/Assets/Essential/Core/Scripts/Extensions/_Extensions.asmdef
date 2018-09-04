@@ -1,3 +1,10 @@
-﻿{
-	"name": "Extensions"
+{
+    "name": "Extensions",
+    "references": [
+        "Converter"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }
