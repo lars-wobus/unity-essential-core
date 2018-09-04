@@ -1,4 +1,7 @@
-﻿using Essential.Core.Extensions;
+﻿//using Essential.Core.Converter;
+
+using System;
+using Essential.Core.Extensions;
 using Essential.Core.Tests.Configuration;
 using NUnit.Framework;
 
@@ -175,6 +178,36 @@ namespace Essential.Core.Tests.Extensions
 			var actual = value.Remap(0, 1, 0, 0);
 			
 			Assert.AreEqual(0, actual, TestSettings.DoublePrecision);
+		}
+
+		[Test]
+		public void Should_ReturnEmptyByteArray_When_EmptyFloatArrayIsConverted()
+		{
+			float[] array = {};
+
+			var actual = array.Convert();
+			
+			Assert.AreEqual(0, actual.Length, TestSettings.DoublePrecision);
+		}
+		
+		[Test]
+		public void Should_ReturnFilledByteArray_When_FilledFloatArrayIsConverted()
+		{
+			float[] array = {1f, 2f, 3f};
+
+			var actual = array.Convert();
+			
+			Assert.AreEqual(array.Length * sizeof(float), actual.Length, TestSettings.DoublePrecision);
+		}
+		
+		[Test]
+		public void Should_ReturnByteFittingToInput_When_PassingSingleFloatInArray()
+		{
+			float[] expected = {42f};
+
+			var actual = expected.Convert();
+			
+			Assert.AreEqual(expected[0], BitConverter.ToSingle(actual, 0), TestSettings.DoublePrecision);
 		}
 	}
 

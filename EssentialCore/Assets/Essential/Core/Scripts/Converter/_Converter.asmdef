@@ -1,8 +1,6 @@
 {
-    "name": "Extensions",
-    "references": [
-        "_Converter"
-    ],
+    "name": "_Converter",
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
