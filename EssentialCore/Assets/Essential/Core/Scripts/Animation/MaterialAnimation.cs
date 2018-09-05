@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Rapid.Animation
 {
@@ -19,6 +21,15 @@ namespace Rapid.Animation
             set { _alteration = value; }
         }
 
+        private void Start()
+        {
+            if (Material == null)
+            {
+                enabled = false;
+                throw new NullReferenceException("Material was null");
+            }
+        }
+        
         private void Update()
         {
             Material.mainTextureOffset += Alteration;
