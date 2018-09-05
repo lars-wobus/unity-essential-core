@@ -1,15 +1,12 @@
 {
-    "name": "Test",
+    "name": "_RuntimeTestsAnimation",
     "references": [
-        "Extensions",
         "_Animation"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }

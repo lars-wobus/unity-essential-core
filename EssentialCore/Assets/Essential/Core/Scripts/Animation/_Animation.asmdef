@@ -1,0 +1,10 @@
+{
+    "name": "_Animation",
+    "references": [
+        "_Math"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
