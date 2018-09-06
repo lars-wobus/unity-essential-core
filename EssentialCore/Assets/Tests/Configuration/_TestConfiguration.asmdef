@@ -1,10 +1,6 @@
 {
-    "name": "_RuntimeTestsAnimation",
-    "references": [
-        "_Animation",
-        "_Debugging",
-        "_TestConfiguration"
-    ],
+    "name": "_TestConfiguration",
+    "references": [],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],

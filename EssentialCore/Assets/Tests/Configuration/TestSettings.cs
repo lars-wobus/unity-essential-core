@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Essential.Core.Tests.Configuration
 {
@@ -30,6 +32,11 @@ namespace Essential.Core.Tests.Configuration
 		{
 			// ReSharper disable once HeapView.ObjectAllocation.Evident
 			return new GameObject();
+		}
+		
+		public static void ExpectNullReferenceException()
+		{
+			LogAssert.Expect(LogType.Exception, new Regex("NullReferenceException: "));
 		}
 	}
 }

@@ -1,9 +1,8 @@
 {
-    "name": "Test",
+    "name": "_TestExtensions",
     "references": [
-        "Extensions",
-        "_Animation",
-        "_Debugging"
+        "_TestConfiguration",
+        "Extensions"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

@@ -1,7 +1,8 @@
 {
     "name": "_Animation",
     "references": [
-        "_Math"
+        "_Math",
+        "_Debugging"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Essential.Core.Debugging;
 using UnityEngine;
 
 namespace Rapid.Animation
@@ -23,11 +24,12 @@ namespace Rapid.Animation
 
         private void Start()
         {
-            if (Material == null)
+            /*if (Material == null)
             {
                 enabled = false;
                 throw new NullReferenceException("Material was null");
-            }
+            }*/
+            SafeGuard.ThrowNullReferenceExceptionWhenComponentIsNull(Material, this, nameof(Material));
         }
         
         private void Update()
