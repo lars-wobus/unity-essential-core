@@ -24,11 +24,6 @@ namespace Rapid.Animation
 
         private void Start()
         {
-            /*if (Material == null)
-            {
-                enabled = false;
-                throw new NullReferenceException("Material was null");
-            }*/
             SafeGuard.ThrowNullReferenceExceptionWhenComponentIsNull(Material, this, nameof(Material));
         }
         
