@@ -22,10 +22,31 @@ namespace Tests.Animation.Runtime
 		[UnityTest]
 		public IEnumerator Should_ThrowNullReferenceException_When_MaterialWasNotSet()
 		{
-			//LogAssert.Expect(LogType.Exception, new Regex("NullReferenceException: "));
 			TestSettings.ExpectNullReferenceException();
 			DummyGameObject.AddComponent<MaterialAnimation>();
 			yield return null;
+		}
+
+		[UnityTest]
+		public IEnumerator Should_NotThrowNullReferenceException_When_MaterialWasSet()
+		{
+			var materialAnimation = DummyGameObject.AddComponent<MaterialAnimation>();
+			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
+			yield return null;
+		}
+
+		[UnityTest]
+		public IEnumerator Should_AlterMainTextureOffset_When_UpdateMethodWasCalled()
+		{
+			var materialAnimation = DummyGameObject.AddComponent<MaterialAnimation>();
+			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
+			materialAnimation.Alteration = new Vector2(1, 1);
+			Vector2 oldOffset = materialAnimation.Material.mainTextureOffset;
+			
+			yield return null;
+			
+			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
+			Assert.False(oldOffset.Equals(newOffset));
 		}
 	}
 }
