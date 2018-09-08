@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Rapid.Animation;
@@ -47,6 +48,22 @@ namespace Tests.Animation.Runtime
 			
 			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
 			Assert.False(oldOffset.Equals(newOffset));
+		}
+
+		[UnityTest]
+		public IEnumerator Should_ResetMainTextureOffset_On_ApplicationQuit()
+		{
+			var materialAnimation = DummyGameObject.AddComponent<MaterialAnimation>();
+			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
+			materialAnimation.Material.mainTextureOffset = Vector2.one;
+			
+			yield return null;
+			
+			MethodInfo onApplicationQuit = materialAnimation.GetType().GetMethod("OnApplicationQuit", TestSettings.BindingFlagsToAccessPrivateMembers);
+			onApplicationQuit.Invoke(materialAnimation, new object[] {  });
+			
+			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
+			Assert.True(materialAnimation.Material.mainTextureOffset.Equals(Vector2.zero));
 		}
 	}
 }

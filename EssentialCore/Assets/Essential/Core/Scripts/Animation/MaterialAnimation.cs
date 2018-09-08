@@ -31,5 +31,10 @@ namespace Rapid.Animation
         {
             Material.mainTextureOffset += Alteration;
         }
+
+        private void OnApplicationQuit()
+        {
+            Material.mainTextureOffset = Vector2.zero;
+        }
     }
 }
