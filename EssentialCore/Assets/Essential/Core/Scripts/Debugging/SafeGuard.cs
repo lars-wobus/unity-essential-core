@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -10,9 +11,14 @@ namespace Essential.Core.Debugging
 	public class SafeGuard {
 
 		[Conditional("UNITY_EDITOR")]
-		public static void ThrowNullReferenceExceptionWhenComponentIsNull<T>(T anything, MonoBehaviour script, string valueName) where T : class 
+		public static void ThrowNullReferenceExceptionWhenComponentIsNull<T>(T anything, MonoBehaviour script, string valueName) where T : class
 		{
-			if (anything != null)
+			/*if (!EqualityComparer<T>.Default.Equals(anything, default(T)))
+			{
+				return;
+			}*/
+
+			if (!anything.ToString().Equals("null"))
 			{
 				return;
 			}
