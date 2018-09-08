@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6850931b2fcfb9145a87ba2147f08141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _material: {fileID: 2100000, guid: e21294ee84d8879479e1e837be9f784c, type: 2}
-  _alteration: {x: 0, y: 0}
+  _material: {fileID: 0}
+  _alteration: {x: 0.1, y: 0}
 --- !u!4 &357292970
 Transform:
   m_ObjectHideFlags: 0
