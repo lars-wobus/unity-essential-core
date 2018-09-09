@@ -25,7 +25,7 @@ namespace Essential.Core.Animation
 			SafeGuard.ThrowNullReferenceExceptionWhenComponentIsNull(Material, this, nameof(Material));
 		}
 
-		protected abstract void ChangeTextureOffset(float speed);
+		protected abstract void ChangeTextureOffset(float progress);
 
 		private void OnApplicationQuit()
 		{

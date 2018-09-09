@@ -5,26 +5,19 @@ namespace Essential.Core.Animation
 	public class TextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
 	{
 		[SerializeField] private string _shaderVariable = "_MainTex";
-		public string ShaderVariable
-		{
-			get { return _shaderVariable; }
-			set { _shaderVariable = value; }
-		}
-
-		/*private void Update()
-		{
-			ChangeTextureOffset();
-		}*/
 		
-		protected override void ChangeTextureOffset(float speed)
+		private string ShaderVariable => _shaderVariable;
+
+		protected override void ChangeTextureOffset(float progress)
 		{
-			var textureOffset = Material.GetTextureOffset(ShaderVariable);
-			Material.SetTextureOffset(ShaderVariable, textureOffset + Alteration * speed);
+			//var textureOffset = Material.GetTextureOffset(ShaderVariable);
+			//Material.SetTextureOffset(ShaderVariable, textureOffset + Alteration * speed);
+			Material.SetTextureOffset(ShaderVariable, Alteration * progress);
 		}
 
-		public void SetProgress(float deltaTime)
+		public void SetProgress(float progress)
 		{
-			ChangeTextureOffset(deltaTime);
+			ChangeTextureOffset(progress);
 		}
 	}
 }

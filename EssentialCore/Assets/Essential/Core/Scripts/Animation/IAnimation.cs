@@ -2,6 +2,6 @@
 {
     public interface IAnimation
     {
-        void SetProgress(float deltaTime);
+        void SetProgress(float progress);
     }
 }

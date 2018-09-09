@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: e21294ee84d8879479e1e837be9f784c, type: 2}
-  _alteration: {x: 0.01, y: 0}
+  _alteration: {x: 1, y: 0}
 --- !u!114 &114841736677081782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,5 +100,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: e21294ee84d8879479e1e837be9f784c, type: 2}
-  _alteration: {x: 0, y: 0.01}
+  _alteration: {x: 0, y: 1}
   _shaderVariable: _MainTex

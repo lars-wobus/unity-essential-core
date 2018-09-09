@@ -2,19 +2,15 @@
 {
     public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
     {
-        /*private void Update()
+        protected override void ChangeTextureOffset(float progress)
         {
-            ChangeTextureOffset();
-        }*/
-
-        protected override void ChangeTextureOffset(float speed)
-        {
-            Material.mainTextureOffset += Alteration * speed;
+            //Material.mainTextureOffset += Alteration * speed;
+            Material.mainTextureOffset = Alteration * progress;
         }
 
-        public void SetProgress(float deltaTime)
+        public void SetProgress(float progress)
         {
-            ChangeTextureOffset(deltaTime);
+            ChangeTextureOffset(progress);
         }
     }
 }
