@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Essential.Core.Debugging;
 using UnityEngine;
 
-namespace Rapid.Animation
+namespace Essential.Core.Animation
 {
     public class MaterialAnimation : MonoBehaviour
     {

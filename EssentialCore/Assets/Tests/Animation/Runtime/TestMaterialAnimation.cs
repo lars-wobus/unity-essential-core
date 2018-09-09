@@ -2,10 +2,10 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
-using Rapid.Animation;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Essential.Core.Debugging;
+using Essential.Core.Animation;
 using Essential.Core.Tests.Configuration;
 
 namespace Tests.Animation.Runtime
