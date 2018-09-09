@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Essential.Core.Animation
 {
-    public class MaterialAnimation : MonoBehaviour
+    public class SimpleMainTextureAnimation : MonoBehaviour
     {
         [SerializeField] private Material _material;
         [SerializeField] private Vector2 _alteration;
