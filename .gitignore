@@ -47,3 +47,11 @@ sysinfo.txt
 # Ignore scenes created from runtime tests
 EssentialCore/Assets/InitTestScene*.unity
 EssentialCore/Assets/InitTestScene*.unity.meta
+
+# Ignore shaders for the moment
+EssentialCore/Assets/Essential/Core/Shaders/*
+
+# Ingore IO scripts
+EssentialCore/Assets/Essential/Core/Scripts/IO.meta
+EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs
+EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs.meta
