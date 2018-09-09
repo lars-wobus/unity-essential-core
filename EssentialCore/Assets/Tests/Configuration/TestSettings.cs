@@ -24,7 +24,7 @@ namespace Essential.Core.Tests.Configuration
 		{
 			get
 			{
-				return BindingFlags.FlattenHierarchy | BindingFlagsToAccessPrivateMembers;
+				return BindingFlags.FlattenHierarchy | BindingFlags.NonPublic;
 			}
 		}
 

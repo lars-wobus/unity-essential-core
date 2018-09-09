@@ -58,11 +58,15 @@ namespace Tests.Animation.Runtime
 			materialAnimation.Material.mainTextureOffset = Vector2.one;
 			
 			yield return null;
-			
-			MethodInfo onApplicationQuit = materialAnimation.GetType().GetMethod("OnApplicationQuit", TestSettings.BindingFlagsToAccessPrivateMembers);
-			onApplicationQuit.Invoke(materialAnimation, new object[] {  });
-			
+
+			var memberInfo = materialAnimation.GetType().BaseType;
+			if (memberInfo != null)
+			{
+				MethodInfo onApplicationQuit = memberInfo.GetMethod("OnApplicationQuit", TestSettings.BindingFlagsToAccessPrivateMembers);
+				onApplicationQuit.Invoke(materialAnimation, new object[] {  });
+			}
 			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
+			
 			Assert.True(materialAnimation.Material.mainTextureOffset.Equals(Vector2.zero));
 		}
 	}
