@@ -3,42 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Essential.Core.Animation;
+using Essential.Core.Extensions;
 
-public class AnimationSync : MonoBehaviour, IAnimation
+public class AnimationSync : MonoBehaviour, IStateMachineAnimation
 {
-	[SerializeField] private Component[] _components;
-	[SerializeField] private List<IAnimation> _syncedComponents;
+	[SerializeField] private MonoBehaviour[] _components;
 
-	public List<IAnimation> SyncedComponents
+	private IEnumerable<MonoBehaviour> Components => _components;
+	private IAnimation[] SyncedComponents { get; set; }
+
+	private void Start()
 	{
-		get { return _syncedComponents; }
-		set { _syncedComponents = value; }
+		Initialize();
 	}
-
-	public Component[] Components
+	
+	/// <summary>
+	/// Use this for initialization when script is used in any animator state.
+	/// In that situation "Awake", "Start", etc. will not be called.
+	/// </summary>
+	public void Initialize()
 	{
-		get { return _components; }
-		set { _components = value; }
-	}
-
-	// Use this for initialization
-	void Start ()
-	{
-		_syncedComponents = new List<IAnimation>();
-		foreach (var component in Components)
-		{
-			_syncedComponents.Add(component as IAnimation);
-		}
+		SyncedComponents = Components.FilterByType<IAnimation>();
 	}
 	
 	public void SetProgress(float deltaTime)
 	{
-		if (_syncedComponents == null)
+		Debug.Log(SyncedComponents);
+		if (SyncedComponents == null)
 		{
+			Debug.Log(_components.Length.ToString());
 			Debug.Log("Not initialized");
-			Start();
 			return;
 		}
-		_syncedComponents.ForEach(element => element.SetProgress(deltaTime));
+
+		foreach (var animationSync in SyncedComponents)
+		{
+			animationSync.SetProgress(deltaTime);
+		}
 	}
 }

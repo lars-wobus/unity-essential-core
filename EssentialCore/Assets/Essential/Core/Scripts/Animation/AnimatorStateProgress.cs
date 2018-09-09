@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
-using Essential.Core.Animation;
+using Essential.Core.Extensions;
 using UnityEngine;
-using System.Linq;
 
-namespace Essential.Core.Animations
+namespace Essential.Core.Animation
 {
 	public class AnimatorStateProgress : StateMachineBehaviour
 	{
 		[SerializeField] private MonoBehaviour[] _components;
 
 		private IEnumerable<MonoBehaviour> Components => _components;
-		private IAnimation[] SyncedComponents { get; set; }
+		private IStateMachineAnimation[] SyncedComponents { get; set; }
 
 		public void Awake()
 		{
-			SyncedComponents = Components
-				.Where(element => (element as IAnimation) != null)
-				.Select(element => (element as IAnimation)).ToArray();
+			SyncedComponents = Components.FilterByType<IStateMachineAnimation>();
+			foreach (var syncedComponent in SyncedComponents)
+			{
+				syncedComponent.Initialize();
+			}
 		}
 
 		// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
