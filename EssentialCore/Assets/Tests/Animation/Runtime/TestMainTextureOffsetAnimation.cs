@@ -37,14 +37,16 @@ namespace Tests.Animation.Runtime
 		}
 
 		[UnityTest]
-		public IEnumerator Should_AlterMainTextureOffset_When_UpdateMethodWasCalled()
+		//public IEnumerator Should_AlterMainTextureOffset_When_UpdateMethodWasCalled()
+		public IEnumerator Should_AlterMainTextureOffset_When_HandleUpdate()
 		{
 			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
 			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
 			materialAnimation.Alteration = new Vector2(1, 1);
 			Vector2 oldOffset = materialAnimation.Material.mainTextureOffset;
-			
+
 			yield return null;
+			materialAnimation.HandleUpdate();
 			
 			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
 			Assert.False(oldOffset.Equals(newOffset));

@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Animation
 {
-	public class TextureOffsetAnimation : TextureOffsetAnimationBase
+	public class TextureOffsetAnimation : TextureOffsetAnimationBase, ISync
 	{
 		[SerializeField] private string _shaderVariable = "_MainTex";
 
@@ -12,15 +12,20 @@ namespace Essential.Core.Animation
 			set { _shaderVariable = value; }
 		}
 
-		private void Update()
+		/*private void Update()
 		{
 			ChangeTextureOffset();
-		}
+		}*/
 		
 		protected override void ChangeTextureOffset()
 		{
 			var textureOffset = Material.GetTextureOffset(ShaderVariable);
 			Material.SetTextureOffset(ShaderVariable, textureOffset + Alteration);
+		}
+
+		public void HandleUpdate()
+		{
+			ChangeTextureOffset();
 		}
 	}
 }
