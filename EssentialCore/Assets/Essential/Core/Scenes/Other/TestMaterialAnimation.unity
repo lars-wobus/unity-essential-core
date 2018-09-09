@@ -384,9 +384,48 @@ Prefab:
       propertyPath: m_Name
       value: TextureOffsetAnimationPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 114253060996574182, guid: bbeb2a31ab703ed43a5e027287b53c19,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114380457362613106, guid: bbeb2a31ab703ed43a5e027287b53c19,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841736677081782, guid: bbeb2a31ab703ed43a5e027287b53c19,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbeb2a31ab703ed43a5e027287b53c19, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &925662290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1308187896386374, guid: bbeb2a31ab703ed43a5e027287b53c19,
+    type: 2}
+  m_PrefabInternal: {fileID: 896116924}
+--- !u!114 &925662291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 925662290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933481e1b74d7224f985157dc34c6f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 925662295}
+--- !u!114 &925662295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114380457362613106, guid: bbeb2a31ab703ed43a5e027287b53c19,
+    type: 2}
+  m_PrefabInternal: {fileID: 896116924}
+  m_Script: {fileID: 11500000, guid: 6850931b2fcfb9145a87ba2147f08141, type: 3}
 --- !u!1 &1132930735
 GameObject:
   m_ObjectHideFlags: 0

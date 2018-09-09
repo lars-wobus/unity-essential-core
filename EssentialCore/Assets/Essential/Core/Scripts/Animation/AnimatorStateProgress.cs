@@ -1,33 +1,66 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Essential.Core.Extensions;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Essential.Core.Animation
 {
+	// TODO rename to AnimatorStateProgressObserver or something
 	public class AnimatorStateProgress : StateMachineBehaviour
 	{
-		[SerializeField] private MonoBehaviour[] _components;
+		private List<IAnimation> Subscribers { get; set; }
 
-		private IEnumerable<MonoBehaviour> Components => _components;
-		private IStateMachineAnimation[] SyncedComponents { get; set; }
-
-		public void Awake()
+		private float _progress;
+		private float Progress
 		{
-			SyncedComponents = Components.FilterByType<IStateMachineAnimation>();
-			foreach (var syncedComponent in SyncedComponents)
+			get { return _progress; }
+			set
 			{
-				syncedComponent.Initialize();
+				_progress = value;
+				OnProgressChanged();
 			}
+		}
+
+		private void Awake()
+		{
+			Subscribers = new List<IAnimation>();
 		}
 
 		// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 		public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
-			var progress = stateInfo.normalizedTime % 1f;
-			foreach (var animationSync in SyncedComponents)
+			Progress = stateInfo.normalizedTime % 1f;
+		}
+
+		public void Subscribe([NotNull] IAnimation animation)
+		{
+			if (Subscribers.Any(element => element.Equals(animation)))
+			{
+				return;
+			}
+			
+			Subscribers.Add(animation);
+		}
+
+		public void Unsubscribe(IAnimation animation)
+		{
+			Subscribers.Remove(animation);
+		}
+
+		private void NotifyObservers()
+		{
+			var progress = Progress;
+			foreach (var animationSync in Subscribers)
 			{
 				animationSync.SetProgress(progress);
 			}
+		}
+
+		private void OnProgressChanged()
+		{
+			NotifyObservers();
 		}
 	}
 }
