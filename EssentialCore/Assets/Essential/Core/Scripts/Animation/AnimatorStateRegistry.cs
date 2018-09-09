@@ -16,6 +16,7 @@ namespace Essential.Core.Animation
 		{
 			var animator = GetComponent<Animator>();
 			AnimatorStateProgress = animator.GetBehaviour<AnimatorStateProgress>();
+			AnimatorStateProgress.Registry = new Registry<IAnimation>();
 			
 			var animations = Components.FilterByType<IAnimation>();
 			foreach (var anim in animations)
@@ -26,12 +27,14 @@ namespace Essential.Core.Animation
 
 		public void Register(IAnimation anim)
 		{
-			AnimatorStateProgress.Subscribe(anim);
+			//AnimatorStateProgress.Subscribe(anim);
+			AnimatorStateProgress.Registry.Subscribe(anim);
 		}
 		
 		public void Unregister(IAnimation anim)
 		{
-			AnimatorStateProgress.Unsubscribe(anim);
+			//AnimatorStateProgress.Unsubscribe(anim);
+			AnimatorStateProgress.Registry.Unsubscribe(anim);
 		}
 	}
 }

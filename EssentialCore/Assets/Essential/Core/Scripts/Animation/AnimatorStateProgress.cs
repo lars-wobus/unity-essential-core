@@ -10,7 +10,8 @@ namespace Essential.Core.Animation
 	// TODO rename to AnimatorStateProgressObserver or something
 	public class AnimatorStateProgress : StateMachineBehaviour
 	{
-		private List<IAnimation> Subscribers { get; set; }
+		public Registry<IAnimation> Registry { get; set; }
+		//private List<IAnimation> Subscribers { get; set; }
 
 		private float _progress;
 		private float Progress
@@ -23,10 +24,10 @@ namespace Essential.Core.Animation
 			}
 		}
 
-		private void Awake()
-		{
-			Subscribers = new List<IAnimation>();
-		}
+//		private void Awake()
+//		{
+//			//Subscribers = new List<IAnimation>();
+//		}
 
 		// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 		public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -34,33 +35,37 @@ namespace Essential.Core.Animation
 			Progress = stateInfo.normalizedTime % 1f;
 		}
 
-		public void Subscribe([NotNull] IAnimation animation)
-		{
-			if (Subscribers.Any(element => element.Equals(animation)))
-			{
-				return;
-			}
-			
-			Subscribers.Add(animation);
-		}
-
-		public void Unsubscribe(IAnimation animation)
-		{
-			Subscribers.Remove(animation);
-		}
-
-		private void NotifyObservers()
-		{
-			var progress = Progress;
-			foreach (var animationSync in Subscribers)
-			{
-				animationSync.SetProgress(progress);
-			}
-		}
+//		public void subscribe([notnull] ianimation animation)
+//		{
+//			/*if (subscribers.any(element => element.equals(animation)))
+//			{
+//				return;
+//			}
+//			
+//			subscribers.add(animation);*/
+//			registry.subscribe(animation);
+//		}
+//
+//		public void unsubscribe(ianimation animation)
+//		{
+//			//subscribers.remove(animation);
+//			registry.unsubscribe(animation);
+//		}
+//
+//		private void notifyobservers()
+//		{
+//			/*var progress = progress;
+//			foreach (var animationsync in subscribers)
+//			{
+//				animationsync.setprogress(progress);
+//			}*/
+//			registry.notifyobservers();
+//		}
 
 		private void OnProgressChanged()
 		{
-			NotifyObservers();
+			//NotifyObservers();
+			Registry.NotifyObservers();
 		}
 	}
 }
