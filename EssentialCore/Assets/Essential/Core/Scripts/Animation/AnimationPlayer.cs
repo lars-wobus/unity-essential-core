@@ -2,7 +2,7 @@
 
 namespace Rapid.Animation
 {
-    public class Animation : IAnimation
+    public class AnimationPlayer : IAnimationPlayer
     {
         [SerializeField] private int _counter;
 

@@ -46,7 +46,7 @@ namespace Tests.Animation.Runtime
 			Vector2 oldOffset = materialAnimation.Material.mainTextureOffset;
 
 			yield return null;
-			materialAnimation.HandleUpdate();
+			materialAnimation.SetProgress(Time.deltaTime);
 			
 			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
 			Assert.False(oldOffset.Equals(newOffset));

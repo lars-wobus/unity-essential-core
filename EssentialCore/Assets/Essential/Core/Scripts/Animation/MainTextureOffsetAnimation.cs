@@ -1,20 +1,20 @@
 ﻿namespace Essential.Core.Animation
 {
-    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, ISync
+    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, IAnimationProgress
     {
         /*private void Update()
         {
             ChangeTextureOffset();
         }*/
 
-        protected override void ChangeTextureOffset()
+        protected override void ChangeTextureOffset(float speed)
         {
-            Material.mainTextureOffset += Alteration;
+            Material.mainTextureOffset += Alteration * speed;
         }
 
-        public void HandleUpdate()
+        public void SetProgress(float deltaTime)
         {
-            ChangeTextureOffset();
+            ChangeTextureOffset(deltaTime);
         }
     }
 }

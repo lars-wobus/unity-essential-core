@@ -1,6 +1,6 @@
 ﻿namespace Rapid.Animation
 {
-    public interface IAnimation
+    public interface IAnimationPlayer
     {
         void Start();
         void Stop();
