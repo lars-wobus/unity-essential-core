@@ -1,6 +1,6 @@
 ﻿namespace Essential.Core.Animation
 {
-    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, IAnimationProgress
+    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
     {
         /*private void Update()
         {

@@ -4,12 +4,12 @@ using UnityEngine;
 using System.Linq;
 using Essential.Core.Animation;
 
-public class AnimationProgress : MonoBehaviour, IAnimationProgress
+public class AnimationSync : MonoBehaviour, IAnimation
 {
 	[SerializeField] private Component[] _components;
-	[SerializeField] private List<IAnimationProgress> _syncedComponents;
+	[SerializeField] private List<IAnimation> _syncedComponents;
 
-	public List<IAnimationProgress> SyncedComponents
+	public List<IAnimation> SyncedComponents
 	{
 		get { return _syncedComponents; }
 		set { _syncedComponents = value; }
@@ -24,10 +24,10 @@ public class AnimationProgress : MonoBehaviour, IAnimationProgress
 	// Use this for initialization
 	void Start ()
 	{
-		_syncedComponents = new List<IAnimationProgress>();
+		_syncedComponents = new List<IAnimation>();
 		foreach (var component in Components)
 		{
-			_syncedComponents.Add(component as IAnimationProgress);
+			_syncedComponents.Add(component as IAnimation);
 		}
 	}
 	

@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Animation
 {
-	public class TextureOffsetAnimation : TextureOffsetAnimationBase, IAnimationProgress
+	public class TextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
 	{
 		[SerializeField] private string _shaderVariable = "_MainTex";
 		public string ShaderVariable

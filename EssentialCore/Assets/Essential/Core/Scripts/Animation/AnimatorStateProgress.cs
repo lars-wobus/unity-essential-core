@@ -10,13 +10,13 @@ namespace Essential.Core.Animations
 		[SerializeField] private MonoBehaviour[] _components;
 
 		private IEnumerable<MonoBehaviour> Components => _components;
-		private IAnimationProgress[] SyncedComponents { get; set; }
+		private IAnimation[] SyncedComponents { get; set; }
 
 		public void Awake()
 		{
 			SyncedComponents = Components
-				.Where(element => (element as IAnimationProgress) != null)
-				.Select(element => (element as IAnimationProgress)).ToArray();
+				.Where(element => (element as IAnimation) != null)
+				.Select(element => (element as IAnimation)).ToArray();
 		}
 
 		// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -1,6 +1,6 @@
 ﻿namespace Essential.Core.Animation
 {
-    public interface IAnimationProgress
+    public interface IAnimation
     {
         void SetProgress(float deltaTime);
     }
