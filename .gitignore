@@ -43,3 +43,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Ignore scenes created from runtime tests
+EssentialCore/Assets/InitTestScene*.unity
+EssentialCore/Assets/InitTestScene*.unity.meta
