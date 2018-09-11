@@ -1,5 +1,8 @@
-﻿namespace Rapid.Animation
+﻿using System;
+
+namespace Rapid.Animation
 {
+    [Obsolete]
     public interface IAnimationPlayer
     {
         void Start();
