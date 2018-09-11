@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Rapid.Animation
 {
+    [Obsolete]
     public class AnimationPlayer : IAnimationPlayer
     {
         [SerializeField] private int _counter;
