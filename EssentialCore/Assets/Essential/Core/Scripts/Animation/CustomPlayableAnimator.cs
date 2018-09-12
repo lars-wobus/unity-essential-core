@@ -7,7 +7,7 @@ namespace Essential.Core.Animation
     [RequireComponent(typeof(Animator))]
     public class CustomPlayableAnimator : MonoBehaviour
     {
-        private PlayableGraph m_Graph;
+        private PlayableGraph _Graph;
         private ScriptPlayable<CustomPlayable> _sourcePlayable;
 
         public double Duration
@@ -26,21 +26,21 @@ namespace Essential.Core.Animation
     
         void Start()
         {
-            m_Graph = PlayableGraph.Create();
+            _Graph = PlayableGraph.Create();
 
-            var animOutput = AnimationPlayableOutput.Create(m_Graph, "AnimationOutput", GetComponent<Animator>());
+            var animOutput = AnimationPlayableOutput.Create(_Graph, "AnimationOutput", GetComponent<Animator>());
 
-            _sourcePlayable = ScriptPlayable<CustomPlayable>.Create(m_Graph, 1);
+            _sourcePlayable = ScriptPlayable<CustomPlayable>.Create(_Graph, 1);
 
             animOutput.SetSourcePlayable(_sourcePlayable);
         
-            m_Graph.Play();
+            _Graph.Play();
         }
 
         private void OnDestroy()
         {
             // Destroy the graph once done with it.
-            m_Graph.Destroy();
+            _Graph.Destroy();
         }
     }
 }
