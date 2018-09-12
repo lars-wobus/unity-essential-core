@@ -1,28 +1,30 @@
-﻿using Essential.Core.Animation;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-public class CustomPlayableAnimator : MonoBehaviour
+namespace Essential.Core.Animation
 {
-    PlayableGraph m_Graph;
+    public class CustomPlayableAnimator : MonoBehaviour
+    {
+        PlayableGraph m_Graph;
     
-    void Start()
-    {
-        m_Graph = PlayableGraph.Create();
+        void Start()
+        {
+            m_Graph = PlayableGraph.Create();
 
-        var animOutput = AnimationPlayableOutput.Create(m_Graph, "AnimationOutput", GetComponent<Animator>());
+            var animOutput = AnimationPlayableOutput.Create(m_Graph, "AnimationOutput", GetComponent<Animator>());
 
-        var blenderPlayable = ScriptPlayable<CustomPlayable>.Create(m_Graph, 1);
+            var blenderPlayable = ScriptPlayable<CustomPlayable>.Create(m_Graph, 1);
 
-        animOutput.SetSourcePlayable(blenderPlayable);
+            animOutput.SetSourcePlayable(blenderPlayable);
         
-        m_Graph.Play();
-    }
+            m_Graph.Play();
+        }
 
-    private void OnDestroy()
-    {
-        // Destroy the graph once done with it.
-        m_Graph.Destroy();
+        private void OnDestroy()
+        {
+            // Destroy the graph once done with it.
+            m_Graph.Destroy();
+        }
     }
 }
