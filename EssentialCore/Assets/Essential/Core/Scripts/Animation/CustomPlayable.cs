@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
+// TODO check https://docs.unity3d.com/ScriptReference/Playables.PlayableExtensions.SetPropagateSetTime.html
+
 namespace Essential.Core.Animation
 {
 	public class CustomPlayable : PlayableBehaviour
