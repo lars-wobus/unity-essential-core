@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-public class PlayableBehaviourSample : MonoBehaviour
+public class CustomPlayableAnimator : MonoBehaviour
 {
     PlayableGraph m_Graph;
     
