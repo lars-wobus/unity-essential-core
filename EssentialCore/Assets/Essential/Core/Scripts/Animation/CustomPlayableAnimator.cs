@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 
 namespace Essential.Core.Animation
 {
+    [RequireComponent(typeof(Animator))]
     public class CustomPlayableAnimator : MonoBehaviour
     {
         PlayableGraph m_Graph;
