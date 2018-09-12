@@ -8,6 +8,21 @@ namespace Essential.Core.Animation
     public class CustomPlayableAnimator : MonoBehaviour
     {
         private PlayableGraph m_Graph;
+        private ScriptPlayable<CustomPlayable> _sourcePlayable;
+
+        public double Duration
+        {
+            get { return _sourcePlayable.GetDuration(); }
+            set
+            {
+                if (value < 0)
+                {
+                    return;
+                }
+                
+                _sourcePlayable.SetDuration(value);
+            }
+        }
     
         void Start()
         {
@@ -15,9 +30,9 @@ namespace Essential.Core.Animation
 
             var animOutput = AnimationPlayableOutput.Create(m_Graph, "AnimationOutput", GetComponent<Animator>());
 
-            var blenderPlayable = ScriptPlayable<CustomPlayable>.Create(m_Graph, 1);
+            _sourcePlayable = ScriptPlayable<CustomPlayable>.Create(m_Graph, 1);
 
-            animOutput.SetSourcePlayable(blenderPlayable);
+            animOutput.SetSourcePlayable(_sourcePlayable);
         
             m_Graph.Play();
         }

@@ -39,7 +39,7 @@ namespace Essential.Core.Animation
 
 		// Called each frame while the state is set to Play
 		public override void PrepareFrame(Playable playable, FrameData info) {
-			Debug.Log("PrepareFrame");
+			Debug.Log($"PrepareFrame {playable.GetTime().ToString()} {playable.GetDuration().ToString()}");
 			ProgressChanged?.Invoke(playable.GetTime() / playable.GetDuration());
 		}
 	}
