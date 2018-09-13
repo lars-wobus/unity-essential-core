@@ -1,0 +1,14 @@
+{
+    "name": "_TestAnimation",
+    "references": [
+        "_Animation"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

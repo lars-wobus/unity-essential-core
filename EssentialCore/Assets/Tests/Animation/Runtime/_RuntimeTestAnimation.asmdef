@@ -1,5 +1,5 @@
 {
-    "name": "_RuntimeTestsAnimation",
+    "name": "_RuntimeTestAnimation",
     "references": [
         "_Animation",
         "_Debugging",
