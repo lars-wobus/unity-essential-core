@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Animation;
+using UnityEngine;
 using _Scripts.Math;
 
 namespace Rapid.Animation
 {
-    public class ContinuousRotation : MonoBehaviour
+    public class ContinuousRotation : AnimationBase
     {
         [SerializeField] private Transform _target;
         [SerializeField] private Vector3 _angles;
@@ -43,12 +44,24 @@ namespace Rapid.Animation
             set { _limitedTime = value; }
         }
 
-        private void Update()
+        /*private void Update()
         {
             var deltaTime = Time.deltaTime;
             LimitedTime.Value += deltaTime;
             //FiniteTime.Value = _overallTime += deltaTime;
             Target.transform.Rotate(Factor3.Evaluate(Angles, LimitedTime.Value), Space);
+        }*/
+
+        public override void SetProgress(float progress)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void SetProgress(double progress)
+        {
+            Debug.Log(progress);
+            Debug.Log(Factor3.Evaluate(Angles, (float) progress));
+            Target.transform.Rotate(Factor3.Evaluate(Angles, (float)progress), Space);
         }
     }
 }
