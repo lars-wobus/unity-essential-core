@@ -23,5 +23,14 @@ namespace Essential.Core.Animation
 				animationSync.SetProgress(progress);
 			}
 		}
+		
+		public void SetProgress(double progress)
+		{
+			Debug.Log(progress);
+			foreach (var animationSync in SyncedComponents)
+			{
+				animationSync.SetProgress(progress);
+			}
+		}
 	}
 }

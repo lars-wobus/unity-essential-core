@@ -3,5 +3,6 @@
     public interface IAnimation
     {
         void SetProgress(float progress);
+        void SetProgress(double progress);
     }
 }

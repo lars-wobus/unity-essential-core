@@ -23,8 +23,10 @@ namespace Essential.Core.Animation
                 _sourcePlayable.SetDuration(value);
             }
         }
-    
-        void Start()
+
+        public CustomPlayable Playable => _sourcePlayable.GetBehaviour();
+
+        private void Awake()
         {
             _Graph = PlayableGraph.Create();
 

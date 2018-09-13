@@ -19,5 +19,10 @@ namespace Essential.Core.Animation
 		{
 			ChangeTextureOffset(progress);
 		}
+		
+		public void SetProgress(double progress)
+		{
+			ChangeTextureOffset((float)progress);
+		}
 	}
 }
