@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Essential.Core.Animation
 {
-	public abstract class TextureOffsetAnimationBase : MonoBehaviour
+	public abstract class TextureOffsetAnimationBase : AnimationBase
 	{
 		[SerializeField] private Material _material;
 		[SerializeField] private Vector2 _alteration;
