@@ -69,17 +69,17 @@ namespace Tests.Animation
             Assert.AreEqual(actual, expected);
         }
         
-        // TODO
+        // DummyPlayable not fully initilized for this test case
         /*[Test]
         public void Should_CallProgressChangedAction_When_PrepareFrameWasCalled()
         {
-            var actual = string.Empty;
-            const string expected = "ProgressChanged";
+            var actual = 0.0;
+            const double expected = 0.0;
             
-            Target.ProgressChanged += (double progress) => actual = expected;
-
+            Target.ProgressChanged += (double progress) => actual = progress;
+            
             Target.PrepareFrame(DummyPlayable, DummyFrameData);
-            Assert.AreEqual(actual, expected);
+            Assert.Equals(expected, actual);
         }*/
     }
 }
