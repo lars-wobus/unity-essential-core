@@ -22,7 +22,7 @@ namespace Tests.Animation
         }
         
         [Test]
-        public void Should_CallGraphStartedAction_When_OnGraphStartWasCalled()
+        public void Should_CallGraphStartedAction_When_PlayableWasEntered()
         {
             var actual = string.Empty;
             const string expected = "GraphStarted";
@@ -34,7 +34,7 @@ namespace Tests.Animation
         }
         
         [Test]
-        public void Should_CallGraphStoppedAction_When_OnGraphStopWasCalled()
+        public void Should_CallGraphStoppedAction_When_PlayableWasStopped()
         {
             var actual = string.Empty;
             const string expected = "GraphStopped";
@@ -46,7 +46,7 @@ namespace Tests.Animation
         }
         
         [Test]
-        public void Should_CallBehaviourPlayedAction_When_OnBehaviourPlayWasCalled()
+        public void Should_CallBehaviourPlayedAction_When_PlayableWasStarted()
         {
             var actual = string.Empty;
             const string expected = "BehaviourPlayed";
@@ -58,7 +58,7 @@ namespace Tests.Animation
         }
         
         [Test]
-        public void Should_CallBehaviourPausedAction_When_OnBehaviourPauseWasCalled()
+        public void Should_CallBehaviourPausedAction_When_PlayableWasPaused()
         {
             var actual = string.Empty;
             const string expected = "BehaviourPaused";
