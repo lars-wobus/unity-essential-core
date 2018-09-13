@@ -4,12 +4,11 @@ using UnityEngine.Playables;
 
 namespace Essential.Core.Animation
 {
-    [RequireComponent(typeof(Animator))]
     public class CustomPlayableAnimator : MonoBehaviour
     {
         private PlayableGraph _Graph;
         private ScriptPlayable<CustomPlayable> _sourcePlayable;
-
+        
         public double Duration
         {
             get { return _sourcePlayable.GetDuration(); }
@@ -30,7 +29,7 @@ namespace Essential.Core.Animation
         {
             _Graph = PlayableGraph.Create();
 
-            var animOutput = AnimationPlayableOutput.Create(_Graph, "AnimationOutput", GetComponent<Animator>());
+            var animOutput = AnimationPlayableOutput.Create(_Graph, "AnimationOutput", null);
 
             _sourcePlayable = ScriptPlayable<CustomPlayable>.Create(_Graph, 1);
 
