@@ -21,11 +21,6 @@ namespace Tests.Animation
             DummyFrameData = new FrameData();
         }
         
-        public void HandleGraphStarted()
-        {
-            Debug.Log("GraphStarted22222222");
-        }
-        
         [Test]
         public void Should_CallGraphStartedAction_When_OnGraphStartWasCalled()
         {
