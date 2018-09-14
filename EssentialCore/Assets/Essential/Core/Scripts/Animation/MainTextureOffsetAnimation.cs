@@ -7,11 +7,6 @@
             //Material.mainTextureOffset += Alteration * speed;
             Material.mainTextureOffset = Alteration * progress;
         }
-
-        public override void SetProgress(float progress)
-        {
-            ChangeTextureOffset(progress);
-        }
         
         public override void SetProgress(double progress)
         {

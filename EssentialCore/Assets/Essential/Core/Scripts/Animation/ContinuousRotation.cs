@@ -52,11 +52,6 @@ namespace Rapid.Animation
             Target.transform.Rotate(Factor3.Evaluate(Angles, LimitedTime.Value), Space);
         }*/
 
-        public override void SetProgress(float progress)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override void SetProgress(double progress)
         {
             Debug.Log(progress);

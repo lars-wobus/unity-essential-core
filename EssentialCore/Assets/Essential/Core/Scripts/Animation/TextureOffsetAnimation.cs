@@ -14,11 +14,6 @@ namespace Essential.Core.Animation
 			//Material.SetTextureOffset(ShaderVariable, textureOffset + Alteration * speed);
 			Material.SetTextureOffset(ShaderVariable, Alteration * progress);
 		}
-
-		public override void SetProgress(float progress)
-		{
-			ChangeTextureOffset(progress);
-		}
 		
 		public override void SetProgress(double progress)
 		{
