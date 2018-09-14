@@ -15,18 +15,9 @@ namespace Essential.Core.Animation
 		{
 			SyncedComponents = Components.FilterByType<IAnimation>();
 		}
-	
-		public void SetProgress(float progress)
-		{
-			foreach (var animationSync in SyncedComponents)
-			{
-				animationSync.SetProgress(progress);
-			}
-		}
 		
 		public void SetProgress(double progress)
 		{
-			Debug.Log(progress);
 			foreach (var animationSync in SyncedComponents)
 			{
 				animationSync.SetProgress(progress);
