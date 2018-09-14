@@ -1,8 +1,7 @@
-﻿using Essential.Core.Animation;
-using UnityEngine;
+﻿using UnityEngine;
 using _Scripts.Math;
 
-namespace Rapid.Animation
+namespace Essential.Core.Animation
 {
     public class ContinuousRotation : AnimationBase
     {
