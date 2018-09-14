@@ -2,22 +2,20 @@
 
 namespace Essential.Core.Animation
 {
-	public class TextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
+	/// <inheritdoc />
+	/// <summary>
+	/// Animate offset of texture bound in shader. 
+	/// </summary>
+	public class TextureOffsetAnimation : TextureOffsetAnimationBase
 	{
+		/// <summary>
+		/// Specifies which texture bound in shadder is affected by offset changes.
+		/// </summary>
 		[SerializeField] private string _shaderVariable = "_MainTex";
-		
-		private string ShaderVariable => _shaderVariable;
-
-		protected override void ChangeTextureOffset(float progress)
-		{
-			//var textureOffset = Material.GetTextureOffset(ShaderVariable);
-			//Material.SetTextureOffset(ShaderVariable, textureOffset + Alteration * speed);
-			Material.SetTextureOffset(ShaderVariable, Alteration * progress);
-		}
 		
 		public override void SetProgress(double progress)
 		{
-			ChangeTextureOffset((float)progress);
+			Material.SetTextureOffset(_shaderVariable, Alteration * (float)progress);
 		}
 	}
 }

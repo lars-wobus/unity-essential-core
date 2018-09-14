@@ -1,16 +1,14 @@
 ﻿namespace Essential.Core.Animation
 {
-    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase, IAnimation
+    /// <inheritdoc />
+    /// <summary>
+    /// Animate main texture offset of Material.
+    /// </summary>
+    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase
     {
-        protected override void ChangeTextureOffset(float progress)
-        {
-            //Material.mainTextureOffset += Alteration * speed;
-            Material.mainTextureOffset = Alteration * progress;
-        }
-        
         public override void SetProgress(double progress)
         {
-            ChangeTextureOffset((float)progress);
+            Material.mainTextureOffset = Alteration * (float) progress;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Essential.Core.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Essential.Core.Animation
 {
