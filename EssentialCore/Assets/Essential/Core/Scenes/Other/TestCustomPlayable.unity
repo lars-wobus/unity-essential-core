@@ -580,7 +580,7 @@ MonoBehaviour:
     _range:
       _min: 0
       _max: 1
-    _limit: 2
+    _limit: 0
 --- !u!1 &2093706832
 GameObject:
   m_ObjectHideFlags: 0
