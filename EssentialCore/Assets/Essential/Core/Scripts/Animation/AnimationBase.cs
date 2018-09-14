@@ -7,7 +7,7 @@ namespace Essential.Core.Animation
     /// </summary>
     public abstract class AnimationBase : MonoBehaviour, IAnimation
     {
-        /// <inheritdoc cref="IAnimation"/>
+        /// <inheritdoc cref="IAnimation.SetProgress"/>
         public abstract void SetProgress(double progress);
     }
 }

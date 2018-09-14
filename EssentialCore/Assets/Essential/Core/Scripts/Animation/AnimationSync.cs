@@ -4,23 +4,22 @@ using UnityEngine;
 
 namespace Essential.Core.Animation
 {
-	public class AnimationSync : MonoBehaviour, IAnimation
+	/// <summary>
+	/// Sync progress for multiple animations at once.
+	/// </summary>
+	public class AnimationSync : AnimationBase
 	{
-		[SerializeField] private MonoBehaviour[] _components;
-
-		private IEnumerable<MonoBehaviour> Components => _components;
-		private IAnimation[] SyncedComponents { get; set; }
-
-		private void Start()
-		{
-			SyncedComponents = Components.FilterByType<IAnimation>();
-		}
+		/// <summary>
+		/// Persistent collection of animations.
+		/// </summary>
+		[SerializeField] private AnimationBase[] _animations;
 		
-		public void SetProgress(double progress)
+		/// <inheritdoc cref="IAnimation.SetProgress"/>
+		public override void SetProgress(double progress)
 		{
-			foreach (var animationSync in SyncedComponents)
+			foreach (var animatonBehaviour in _animations)
 			{
-				animationSync.SetProgress(progress);
+				animatonBehaviour.SetProgress(progress);
 			}
 		}
 	}
