@@ -7,7 +7,7 @@ namespace Essential.Core.Animation.Classes
 	/// <summary>
 	/// TODO
 	/// </summary>
-	public class RotationAnimator : IAnimation
+	public class RotationAnimator : IAnimator
 	{
 		private RotationData RotationData { get; }
 		

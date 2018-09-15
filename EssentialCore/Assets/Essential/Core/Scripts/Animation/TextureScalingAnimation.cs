@@ -13,7 +13,7 @@ namespace Essential.Core.Animation
         
 		protected override void Start()
 		{
-			Animation = new Classes.TextureScalingAnimator(_textureData);
+			Animator = new Classes.TextureScalingAnimator(_textureData);
 		}
 	}
 }

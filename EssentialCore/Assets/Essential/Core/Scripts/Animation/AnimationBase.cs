@@ -9,18 +9,18 @@ namespace Essential.Core.Animation
     /// </summary>
     public abstract class AnimationBase : MonoBehaviour, IAnimation
     {
-        protected Classes.IAnimation Animation { private get; set; }
+        protected Classes.IAnimator Animator { private get; set; }
 
         protected abstract void Start();
         
         public void SetProgress(double progress)
         {
-            Animation.HandleProgressChange((float)progress);
+            Animator.HandleProgressChange((float)progress);
         }
 
         private void OnApplicationQuit()
         {
-            Animation.HandleApplicationQuit();
+            Animator.HandleApplicationQuit();
         }
     }
 }

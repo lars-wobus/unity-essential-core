@@ -19,7 +19,7 @@ namespace Essential.Core.Animation
         
         protected override void Start()
         {
-            Animation = new Classes.RotationAnimator(_rotationData, _transform);
+            Animator = new Classes.RotationAnimator(_rotationData, _transform);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Essential.Core.Animation.Classes
 {
-	public interface IAnimation
+	public interface IAnimator
 	{
 		void HandleProgressChange(float progress);
 		void HandleApplicationQuit();
