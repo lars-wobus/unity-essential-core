@@ -1,4 +1,4 @@
-# Contributing Animation Scripts
+# Contributing
 When contributing to the animation module, please create a new issue. Do not use other communication channels to discuss changes.
 
 ## Pull Requests
