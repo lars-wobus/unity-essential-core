@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Essential.Core.Animation.Classes
+namespace Essential.Core.Animation.Data
 {
-	public abstract class TextureAnimationBase : IAnimation
-	{
-		/*/// <summary>
+	[Serializable]
+	public class MaterialData {
+
+		/// <summary>
 		/// Store for the Material property.
 		/// </summary>
 		[SerializeField] private Material _material;
@@ -30,12 +32,6 @@ namespace Essential.Core.Animation.Classes
 		{
 			get { return _alteration; }
 			set { _alteration = value; }
-		}*/
-		
-		public abstract void HandleApplicationStart();
-
-		public abstract void HandleApplicationQuit();
-
-		public abstract void HandleProgressChange(float progress);
+		}
 	}
 }

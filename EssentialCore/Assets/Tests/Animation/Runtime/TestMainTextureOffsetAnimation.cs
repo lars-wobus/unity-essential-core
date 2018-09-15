@@ -20,7 +20,7 @@ namespace Tests.Animation.Runtime
 			DummyGameObject = new GameObject();
 		}
 	
-		[UnityTest]
+		/*[UnityTest]
 		public IEnumerator Should_ThrowNullReferenceException_When_MaterialWasNotSet()
 		{
 			TestSettings.ExpectNullReferenceException();
@@ -69,6 +69,6 @@ namespace Tests.Animation.Runtime
 			}
 
 			Assert.True(materialAnimation.Material.mainTextureOffset.Equals(Vector2.zero));
-		}
+		}*/
 	}
 }
