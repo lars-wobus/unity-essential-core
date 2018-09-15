@@ -5,9 +5,9 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Sync progress for multiple animations at once.
 	/// </summary>
-	public class AnimationSync : AnimationBase
+	public class AnimationSync : MonoBehaviour/* : AnimationBase*/
 	{
-		/// <summary>
+		/*/// <summary>
 		/// Persistent collection of animations.
 		/// </summary>
 		[SerializeField] private AnimationBase[] _animations;
@@ -19,6 +19,6 @@ namespace Essential.Core.Animation
 			{
 				animatonBehaviour.SetProgress(progress);
 			}
-		}
+		}*/
 	}
 }

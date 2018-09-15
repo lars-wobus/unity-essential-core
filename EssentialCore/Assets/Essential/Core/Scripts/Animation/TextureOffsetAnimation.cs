@@ -1,21 +1,19 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Animation.Data;
+using UnityEngine;
 
 namespace Essential.Core.Animation
 {
 	/// <inheritdoc />
 	/// <summary>
-	/// Animate offset of texture bound in shader. 
+	/// Animator to change offset of main texture of a Material.
 	/// </summary>
-	public class TextureOffsetAnimation : TextureOffsetAnimationBase
+	public class TextureOffsetAnimation : AnimationBase
 	{
-		/// <summary>
-		/// Specifies which texture bound in shadder is affected by offset changes.
-		/// </summary>
-		[SerializeField] private string _shaderVariable = "_MainTex";
-		
-		public override void SetProgress(double progress)
+		[SerializeField] private TextureData _textureData;
+        
+		protected override void Start()
 		{
-			Material.SetTextureOffset(_shaderVariable, DefaultOffset + Alteration * (float)progress);
+			Animation = new Classes.TextureOffsetAnimator(_textureData);
 		}
 	}
 }

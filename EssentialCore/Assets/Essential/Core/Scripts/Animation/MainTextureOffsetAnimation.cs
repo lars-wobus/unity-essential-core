@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Animation.Data;
+using UnityEngine;
 
 namespace Essential.Core.Animation
 {
@@ -8,23 +9,11 @@ namespace Essential.Core.Animation
     /// </summary>
     public class MainTextureOffsetAnimation : AnimationBase
     {
-        [SerializeField] private Data.MaterialData _materialData;
-        private Classes.TextureOffsetAnimationBase _class;
+        [SerializeField] private MainTextureData _mainTextureData;
         
-        private void Start()
+        protected override void Start()
         {
-            _class = new Classes.MainTextureOffsetAnimation(_materialData);
-            //_class.HandleApplicationStart();
-        }
-
-        public override void SetProgress(double progress)
-        {
-            _class.HandleProgressChange((float)progress);
-        }
-
-        private void OnApplicationQuit()
-        {
-            _class.HandleApplicationQuit();
+            Animation = new Classes.MainTextureOffsetAnimator(_mainTextureData);
         }
     }
 }

@@ -76,9 +76,9 @@ namespace Tests.Animation
             var actual = 0.0;
             const double expected = 0.0;
             
-            Target.ProgressChanged += (double progress) => actual = progress;
+            Prefab.ProgressChanged += (double progress) => actual = progress;
             
-            Target.PrepareFrame(DummyPlayable, DummyFrameData);
+            Prefab.PrepareFrame(DummyPlayable, DummyFrameData);
             Assert.Equals(expected, actual);
         }*/
     }

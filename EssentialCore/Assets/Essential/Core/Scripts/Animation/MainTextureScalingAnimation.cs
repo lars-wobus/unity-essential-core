@@ -1,14 +1,19 @@
-﻿namespace Essential.Core.Animation
+﻿using Essential.Core.Animation.Data;
+using UnityEngine;
+
+namespace Essential.Core.Animation
 {
 	/// <inheritdoc />
 	/// <summary>
 	/// Animate main texture tiling of Material.
 	/// </summary>
-	public class MainTextureScalingAnimation : TextureScalingAnimationBase
+	public class MainTextureScalingAnimation : AnimationBase
 	{
-		public override void SetProgress(double progress)
+		[SerializeField] private MainTextureData _mainTextureData;
+        
+		protected override void Start()
 		{
-			Material.mainTextureScale = DefaultScale + Alteration * (float) progress;
+			Animation = new Classes.MainTextureScalingAnimator(_mainTextureData);
 		}
 	}
 }

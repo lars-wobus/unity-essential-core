@@ -8,7 +8,7 @@ namespace Essential.Core.Animation
 	/// </summary>
 	public abstract class TextureOffsetAnimationBase : TextureAnimationBase
 	{
-		/// <summary>
+		/*/// <summary>
 		/// Keep texture scale from start.
 		/// </summary>
 		protected Vector2 DefaultOffset { get; private set; }
@@ -21,6 +21,6 @@ namespace Essential.Core.Animation
 		protected override void OnApplicationQuit()
 		{
 			Material.mainTextureOffset = DefaultOffset;
-		}
+		}*/
 	}
 }

@@ -8,7 +8,7 @@ namespace Essential.Core.Animation
 	/// </summary>
 	public abstract class TextureScalingAnimationBase : TextureAnimationBase
 	{
-		/// <summary>
+		/*/// <summary>
 		/// Get or set texture scale.
 		/// </summary>
 		protected Vector2 DefaultScale { get; private set; }
@@ -21,6 +21,6 @@ namespace Essential.Core.Animation
 		protected override void OnApplicationQuit()
 		{
 			Material.mainTextureScale = DefaultScale;
-		}
+		}*/
 	}
 }

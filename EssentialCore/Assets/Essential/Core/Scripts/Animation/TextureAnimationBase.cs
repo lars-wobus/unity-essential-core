@@ -9,7 +9,7 @@ namespace Essential.Core.Animation
 	/// </summary>
 	public abstract class TextureAnimationBase : AnimationBase
 	{
-		/// <summary>
+		/*/// <summary>
 		/// Store for the Material property.
 		/// </summary>
 		[SerializeField] private Material _material;
@@ -48,6 +48,6 @@ namespace Essential.Core.Animation
 		/// <summary>
 		/// Revert changes on application end, otherwise version control will mark Material as modified.
 		/// </summary>
-		protected abstract void OnApplicationQuit();
+		protected abstract void OnApplicationQuit();*/
 	}
 }

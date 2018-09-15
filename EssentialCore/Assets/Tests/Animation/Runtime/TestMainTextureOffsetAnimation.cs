@@ -24,14 +24,14 @@ namespace Tests.Animation.Runtime
 		public IEnumerator Should_ThrowNullReferenceException_When_MaterialWasNotSet()
 		{
 			TestSettings.ExpectNullReferenceException();
-			DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
+			DummyGameObject.AddComponent<MainTextureOffsetAnimator>();
 			yield return null;
 		}
 
 		[UnityTest]
 		public IEnumerator Should_NotThrowNullReferenceException_When_MaterialWasSet()
 		{
-			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
+			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimator>();
 			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
 			yield return null;
 		}
@@ -40,7 +40,7 @@ namespace Tests.Animation.Runtime
 		//public IEnumerator Should_AlterMainTextureOffset_When_UpdateMethodWasCalled()
 		public IEnumerator Should_AlterMainTextureOffset_When_HandleUpdate()
 		{
-			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
+			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimator>();
 			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
 			materialAnimation.Alteration = new Vector2(1, 1);
 			var oldOffset = materialAnimation.Material.mainTextureOffset;
@@ -55,7 +55,7 @@ namespace Tests.Animation.Runtime
 		[UnityTest]
 		public IEnumerator Should_ResetMainTextureOffset_On_ApplicationQuit()
 		{
-			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
+			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimator>();
 			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
 			
 			yield return null;

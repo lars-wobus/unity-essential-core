@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Essential.Core.Animation.Data
 {
-	[Serializable]
-	public class MaterialData {
-
+	[CreateAssetMenu(fileName = "MainTextureData_", menuName = "Animation/MainTextureData", order = 1)]
+	public class MainTextureData : ScriptableObject {
 		/// <summary>
 		/// Store for the Material property.
 		/// </summary>
