@@ -57,9 +57,9 @@ namespace Tests.Animation.Runtime
 		{
 			var materialAnimation = DummyGameObject.AddComponent<MainTextureOffsetAnimation>();
 			materialAnimation.Material = new Material(Shader.Find("Diffuse"));
-			materialAnimation.Material.mainTextureOffset = Vector2.one;
 			
 			yield return null;
+			materialAnimation.Material.mainTextureOffset = Vector2.one;
 
 			var memberInfo = materialAnimation.GetType().BaseType;
 			if (memberInfo != null)
@@ -67,8 +67,7 @@ namespace Tests.Animation.Runtime
 				MethodInfo onApplicationQuit = memberInfo.GetMethod("OnApplicationQuit", TestSettings.BindingFlagsToAccessPrivateMembers);
 				onApplicationQuit.Invoke(materialAnimation, new object[] {  });
 			}
-			Vector2 newOffset = materialAnimation.Material.mainTextureOffset;
-			
+
 			Assert.True(materialAnimation.Material.mainTextureOffset.Equals(Vector2.zero));
 		}
 	}
