@@ -7,7 +7,7 @@ namespace Essential.Core.Animation.Classes
 	/// <summary>
 	/// TODO
 	/// </summary>
-	public class TextureOffsetAnimator : TextureAnimator {
+	public class TextureOffsetAnimator : TextureAnimatorBase {
         
 		private TextureData TextureData { get; }
 

@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Animation.Classes
 {
-    public abstract class TextureAnimator : IAnimation
+    public abstract class TextureAnimatorBase : IAnimation
     {
         protected Vector2 DefaultValue { get; set; }
         

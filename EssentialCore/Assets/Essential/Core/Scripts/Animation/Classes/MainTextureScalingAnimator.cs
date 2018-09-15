@@ -7,7 +7,7 @@ namespace Essential.Core.Animation.Classes
 	/// <summary>
 	/// TODO
 	/// </summary>
-	public class MainTextureScalingAnimator : TextureAnimator {
+	public class MainTextureScalingAnimator : TextureAnimatorBase {
         
 		private MainTextureData MainTextureData { get; }
 
