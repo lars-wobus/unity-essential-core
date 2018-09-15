@@ -48,9 +48,6 @@ namespace Essential.Core.Animation
 		/// <summary>
 		/// Revert changes on application end, otherwise version control will mark Material as modified.
 		/// </summary>
-		private void OnApplicationQuit()
-		{
-			Material.mainTextureOffset = Vector2.zero;
-		}
+		protected abstract void OnApplicationQuit();
 	}
 }

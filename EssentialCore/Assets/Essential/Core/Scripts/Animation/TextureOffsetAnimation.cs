@@ -6,7 +6,7 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Animate offset of texture bound in shader. 
 	/// </summary>
-	public class TextureOffsetAnimation : TextureAnimationBase
+	public class TextureOffsetAnimation : TextureOffsetAnimationBase
 	{
 		/// <summary>
 		/// Specifies which texture bound in shadder is affected by offset changes.
@@ -15,7 +15,7 @@ namespace Essential.Core.Animation
 		
 		public override void SetProgress(double progress)
 		{
-			Material.SetTextureOffset(_shaderVariable, Alteration * (float)progress);
+			Material.SetTextureOffset(_shaderVariable, DefaultOffset + Alteration * (float)progress);
 		}
 	}
 }
