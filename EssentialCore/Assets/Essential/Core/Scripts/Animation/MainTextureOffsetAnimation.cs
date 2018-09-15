@@ -4,7 +4,7 @@
     /// <summary>
     /// Animate main texture offset of Material.
     /// </summary>
-    public class MainTextureOffsetAnimation : TextureOffsetAnimationBase
+    public class MainTextureOffsetAnimation : TextureAnimationBase
     {
         public override void SetProgress(double progress)
         {

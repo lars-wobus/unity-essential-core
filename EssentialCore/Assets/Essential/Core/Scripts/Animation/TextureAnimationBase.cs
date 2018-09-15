@@ -7,7 +7,7 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Base class for all animations operating on textures.
 	/// </summary>
-	public abstract class TextureOffsetAnimationBase : AnimationBase
+	public abstract class TextureAnimationBase : AnimationBase
 	{
 		/// <summary>
 		/// Store for the Material property.

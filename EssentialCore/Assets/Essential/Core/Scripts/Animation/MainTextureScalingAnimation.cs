@@ -6,7 +6,7 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Animate main texture tiling of Material.
 	/// </summary>
-	public class MainTextureScalingAnimation : TextureOffsetAnimationBase
+	public class MainTextureScalingAnimation : TextureAnimationBase
 	{
 		/// <summary>
 		/// Keep texture scale from start.

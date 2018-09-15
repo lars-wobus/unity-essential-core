@@ -6,7 +6,7 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Animate tiling of texture bound in shader. 
 	/// </summary>
-	public class TextureScalingAnimation : TextureOffsetAnimationBase
+	public class TextureScalingAnimation : TextureAnimationBase
 	{
 		/// <summary>
 		/// Specifies which texture bound in shadder is affected by scale changes.

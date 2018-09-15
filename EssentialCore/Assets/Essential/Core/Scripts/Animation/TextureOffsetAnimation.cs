@@ -6,7 +6,7 @@ namespace Essential.Core.Animation
 	/// <summary>
 	/// Animate offset of texture bound in shader. 
 	/// </summary>
-	public class TextureOffsetAnimation : TextureOffsetAnimationBase
+	public class TextureOffsetAnimation : TextureAnimationBase
 	{
 		/// <summary>
 		/// Specifies which texture bound in shadder is affected by offset changes.
