@@ -96,3 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _registry: {fileID: 11400000, guid: 9907b3ec04202a547a56421720c246c0, type: 2}
+  _factory: {fileID: 11400000, guid: a25c4e15f6747244584a7fc1562500a7, type: 2}

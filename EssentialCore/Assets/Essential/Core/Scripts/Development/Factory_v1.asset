@@ -8,11 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 762062c0affc270418e3c9c0d62055fb, type: 3}
-  m_Name: Registry_v2
+  m_Script: {fileID: 11500000, guid: 596afca06cffd6a4e9e50793be3d29f5, type: 3}
+  m_Name: Factory_v1
   m_EditorClassIdentifier: 
-  _subscribers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _prefabs:
+  - {fileID: 1276546865749240, guid: c14cc50b2b23493408a5b516a326d220, type: 2}
+  _parent: {fileID: 0}
