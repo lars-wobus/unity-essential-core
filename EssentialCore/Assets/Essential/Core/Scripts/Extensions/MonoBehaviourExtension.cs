@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,6 +13,12 @@ namespace Essential.Core.Extensions
 			return array
 				.Where(element => (element as T) != null)
 				.Select(element => (element as T)).ToArray();
+		}
+		
+		public static IEnumerator LateStart(this MonoBehaviour monoBehaviour, Action action)
+		{
+			yield return new WaitForEndOfFrame();
+			action?.Invoke();
 		}
 	}
 }
