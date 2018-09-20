@@ -38,5 +38,10 @@ namespace Essential.Core.Tests.Configuration
 		{
 			LogAssert.Expect(LogType.Exception, new Regex("NullReferenceException: "));
 		}
+		
+		public static void ExpectException(string regexMessage)
+		{
+			LogAssert.Expect(LogType.Exception, new Regex(regexMessage));
+		}
 	}
 }

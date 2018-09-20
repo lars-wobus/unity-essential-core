@@ -1,0 +1,13 @@
+{
+    "name": "_RuntimeTestUtils",
+    "references": [
+        "_Utils",
+        "_TestConfiguration"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
