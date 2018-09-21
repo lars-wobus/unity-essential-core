@@ -1,7 +1,7 @@
-﻿using System;
-using System.Xml;
-using UnityEngine;
+﻿using UnityEngine;
+
 #if UNITY_EDITOR
+using System;
 using System.Linq;
 #endif
 
@@ -20,6 +20,11 @@ namespace Essential.Core.Utils
 
 #if UNITY_EDITOR
 		
+		/// <summary>
+		/// Check if public field was set properly.
+		/// </summary>
+		/// <exception cref="ArgumentException">Throw when array remains empty on start.</exception>
+		/// <exception cref="NullReferenceException">Throw when one or more array elements are not assigned.</exception>
 		private void Start()
 		{
 			if (_gameObjects.Length == 0)
