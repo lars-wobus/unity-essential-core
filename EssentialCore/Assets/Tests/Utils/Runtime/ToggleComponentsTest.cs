@@ -25,25 +25,27 @@ namespace Tests.Utils.Runtime
 		[UnityTest]
 		public IEnumerator Should_ThrowArgumentException_When_ComponentArrayRemainsEmpty()
 		{
+			TestSettings.ExpectException("ArgumentException:");
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
-			FieldInfo = TargetScript.GetType().GetField("_components", BindingFlags.NonPublic | BindingFlags.Instance);
-		
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
+
 			FieldInfo.SetValue(TargetScript, new Component[]{});
 		
-			TestSettings.ExpectException("ArgumentException:");
+			
 			yield return null;
 		}
 	
 		[UnityTest]
 		public IEnumerator Should_ThrowNullReferenceException_When_AtLeastOneComponentArrayElementIsNull()
 		{
+			TestSettings.ExpectException("NullReferenceException:");
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
-			FieldInfo = TargetScript.GetType().GetField("_components", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var components = new Component[]{null};
 			FieldInfo.SetValue(TargetScript, components);
 		
-			TestSettings.ExpectException("NullReferenceException:");
+			
 			yield return null;
 		}
 
@@ -51,7 +53,7 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_ContainOnlyActiveComponents_When_ScriptFullyInitialized()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
-			FieldInfo = TargetScript.GetType().GetField("_components", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var monoBehaviour1 = new GameObject().AddComponent<DefaultBehaviour>();
 			var monoBehaviour2 = new GameObject().AddComponent<DefaultBehaviour>();
@@ -71,7 +73,7 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_DisableAllComponents_When_ToggleMethodWasCalled()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
-			FieldInfo = TargetScript.GetType().GetField("_components", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var monoBehaviour1 = new GameObject().AddComponent<DefaultBehaviour>();
 			var monoBehaviour2 = new GameObject().AddComponent<DefaultBehaviour>();

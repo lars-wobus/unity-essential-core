@@ -1,10 +1,5 @@
 ﻿using UnityEngine;
 
-#if UNITY_EDITOR
-using System;
-using System.Linq;
-#endif
-
 namespace Essential.Core.Utils
 {
 	/// <inheritdoc />
@@ -14,40 +9,14 @@ namespace Essential.Core.Utils
 	/// <remarks>
 	/// Not every component comes with an 'enabled' property.
 	/// </remarks>
-	public class ToggleComponents : MonoBehaviour
+	public class ToggleComponents : ToggleObjectsBase<Component>
 	{
-		/// <summary>
-		/// Persistent Components.
-		/// </summary>
-		[SerializeField] private Component[] _components;
-		
-#if UNITY_EDITOR
-		
-		/// <summary>
-		/// Check if public field was set properly.
-		/// </summary>
-		/// <exception cref="ArgumentException">Throw when array remains empty on start.</exception>
-		/// <exception cref="NullReferenceException">Throw when one or more array elements are not assigned.</exception>
-		private void Start()
-		{
-			if (_components.Length == 0)
-			{
-				throw new ArgumentException("Array remains empty.");
-			}
-
-			if (_components.Any(element => element == null))
-			{
-				throw new NullReferenceException("Element in array was null");
-			}
-		}
-#endif
-		
 		/// <summary>
 		/// Toggle 'enabled' properties of persistent Components.
 		/// </summary>
-		public void Toggle()
+		public override void Toggle()
 		{
-			foreach (var component in _components)
+			foreach (var component in _objects)
 			{
 				var propertyInfo = component.GetType().GetProperty("enabled");
 				if (propertyInfo == null)

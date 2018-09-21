@@ -24,7 +24,7 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_ThrowArgumentException_When_GameObjectArrayRemainsEmpty()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
-			FieldInfo = TargetScript.GetType().GetField("_gameObjects", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			FieldInfo.SetValue(TargetScript, new GameObject[]{});
 		
@@ -36,7 +36,7 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_ThrowNullReferenceException_When_AtLeastOneGameObjectArrayElementIsNull()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
-			FieldInfo = TargetScript.GetType().GetField("_gameObjects", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var gameobjects = new GameObject[]{null};
 			FieldInfo.SetValue(TargetScript, gameobjects);
@@ -49,7 +49,7 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_ContainOnlyActiveGameObjects_When_ScriptFullyInitialized()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
-			FieldInfo = TargetScript.GetType().GetField("_gameObjects", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var gameobjects = new[]{new GameObject(), new GameObject()};
 			FieldInfo.SetValue(TargetScript, gameobjects);
@@ -63,13 +63,14 @@ namespace Tests.Utils.Runtime
 		public IEnumerator Should_DisableAllGameObjects_When_ToggleMethodWasCalled()
 		{
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
-			FieldInfo = TargetScript.GetType().GetField("_gameObjects", BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
 			var gameobjects = new[]{new GameObject(), new GameObject()};
 			FieldInfo.SetValue(TargetScript, gameobjects);
 			TargetScript.Toggle();
 
 			var actual = gameobjects[0].activeSelf || gameobjects[1].activeSelf;
+			Debug.Log(gameobjects[0].activeSelf +" "+ gameobjects[1].activeSelf);
 			Assert.IsFalse(actual);
 			yield return null;
 		}
