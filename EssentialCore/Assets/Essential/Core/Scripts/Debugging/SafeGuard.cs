@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Essential.Core.Debugging
 {
 	public static class SafeGuard
 	{
 		[Conditional("UNITY_EDITOR")]
-		public static void ThrowNullReferenceExceptionWhenFieldNotInitialized(Object obj, Object owner, string fieldName)
+		public static void ThrowNullReferenceExceptionWhenFieldNotInitialized(Object obj, UnityEngine.Object owner, string fieldName)
 		{
 			// Everything is ok
 			if (obj != null)
