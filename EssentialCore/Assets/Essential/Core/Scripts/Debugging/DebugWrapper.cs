@@ -4,7 +4,7 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 
-namespace Essential.Core.Extensions
+namespace Essential.Core.Debugging
 {
     public static class DebugWrapper
     {
@@ -13,7 +13,6 @@ namespace Essential.Core.Extensions
             Debug.Log(string.Join("", array.ToList().ToList().ConvertAll( element => element.ToString()).ToArray()));
         }
     }
-    
 }
    
 #endif
