@@ -8,8 +8,8 @@ using UnityEngine.TestTools;
 
 namespace Tests.Utils.Runtime
 {
-	public class ToggleComponentsTest : MonoBehaviour {
-		
+	public class ToggleComponentsTest
+	{
 		private class DefaultBehaviour : MonoBehaviour {}
 
 		private GameObject DummyGameObject { get; set; }

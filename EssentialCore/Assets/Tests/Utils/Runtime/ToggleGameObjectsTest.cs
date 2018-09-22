@@ -8,8 +8,8 @@ using UnityEngine.TestTools;
 
 namespace Tests.Utils.Runtime
 {
-	public class ToggleGameObjectsTest : MonoBehaviour {
-
+	public class ToggleGameObjectsTest
+	{
 		private GameObject DummyGameObject { get; set; }
 		private ToggleGameObjects TargetScript { get; set; }
 		private FieldInfo FieldInfo { get; set; }
