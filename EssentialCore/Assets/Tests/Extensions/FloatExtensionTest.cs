@@ -2,8 +2,8 @@
 
 using System;
 using Essential.Core.Extensions;
-using Essential.Core.Tests.Configuration;
 using NUnit.Framework;
+using Tests.Configuration;
 
 namespace Essential.Core.Tests.Extensions
 {

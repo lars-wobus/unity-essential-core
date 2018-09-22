@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Reflection;
-using Essential.Core.Tests.Configuration;
 using Essential.Core.Utils;
 using NUnit.Framework;
+using Tests.Configuration;
 using UnityEngine;
 using UnityEngine.TestTools;
 

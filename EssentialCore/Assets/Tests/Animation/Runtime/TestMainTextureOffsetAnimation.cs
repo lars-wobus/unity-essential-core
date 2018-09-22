@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Essential.Core.Debugging;
 using Essential.Core.Animation;
-using Essential.Core.Tests.Configuration;
+using Tests.Configuration;
 
 namespace Tests.Animation.Runtime
 {

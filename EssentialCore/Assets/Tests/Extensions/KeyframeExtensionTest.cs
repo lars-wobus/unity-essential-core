@@ -1,6 +1,6 @@
 ﻿using Essential.Core.Extensions;
-using Essential.Core.Tests.Configuration;
 using NUnit.Framework;
+using Tests.Configuration;
 using UnityEngine;
 
 namespace Essential.Core.Tests.Extensions
