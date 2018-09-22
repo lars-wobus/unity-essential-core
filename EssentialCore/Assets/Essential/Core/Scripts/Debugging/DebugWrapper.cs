@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using Debug = UnityEngine.Debug;
 
-#if UNITY_EDITOR
-
 namespace Essential.Core.Debugging
 {
     public static class DebugWrapper
@@ -21,5 +19,3 @@ namespace Essential.Core.Debugging
         }
     }
 }
-   
-#endif
