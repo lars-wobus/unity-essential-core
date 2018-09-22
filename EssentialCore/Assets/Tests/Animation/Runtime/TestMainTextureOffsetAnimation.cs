@@ -13,11 +13,19 @@ namespace Tests.Animation.Runtime
 	public class TestMainTextureOffsetAnimation {
 
 		private GameObject DummyGameObject { get; set; }
+		private string TypeName { get; set; }
 	
 		[SetUp]
 		public void Setup()
 		{
-			DummyGameObject = new GameObject();
+			TypeName = GetType().ToString();
+			DummyGameObject = new GameObject(TypeName);
+		}
+		
+		[TearDown]
+		public void TearDown()
+		{
+			Object.Destroy(DummyGameObject);
 		}
 		
 		[UnityTest]

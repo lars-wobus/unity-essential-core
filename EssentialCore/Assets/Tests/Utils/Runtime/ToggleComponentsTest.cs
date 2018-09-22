@@ -15,11 +15,19 @@ namespace Tests.Utils.Runtime
 		private GameObject DummyGameObject { get; set; }
 		private ToggleComponents TargetScript { get; set; }
 		private FieldInfo FieldInfo { get; set; }
+		private string TypeName { get; set; }
 		
 		[SetUp]
 		public void Setup()
 		{
-			DummyGameObject = new GameObject();
+			TypeName = GetType().ToString();
+			DummyGameObject = new GameObject(TypeName);
+		}
+		
+		[TearDown]
+		public void TearDown()
+		{
+			Object.Destroy(DummyGameObject);
 		}
 		
 		[UnityTest]
@@ -55,8 +63,8 @@ namespace Tests.Utils.Runtime
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
 			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
-			var monoBehaviour1 = new GameObject().AddComponent<DefaultBehaviour>();
-			var monoBehaviour2 = new GameObject().AddComponent<DefaultBehaviour>();
+			var monoBehaviour1 = new GameObject(TypeName).AddComponent<DefaultBehaviour>();
+			var monoBehaviour2 = new GameObject(TypeName).AddComponent<DefaultBehaviour>();
 			var components = new[]{monoBehaviour1, monoBehaviour2};
 			FieldInfo.SetValue(TargetScript, components);
 			
@@ -75,8 +83,8 @@ namespace Tests.Utils.Runtime
 			TargetScript = DummyGameObject.AddComponent<ToggleComponents>();
 			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
-			var monoBehaviour1 = new GameObject().AddComponent<DefaultBehaviour>();
-			var monoBehaviour2 = new GameObject().AddComponent<DefaultBehaviour>();
+			var monoBehaviour1 = new GameObject(TypeName).AddComponent<DefaultBehaviour>();
+			var monoBehaviour2 = new GameObject(TypeName).AddComponent<DefaultBehaviour>();
 			var components = new[]{monoBehaviour1, monoBehaviour2};
 			FieldInfo.SetValue(TargetScript, components);
 

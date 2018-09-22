@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Reflection;
 using Essential.Core.Utils;
 using NUnit.Framework;
 using Tests.Configuration;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 namespace Tests.Utils.Runtime
 {
@@ -13,11 +15,19 @@ namespace Tests.Utils.Runtime
 		private GameObject DummyGameObject { get; set; }
 		private ToggleGameObjects TargetScript { get; set; }
 		private FieldInfo FieldInfo { get; set; }
+		private string TypeName { get; set; }
 	
 		[SetUp]
 		public void Setup()
 		{
-			DummyGameObject = new GameObject();
+			TypeName = GetType().ToString();
+			DummyGameObject = new GameObject(TypeName);
+		}
+		
+		[TearDown]
+		public void TearDown()
+		{
+			Object.Destroy(DummyGameObject);
 		}
 
 		[UnityTest]
@@ -51,7 +61,7 @@ namespace Tests.Utils.Runtime
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
 			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
-			var gameobjects = new[]{new GameObject(), new GameObject()};
+			var gameobjects = new[]{new GameObject(TypeName), new GameObject(TypeName)};
 			FieldInfo.SetValue(TargetScript, gameobjects);
 
 			var actual = gameobjects[0].activeSelf && gameobjects[1].activeSelf;
@@ -65,12 +75,11 @@ namespace Tests.Utils.Runtime
 			TargetScript = DummyGameObject.AddComponent<ToggleGameObjects>();
 			FieldInfo = TargetScript.GetType().BaseType.GetField("_objects", BindingFlags.NonPublic | BindingFlags.Instance);
 		
-			var gameobjects = new[]{new GameObject(), new GameObject()};
+			var gameobjects = new[]{new GameObject(TypeName), new GameObject(TypeName)};
 			FieldInfo.SetValue(TargetScript, gameobjects);
 			TargetScript.Toggle();
 
 			var actual = gameobjects[0].activeSelf || gameobjects[1].activeSelf;
-			Debug.Log(gameobjects[0].activeSelf +" "+ gameobjects[1].activeSelf);
 			Assert.IsFalse(actual);
 			yield return null;
 		}

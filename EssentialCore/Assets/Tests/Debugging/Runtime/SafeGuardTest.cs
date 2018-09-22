@@ -4,6 +4,7 @@ using Essential.Core.Debugging;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 namespace Tests.Debugging.Runtime
 {
@@ -12,18 +13,28 @@ namespace Tests.Debugging.Runtime
 		private class DefaultBehaviour : MonoBehaviour {}
 		private class DefaultClass {}
 		
+		private GameObject DummyGameObject { get; set; }
 		private DefaultBehaviour PlaceholderScript { get; set; }
+		private string TypeName { get; set; }
 		
 		[SetUp]
 		public void Setup()
 		{
-			PlaceholderScript = new GameObject().AddComponent<DefaultBehaviour>();
+			TypeName = GetType().ToString();
+			DummyGameObject = new GameObject(TypeName);
+			PlaceholderScript = DummyGameObject.AddComponent<DefaultBehaviour>();
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			Object.Destroy(DummyGameObject);
 		}
 		
 		[UnityTest]
 		public IEnumerator Should_NotThrowAnyException_When_GameObjectIsPassed()
 		{
-			SafeGuard.ThrowNullReferenceExceptionWhenFieldNotInitialized(new GameObject(), PlaceholderScript, "myField");
+			SafeGuard.ThrowNullReferenceExceptionWhenFieldNotInitialized(new GameObject(TypeName), PlaceholderScript, "myField");
 			yield return null;
 		}
 		
