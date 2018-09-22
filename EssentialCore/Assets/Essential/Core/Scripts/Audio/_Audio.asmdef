@@ -1,0 +1,10 @@
+{
+    "name": "_Audio",
+    "references": [
+        "_Debugging"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
