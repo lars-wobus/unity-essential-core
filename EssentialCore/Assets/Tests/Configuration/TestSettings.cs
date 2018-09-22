@@ -1,9 +1,10 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Essential.Core.Tests.Configuration
+namespace Tests.Configuration
 {
 	public static class TestSettings
 	{
@@ -34,7 +35,8 @@ namespace Essential.Core.Tests.Configuration
 			return new GameObject();
 		}
 		
-		public static void ExpectNullReferenceException()
+		[Obsolete]
+		public static void ExpectNullReferenceException() // TODO obsolete
 		{
 			LogAssert.Expect(LogType.Exception, new Regex("NullReferenceException: "));
 		}
