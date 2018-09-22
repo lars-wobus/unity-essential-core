@@ -1,0 +1,12 @@
+{
+    "name": "_RuntimeTestDebugging",
+    "references": [
+        "_Debugging"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
