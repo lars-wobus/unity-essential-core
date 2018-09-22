@@ -10,7 +10,7 @@ namespace Essential.Core.Debugging
     public static class DebugWrapper
     {
         [Conditional("UNITY_EDITOR")]
-        public static void LogArray<T>(IEnumerable<T> array)
+        public static void LogCollection<T>(IEnumerable<T> array)
         {
             if (array == null)
             {

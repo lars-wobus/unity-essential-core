@@ -11,7 +11,7 @@ namespace Tests.Debugging
 		[Test]
 		public void Should_LogNothing_When_NullIsPassed()
 		{
-			DebugWrapper.LogArray<bool>(null);
+			DebugWrapper.LogCollection<bool>(null);
 			Assert.True(true);
 		}
 		
@@ -20,7 +20,7 @@ namespace Tests.Debugging
 		{
 			LogAssert.Expect(LogType.Log, "");
 			
-			DebugWrapper.LogArray(new object[0]);
+			DebugWrapper.LogCollection(new object[0]);
 		}
 		
 		[Test]
@@ -28,7 +28,7 @@ namespace Tests.Debugging
 		{
 			LogAssert.Expect(LogType.Log, "null");
 			
-			DebugWrapper.LogArray(new object[]{new Object()});
+			DebugWrapper.LogCollection(new object[]{new Object()});
 		}
 		
 		[Test]
@@ -36,7 +36,7 @@ namespace Tests.Debugging
 		{
 			LogAssert.Expect(LogType.Log, "True");
 			
-			DebugWrapper.LogArray(new []{true});
+			DebugWrapper.LogCollection(new []{true});
 		}
 		
 		[Test]
@@ -44,7 +44,7 @@ namespace Tests.Debugging
 		{
 			LogAssert.Expect(LogType.Log, "null");
 			
-			DebugWrapper.LogArray(new List<object>(){new Object()});
+			DebugWrapper.LogCollection(new List<object>(){new Object()});
 		}
 	}
 }
