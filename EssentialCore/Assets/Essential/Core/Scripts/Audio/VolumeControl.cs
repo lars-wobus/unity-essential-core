@@ -7,6 +7,7 @@ namespace Essential.Core.Audio
 	public class VolumeControl : MonoBehaviour
 	{
 		[SerializeField] private AudioMixer _masterMixer;
+		//[SerializeField] private ExposedProperty _exposedProperty;
 
 		private void Start () {
 			var parameters = _masterMixer.GetType().GetProperty("exposedParameters").GetValue(_masterMixer, null) as Array;

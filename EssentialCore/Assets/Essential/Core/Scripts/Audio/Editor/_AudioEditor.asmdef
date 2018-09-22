@@ -1,0 +1,10 @@
+{
+    "name": "_AudioEditor",
+    "references": [
+        "_Audio"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
