@@ -1,36 +1,43 @@
 ﻿using System;
 using System.Diagnostics;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Essential.Core.Debugging
 {
-	public static class SafeGuard {
-
-		/*[Conditional("UNITY_EDITOR")]
-		public static void ThrowNullReferenceExceptionWhenComponentIsNull<T>(T anything, MonoBehaviour script, string valueName) where T : class
-		{
-			if (anything != null)
-			{
-				return;
-			}
-
-			script.enabled = false;
-			throw new NullReferenceException(
-				$"{script.name}, {script.GetType()}, {valueName}"
-			);
-		}*/
-		
+	public static class SafeGuard
+	{
 		[Conditional("UNITY_EDITOR")]
-		public static void ThrowNullReferenceExceptionWhenComponentIsNull(Material anything, MonoBehaviour script, string valueName)
+		public static void ThrowNullReferenceExceptionWhenFieldNotInitialized(Object obj, Object owner, string fieldName)
 		{
-			if (anything != null)
+			// Everything is ok
+			if (obj != null)
 			{
 				return;
 			}
 
-			script.enabled = false;
+			// Worst case: Improper use of this method
+			if (owner == null)
+			{
+				throw new ArgumentException($"Unknown owner {fieldName}");
+			}
+			if (string.IsNullOrEmpty(fieldName))
+			{
+				throw new ArgumentException($"Unknown field name {fieldName}");
+			}
+
+			var type = owner.GetType();
+			
+			// Disable component if possible
+			var propertyInfo = type.GetProperty("enabled");
+			if (propertyInfo != null)
+			{
+				propertyInfo.SetValue(owner, false);
+			}
+			
+			// Hint for non-programmers that something was not set via the inspector
 			throw new NullReferenceException(
-				$"{script.name}, {script.GetType()}, {valueName}"
+				$"{owner.name}, {type}, {fieldName}"
 			);
 		}
 	}

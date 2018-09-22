@@ -20,6 +20,16 @@ namespace Tests.Debugging.Runtime
 			DummyGameObject = new GameObject();
 			PlaceholderScript = DummyGameObject.AddComponent<DefaultBehaviour>();
 		}
+		
+		[UnityTest]
+		public IEnumerator Should_NotThrowAnyException_When_DiffuseMaterialIsPassed()
+		{
+			var diffuseMaterial = new Material(Shader.Find("Diffuse"));
+			
+			SafeGuard.ThrowNullReferenceExceptionWhenFieldNotInitialized(diffuseMaterial, PlaceholderScript, "Something");
+			
+			yield return null;
+		}
 
 		[UnityTest]
 		public IEnumerator Should_ThrowNullReferenceException_When_NullIsPassed()
@@ -27,7 +37,7 @@ namespace Tests.Debugging.Runtime
 			// Important note: LogAssert did not seem to work here
 			try
 			{
-				SafeGuard.ThrowNullReferenceExceptionWhenComponentIsNull(null, PlaceholderScript, "Something");
+				SafeGuard.ThrowNullReferenceExceptionWhenFieldNotInitialized(null, PlaceholderScript, "Something");
 			}
 			catch (NullReferenceException exception)
 			{
@@ -38,16 +48,6 @@ namespace Tests.Debugging.Runtime
 			yield return null;
 			
 			Assert.Fail();
-		}
-		
-		[UnityTest]
-		public IEnumerator Should_NotThrowNullReferenceException_When_DiffuseMaterialIsPassed()
-		{
-			var diffuseMaterial = new Material(Shader.Find("Diffuse"));
-			
-			SafeGuard.ThrowNullReferenceExceptionWhenComponentIsNull(diffuseMaterial, PlaceholderScript, "Something");
-			
-			yield return null;
 		}
 	}
 }
