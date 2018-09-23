@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -7,7 +8,8 @@ namespace Essential.Core.Audio
 	public class VolumeControl : MonoBehaviour
 	{
 		[SerializeField] private AudioMixer _masterMixer;
-		//[SerializeField] private ExposedProperty _exposedProperty;
+		[SerializeField] private ExposedProperty[] _exposedProperty;
+		public List<ExposedProperty> Waves = new List<ExposedProperty>();
 
 		private void Start () {
 			var parameters = _masterMixer.GetType().GetProperty("exposedParameters").GetValue(_masterMixer, null) as Array;
