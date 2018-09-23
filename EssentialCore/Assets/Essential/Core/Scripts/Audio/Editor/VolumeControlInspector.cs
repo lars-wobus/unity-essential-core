@@ -15,13 +15,15 @@ namespace Essential.Core.Scripts.Audio.Editor
 		private AudioMixer AudioMixer { get; set; }
 		private ReorderableList ReorderableList { get; set; }
 
+		private SerializedProperty _serializedMixer;
 		private SerializedProperty _serializedScriptableObject;
 		private ExposedPropertyData ExposedPropertyData { get; set; }
 
 		private void OnEnable()
 		{
 			TargetScript = (VolumeControl)target;
-			AudioMixer = serializedObject.FindProperty("_masterMixer").objectReferenceValue as AudioMixer;
+			_serializedMixer = serializedObject.FindProperty("_masterMixer");
+			AudioMixer = _serializedMixer.objectReferenceValue as AudioMixer;
 			ExposedProperties = GetExposedValues();
 
 			var serializedField = serializedObject.FindProperty("_exposedProperty");
@@ -40,9 +42,13 @@ namespace Essential.Core.Scripts.Audio.Editor
 				(Rect rect, int index, bool isActive, bool isFocused) => {
 					var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(index);
 					rect.y += 2;
+					var halfRectWidth = rect.width / 2;
 					EditorGUI.PropertyField(
-						new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight),
+						new Rect(rect.x, rect.y, halfRectWidth, EditorGUIUtility.singleLineHeight),
 						element.FindPropertyRelative("_name"), GUIContent.none);
+					EditorGUI.PropertyField(
+						new Rect(rect.x + halfRectWidth, rect.y, halfRectWidth, EditorGUIUtility.singleLineHeight),
+						element.FindPropertyRelative("_volume"), GUIContent.none);
 				};
 
 			ReorderableList.onRemoveCallback = (ReorderableList l) => {
@@ -80,7 +86,9 @@ namespace Essential.Core.Scripts.Audio.Editor
 		
 		public override void OnInspectorGUI()
 		{
-			_serializedScriptableObject= serializedObject.FindProperty("_exposedPropertyData");
+			EditorGUILayout.PropertyField(_serializedMixer, GUIContent.none);
+			
+			_serializedScriptableObject = serializedObject.FindProperty("_customSettings");
 			
 			EditorGUILayout.PropertyField(_serializedScriptableObject, GUIContent.none);
 

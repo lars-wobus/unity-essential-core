@@ -260,11 +260,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _masterMixer: {fileID: 24100000, guid: 18932065404a39c49b03f23bdffa628e, type: 2}
-  _exposedProperty: []
-  Waves:
+  _customSettings: {fileID: 11400000, guid: 914654febd92f744b842d23853bb7ddb, type: 2}
+  _exposedProperty:
   - _name: masterVolume
-  - _name: musicVolume
+    _volume: 0
   - _name: sfxVolume
+    _volume: 3
+  - _name: musicVolume
+    _volume: 0
 --- !u!1 &1644379460
 GameObject:
   m_ObjectHideFlags: 0
