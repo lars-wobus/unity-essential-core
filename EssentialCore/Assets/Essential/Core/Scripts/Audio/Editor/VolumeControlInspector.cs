@@ -10,10 +10,13 @@ namespace Essential.Core.Scripts.Audio.Editor
 	[CustomEditor(typeof(VolumeControl))]
 	public class VolumeControlInspector : UnityEditor.Editor
 	{
-		public VolumeControl TargetScript { get; set; }
-		public string[] ExposedProperties { get; set; }
-		public AudioMixer AudioMixer { get; set; }
-		private ReorderableList list;
+		private VolumeControl TargetScript { get; set; }
+		private string[] ExposedProperties { get; set; }
+		private AudioMixer AudioMixer { get; set; }
+		private ReorderableList ReorderableList { get; set; }
+
+		private SerializedProperty _serializedScriptableObject;
+		private ExposedPropertyData ExposedPropertyData { get; set; }
 
 		private void OnEnable()
 		{
@@ -23,36 +26,36 @@ namespace Essential.Core.Scripts.Audio.Editor
 
 			var serializedField = serializedObject.FindProperty("_exposedProperty");
 			
-			list = new ReorderableList(serializedObject, 
+			ReorderableList = new ReorderableList(serializedObject, 
 				serializedField, 
 				true, true, true, true);
 
 			var variableName = ObjectNames.NicifyVariableName(serializedField.name);
 			
-			list.drawHeaderCallback = (Rect rect) => {
+			ReorderableList.drawHeaderCallback = (Rect rect) => {
 				EditorGUI.LabelField(rect, variableName);
 			};
 			
-			list.drawElementCallback = 
+			ReorderableList.drawElementCallback = 
 				(Rect rect, int index, bool isActive, bool isFocused) => {
-					var element = list.serializedProperty.GetArrayElementAtIndex(index);
+					var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(index);
 					rect.y += 2;
 					EditorGUI.PropertyField(
 						new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight),
 						element.FindPropertyRelative("_name"), GUIContent.none);
 				};
 
-			list.onRemoveCallback = (ReorderableList l) => {
-				var element = list.serializedProperty.GetArrayElementAtIndex(l.index);
+			ReorderableList.onRemoveCallback = (ReorderableList l) => {
+				var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(l.index);
 				var name = element.FindPropertyRelative("_name").stringValue;
 				
-				if (EditorUtility.DisplayDialog("Delete element from list!", 
+				if (EditorUtility.DisplayDialog("Delete element from ReorderableList!", 
 					name, "Yes", "No")) {
 					ReorderableList.defaultBehaviours.DoRemoveButton(l);
 				}
 			};
 			
-			list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) => {
+			ReorderableList.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) => {
 				var menu = new GenericMenu();
 
 				foreach (var name in ExposedProperties) {
@@ -67,26 +70,29 @@ namespace Essential.Core.Scripts.Audio.Editor
 		
 		private void clickHandler(object target) {
 			var data = (ExposedProperty)target;
-			var index = list.serializedProperty.arraySize;
-			list.serializedProperty.arraySize++;
-			list.index = index;
-			var element = list.serializedProperty.GetArrayElementAtIndex(index);
+			var index = ReorderableList.serializedProperty.arraySize;
+			ReorderableList.serializedProperty.arraySize++;
+			ReorderableList.index = index;
+			var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(index);
 			element.FindPropertyRelative("_name").stringValue = data.Name;
 			serializedObject.ApplyModifiedProperties();
 		}
 		
-		
+		public override void OnInspectorGUI()
+		{
+			_serializedScriptableObject= serializedObject.FindProperty("_exposedPropertyData");
+			
+			EditorGUILayout.PropertyField(_serializedScriptableObject, GUIContent.none);
 
-		public override void OnInspectorGUI() {
-			//DrawDefaultInspector();
-			
-			/*if (ExposedProperties != null)
+			if (_serializedScriptableObject != null)
 			{
-				SelectedIndex = EditorGUILayout.Popup("Label", SelectedIndex, ExposedProperties);
-			}*/
+				UpdateExposedPropertyData();
+			}
 			
-			list.DoLayoutList();
+			EditorGUILayout.Space();
 			
+			ReorderableList.DoLayoutList();
+
 			serializedObject.ApplyModifiedProperties();
 		}
 
@@ -101,6 +107,25 @@ namespace Essential.Core.Scripts.Audio.Editor
 			}
 
 			return result;
+		}
+
+		private void UpdateExposedPropertyData()
+		{
+			ExposedPropertyData =
+				_serializedScriptableObject.objectReferenceValue as ExposedPropertyData;
+
+			var length = ReorderableList.serializedProperty.arraySize;
+			ExposedPropertyData.ExposedProperties = new ExposedProperty[length];
+			
+			for (int index = 0; index < ReorderableList.serializedProperty.arraySize; ++index)
+			{
+				var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(index);
+				var name = element.FindPropertyRelative("_name").stringValue;
+
+				ExposedPropertyData.ExposedProperties[index] = new ExposedProperty(name);
+			}
+			
+			serializedObject.ApplyModifiedProperties();
 		}
 	}
 }
