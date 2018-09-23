@@ -55,3 +55,7 @@ EssentialCore/Assets/Essential/Core/Shaders/*
 EssentialCore/Assets/Essential/Core/Scripts/IO.meta
 EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs
 EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs.meta
+
+# Ignore some plugins
+EssentialCore/Assets/Plugins/NaughtyAttributes/* 
+!EssentialCore/Assets/Plugins/NaughtyAttributes/.keep 
