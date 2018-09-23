@@ -13,7 +13,6 @@ namespace Essential.Core.Scripts.Audio.Editor
 		public VolumeControl TargetScript { get; set; }
 		public string[] ExposedProperties { get; set; }
 		public AudioMixer AudioMixer { get; set; }
-		//public int SelectedIndex { get; set; }
 		private ReorderableList list;
 
 		private void OnEnable()
@@ -21,10 +20,18 @@ namespace Essential.Core.Scripts.Audio.Editor
 			TargetScript = (VolumeControl)target;
 			AudioMixer = serializedObject.FindProperty("_masterMixer").objectReferenceValue as AudioMixer;
 			ExposedProperties = GetExposedValues();
+
+			var serializedField = serializedObject.FindProperty("_exposedProperty");
 			
 			list = new ReorderableList(serializedObject, 
-				serializedObject.FindProperty("Waves"), 
+				serializedField, 
 				true, true, true, true);
+
+			var variableName = ObjectNames.NicifyVariableName(serializedField.name);
+			
+			list.drawHeaderCallback = (Rect rect) => {
+				EditorGUI.LabelField(rect, variableName);
+			};
 			
 			list.drawElementCallback = 
 				(Rect rect, int index, bool isActive, bool isFocused) => {
@@ -34,11 +41,7 @@ namespace Essential.Core.Scripts.Audio.Editor
 						new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight),
 						element.FindPropertyRelative("_name"), GUIContent.none);
 				};
-			
-			list.drawHeaderCallback = (Rect rect) => {
-				EditorGUI.LabelField(rect, "Exposed Values");
-			};
-			
+
 			list.onRemoveCallback = (ReorderableList l) => {
 				var element = list.serializedProperty.GetArrayElementAtIndex(l.index);
 				var name = element.FindPropertyRelative("_name").stringValue;
