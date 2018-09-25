@@ -9,6 +9,9 @@ namespace Essential.Core.Audio
 	{
 		[SerializeField] private AudioMixer _audioMixer;
 		[SerializeField] private ExposedProperty[] exposedProperties;
+
+		public AudioMixer AudioMixer => _audioMixer;
+		public ExposedProperty[] ExposedProperties => exposedProperties;
 	
 		public string SerializeToJson()
 		{
