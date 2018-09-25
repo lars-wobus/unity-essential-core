@@ -11,7 +11,6 @@ namespace Essential.Core.Scripts.Audio.Editor
 	public class VolumeControlInspector : UnityEditor.Editor
 	{
 		private VolumeControl TargetScript { get; set; }
-		private string[] ExposedProperties { get; set; }
 		private AudioMixer AudioMixer { get; set; }
 		private ReorderableList ReorderableList { get; set; }
 
@@ -24,19 +23,8 @@ namespace Essential.Core.Scripts.Audio.Editor
 			TargetScript = (VolumeControl)target;
 			_serializedMixer = serializedObject.FindProperty("_masterMixer");
 			AudioMixer = _serializedMixer.objectReferenceValue as AudioMixer;
-			ExposedProperties = GetExposedValues();
 
-			var serializedField = serializedObject.FindProperty("_exposedProperty");
-			
-			ReorderableList = new ReorderableList(serializedObject, 
-				serializedField, 
-				true, true, true, true);
-
-			var variableName = ObjectNames.NicifyVariableName(serializedField.name);
-			
-			ReorderableList.drawHeaderCallback = (Rect rect) => {
-				EditorGUI.LabelField(rect, variableName);
-			};
+			ReorderableList = ReorderableListHelper.CreateReorderableListFromTemplate(serializedObject, "_exposedProperty");
 			
 			ReorderableList.drawElementCallback = 
 				(Rect rect, int index, bool isActive, bool isFocused) => {
@@ -50,21 +38,12 @@ namespace Essential.Core.Scripts.Audio.Editor
 						new Rect(rect.x + halfRectWidth, rect.y, halfRectWidth, EditorGUIUtility.singleLineHeight),
 						element.FindPropertyRelative("_volume"), GUIContent.none);
 				};
-
-			ReorderableList.onRemoveCallback = (ReorderableList l) => {
-				var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(l.index);
-				var name = element.FindPropertyRelative("_name").stringValue;
-				
-				if (EditorUtility.DisplayDialog("Delete element from ReorderableList!", 
-					name, "Yes", "No")) {
-					ReorderableList.defaultBehaviours.DoRemoveButton(l);
-				}
-			};
 			
 			ReorderableList.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) => {
 				var menu = new GenericMenu();
 
-				foreach (var name in ExposedProperties) {
+				var itemNames = GetExposedValues();
+				foreach (var name in itemNames) {
 					menu.AddItem(new GUIContent(name), 
 						false, clickHandler, 
 						new ExposedProperty(name));
