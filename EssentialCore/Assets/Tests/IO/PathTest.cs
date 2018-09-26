@@ -90,5 +90,69 @@ namespace Tests.IO
 		{
 			Assert.Fail(); 
 		}
+		
+		// Belongs to file
+		
+		[Test]
+		public void Should_ReturnFalse_When_CheckingFileTypeForNull()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_CheckingFileTypeForEmptyString()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_PathDoesNotPointToFile()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringCheckIfPathPointsToFile()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnTrue_When_PathPointsToFile()
+		{
+			Assert.Fail();
+		}
+		
+		// Belongs to directory
+		
+		[Test]
+		public void Should_ReturnFalse_When_CheckingDirectoryTypeForNull()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_CheckingDirectoryTypeForEmptyString()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_PathDoesNotPointToDirectory()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringCheckIfPathPointsToDirectory()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnTrue_When_PathPointsToDirectory()
+		{
+			Assert.Fail();
+		}
 	}
 }
