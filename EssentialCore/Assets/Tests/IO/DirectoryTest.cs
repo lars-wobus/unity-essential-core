@@ -34,6 +34,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_DirectoryPathPointsToFile()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_DirectoryDoesNotExist()
         {
             Assert.Fail();
@@ -72,6 +78,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_TryingToCreateFile()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCreatingDirectory()
         {
             Assert.Fail();
@@ -105,6 +117,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_DeletingDirectoryContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_TryingToDeleteFile()
         {
             Assert.Fail();
         }
@@ -149,6 +167,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_CleaningDirectoryContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_TryingToCleanFile()
         {
             Assert.Fail();
         }

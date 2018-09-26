@@ -34,6 +34,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_FilePathPointsToDirectory()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_FileDoesNotExist()
         {
             Assert.Fail();
@@ -67,6 +73,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_DeletingFileContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_TryingToDeleteDirectory()
         {
             Assert.Fail();
         }
@@ -128,6 +140,18 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_TryingToMoveDirectoryToFile()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_TryingToMoveFileToDirectory()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_IdenticallyNamedFileInTargetDirectoryBlocksFileMovement()
         {
             Assert.Fail();
@@ -184,6 +208,18 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_TryingToCopyDirectoryToFile()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_TryingToCopyFileToDirectory()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_TargetDirectoryContainsFileWithSameNameAsCopy()
         {
             Assert.Fail();
@@ -200,5 +236,9 @@ namespace Tests.IO
         {
             Assert.Fail(); 
         }
+        
+        // File read
+        
+        // File write
     }
 }
