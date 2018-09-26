@@ -28,6 +28,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_FileDoesNotExist()
         {
             Assert.Fail();
@@ -55,6 +61,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_DeletingEmptyString()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_DeletingFileContainingInvalidCharacters()
         {
             Assert.Fail();
         }
@@ -104,6 +116,18 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_MovingFileContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_MovingFileToPathContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_IdenticallyNamedFileInTargetDirectoryBlocksFileMovement()
         {
             Assert.Fail();
@@ -143,6 +167,18 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_CopyingFileToEmptyString()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_CopyingFileContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_CopyingFileToPathContainingInvalidCharacters()
         {
             Assert.Fail();
         }

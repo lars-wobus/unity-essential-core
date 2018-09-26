@@ -28,6 +28,12 @@ namespace Tests.IO
 		}
 		
 		[Test]
+		public void Should_ReturnFalse_When_ValidatingPathContainingInvalidCharacters()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
 		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringValidation()
 		{
 			Assert.Fail();
@@ -55,6 +61,12 @@ namespace Tests.IO
 		
 		[Test]
 		public void Should_ReturnEmptyString_When_NormalizingEmptyString()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnEmptyString_When_NormalizingPathContainingInvalidCharacters()
 		{
 			Assert.Fail();
 		}
@@ -86,6 +98,12 @@ namespace Tests.IO
 		}
 		
 		[Test]
+		public void Should_ReturnNull_When_PersistentSubdirectoryContainsInvalidCharacters()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
 		public void Should_ReturnDirectoryWithinApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsNotEmpty()
 		{
 			Assert.Fail();
@@ -101,6 +119,12 @@ namespace Tests.IO
 		
 		[Test]
 		public void Should_ReturnFalse_When_CheckingFileTypeForEmptyString()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
 		{
 			Assert.Fail();
 		}
@@ -133,6 +157,12 @@ namespace Tests.IO
 		
 		[Test]
 		public void Should_ReturnFalse_When_CheckingDirectoryTypeForEmptyString()
+		{
+			Assert.Fail();
+		}
+		
+		[Test]
+		public void Should_ReturnFalse_When_DirectoryPathContainsInvalidCharacters()
 		{
 			Assert.Fail();
 		}

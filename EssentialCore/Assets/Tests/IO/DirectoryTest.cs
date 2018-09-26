@@ -28,6 +28,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_DirectoryPathContainsInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_DirectoryDoesNotExist()
         {
             Assert.Fail();
@@ -60,6 +66,12 @@ namespace Tests.IO
         }
         
         [Test]
+        public void Should_ReturnFalse_When_CreatingDirectoryContainingInvalidCharacters()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
         public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCreatingDirectory()
         {
             Assert.Fail();
@@ -87,6 +99,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_DeletingEmptyString()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_DeletingDirectoryContainingInvalidCharacters()
         {
             Assert.Fail();
         }
@@ -125,6 +143,12 @@ namespace Tests.IO
         
         [Test]
         public void Should_ReturnFalse_When_CleaningEmptyString()
+        {
+            Assert.Fail();
+        }
+        
+        [Test]
+        public void Should_ReturnFalse_When_CleaningDirectoryContainingInvalidCharacters()
         {
             Assert.Fail();
         }
