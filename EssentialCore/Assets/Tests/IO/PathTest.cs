@@ -1,16 +1,21 @@
-﻿using NUnit.Framework;
+﻿using System.Text.RegularExpressions;
+using Essential.Core.IO;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Tests.IO
 {
 	public class PathTest
 	{
 		private string TestPath { get; set; }
+		private string InvalidCharacters { get; set; }
         
 		[SetUp]
 		public void Setup()
 		{
 			TestPath = Application.persistentDataPath;
+			InvalidCharacters = new string(System.IO.Path.GetInvalidPathChars());
 		}
         
 		// Validate path - Check if path points to Application.persistentDataPath or one of its elements inside
@@ -18,37 +23,49 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_ValidatingNull()
 		{
-			Assert.Fail();
+			var actual = Path.Validate(null);
+			
+			Assert.False(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_ValidatingEmptyString()
 		{
-			Assert.Fail();
+			var actual = Path.Validate("");
+			
+			Assert.False(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_ValidatingPathContainingInvalidCharacters()
 		{
-			Assert.Fail();
+			var actual = Path.Validate(InvalidCharacters);
+			
+			Assert.False(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringValidation()
 		{
-			Assert.Fail();
+			LogAssert.Expect(LogType.Exception, new Regex (""));
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_ValidatingPathPointingOutsideOfApplicationPersistentDataPath()
 		{
-			Assert.Fail();
+			var actual = Path.Validate(@"C:\Windows");
+			
+			Assert.False(actual);
 		}
         
 		[Test]
 		public void Should_ReturnTrue_When_ValidatingPathPointingInsideOfApplicationPersistentDataPath()
 		{
-			Assert.Fail(); 
+			var directory = Application.persistentDataPath + "/mySubFolder";
+			
+			var actual = Path.Validate(directory);
+			
+			Assert.IsTrue(actual); 
 		}
 		
 		// Normalize path - Normalize paths to use them on unix systems
@@ -56,31 +73,45 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnNull_When_NormalizingNull()
 		{
-			Assert.Fail();
+			var actual = Path.Normalize(null);
+			
+			Assert.IsNull(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnEmptyString_When_NormalizingEmptyString()
 		{
-			Assert.Fail();
+			var actual = Path.Normalize("");
+			
+			Assert.IsNull(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnEmptyString_When_NormalizingPathContainingInvalidCharacters()
 		{
-			Assert.Fail();
+			var actual = Path.Normalize(InvalidCharacters);
+			
+			Assert.IsNull(actual);
 		}
      
 		[Test]
 		public void Should_ReturnStringWithNoBackslashes_When_NormalizingLocalPath()
 		{
-			Assert.Fail();
+			const string expected = @"myFolder/mySubFolder";
+			
+			var actual = Path.Normalize(@"myFolder\mySubFolder");
+
+			Assert.AreEqual(expected, actual);
 		}
 		
 		[Test]
 		public void Should_ReturnStringWithNoBackslashes_When_NormalizingAbsolutePath()
 		{
-			Assert.Fail();
+			var expected = Application.persistentDataPath + @"/mySubFolder";
+			
+			var actual = Path.Normalize(Application.persistentDataPath + @"\mySubFolder");
+
+			Assert.AreEqual(expected, actual);
 		}
 		
 		// Build path - Get subdirectory within Application.persistentDataPath or null
@@ -88,25 +119,33 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnNull_When_PersistentSubdirectoryNameIsNull()
 		{
-			Assert.Fail();
+			var actual = Path.GetPersistentDirectory(null);
+			
+			Assert.IsNull(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnNull_When_PersistentSubdirectoryNameIsEmpty()
 		{
-			Assert.Fail();
+			var actual = Path.GetPersistentDirectory("");
+			
+			Assert.IsNull(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnNull_When_PersistentSubdirectoryContainsInvalidCharacters()
 		{
-			Assert.Fail();
+			var actual = Path.GetPersistentDirectory(InvalidCharacters);
+			
+			Assert.IsNull(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnDirectoryWithinApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsNotEmpty()
 		{
-			Assert.Fail();
+			var actual = Path.GetPersistentDirectory("mySubFolder");
+			
+			Assert.IsNotNull(actual);
 		}
 		
 		// Belongs to file
@@ -114,37 +153,49 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_CheckingFileTypeForNull()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile(null);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_CheckingFileTypeForEmptyString()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile("");
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile(InvalidCharacters);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_PathDoesNotPointToFile()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile(Application.persistentDataPath);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringCheckIfPathPointsToFile()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile(Application.persistentDataPath);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnTrue_When_PathPointsToFile()
 		{
-			Assert.Fail();
+			var actual = Path.IsFile(Application.persistentDataPath + "/anything.txt");
+			
+			Assert.IsTrue(actual);
 		}
 		
 		// Belongs to directory
@@ -152,37 +203,49 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_CheckingDirectoryTypeForNull()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory(null);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_CheckingDirectoryTypeForEmptyString()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory("");
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_DirectoryPathContainsInvalidCharacters()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory(InvalidCharacters);
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_PathDoesNotPointToDirectory()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory(Application.persistentDataPath + "/anything.txt");
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringCheckIfPathPointsToDirectory()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory(Application.persistentDataPath + "/anything.txt");
+			
+			Assert.IsFalse(actual);
 		}
 		
 		[Test]
 		public void Should_ReturnTrue_When_PathPointsToDirectory()
 		{
-			Assert.Fail();
+			var actual = Path.IsDirectory(Application.persistentDataPath);
+			
+			Assert.IsTrue(actual);
 		}
 	}
 }
