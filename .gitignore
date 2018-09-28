@@ -52,6 +52,7 @@ EssentialCore/Assets/InitTestScene*.unity.meta
 EssentialCore/Assets/Essential/Core/Shaders/*
 
 # Ingore IO scripts
-EssentialCore/Assets/Essential/Core/Scripts/IO.meta
-EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs
-EssentialCore/Assets/Essential/Core/Scripts/IO/*.cs.meta
+EssentialCore/Assets/Essential/Core/Scripts/IO/FileReader.cs
+EssentialCore/Assets/Essential/Core/Scripts/IO/FileReader.cs.meta
+EssentialCore/Assets/Essential/Core/Scripts/IO/FileWriter.cs
+EssentialCore/Assets/Essential/Core/Scripts/IO/FileWriter.cs.meta
