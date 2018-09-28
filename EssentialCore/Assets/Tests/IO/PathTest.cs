@@ -131,19 +131,19 @@ namespace Tests.IO
 		// Build path - Get subdirectory within Application.persistentDataPath or null
 		
 		[Test]
-		public void Should_ReturnNull_When_PersistentSubdirectoryNameIsNull()
+		public void Should_ReturnApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsNull()
 		{
 			var actual = Path.GetPersistentDirectory(null);
 			
-			Assert.IsNull(actual);
+			Assert.AreEqual(Application.persistentDataPath, actual);
 		}
 		
 		[Test]
-		public void Should_ReturnNull_When_PersistentSubdirectoryNameIsEmpty()
+		public void Should_ReturnApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsEmpty()
 		{
 			var actual = Path.GetPersistentDirectory("");
 			
-			Assert.IsNull(actual);
+			Assert.AreEqual(Application.persistentDataPath, actual);
 		}
 		
 		[Test]
