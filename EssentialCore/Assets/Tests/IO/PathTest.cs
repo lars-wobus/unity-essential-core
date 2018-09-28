@@ -1,8 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using Essential.Core.IO;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Path = Essential.Core.IO.Path;
 
 namespace Tests.IO
 {
@@ -10,12 +11,25 @@ namespace Tests.IO
 	{
 		private string TestPath { get; set; }
 		private string InvalidCharacters { get; set; }
+		private string TestFilePath { get; set; }
         
 		[SetUp]
 		public void Setup()
 		{
 			TestPath = Application.persistentDataPath;
 			InvalidCharacters = new string(System.IO.Path.GetInvalidPathChars());
+
+			TestFilePath = TestPath + "/FileForUnitTesting.txt";
+			using(var streamWriter = new StreamWriter(TestFilePath, true))
+			{
+				streamWriter.WriteLine("Some dummy text.");
+			}
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			System.IO.File.Delete(TestFilePath);
 		}
         
 		// Validate path - Check if path points to Application.persistentDataPath or one of its elements inside
@@ -193,8 +207,8 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnTrue_When_PathPointsToFile()
 		{
-			var actual = Path.IsFile(Application.persistentDataPath + "/anything.txt");
-			
+			var actual = Path.IsFile(TestFilePath);
+
 			Assert.IsTrue(actual);
 		}
 		
