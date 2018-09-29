@@ -1,16 +1,44 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.TestTools;
+using Path = Essential.Core.IO.Path;
 
 namespace Tests.IO
 {
     public class FileTest
     {
         private string TestPath { get; set; }
+        private string InvalidCharacters { get; set; }
+        private string TestFilePath { get; set; }
+        private string TestFilePathTarget { get; set; }
         
         [SetUp]
         public void Setup()
         {
             TestPath = Application.persistentDataPath;
+            InvalidCharacters = new string(System.IO.Path.GetInvalidPathChars());
+
+            TestFilePath = TestPath + "/FileForUnitTesting.txt";
+            TestFilePathTarget = TestPath + "/FileForUnitTesting.txt";
+            using(var streamWriter = new StreamWriter(TestFilePath, true))
+            {
+                streamWriter.WriteLine("Some dummy text.");
+            }
+            using(var streamWriter = new StreamWriter(TestFilePathTarget, true))
+            {
+                streamWriter.WriteLine("Some dummy text.");
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            System.IO.File.Delete(TestFilePath);
+            System.IO.File.Delete(TestFilePathTarget);
         }
         
         // File exist
@@ -18,31 +46,41 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_FilePathIsNull()
         {
-            Assert.Fail();
+            var actual = File.Exists(null);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_FilePathIsEmpty()
         {
-            Assert.Fail();
+            var actual = File.Exists("");
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
         {
-            Assert.Fail();
+            var actual = File.Exists(InvalidCharacters);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_FilePathPointsToDirectory()
         {
-            Assert.Fail();
+            var actual = File.Exists(Application.persistentDataPath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_FileDoesNotExist()
         {
-            Assert.Fail();
+            var actual = File.Exists(Application.persistentDataPath + "/nonExistingFile.txt");
+            
+            Assert.False(actual);
         }
         
         [Test]
@@ -54,7 +92,9 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileExists()
         {
-            Assert.Fail();
+            var actual = File.Exists(TestFilePath);
+            
+            Assert.True(actual);
         }
         
         // File delete
@@ -62,31 +102,41 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_DeletingNull()
         {
-            Assert.Fail();
+            var actual = File.Delete(null);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_DeletingEmptyString()
         {
-            Assert.Fail();
+            var actual = File.Delete("");
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_DeletingFileContainingInvalidCharacters()
         {
-            Assert.Fail();
+            var actual = File.Delete(InvalidCharacters);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TryingToDeleteDirectory()
         {
-            Assert.Fail();
+            var actual = File.Delete(Application.persistentDataPath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_DeletingNonExistingFile()
         {
-            Assert.Fail();
+            var actual = File.Delete(Application.persistentDataPath + "/nonExistingFile.txt");
+            
+            Assert.False(actual);
         }
         
         [Test]
@@ -98,7 +148,9 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeDeleted()
         {
-            Assert.Fail();
+            var actual = File.Delete(TestFilePath);
+            
+            Assert.True(actual);
         }
         
         // File move
@@ -106,55 +158,81 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingNull()
         {
-            Assert.Fail();
+            var actual = File.Move(null, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_MovingFileToNull()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Move(TestFilePath, null);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_MovingEmptyString()
         {
-            Assert.Fail();
+            var actual = File.Move("", TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_MovingFileToEmptyString()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Move(TestFilePath, "");
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_MovingFileContainingInvalidCharacters()
         {
-            Assert.Fail();
+            var actual = File.Move(InvalidCharacters, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_MovingFileToPathContainingInvalidCharacters()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Move(TestFilePath, InvalidCharacters);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TryingToMoveDirectoryToFile()
         {
-            Assert.Fail();
+            var actual = File.Move(Application.persistentDataPath, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TryingToMoveFileToDirectory()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Move(TestFilePath, Application.persistentDataPath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_IdenticallyNamedFileInTargetDirectoryBlocksFileMovement()
         {
-            Assert.Fail();
+            var actual = File.Move(TestFilePath, TestFilePathTarget);
+            
+            Assert.False(actual);
         }
         
         [Test]
@@ -166,7 +244,9 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeMoved()
         {
-            Assert.Fail(); 
+            var actual = File.Move(TestFilePath, TestFilePathTarget);
+            
+            Assert.False(actual);
         }
         
         // File copy
@@ -174,55 +254,81 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingNull()
         {
-            Assert.Fail();
+            var actual = File.Copy(null, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_CopyingFileToNull()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Copy(TestFilePath, null);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_CopyingEmptyString()
         {
-            Assert.Fail();
+            var actual = File.Copy("", TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_CopyingFileToEmptyString()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Copy(TestFilePath, "");
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_CopyingFileContainingInvalidCharacters()
         {
-            Assert.Fail();
+            var actual = File.Copy(InvalidCharacters, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_CopyingFileToPathContainingInvalidCharacters()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Copy(TestFilePath, InvalidCharacters);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TryingToCopyDirectoryToFile()
-        {
-            Assert.Fail();
+        {           
+            var actual = File.Copy(Application.persistentDataPath, TestFilePath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TryingToCopyFileToDirectory()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Copy(TestFilePath, Application.persistentDataPath);
+            
+            Assert.False(actual);
         }
         
         [Test]
         public void Should_ReturnFalse_When_TargetDirectoryContainsFileWithSameNameAsCopy()
         {
-            Assert.Fail();
+            var actual = File.Copy(TestFilePath, TestFilePathTarget);
+            
+            Assert.False(actual);
         }
         
         [Test]
@@ -234,7 +340,9 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeCopied()
         {
-            Assert.Fail(); 
+            var actual = File.Copy(TestFilePath, TestFilePathTarget);
+            
+            Assert.False(actual); 
         }
         
         // File read
