@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
@@ -59,12 +61,6 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringValidation()
-		{
-			LogAssert.Expect(LogType.Exception, new Regex (""));
-		}
-		
-		[Test]
 		public void Should_ReturnFalse_When_ValidatingPathPointingOutsideOfApplicationPersistentDataPath()
 		{
 			var actual = Path.Validate(@"C:\Windows");
@@ -97,15 +93,15 @@ namespace Tests.IO
 		{
 			var actual = Path.Normalize("");
 			
-			Assert.IsNull(actual);
+			Assert.IsEmpty(actual);
 		}
 		
 		[Test]
-		public void Should_ReturnEmptyString_When_NormalizingPathContainingInvalidCharacters()
+		public void Should_ReturnUnchangedString_EvenWhen_PathContainsInvalidCharacters()
 		{
 			var actual = Path.Normalize(InvalidCharacters);
 			
-			Assert.IsNull(actual);
+			Assert.AreEqual(InvalidCharacters, actual);
 		}
      
 		[Test]
@@ -183,6 +179,8 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
 		{
+			LogAssert.Expect(LogType.Exception, new Regex ("Exception"));
+			
 			var actual = Path.IsFile(InvalidCharacters);
 			
 			Assert.IsFalse(actual);
@@ -233,6 +231,8 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_DirectoryPathContainsInvalidCharacters()
 		{
+			LogAssert.Expect(LogType.Exception, new Regex ("Exception"));
+			
 			var actual = Path.IsDirectory(InvalidCharacters);
 			
 			Assert.IsFalse(actual);
@@ -241,7 +241,7 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_PathDoesNotPointToDirectory()
 		{
-			var actual = Path.IsDirectory(Application.persistentDataPath + "/anything.txt");
+			var actual = Path.IsDirectory(TestFilePath);
 			
 			Assert.IsFalse(actual);
 		}
@@ -249,9 +249,9 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnFalse_When_AnyExceptionIsThrownDuringCheckIfPathPointsToDirectory()
 		{
+			LogAssert.Expect(LogType.Exception, new Regex ("Exception"));
+
 			var actual = Path.IsDirectory(Application.persistentDataPath + "/anything.txt");
-			
-			Assert.IsFalse(actual);
 		}
 		
 		[Test]

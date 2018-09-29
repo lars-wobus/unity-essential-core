@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using UnityEngine;
 
 namespace Essential.Core.IO
@@ -17,7 +16,7 @@ namespace Essential.Core.IO
 			}
 			catch (Exception exception)
 			{
-				Debug.LogError(exception);
+				Debug.LogException(exception);
 				return true;
 			}
 
@@ -41,7 +40,58 @@ namespace Essential.Core.IO
 		
 		public static string Normalize(string path)
 		{
-			return !Path.Validate(path) ? null : new Uri(path).LocalPath.Replace("\\", "/").TrimEnd('/');
+			/*if (string.IsNullOrEmpty(path))
+			{
+				return null;
+			}
+			
+			try
+			{
+				if (!System.IO.Path.IsPathRooted(path))
+				{
+					return path.Replace("\\", "/").TrimEnd('/');
+				}
+				
+				return !Path.Validate(path) ? null : path.Replace("\\", "/").TrimEnd('/');
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
+			}*/
+
+			if (string.IsNullOrEmpty(path))
+			{
+				return path;
+			}
+
+			return path.Replace("\\", "/").TrimEnd('/');
+		}
+
+		public static bool IsAbsolutePath(string path)
+		{
+			try
+			{
+				return System.IO.Path.IsPathRooted(path);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return false;
+			}
+		}
+
+		public static bool IsLocalPath(string path)
+		{
+			try
+			{
+				return !System.IO.Path.IsPathRooted(path);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return false;
+			}
 		}
 
 		public static string GetPersistentDirectory(string localPath)
@@ -55,18 +105,18 @@ namespace Essential.Core.IO
 		{
 			var normalizedPath = Normalize(path);
 			
-			if (normalizedPath == null)
+			if (string.IsNullOrEmpty(normalizedPath))
 			{
 				return false;
 			}
 			
 			try
 			{
-				return (File.GetAttributes(path) & FileAttributes.Directory) != FileAttributes.Directory;
+				return (System.IO.File.GetAttributes(path) & System.IO.FileAttributes.Directory) != System.IO.FileAttributes.Directory;
 			}
 			catch (Exception exception)
 			{
-				Debug.LogError(exception);
+				Debug.LogException(exception);
 				return false;
 			}
 		}
@@ -75,18 +125,18 @@ namespace Essential.Core.IO
 		{
 			var normalizedPath = Normalize(path);
 			
-			if (normalizedPath == null)
+			if (string.IsNullOrEmpty(normalizedPath))
 			{
 				return false;
 			}
 			
 			try
 			{
-				return (File.GetAttributes(path) & FileAttributes.Directory) == FileAttributes.Directory;
+				return (System.IO.File.GetAttributes(path) & System.IO.FileAttributes.Directory) == System.IO.FileAttributes.Directory;
 			}
 			catch (Exception exception)
 			{
-				Debug.LogError(exception);
+				Debug.LogException(exception);
 				return false;
 			}
 		}
