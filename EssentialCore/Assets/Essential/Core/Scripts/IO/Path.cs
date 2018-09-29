@@ -9,18 +9,13 @@ namespace Essential.Core.IO
 		{
 			try
 			{
-				if (path.IndexOfAny(System.IO.Path.GetInvalidPathChars()) != -1)
-				{
-					return true;
-				}
+				return path.IndexOfAny(System.IO.Path.GetInvalidPathChars()) != -1;
 			}
 			catch (Exception exception)
 			{
 				Debug.LogException(exception);
 				return true;
 			}
-
-			return false;
 		}
 		
 		public static bool Validate(string path)
@@ -40,26 +35,6 @@ namespace Essential.Core.IO
 		
 		public static string Normalize(string path)
 		{
-			/*if (string.IsNullOrEmpty(path))
-			{
-				return null;
-			}
-			
-			try
-			{
-				if (!System.IO.Path.IsPathRooted(path))
-				{
-					return path.Replace("\\", "/").TrimEnd('/');
-				}
-				
-				return !Path.Validate(path) ? null : path.Replace("\\", "/").TrimEnd('/');
-			}
-			catch (Exception exception)
-			{
-				Debug.LogException(exception);
-				return null;
-			}*/
-
 			if (string.IsNullOrEmpty(path))
 			{
 				return path;
@@ -91,6 +66,45 @@ namespace Essential.Core.IO
 			{
 				Debug.LogException(exception);
 				return false;
+			}
+		}
+
+		public static string GetDirectoryName(string filePath)
+		{
+			try
+			{
+				return System.IO.Path.GetDirectoryName(filePath);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
+			}
+		}
+
+		public static string GetFileName(string filePath)
+		{
+			try
+			{
+				return System.IO.Path.GetFileName(filePath);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
+			}
+		}
+
+		public static string GetFolderName(string filePath)
+		{
+			try
+			{
+				return System.IO.Path.GetFileName(System.IO.Path.GetDirectoryName(filePath));
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
 			}
 		}
 
