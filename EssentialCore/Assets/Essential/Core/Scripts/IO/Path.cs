@@ -127,51 +127,5 @@ namespace Essential.Core.IO
 			
 			return /*!Path.IsValid(normalizedPath) ? null :*/ normalizedPath;
 		}
-
-		public static bool IsFile(string path)
-		{
-			if (string.IsNullOrEmpty(path))
-			{
-				return false;
-			}
-
-			if (ContainsInvalidFileNameCharacters(path))
-			{
-				return false;
-			}
-			
-			try
-			{
-				return (System.IO.File.GetAttributes(path) & System.IO.FileAttributes.Directory) != System.IO.FileAttributes.Directory;
-			}
-			catch (Exception exception)
-			{
-				Debug.LogException(exception);
-				return false;
-			}
-		}
-		
-		public static bool IsDirectory(string path)
-		{
-			if (string.IsNullOrEmpty(path))
-			{
-				return false;
-			}
-
-			if (ContainsInvalidPathCharacters(path))
-			{
-				return false;
-			}
-			
-			try
-			{
-				return (System.IO.File.GetAttributes(path) & System.IO.FileAttributes.Directory) == System.IO.FileAttributes.Directory;
-			}
-			catch (Exception exception)
-			{
-				Debug.LogException(exception);
-				return false;
-			}
-		}
 	}
 }
