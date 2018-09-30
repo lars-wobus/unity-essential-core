@@ -54,7 +54,6 @@ namespace Essential.Core.IO
             try
             {
                 var enumerable = System.IO.Directory.EnumerateFiles(path, "*", System.IO.SearchOption.AllDirectories);
-                Debug.Log(enumerable.ToArray().Length);
                 return !enumerable.Any();
             }
             catch (Exception exception)
@@ -118,7 +117,7 @@ namespace Essential.Core.IO
             try
             {
                 System.IO.Directory.Delete(path);
-                return !Empty(path);
+                return !Exists(path);
             }
             catch (Exception exception)
             {

@@ -13,15 +13,16 @@ namespace Tests.IO
         private static string EmptyString => "";
         private static string AbsolutePathToUnitTestDump => Application.persistentDataPath + "/UnitTestDump";
         private static string AbsolutePathToNonExistingDirectory => AbsolutePathToUnitTestDump + "/nonExistingFolder";
-        private static string AbsolutePathToFile => AbsolutePathToExistingNonEmptyDirectory + "/EmptyFile.txt";
+        private static string AbsolutePathToFile => AbsolutePathToExistingNonEmptyDirectory + "/TestFile.txt";
         private static string AbsolutePathToExistingNonEmptyDirectory => AbsolutePathToUnitTestDump + "/existingNonEmptyDirectory";
-        private static string AbsolutePathToExistingEmptyDirectory => AbsolutePathToUnitTestDump + "/existingEmptyDirectory";
+        private static string AbsolutePathToExistingEmptyDirectory => AbsolutePathToExistingNonEmptyDirectory + "/existingEmptyDirectory";
         private string AbsolutePathContainingInvalidCharacters { get; set; }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             AbsolutePathContainingInvalidCharacters = AbsolutePathToUnitTestDump + "/" + new string(System.IO.Path.GetInvalidPathChars());
+            TearDown();
         }
         
         [SetUp]
@@ -329,7 +330,7 @@ namespace Tests.IO
         [Test]
         public void Delete_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
         {
-            var actual = Directory.Delete(AbsolutePathToExistingEmptyDirectory);
+            var actual = Directory.Delete(AbsolutePathToExistingEmptyDirectory) && !System.IO.Directory.Exists(AbsolutePathToExistingEmptyDirectory);
             
             Assert.True(actual);
         }
@@ -408,7 +409,7 @@ namespace Tests.IO
         [Test]
         public void Clean_ReturnTrue_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
-            var actual = Directory.Clean(AbsolutePathToExistingNonEmptyDirectory);
+            var actual = Directory.Clean(AbsolutePathToExistingNonEmptyDirectory) && !System.IO.Directory.Exists(AbsolutePathToFile);
             
             Assert.True(actual);
         }
