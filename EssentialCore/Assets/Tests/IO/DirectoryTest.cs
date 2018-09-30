@@ -136,13 +136,6 @@ namespace Tests.IO
             Assert.False(actual);
         }
         
-        /*[Test]
-        public void Exists_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingTheExistenceOfDirectory()
-        {
-            // TODO path cannot be reached because of user rights or disk drive not available
-            Assert.Fail();
-        }*/
-        
         [Test]
         public void Exists_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
         {
@@ -193,12 +186,6 @@ namespace Tests.IO
             Assert.False(actual);
         }
         
-        /*[Test]
-        public void Empty_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingIfDirectoryPathPointsToEmptyDirectory()
-        {
-            Assert.Fail();
-        }*/
-        
         [Test]
         public void Empty_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
@@ -248,12 +235,6 @@ namespace Tests.IO
             
             Assert.False(actual);
         }
-        
-        /*[Test]
-        public void Create_ReturnFalse_When_AnyExceptionIsThrownWhileCreatingDirectory()
-        {
-            Assert.Fail();
-        }*/
         
         [Test]
         public void Create_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory()
@@ -313,12 +294,6 @@ namespace Tests.IO
             Assert.False(actual);
         }
         
-        /*[Test]
-        public void Delete_ReturnFalse_When_AnyExceptionIsThrownWhileDeletingDirectory()
-        {
-            Assert.Fail();
-        }*/
-        
         [Test]
         public void Delete_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
@@ -376,12 +351,6 @@ namespace Tests.IO
             
             Assert.False(actual);
         }
-        
-        /*[Test]
-        public void Clean_ReturnFalse_When_AnyExceptionIsThrownWhileCleaningDirectory()
-        {
-            Assert.Fail();
-        }*/
         
         [Test]
         public void Clean_ReturnFalse_When_FileRemainsAfterCleaningDirectory()
