@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -53,8 +54,7 @@ namespace Essential.Core.IO
 
             try
             {
-                var enumerable = System.IO.Directory.EnumerateFiles(path, "*", System.IO.SearchOption.AllDirectories);
-                return !enumerable.Any();
+                return !GetAllFiles(path).Any();
             }
             catch (Exception exception)
             {
@@ -143,12 +143,25 @@ namespace Essential.Core.IO
         
             try
             {
-                if (System.IO.File.Exists(path))
+                /*if (System.IO.File.Exists(path))
                 {
                     return false;
                 }
             
                 var enumerable = System.IO.Directory.EnumerateFiles(path, "*", System.IO.SearchOption.AllDirectories);
+                foreach (var absolutePath in enumerable)
+                {
+                    if (File.Exists(absolutePath))
+                    {
+                        File.Delete(absolutePath);
+                    }
+                }
+                return Empty(path);*/
+                var enumerable = GetAllFiles(path);
+                if (enumerable == null)
+                {
+                    return false;
+                }
                 foreach (var absolutePath in enumerable)
                 {
                     if (File.Exists(absolutePath))
@@ -162,6 +175,35 @@ namespace Essential.Core.IO
             {
                 Debug.LogException(exception);
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Get all files found in directory.
+        /// </summary>
+        /// <param name="path">Absolute path to an existing directory.</param>
+        /// <param name="searchOption">Specifies if files found in subdirectories will be included.</param>
+        /// <returns>Enumerable of absolute filepaths or null.</returns>
+        public static IEnumerable<string> GetAllFiles(string path, System.IO.SearchOption searchOption = System.IO.SearchOption.AllDirectories)
+        {
+            if (!Exists(path))
+            {
+                return null;
+            }
+
+            try
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    return null;
+                }
+
+                return System.IO.Directory.EnumerateFiles(path, "*", searchOption);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                return null;
             }
         }
     }
