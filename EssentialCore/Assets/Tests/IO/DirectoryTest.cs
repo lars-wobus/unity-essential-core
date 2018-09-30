@@ -1,28 +1,37 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
+using Essential.Core.IO;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Tests.IO
 {
     public class DirectoryTest
     {
-        private string TestPath { get; set; }
-        private string InvalidCharacters { get; set; }
-        private string TestFilePath { get; set; }
-        private string TestFilePathTarget { get; set; }
+        private static string NullString => null;
+        private static string EmptyString => "";
+        private static string AbsolutePathToUnitTestDump => Application.persistentDataPath + "/UnitTestDump";
+        private static string AbsolutePathToNonExistingDirectory => AbsolutePathToUnitTestDump + "/nonExistingFolder";
+        private static string AbsolutePathToFile => AbsolutePathToExistingNonEmptyDirectory + "/EmptyFile.txt";
+        private static string AbsolutePathToExistingNonEmptyDirectory => AbsolutePathToUnitTestDump + "/existingNonEmptyDirectory";
+        private static string AbsolutePathToExistingEmptyDirectory => AbsolutePathToUnitTestDump + "/existingEmptyDirectory";
+        private string AbsolutePathContainingInvalidCharacters { get; set; }
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            AbsolutePathContainingInvalidCharacters = AbsolutePathToUnitTestDump + "/" + new string(System.IO.Path.GetInvalidPathChars());
+        }
         
         [SetUp]
         public void Setup()
         {
-            TestPath = Application.persistentDataPath;
-            InvalidCharacters = new string(System.IO.Path.GetInvalidPathChars());
-
-            TestFilePath = TestPath + "/FileForUnitTesting.txt";
-            TestFilePathTarget = TestPath + "/FileForUnitTesting.txt";
-            using(var streamWriter = new System.IO.StreamWriter(TestFilePath, true))
-            {
-                streamWriter.WriteLine("Some dummy text.");
-            }
-            using(var streamWriter = new System.IO.StreamWriter(TestFilePathTarget, true))
+            System.IO.Directory.CreateDirectory(AbsolutePathToUnitTestDump);
+            System.IO.Directory.CreateDirectory(AbsolutePathToExistingEmptyDirectory);
+            System.IO.Directory.CreateDirectory(AbsolutePathToExistingNonEmptyDirectory);
+            
+            using(var streamWriter = new System.IO.StreamWriter(AbsolutePathToFile, true))
             {
                 streamWriter.WriteLine("Some dummy text.");
             }
@@ -31,256 +40,377 @@ namespace Tests.IO
         [TearDown]
         public void TearDown()
         {
-            System.IO.File.Delete(TestFilePath);
-            System.IO.File.Delete(TestFilePathTarget);
+            if (System.IO.Directory.Exists(AbsolutePathToNonExistingDirectory))
+            {
+                System.IO.Directory.Delete(AbsolutePathToNonExistingDirectory);
+            }
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            System.IO.Directory.Delete(AbsolutePathToUnitTestDump);
+        }
+        
+        // Directory name validation
+        
+        [Test]
+        public void ValidPath_ReturnsFalse_WhenPassing_NullString()
+        {
+            var actual = Directory.ValidPath(NullString);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void ValidPath_ReturnsFalse_WhenPassing_EmptyString()
+        {
+            var actual = Directory.ValidPath(EmptyString);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void ValidPath_ReturnsFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
+        {
+            var actual = Directory.ValidPath(AbsolutePathContainingInvalidCharacters);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void ValidPath_ReturnsTrue_WhenPassing_AbsolutePathToNonExistingDirectory()
+        {
+            var actual = Directory.ValidPath(AbsolutePathToNonExistingDirectory);
+            
+            Assert.True(actual);
+        }
+        
+        [Test]
+        public void ValidPath_ReturnsTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.ValidPath(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.True(actual);
         }
         
         // Directory exist
         
         [Test]
-        public void Should_ReturnFalse_When_DirectoryPathIsNull()
+        public void Exists_ReturnFalse_WhenPassing_NullString()
         {
-            var acutal = Directory.Exists(null);
-            
-            Assert.Fail();
+            var actual = Directory.Exists(NullString);
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DirectoryPathIsEmpty()
+        public void Exists_ReturnFalse_WhenPassing_EmptyString()
         {
-            var acutal = Directory.Exists("");
+            var actual = Directory.Exists(EmptyString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DirectoryPathContainsInvalidCharacters()
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
         {
-            var acutal = Directory.Exists(InvalidCharacters);
-            
-            Assert.Fail();
+            var actual = Directory.Exists(AbsolutePathContainingInvalidCharacters);
+
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DirectoryPathPointsToFile()
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathToFile()
         {
-            var acutal = Directory.Exists(TestFilePath);
+            var actual = Directory.Exists(AbsolutePathToFile);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DirectoryDoesNotExist()
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory()
         {
-            var acutal = Directory.Exists(Application.persistentDataPath + "/nonExistingFolder");
+            var actual = Directory.Exists(AbsolutePathToNonExistingDirectory);
             
+            Assert.False(actual);
+        }
+        
+        /*[Test]
+        public void Exists_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingTheExistenceOfDirectory()
+        {
+            // TODO path cannot be reached because of user rights or disk drive not available
             Assert.Fail();
+        }*/
+        
+        [Test]
+        public void Exists_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.Exists(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.True(actual);
+        }
+        
+        // Directory empty
+        
+        [Test]
+        public void Empty_ReturnFalse_WhenPassing_NullString()
+        {
+            var actual = Directory.Empty(NullString);
+            
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingTheExistenceOfDirectory()
+        public void Empty_ReturnFalse_WhenPassing_EmptyString()
         {
-            Assert.Fail();
+            var actual = Directory.Empty(EmptyString);
+            
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnTrue_When_DirectoryExists()
+        public void Empty_ReturnFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
         {
-            var acutal = Directory.Exists(Application.persistentDataPath);
+            var actual = Directory.Empty(AbsolutePathContainingInvalidCharacters);
+
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Empty_ReturnFalse_WhenPassing_AbsolutePathToFile()
+        {
+            var actual = Directory.Empty(AbsolutePathToFile);
             
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Empty_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory()
+        {
+            var actual = Directory.Empty(AbsolutePathToNonExistingDirectory);
+            
+            Assert.False(actual);
+        }
+        
+        /*[Test]
+        public void Empty_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingIfDirectoryPathPointsToEmptyDirectory()
+        {
             Assert.Fail();
+        }*/
+        
+        [Test]
+        public void Empty_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
+        {
+            var actual = Directory.Empty(AbsolutePathToExistingNonEmptyDirectory);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Empty_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.Empty(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.True(actual);
         }
         
         // Directory create
         
         [Test]
-        public void Should_ReturnFalse_When_CreatingNull()
+        public void Create_ReturnFalse_WhenPassing_NullString()
         {
-            var acutal = Directory.Create(null);
+            var actual = Directory.Create(NullString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CreatingEmptyString()
+        public void Create_ReturnFalse_WhenPassing_EmptyString()
         {
-            var acutal = Directory.Create("");
+            var actual = Directory.Create(EmptyString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CreatingDirectoryContainingInvalidCharacters()
+        public void Create_ReturnFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
         {
-            var acutal = Directory.Create(InvalidCharacters);
+            var actual = Directory.Create(AbsolutePathContainingInvalidCharacters);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToCreateFile()
+        public void Create_ReturnFalse_WhenPassing_AbsolutePathToFile()
         {
-            var acutal = Directory.Create(TestFilePath);
+            var actual = Directory.Create(AbsolutePathToFile);
             
+            Assert.False(actual);
+        }
+        
+        /*[Test]
+        public void Create_ReturnFalse_When_AnyExceptionIsThrownWhileCreatingDirectory()
+        {
             Assert.Fail();
+        }*/
+        
+        [Test]
+        public void Create_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.Create(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCreatingDirectory()
+        public void Create_ReturnTrue_WhenPassing_AbsolutePathToNonExistingDirectory()
         {
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_CreatingExistingDirectory()
-        {
-            var acutal = Directory.Create(Application.persistentDataPath + "/existingEmptyDirectory");
+            var actual = Directory.Create(AbsolutePathToNonExistingDirectory);
             
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_CreatingNonExistingDirectory()
-        {
-            var acutal = Directory.Create(Application.persistentDataPath + "/nonExistingDirectory");
-            
-            Assert.Fail();
+            Assert.True(actual);
         }
         
         // Directory delete - delete only empty directories
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingNull()
+        public void Delete_ReturnFalse_WhenPassing_NullString()
         {
-            var acutal = Directory.Delete(null);
+            var actual = Directory.Delete(NullString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingEmptyString()
+        public void Delete_ReturnFalse_WhenPassing_EmptyString()
         {
-            var acutal = Directory.Delete("");
+            var actual = Directory.Delete(EmptyString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingDirectoryContainingInvalidCharacters()
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
         {
-            var acutal = Directory.Delete(InvalidCharacters);
+            var actual = Directory.Delete(AbsolutePathContainingInvalidCharacters);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToDeleteFile()
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToFile()
         {
-            var acutal = Directory.Delete(TestFilePath);
+            var actual = Directory.Delete(AbsolutePathToFile);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingNonExistingDirectory()
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory()
         {
-            var acutal = Directory.Delete(Application.persistentDataPath + "/nonExistingDirectory");
+            var actual = Directory.Delete(AbsolutePathToNonExistingDirectory);
             
+            Assert.False(actual);
+        }
+        
+        /*[Test]
+        public void Delete_ReturnFalse_When_AnyExceptionIsThrownWhileDeletingDirectory()
+        {
             Assert.Fail();
+        }*/
+        
+        [Test]
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
+        {
+            var actual = Directory.Delete(AbsolutePathToExistingNonEmptyDirectory);
+            
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileDeletingDirectory()
+        public void Delete_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
         {
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnFalse_When_DeletingNonEmptyDirectory()
-        {
-            var acutal = Directory.Delete(Application.persistentDataPath + "/existingNonEmptyDirectory");
+            var actual = Directory.Delete(AbsolutePathToExistingEmptyDirectory);
             
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_DirectoryCouldBeDeleted()
-        {
-            var acutal = Directory.Delete(Application.persistentDataPath + "/existingEmptyDirectory");
-            
-            Assert.Fail();
+            Assert.True(actual);
         }
         
         // Directory clean - delete all files in directory and subdirectories
         
         [Test]
-        public void Should_ReturnFalse_When_CleaningNull()
+        public void Clean_ReturnFalse_WhenPassing_NullString()
         {
-            var acutal = Directory.Clean(null);
+            var actual = Directory.Clean(NullString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CleaningEmptyString()
+        public void Clean_ReturnFalse_WhenPassing_EmptyString()
         {
-            var acutal = Directory.Clean("");
+            var actual = Directory.Clean(EmptyString);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CleaningDirectoryContainingInvalidCharacters()
+        public void Clean_ReturnFalse_WhenPassing_AbsolutePathContainingInvalidCharacters()
         {
-            var acutal = Directory.Clean(InvalidCharacters);
+            var actual = Directory.Clean(AbsolutePathContainingInvalidCharacters);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToCleanFile()
+        public void Clean_ReturnFalse_WhenPassing_AbsolutePathToFile()
         {
-            var acutal = Directory.Clean(TestFilePath);
+            var actual = Directory.Clean(AbsolutePathToFile);
             
-            Assert.Fail();
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CleaningNonExistingDirectory()
+        public void Clean_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory()
         {
-            var acutal = Directory.Clean(Application.persistentDataPath + "/nonExistingDirectory");
+            var actual = Directory.Clean(AbsolutePathToNonExistingDirectory);
             
+            Assert.False(actual);
+        }
+        
+        /*[Test]
+        public void Clean_ReturnFalse_When_AnyExceptionIsThrownWhileCleaningDirectory()
+        {
             Assert.Fail();
+        }*/
+        
+        [Test]
+        public void Clean_ReturnFalse_When_FileRemainsAfterCleaningDirectory()
+        {
+            var actual = true;
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            using (var filestream = System.IO.File.Open(AbsolutePathToFile, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.None))
+            {
+                actual = Directory.Clean(AbsolutePathToExistingNonEmptyDirectory);
+            }
+
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCleaningDirectory()
+        public void Clean_ReturnTrue_WhenPassing_AbsolutePathToExistingEmptyDirectory()
         {
-            Assert.Fail();
+            var actual = Directory.Clean(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.True(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_FileRemainsAfterCleaningDirectory()
+        public void Clean_ReturnTrue_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
-            var acutal = Directory.Clean(Application.persistentDataPath + "/existingNonEmptyDirectory");
+            var actual = Directory.Clean(AbsolutePathToExistingNonEmptyDirectory);
             
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_CleaningEmptyDirectory()
-        {
-            var acutal = Directory.Clean(Application.persistentDataPath + "/existingEmptyDirectory");
-            
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_CleaningNonEmptyDirectory()
-        {
-            var acutal = Directory.Clean(Application.persistentDataPath + "/existingNonEmptyDirectory");
-            
-            Assert.Fail();
+            Assert.True(actual);
         }
     }
 }

@@ -5,7 +5,20 @@ namespace Essential.Core.IO
 {
 	public static class Path
 	{
-		private static bool ContainsInvalidCharacters(string path)
+		public static bool ContainsInvalidFileNameCharacters(string path)
+		{
+			try
+			{
+				return path.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) != -1;
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return true;
+			}
+		}
+		
+		public static bool ContainsInvalidPathCharacters(string path)
 		{
 			try
 			{
@@ -18,20 +31,20 @@ namespace Essential.Core.IO
 			}
 		}
 		
-		public static bool Validate(string path)
+		/*public static bool IsValid(string path)
 		{
 			if (string.IsNullOrEmpty(path))
 			{
 				return false;
-			}
+			}*/
 			
-			if (!path.StartsWith(Application.persistentDataPath))
+			/*if (!path.StartsWith(Application.persistentDataPath))
 			{
 				return false;
-			}
+			}*/
 
-			return !ContainsInvalidCharacters(path);
-		}
+			/*return !ContainsInvalidPathCharacters(path);
+		}*/
 		
 		public static string Normalize(string path)
 		{
@@ -112,14 +125,17 @@ namespace Essential.Core.IO
 		{
 			var normalizedPath = Normalize(Application.persistentDataPath + "/" + localPath);
 			
-			return !Path.Validate(normalizedPath) ? null : normalizedPath;
+			return /*!Path.IsValid(normalizedPath) ? null :*/ normalizedPath;
 		}
 
 		public static bool IsFile(string path)
 		{
-			var normalizedPath = Normalize(path);
-			
-			if (string.IsNullOrEmpty(normalizedPath))
+			if (string.IsNullOrEmpty(path))
+			{
+				return false;
+			}
+
+			if (ContainsInvalidFileNameCharacters(path))
 			{
 				return false;
 			}
@@ -137,9 +153,12 @@ namespace Essential.Core.IO
 		
 		public static bool IsDirectory(string path)
 		{
-			var normalizedPath = Normalize(path);
-			
-			if (string.IsNullOrEmpty(normalizedPath))
+			if (string.IsNullOrEmpty(path))
+			{
+				return false;
+			}
+
+			if (ContainsInvalidPathCharacters(path))
 			{
 				return false;
 			}
