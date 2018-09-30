@@ -206,5 +206,34 @@ namespace Essential.Core.IO
                 return null;
             }
         }
+        
+        /// <summary>
+        /// Get all directories found in selected directory.
+        /// </summary>
+        /// <param name="path">Absolute path to an existing directory.</param>
+        /// <param name="searchOption">Specifies if folders found in subdirectories will be included.</param>
+        /// <returns>Enumerable of directories or null.</returns>
+        public static IEnumerable<string> GetAllDirectories(string path, System.IO.SearchOption searchOption = System.IO.SearchOption.AllDirectories)
+        {
+            if (!Exists(path))
+            {
+                return null;
+            }
+
+            try
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    return null;
+                }
+
+                return System.IO.Directory.EnumerateDirectories(path, "*", searchOption);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                return null;
+            }
+        }
     }
 }
