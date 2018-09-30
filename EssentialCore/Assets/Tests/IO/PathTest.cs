@@ -327,7 +327,7 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsNull()
 		{
-			var actual = Path.GetPersistentDirectory(null);
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(null);
 			
 			Assert.AreEqual(Application.persistentDataPath, actual);
 		}
@@ -335,7 +335,7 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsEmpty()
 		{
-			var actual = Path.GetPersistentDirectory("");
+			var actual = Path.GetNormalizedApplicationPersistentDataPath("");
 			
 			Assert.AreEqual(Application.persistentDataPath, actual);
 		}
@@ -343,7 +343,7 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnNull_When_PersistentSubdirectoryContainsInvalidCharacters()
 		{
-			var actual = Path.GetPersistentDirectory(InvalidCharacters);
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(InvalidCharacters);
 			
 			Assert.IsNull(actual);
 		}
@@ -351,7 +351,7 @@ namespace Tests.IO
 		[Test]
 		public void Should_ReturnDirectoryWithinApplicationPersistentDataPath_When_PersistentSubdirectoryNameIsNotEmpty()
 		{
-			var actual = Path.GetPersistentDirectory("mySubFolder");
+			var actual = Path.GetNormalizedApplicationPersistentDataPath("mySubFolder");
 			
 			Assert.IsNotNull(actual);
 		}

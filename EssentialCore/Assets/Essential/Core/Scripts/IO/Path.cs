@@ -5,6 +5,7 @@ namespace Essential.Core.IO
 {
 	public static class Path
 	{
+		[Obsolete]
 		public static bool ContainsInvalidFileNameCharacters(string path)
 		{
 			try
@@ -31,29 +32,9 @@ namespace Essential.Core.IO
 			}
 		}
 		
-		/*public static bool IsValid(string path)
-		{
-			if (string.IsNullOrEmpty(path))
-			{
-				return false;
-			}*/
-			
-			/*if (!path.StartsWith(Application.persistentDataPath))
-			{
-				return false;
-			}*/
-
-			/*return !ContainsInvalidPathCharacters(path);
-		}*/
-		
 		public static string Normalize(string path)
 		{
-			if (string.IsNullOrEmpty(path))
-			{
-				return path;
-			}
-
-			return path.ToLower().Replace("\\", "/").TrimEnd('/');
+			return string.IsNullOrEmpty(path) ? path : path.ToLower().Replace("\\", "/").TrimEnd('/');
 		}
 
 		public static bool IsAbsolutePath(string path)
@@ -121,11 +102,19 @@ namespace Essential.Core.IO
 			}
 		}
 
-		public static string GetPersistentDirectory(string localPath)
+		public static string GetNormalizedApplicationPersistentDataPath(string localPath = null)
 		{
-			var normalizedPath = Normalize(Application.persistentDataPath + "/" + localPath);
-			
-			return /*!Path.IsValid(normalizedPath) ? null :*/ normalizedPath;
+			return Normalize(Application.persistentDataPath + "/" + localPath);
+		}
+
+		public static bool InsideApplicationPersistentDataPath(string absolutePath)
+		{
+			if (string.IsNullOrEmpty(absolutePath))
+			{
+				return false;
+			}
+
+			return absolutePath.StartsWith(Application.persistentDataPath);
 		}
 	}
 }
