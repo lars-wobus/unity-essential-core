@@ -1,4 +1,5 @@
-﻿using System.Runtime.Remoting.Messaging;
+﻿using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using Essential.Core.IO;
 using NUnit.Framework;
@@ -381,6 +382,153 @@ namespace Tests.IO
             var actual = Directory.Clean(AbsolutePathToExistingNonEmptyDirectory) && !System.IO.Directory.Exists(AbsolutePathToFile);
             
             Assert.True(actual);
+        }
+        
+        // Get all files
+        
+        [Test]
+        public void GetAllFiles_ReturnNull_WhenPassing_NullString()
+        {
+            var actual = Directory.GetAllFiles(NullString);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnNull_WhenPassing_EmptyString()
+        {
+            var actual = Directory.GetAllFiles(EmptyString);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnNull_WhenPassing_AbsolutePathContainingInvalidCharacters()
+        {
+            var actual = Directory.GetAllFiles(AbsolutePathContainingInvalidCharacters);
+
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnNull_WhenPassing_AbsolutePathToFile()
+        {
+            var actual = Directory.GetAllFiles(AbsolutePathToFile);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnNull_WhenPassing_AbsolutePathToNonExistingDirectory()
+        {
+            var actual = Directory.GetAllFiles(AbsolutePathToNonExistingDirectory);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnNonEmptyCollection_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
+        {
+            var actual = Directory.GetAllFiles(AbsolutePathToExistingNonEmptyDirectory);
+            
+            Assert.IsNotEmpty(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnEmptyCollection_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_And_TopDirectoryOnly()
+        {
+            System.IO.File.Delete(AbsolutePathToFile);
+            var tempFile = AbsolutePathToExistingEmptyDirectory + "/temp.txt";
+            using(var streamWriter = new System.IO.StreamWriter(tempFile, true))
+            {
+                streamWriter.WriteLine("Some dummy text.");
+            }
+            
+            var actual = Directory.GetAllFiles(AbsolutePathToExistingNonEmptyDirectory, System.IO.SearchOption.TopDirectoryOnly);
+            
+            System.IO.File.Delete(tempFile);
+            
+            Assert.IsEmpty(actual);
+        }
+        
+        [Test]
+        public void GetAllFiles_ReturnEmptyCollection_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.GetAllFiles(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.IsEmpty(actual);
+        }
+        
+        // Get all directories
+        
+        [Test]
+        public void GetAllDirectories_ReturnNull_WhenPassing_NullString()
+        {
+            var actual = Directory.GetAllDirectories(NullString);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnNull_WhenPassing_EmptyString()
+        {
+            var actual = Directory.GetAllDirectories(EmptyString);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnNull_WhenPassing_AbsolutePathContainingInvalidCharacters()
+        {
+            var actual = Directory.GetAllDirectories(AbsolutePathContainingInvalidCharacters);
+
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnNull_WhenPassing_AbsolutePathToFile()
+        {
+            var actual = Directory.GetAllDirectories(AbsolutePathToFile);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnNull_WhenPassing_AbsolutePathToNonExistingDirectory()
+        {
+            var actual = Directory.GetAllDirectories(AbsolutePathToNonExistingDirectory);
+            
+            Assert.IsNull(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnNonEmptyCollection_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
+        {
+            var actual = Directory.GetAllDirectories(AbsolutePathToExistingNonEmptyDirectory);
+            
+            Assert.IsNotEmpty(actual);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnSmallerCollection_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_And_TopDirectoryOnly()
+        {
+            var tempDirectory = AbsolutePathToExistingEmptyDirectory + "/temp";
+            System.IO.Directory.CreateDirectory(tempDirectory);
+            
+            var subdirectories = Directory.GetAllDirectories(AbsolutePathToExistingNonEmptyDirectory, System.IO.SearchOption.TopDirectoryOnly).Count();
+            var allSubdirectories = Directory.GetAllDirectories(AbsolutePathToExistingNonEmptyDirectory).Count();
+ 
+            System.IO.Directory.Delete(tempDirectory);
+            
+            Assert.Less(subdirectories, allSubdirectories);
+        }
+        
+        [Test]
+        public void GetAllDirectories_ReturnEmptyCollection_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = Directory.GetAllDirectories(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.IsEmpty(actual);
         }
     }
 }
