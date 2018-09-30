@@ -1,35 +1,44 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using File = Essential.Core.IO.File;
-using Path = Essential.Core.IO.Path;
+using Essential.Core.IO;
 
 namespace Tests.IO
 {
     public class FileTest
     {
-        private string TestPath { get; set; }
-        private string InvalidCharacters { get; set; }
-        private string TestFilePath { get; set; }
-        private string TestFilePathTarget { get; set; }
+        private static string NullString => null;
+        private static string EmptyString => "";
+        private static string AbsolutePathToUnitTestDump => Application.persistentDataPath + "/UnitTestDump";
+        private static string AbsolutePathToNonExistingDirectory => AbsolutePathToUnitTestDump + "/nonExistingFolder";
+        private static string AbsolutePathToExistingFile => AbsolutePathToExistingNonEmptyDirectory + "/existingFile.txt";
+        private static string AbsolutePathToAnotherExistingFile => AbsolutePathToExistingNonEmptyDirectory + "/existingFile2.txt";
+        private static string AbsolutePathToNonExistingFile => AbsolutePathToExistingNonEmptyDirectory + "/nonExistingFile.txt";
+        private static string AbsolutePathToExistingNonEmptyDirectory => AbsolutePathToUnitTestDump + "/existingNonEmptyDirectory";
+        private static string AbsolutePathToExistingEmptyDirectory => AbsolutePathToExistingNonEmptyDirectory + "/existingEmptyDirectory";
+        private string AbsoluteFilePathContainingInvalidCharacters { get; set; }
+        
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            AbsoluteFilePathContainingInvalidCharacters = AbsolutePathToExistingNonEmptyDirectory + "/" + new string(System.IO.Path.GetInvalidFileNameChars());
+            TearDown();
+        }
         
         [SetUp]
         public void Setup()
         {
-            TestPath = Application.persistentDataPath;
-            InvalidCharacters = new string(System.IO.Path.GetInvalidPathChars());
-
-            TestFilePath = TestPath + "/FileForUnitTesting.txt";
-            TestFilePathTarget = TestPath + "/FileForUnitTesting.txt";
-            using(var streamWriter = new StreamWriter(TestFilePath, true))
+            System.IO.Directory.CreateDirectory(AbsolutePathToUnitTestDump);
+            System.IO.Directory.CreateDirectory(AbsolutePathToExistingEmptyDirectory);
+            System.IO.Directory.CreateDirectory(AbsolutePathToExistingNonEmptyDirectory);
+            
+            using(var streamWriter = new System.IO.StreamWriter(AbsolutePathToExistingFile, true))
             {
                 streamWriter.WriteLine("Some dummy text.");
             }
-            using(var streamWriter = new StreamWriter(TestFilePathTarget, true))
+            
+            using(var streamWriter = new System.IO.StreamWriter(AbsolutePathToAnotherExistingFile, true))
             {
                 streamWriter.WriteLine("Some dummy text.");
             }
@@ -38,8 +47,16 @@ namespace Tests.IO
         [TearDown]
         public void TearDown()
         {
-            System.IO.File.Delete(TestFilePath);
-            System.IO.File.Delete(TestFilePathTarget);
+            if (System.IO.File.Exists(AbsolutePathToNonExistingFile))
+            {
+                System.IO.File.Delete(AbsolutePathToNonExistingFile);
+            }
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            System.IO.Directory.Delete(AbsolutePathToUnitTestDump);
         }
         
         // File exist
@@ -63,7 +80,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
         {
-            var actual = File.Exists(InvalidCharacters);
+            var actual = File.Exists(AbsoluteFilePathContainingInvalidCharacters);
             
             Assert.False(actual);
         }
@@ -93,7 +110,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileExists()
         {
-            var actual = File.Exists(TestFilePath);
+            var actual = File.Exists(AbsolutePathToExistingFile);
             
             Assert.True(actual);
         }
@@ -119,7 +136,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_DeletingFileContainingInvalidCharacters()
         {
-            var actual = File.Delete(InvalidCharacters);
+            var actual = File.Delete(AbsoluteFilePathContainingInvalidCharacters);
             
             Assert.False(actual);
         }
@@ -149,7 +166,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeDeleted()
         {
-            var actual = File.Delete(TestFilePath);
+            var actual = File.Delete(AbsolutePathToExistingFile);
             
             Assert.True(actual);
         }
@@ -159,7 +176,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingNull()
         {
-            var actual = File.Move(null, TestFilePath);
+            var actual = File.Move(null, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -169,7 +186,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(TestFilePath, null);
+            var actual = File.Move(AbsolutePathToExistingFile, null);
             
             Assert.False(actual);
         }
@@ -177,7 +194,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingEmptyString()
         {
-            var actual = File.Move("", TestFilePath);
+            var actual = File.Move("", AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -187,7 +204,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(TestFilePath, "");
+            var actual = File.Move(AbsolutePathToExistingFile, "");
             
             Assert.False(actual);
         }
@@ -195,7 +212,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingFileContainingInvalidCharacters()
         {
-            var actual = File.Move(InvalidCharacters, TestFilePath);
+            var actual = File.Move(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -205,7 +222,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(TestFilePath, InvalidCharacters);
+            var actual = File.Move(AbsolutePathToExistingFile, AbsoluteFilePathContainingInvalidCharacters);
             
             Assert.False(actual);
         }
@@ -213,7 +230,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_TryingToMoveDirectoryToFile()
         {
-            var actual = File.Move(Application.persistentDataPath, TestFilePath);
+            var actual = File.Move(Application.persistentDataPath, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -223,7 +240,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(TestFilePath, Application.persistentDataPath);
+            var actual = File.Move(AbsolutePathToExistingFile, Application.persistentDataPath);
             
             Assert.False(actual);
         }
@@ -231,7 +248,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_IdenticallyNamedFileInTargetDirectoryBlocksFileMovement()
         {
-            var actual = File.Move(TestFilePath, TestFilePathTarget);
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
             
             Assert.False(actual);
         }
@@ -245,7 +262,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeMoved()
         {
-            var actual = File.Move(TestFilePath, TestFilePathTarget);
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
             
             Assert.False(actual);
         }
@@ -255,7 +272,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingNull()
         {
-            var actual = File.Copy(null, TestFilePath);
+            var actual = File.Copy(null, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -265,7 +282,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(TestFilePath, null);
+            var actual = File.Copy(AbsolutePathToExistingFile, null);
             
             Assert.False(actual);
         }
@@ -273,7 +290,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingEmptyString()
         {
-            var actual = File.Copy("", TestFilePath);
+            var actual = File.Copy("", AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -283,7 +300,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(TestFilePath, "");
+            var actual = File.Copy(AbsolutePathToExistingFile, "");
             
             Assert.False(actual);
         }
@@ -291,7 +308,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingFileContainingInvalidCharacters()
         {
-            var actual = File.Copy(InvalidCharacters, TestFilePath);
+            var actual = File.Copy(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -301,7 +318,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(TestFilePath, InvalidCharacters);
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsoluteFilePathContainingInvalidCharacters);
             
             Assert.False(actual);
         }
@@ -309,7 +326,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_TryingToCopyDirectoryToFile()
         {           
-            var actual = File.Copy(Application.persistentDataPath, TestFilePath);
+            var actual = File.Copy(Application.persistentDataPath, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -319,7 +336,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(TestFilePath, Application.persistentDataPath);
+            var actual = File.Copy(AbsolutePathToExistingFile, Application.persistentDataPath);
             
             Assert.False(actual);
         }
@@ -327,7 +344,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_TargetDirectoryContainsFileWithSameNameAsCopy()
         {
-            var actual = File.Copy(TestFilePath, TestFilePathTarget);
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
             
             Assert.False(actual);
         }
@@ -341,7 +358,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnTrue_When_FileCouldBeCopied()
         {
-            var actual = File.Copy(TestFilePath, TestFilePathTarget);
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
             
             Assert.False(actual); 
         }
