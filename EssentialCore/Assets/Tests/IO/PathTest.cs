@@ -33,50 +33,6 @@ namespace Tests.IO
 		{
 			System.IO.File.Delete(TestFilePath);
 		}
-        
-		// IsValid path - Check if path points to Application.persistentDataPath or one of its elements inside
-        
-		/*[Test]
-		public void Should_ReturnFalse_When_ValidatingNull()
-		{
-			var actual = Path.IsValid(null);
-			
-			Assert.False(actual);
-		}
-		
-		[Test]
-		public void Should_ReturnFalse_When_ValidatingEmptyString()
-		{
-			var actual = Path.IsValid("");
-			
-			Assert.False(actual);
-		}
-		
-		[Test]
-		public void Should_ReturnFalse_When_ValidatingPathContainingInvalidCharacters()
-		{
-			var actual = Path.IsValid(InvalidCharacters);
-			
-			Assert.False(actual);
-		}
-		
-		[Test]
-		public void Should_ReturnFalse_When_ValidatingPathPointingOutsideOfApplicationPersistentDataPath()
-		{
-			var actual = Path.IsValid(@"C:\Windows");
-			
-			Assert.False(actual);
-		}
-        
-		[Test]
-		public void Should_ReturnTrue_When_ValidatingPathPointingInsideOfApplicationPersistentDataPath()
-		{
-			var directory = Application.persistentDataPath + "/mySubFolder";
-			
-			var actual = Path.IsValid(directory);
-			
-			Assert.IsTrue(actual); 
-		}*/
 		
 		// Normalize path - Normalize paths to use them on unix systems
 		
