@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using File = Essential.Core.IO.File;
 using Path = Essential.Core.IO.Path;
 
 namespace Tests.IO

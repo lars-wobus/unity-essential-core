@@ -1,80 +1,81 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class File
+namespace Essential.Core.IO
 {
-    public static bool Exists(string filePath)
+    public static class File
     {
-        try
+        public static bool Exists(string filePath)
         {
-            return System.IO.File.Exists(filePath);
-        }
-        catch (Exception exception)
-        {
-            Debug.LogException(exception);
-            return false;
-        }
-    }
-
-    public static bool Delete(string filePath)
-    {
-        try
-        {
-            if (!Exists(filePath))
+            try
             {
+                return System.IO.File.Exists(filePath);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
                 return false;
             }
-            
-            System.IO.File.Delete(filePath);
-
-            return !Exists(filePath);
         }
-        catch (Exception exception)
-        {
-            Debug.LogException(exception);
-            return false;
-        }
-    }
 
-    public static bool Move(string sourceFilePath, string targetFilePath)
-    {
-        try
+        public static bool Delete(string filePath)
         {
-            if (!Exists(sourceFilePath) || Exists(targetFilePath))
+            try
             {
+                if (!Exists(filePath))
+                {
+                    return false;
+                }
+            
+                System.IO.File.Delete(filePath);
+
+                return !Exists(filePath);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
                 return false;
             }
-            
-            System.IO.File.Move(sourceFilePath, targetFilePath);
-            
-            return (!Exists(sourceFilePath) && Exists(targetFilePath));
         }
-        catch (Exception exception)
+
+        public static bool Move(string sourceFilePath, string targetFilePath)
         {
-            Debug.LogException(exception);
-            return false;
+            try
+            {
+                if (!Exists(sourceFilePath) || Exists(targetFilePath))
+                {
+                    return false;
+                }
+            
+                System.IO.File.Move(sourceFilePath, targetFilePath);
+            
+                return (!Exists(sourceFilePath) && Exists(targetFilePath));
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                return false;
+            }
         }
-    }
     
-    public static bool Copy(string sourceFilePath, string targetFilePath)
-    {
-        try
+        public static bool Copy(string sourceFilePath, string targetFilePath)
         {
-            if (!Exists(sourceFilePath) || Exists(targetFilePath))
+            try
             {
+                if (!Exists(sourceFilePath) || Exists(targetFilePath))
+                {
+                    return false;
+                }
+            
+                System.IO.File.Move(sourceFilePath, targetFilePath);
+            
+                return (Exists(sourceFilePath) && Exists(targetFilePath));
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
                 return false;
             }
-            
-            System.IO.File.Move(sourceFilePath, targetFilePath);
-            
-            return (Exists(sourceFilePath) && Exists(targetFilePath));
-        }
-        catch (Exception exception)
-        {
-            Debug.LogException(exception);
-            return false;
         }
     }
 }
