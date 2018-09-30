@@ -64,7 +64,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_FilePathIsNull()
         {
-            var actual = File.Exists(null);
+            var actual = File.Exists(NullString);
             
             Assert.False(actual);
         }
@@ -72,7 +72,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_FilePathIsEmpty()
         {
-            var actual = File.Exists("");
+            var actual = File.Exists(EmptyString);
             
             Assert.False(actual);
         }
@@ -96,7 +96,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_FileDoesNotExist()
         {
-            var actual = File.Exists(Application.persistentDataPath + "/nonExistingFile.txt");
+            var actual = File.Exists(AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
@@ -120,7 +120,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_DeletingNull()
         {
-            var actual = File.Delete(null);
+            var actual = File.Delete(NullString);
             
             Assert.False(actual);
         }
@@ -128,7 +128,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_DeletingEmptyString()
         {
-            var actual = File.Delete("");
+            var actual = File.Delete(EmptyString);
             
             Assert.False(actual);
         }
@@ -152,7 +152,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_DeletingNonExistingFile()
         {
-            var actual = File.Delete(Application.persistentDataPath + "/nonExistingFile.txt");
+            var actual = File.Delete(AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
@@ -176,7 +176,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingNull()
         {
-            var actual = File.Move(null, AbsolutePathToExistingFile);
+            var actual = File.Move(NullString, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -186,7 +186,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(AbsolutePathToExistingFile, null);
+            var actual = File.Move(AbsolutePathToExistingFile, NullString);
             
             Assert.False(actual);
         }
@@ -194,7 +194,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_MovingEmptyString()
         {
-            var actual = File.Move("", AbsolutePathToExistingFile);
+            var actual = File.Move(EmptyString, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -204,7 +204,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(AbsolutePathToExistingFile, "");
+            var actual = File.Move(AbsolutePathToExistingFile, EmptyString);
             
             Assert.False(actual);
         }
@@ -272,7 +272,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingNull()
         {
-            var actual = File.Copy(null, AbsolutePathToExistingFile);
+            var actual = File.Copy(NullString, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -282,7 +282,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(AbsolutePathToExistingFile, null);
+            var actual = File.Copy(AbsolutePathToExistingFile, NullString);
             
             Assert.False(actual);
         }
@@ -290,7 +290,7 @@ namespace Tests.IO
         [Test]
         public void Should_ReturnFalse_When_CopyingEmptyString()
         {
-            var actual = File.Copy("", AbsolutePathToExistingFile);
+            var actual = File.Copy(EmptyString, AbsolutePathToExistingFile);
             
             Assert.False(actual);
         }
@@ -300,7 +300,7 @@ namespace Tests.IO
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(AbsolutePathToExistingFile, "");
+            var actual = File.Copy(AbsolutePathToExistingFile, EmptyString);
             
             Assert.False(actual);
         }
