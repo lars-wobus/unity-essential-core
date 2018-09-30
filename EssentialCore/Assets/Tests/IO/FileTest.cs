@@ -51,6 +51,11 @@ namespace Tests.IO
             {
                 System.IO.File.Delete(AbsolutePathToNonExistingFile);
             }
+            
+            if (System.IO.File.Exists(AbsolutePathToNonExistingDirectory))
+            {
+                System.IO.File.Delete(AbsolutePathToNonExistingDirectory);
+            }
         }
 
         [OneTimeTearDown]
@@ -62,7 +67,7 @@ namespace Tests.IO
         // File exist
         
         [Test]
-        public void Should_ReturnFalse_When_FilePathIsNull()
+        public void Exists_ReturnFalse_WhenPassing_NullString()
         {
             var actual = File.Exists(NullString);
             
@@ -70,7 +75,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_FilePathIsEmpty()
+        public void Exists_ReturnFalse_WhenPassing_EmptyString()
         {
             var actual = File.Exists(EmptyString);
             
@@ -78,7 +83,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_FilePathContainsInvalidCharacters()
+        public void Exists_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters()
         {
             var actual = File.Exists(AbsoluteFilePathContainingInvalidCharacters);
             
@@ -86,15 +91,23 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_FilePathPointsToDirectory()
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
-            var actual = File.Exists(Application.persistentDataPath);
+            var actual = File.Exists(AbsolutePathToExistingNonEmptyDirectory);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_FileDoesNotExist()
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = File.Exists(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Exists_ReturnFalse_WhenPassing_AbsolutePathToNonExistingFile()
         {
             var actual = File.Exists(AbsolutePathToNonExistingFile);
             
@@ -102,13 +115,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCheckingTheExistenceOfFile()
-        {
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_FileExists()
+        public void Exists_ReturnTrue_WhenPassing_AbsolutePathToExistingFile()
         {
             var actual = File.Exists(AbsolutePathToExistingFile);
             
@@ -118,7 +125,7 @@ namespace Tests.IO
         // File delete
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingNull()
+        public void Delete_ReturnFalse_WhenPassing_NullString()
         {
             var actual = File.Delete(NullString);
             
@@ -126,7 +133,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingEmptyString()
+        public void Delete_ReturnFalse_WhenPassing_EmptyString()
         {
             var actual = File.Delete(EmptyString);
             
@@ -134,7 +141,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingFileContainingInvalidCharacters()
+        public void Delete_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters()
         {
             var actual = File.Delete(AbsoluteFilePathContainingInvalidCharacters);
             
@@ -142,15 +149,23 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToDeleteDirectory()
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory()
         {
-            var actual = File.Delete(Application.persistentDataPath);
+            var actual = File.Delete(AbsolutePathToExistingNonEmptyDirectory);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_DeletingNonExistingFile()
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory()
+        {
+            var actual = File.Delete(AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Delete_ReturnFalse_WhenPassing_AbsolutePathToNonExistingFile()
         {
             var actual = File.Delete(AbsolutePathToNonExistingFile);
             
@@ -158,13 +173,7 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileDeletingFile()
-        {
-            Assert.Fail();
-        }
-        
-        [Test]
-        public void Should_ReturnTrue_When_FileCouldBeDeleted()
+        public void Delete_ReturnTrue_WhenPassing_AbsolutePathToExistingFile()
         {
             var actual = File.Delete(AbsolutePathToExistingFile);
             
@@ -174,15 +183,15 @@ namespace Tests.IO
         // File move
         
         [Test]
-        public void Should_ReturnFalse_When_MovingNull()
+        public void Move_ReturnFalse_WhenPassing_NullString_AsFirstParameter()
         {
-            var actual = File.Move(NullString, AbsolutePathToExistingFile);
+            var actual = File.Move(NullString, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_MovingFileToNull()
+        public void Move_ReturnFalse_WhenPassing_NullString_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -192,15 +201,15 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_MovingEmptyString()
+        public void Move_ReturnFalse_WhenPassing_EmptyString_AsFirstParameter()
         {
-            var actual = File.Move(EmptyString, AbsolutePathToExistingFile);
+            var actual = File.Move(EmptyString, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_MovingFileToEmptyString()
+        public void Move_ReturnFalse_WhenPassing_EmptyString_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -210,15 +219,15 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_MovingFileContainingInvalidCharacters()
+        public void Move_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters_AsFirstParameter()
         {
-            var actual = File.Move(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToExistingFile);
+            var actual = File.Move(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_MovingFileToPathContainingInvalidCharacters()
+        public void Move_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -228,57 +237,121 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToMoveDirectoryToFile()
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_AsFirstParameter()
         {
-            var actual = File.Move(Application.persistentDataPath, AbsolutePathToExistingFile);
+            var actual = File.Move(AbsolutePathToExistingNonEmptyDirectory, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToMoveFileToDirectory()
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Move(AbsolutePathToExistingFile, Application.persistentDataPath);
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToExistingNonEmptyDirectory);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_IdenticallyNamedFileInTargetDirectoryBlocksFileMovement()
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory_AsFirstParameter()
         {
+            var actual = File.Move(AbsolutePathToExistingEmptyDirectory, AbsolutePathToNonExistingFile);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory_AsSecondParameter()
+        {
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory_AsFirstParameter()
+        {
+            var actual = File.Move(AbsolutePathToNonExistingDirectory, AbsolutePathToNonExistingFile);
+            
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Move_ReturnTrue_WhenPassing_AbsolutePathToNonExistingDirectory_AsSecondParameter()
+        {
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToNonExistingDirectory);
+            
+            Assert.True(actual);
+        }
+        
+        [Test]
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToNonExistingFile_AsFirstParameter()
+        {           
+            var actual = File.Move(AbsolutePathToNonExistingFile, AbsolutePathToAnotherExistingFile);
+
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Move_ReturnFalse_WhenPassing_AbsolutePathToAnotherExistingFile_AsSecondParameter()
+        {           
             var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
-            
+
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileMovingFile()
+        public void Move_ReturnFalse_When_SourceFileIsCurrentlyInUseExclusively()
         {
-            Assert.Fail();
+            var actual = true;
+            
+            using (var filestream = System.IO.File.Open(AbsolutePathToExistingFile, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.None))
+            {
+                actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            }
+
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnTrue_When_FileCouldBeMoved()
+        public void Move_ReturnFalse_When_TargetFileIsCurrentlyInUseExclusively()
         {
-            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            var actual = true;
             
+            using (var filestream = System.IO.File.Open(AbsolutePathToAnotherExistingFile, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.None))
+            {
+                actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            }
+
             Assert.False(actual);
+        }
+ 
+        [Test]
+        public void Move_ReturnTrue_WhenPassing_AbsolutePathToExistingFile_And_AbsolutePathToNonExistingFile()
+        {
+            var actual = File.Move(AbsolutePathToExistingFile, AbsolutePathToNonExistingFile);
+            
+            Assert.True(actual);
         }
         
         // File copy
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingNull()
+        public void Copy_ReturnFalse_WhenPassing_NullString_AsFirstParameter()
         {
-            var actual = File.Copy(NullString, AbsolutePathToExistingFile);
+            var actual = File.Copy(NullString, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingFileToNull()
+        public void Copy_ReturnFalse_WhenPassing_NullString_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -288,15 +361,15 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingEmptyString()
+        public void Copy_ReturnFalse_WhenPassing_EmptyString_AsFirstParameter()
         {
-            var actual = File.Copy(EmptyString, AbsolutePathToExistingFile);
+            var actual = File.Copy(EmptyString, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingFileToEmptyString()
+        public void Copy_ReturnFalse_WhenPassing_EmptyString_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -306,15 +379,15 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingFileContainingInvalidCharacters()
+        public void Copy_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters_AsFirstParameter()
         {
-            var actual = File.Copy(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToExistingFile);
+            var actual = File.Copy(AbsoluteFilePathContainingInvalidCharacters, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_CopyingFileToPathContainingInvalidCharacters()
+        public void Copy_ReturnFalse_WhenPassing_AbsoluteFilePathContainingInvalidCharacters_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
@@ -324,43 +397,107 @@ namespace Tests.IO
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToCopyDirectoryToFile()
-        {           
-            var actual = File.Copy(Application.persistentDataPath, AbsolutePathToExistingFile);
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_AsFirstParameter()
+        {
+            var actual = File.Copy(AbsolutePathToExistingNonEmptyDirectory, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TryingToCopyFileToDirectory()
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToExistingNonEmptyDirectory_AsSecondParameter()
         {
             LogAssert.Expect(LogType.Exception, new Regex("Exception"));
             
-            var actual = File.Copy(AbsolutePathToExistingFile, Application.persistentDataPath);
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToExistingNonEmptyDirectory);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_TargetDirectoryContainsFileWithSameNameAsCopy()
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory_AsFirstParameter()
         {
-            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            var actual = File.Copy(AbsolutePathToExistingEmptyDirectory, AbsolutePathToNonExistingFile);
             
             Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnFalse_When_AnyExceptionIsThrownWhileCopyingFile()
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToExistingEmptyDirectory_AsSecondParameter()
         {
-            Assert.Fail();
+            LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+            
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToExistingEmptyDirectory);
+            
+            Assert.False(actual);
         }
         
         [Test]
-        public void Should_ReturnTrue_When_FileCouldBeCopied()
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory_AsFirstParameter()
         {
-            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            var actual = File.Copy(AbsolutePathToNonExistingDirectory, AbsolutePathToNonExistingFile);
             
-            Assert.False(actual); 
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToNonExistingDirectory_AsSecondParameter()
+        {
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToNonExistingDirectory);
+            
+            Assert.True(actual);
+        }
+        
+        [Test]
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToNonExistingFile_AsFirstParameter()
+        {           
+            var actual = File.Copy(AbsolutePathToNonExistingFile, AbsolutePathToAnotherExistingFile);
+
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Copy_ReturnFalse_WhenPassing_AbsolutePathToAnotherExistingFile_AsSecondParameter()
+        {           
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Copy_ReturnFalse_When_SourceFileIsCurrentlyInUseExclusively()
+        {
+            var actual = true;
+            
+            using (var filestream = System.IO.File.Open(AbsolutePathToExistingFile, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.None))
+            {
+                actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            }
+
+            Assert.False(actual);
+        }
+        
+        [Test]
+        public void Copy_ReturnFalse_When_TargetFileIsCurrentlyInUseExclusively()
+        {
+            var actual = true;
+            
+            using (var filestream = System.IO.File.Open(AbsolutePathToAnotherExistingFile, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.None))
+            {
+                actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToAnotherExistingFile);
+            }
+
+            Assert.False(actual);
+        }
+ 
+        [Test]
+        public void Copy_ReturnTrue_WhenPassing_AbsolutePathToExistingFile_And_AbsolutePathToNonExistingFile()
+        {
+            var actual = File.Copy(AbsolutePathToExistingFile, AbsolutePathToNonExistingFile);
+            
+            Assert.True(actual);
         }
         
         // File read

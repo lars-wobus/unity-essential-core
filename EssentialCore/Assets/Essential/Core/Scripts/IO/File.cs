@@ -67,7 +67,7 @@ namespace Essential.Core.IO
                     return false;
                 }
             
-                System.IO.File.Move(sourceFilePath, targetFilePath);
+                System.IO.File.Copy(sourceFilePath, targetFilePath);
             
                 return (Exists(sourceFilePath) && Exists(targetFilePath));
             }
