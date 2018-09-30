@@ -53,7 +53,7 @@ namespace Essential.Core.IO
 				return path;
 			}
 
-			return path.Replace("\\", "/").TrimEnd('/');
+			return path.ToLower().Replace("\\", "/").TrimEnd('/');
 		}
 
 		public static bool IsAbsolutePath(string path)
