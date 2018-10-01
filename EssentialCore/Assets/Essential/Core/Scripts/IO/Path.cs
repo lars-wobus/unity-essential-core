@@ -5,6 +5,11 @@ namespace Essential.Core.IO
 {
 	public static class Path
 	{
+		/// <summary>
+		/// Check if path contains invalid characters for files.
+		/// </summary>
+		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <returns>True if any invalid character was found.</returns>
 		[Obsolete]
 		public static bool ContainsInvalidFileNameCharacters(string path)
 		{
@@ -19,6 +24,11 @@ namespace Essential.Core.IO
 			}
 		}
 		
+		/// <summary>
+		/// Check if path contains invalid characters for paths.
+		/// </summary>
+		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <returns>True if any invalid character was found.</returns>
 		public static bool ContainsInvalidPathCharacters(string path)
 		{
 			try
@@ -32,11 +42,26 @@ namespace Essential.Core.IO
 			}
 		}
 		
+		/// <summary>
+		/// Unifies paths.
+		/// </summary>
+		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <returns>String without backslashes in lowercase.</returns>
 		public static string Normalize(string path)
 		{
-			return string.IsNullOrEmpty(path) ? path : path.ToLower().Replace("\\", "/").TrimEnd('/');
+			if (string.IsNullOrEmpty(path))
+			{
+				return path;
+			}
+
+			return ContainsInvalidPathCharacters(path) ? null : path.ToLower().Replace("\\", "/").TrimEnd('/');
 		}
 
+		/// <summary>
+		/// Check if string describes absolute path.
+		/// </summary>
+		/// <param name="path">Absolute path to (non-)existing file or folder.</param>
+		/// <returns>True if absolute path is found.</returns>
 		public static bool IsAbsolutePath(string path)
 		{
 			try
@@ -50,6 +75,11 @@ namespace Essential.Core.IO
 			}
 		}
 
+		/// <summary>
+		/// Check if string describes local path.
+		/// </summary>
+		/// <param name="path">Local path to (non-)existing file or folder.</param>
+		/// <returns>True if non absolute path is found.</returns>
 		public static bool IsLocalPath(string path)
 		{
 			try
@@ -63,7 +93,12 @@ namespace Essential.Core.IO
 			}
 		}
 
-		public static string GetDirectoryName(string filePath)
+		/// <summary>
+		/// Extract path to folder, which contains selected file.
+		/// </summary>
+		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <returns>Path to folder or null.</returns>
+		public static string ExtractDirectory(string filePath)
 		{
 			try
 			{
@@ -76,7 +111,12 @@ namespace Essential.Core.IO
 			}
 		}
 
-		public static string GetFileName(string filePath)
+		/// <summary>
+		/// Extract name of file from file path.
+		/// </summary>
+		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <returns>File name or null.</returns>
+		public static string ExtractFileName(string filePath)
 		{
 			try
 			{
@@ -89,7 +129,12 @@ namespace Essential.Core.IO
 			}
 		}
 
-		public static string GetFolderName(string filePath)
+		/// <summary>
+		/// Extract name of folder from file path.
+		/// </summary>
+		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <returns>Folder name or null.</returns>
+		public static string ExtractFolderName(string filePath)
 		{
 			try
 			{
@@ -102,19 +147,36 @@ namespace Essential.Core.IO
 			}
 		}
 
+		/// <summary>
+		/// Get absolute path pointing to or pointing inside Application.persistentDataPath.
+		/// </summary>
+		/// <param name="localPath">Local path, filename or foldername.</param>
+		/// <returns>Absolute path to</returns>
 		public static string GetNormalizedApplicationPersistentDataPath(string localPath = null)
 		{
 			return Normalize(Application.persistentDataPath + "/" + localPath);
 		}
 
+		/// <summary>
+		/// Check if path points into Application.persistentDataPath. 
+		/// </summary>
+		/// <param name="absolutePath">Absolute path to an existing file or directory.</param>
+		/// <returns>True if path points into Application.persistentDataPath.</returns>
+		/// <remarks>
+		/// Does not check if path contains invalid characters.
+		/// </remarks>
 		public static bool InsideApplicationPersistentDataPath(string absolutePath)
 		{
-			if (string.IsNullOrEmpty(absolutePath))
+			var normalizedPath = Normalize(absolutePath);
+			
+			if (string.IsNullOrEmpty(normalizedPath))
 			{
 				return false;
 			}
 
-			return absolutePath.StartsWith(Application.persistentDataPath);
+			var normalizedRoot = GetNormalizedApplicationPersistentDataPath();
+
+			return string.Compare(normalizedPath, normalizedRoot, StringComparison.Ordinal) != 0 && normalizedPath.StartsWith(normalizedRoot);
 		}
 	}
 }
