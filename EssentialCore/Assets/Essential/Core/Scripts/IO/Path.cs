@@ -8,7 +8,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Check if path contains invalid characters for files.
 		/// </summary>
-		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <param name="path">Absolute or relative path to (non-)existing file or folder.</param>
 		/// <returns>True if any invalid character was found.</returns>
 		[Obsolete]
 		public static bool ContainsInvalidFileNameCharacters(string path)
@@ -27,7 +27,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Check if path contains invalid characters for paths.
 		/// </summary>
-		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <param name="path">Absolute or relative path to (non-)existing file or folder.</param>
 		/// <returns>True if any invalid character was found.</returns>
 		public static bool ContainsInvalidPathCharacters(string path)
 		{
@@ -45,7 +45,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Unifies paths.
 		/// </summary>
-		/// <param name="path">Absolute or local path to (non-)existing file or folder.</param>
+		/// <param name="path">Absolute or relative path to (non-)existing file or folder.</param>
 		/// <returns>String without backslashes in lowercase.</returns>
 		public static string Normalize(string path)
 		{
@@ -76,11 +76,11 @@ namespace Essential.Core.IO
 		}
 
 		/// <summary>
-		/// Check if string describes local path.
+		/// Check if string describes relative path.
 		/// </summary>
-		/// <param name="path">Local path to (non-)existing file or folder.</param>
+		/// <param name="path">Relative path to (non-)existing file or folder.</param>
 		/// <returns>True if non absolute path is found.</returns>
-		public static bool IsLocalPath(string path)
+		public static bool IsRelativePath(string path)
 		{
 			try
 			{
@@ -96,7 +96,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Extract path to folder, which contains selected file.
 		/// </summary>
-		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <param name="filePath">Absolute or relative path to (non-)existing file.</param>
 		/// <returns>Path to folder or null.</returns>
 		public static string ExtractDirectory(string filePath)
 		{
@@ -114,7 +114,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Extract name of file from file path.
 		/// </summary>
-		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <param name="filePath">Absolute or relative path to (non-)existing file.</param>
 		/// <returns>File name or null.</returns>
 		public static string ExtractFileName(string filePath)
 		{
@@ -132,7 +132,7 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Extract name of folder from file path.
 		/// </summary>
-		/// <param name="filePath">Absolute or local path to (non-)existing file.</param>
+		/// <param name="filePath">Absolute or relative path to (non-)existing file.</param>
 		/// <returns>Folder name or null.</returns>
 		public static string ExtractFolderName(string filePath)
 		{
@@ -150,11 +150,11 @@ namespace Essential.Core.IO
 		/// <summary>
 		/// Get absolute path pointing to or pointing inside Application.persistentDataPath.
 		/// </summary>
-		/// <param name="localPath">Local path, filename or foldername.</param>
+		/// <param name="relativePath">Relative path, filename or foldername.</param>
 		/// <returns>Absolute path to</returns>
-		public static string GetNormalizedApplicationPersistentDataPath(string localPath = null)
+		public static string GetNormalizedApplicationPersistentDataPath(string relativePath = null)
 		{
-			return Normalize(Application.persistentDataPath + "/" + localPath);
+			return Normalize(Application.persistentDataPath + "/" + relativePath);
 		}
 
 		/// <summary>

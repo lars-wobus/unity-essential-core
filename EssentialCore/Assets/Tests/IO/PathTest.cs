@@ -13,7 +13,7 @@ namespace Tests.IO
 		private static string RootFolderName => "UnitTestDump";
 		private static string FolderName => "existingNonEmptyDirectory";
 		private static string FileName => "existingFile.txt";
-		private static string LocalPathToFile = $@"{FolderName}\{FileName}";
+		private static string RelativePathToFile = $@"{FolderName}\{FileName}";
         private static string AbsolutePathToUnitTestDump => Application.persistentDataPath + "/" + RootFolderName;
 		private static string AbsolutePathToExistingNonEmptyDirectory => AbsolutePathToUnitTestDump + "/" + FolderName;
 		private static string AbsolutePathToExistingFile => AbsolutePathToExistingNonEmptyDirectory + "/" + FileName;
@@ -79,11 +79,11 @@ namespace Tests.IO
 		}
 
 		[Test]
-		public void Normalize_ReturnLocalPathToFileWithoutBacklashesInLowercase_WhenPassing_LocalPathToFileIncludingBackslashes()
+		public void Normalize_ReturnRelativePathToFileWithoutBacklashesInLowercase_WhenPassing_RelativePathToFileIncludingBackslashes()
 		{
-			var expected = LocalPathToFile.Replace("\\", "/").ToLower();
+			var expected = RelativePathToFile.Replace("\\", "/").ToLower();
 			
-			var actual = Path.Normalize(LocalPathToFile);
+			var actual = Path.Normalize(RelativePathToFile);
 			
 			Assert.AreEqual(expected, actual);
 		}
@@ -149,9 +149,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void IsAbsolutePath_ReturnFalse_WhenPassing_LocalPathToFile()
+		public void IsAbsolutePath_ReturnFalse_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.IsAbsolutePath(LocalPathToFile);
+			var actual = Path.IsAbsolutePath(RelativePathToFile);
 			
 			Assert.False(actual);
 		}
@@ -164,78 +164,78 @@ namespace Tests.IO
 			Assert.True(actual);
 		}
 		
-		// IsLocalPath
+		// IsRelativePath
 
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_NullString()
+		public void IsRelativePath_ReturnFalse_WhenPassing_NullString()
 		{
-			var actual = Path.IsLocalPath(NullString);
+			var actual = Path.IsRelativePath(NullString);
 			
 			Assert.True(actual);
 		}
 
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_EmptyString()
+		public void IsRelativePath_ReturnFalse_WhenPassing_EmptyString()
 		{
-			var actual = Path.IsLocalPath(EmptyString);
+			var actual = Path.IsRelativePath(EmptyString);
 			
 			Assert.True(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_StringContainingInvalidCharacters()
+		public void IsRelativePath_ReturnFalse_WhenPassing_StringContainingInvalidCharacters()
 		{
 			LogAssert.Expect(LogType.Exception, new Regex(""));
 			
-			var actual = Path.IsLocalPath(StringContainingInvalidCharacters);
+			var actual = Path.IsRelativePath(StringContainingInvalidCharacters);
 			
 			Assert.False(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_SingleBackslash()
+		public void IsRelativePath_ReturnFalse_WhenPassing_SingleBackslash()
 		{
-			var actual = Path.IsLocalPath(@"\");
+			var actual = Path.IsRelativePath(@"\");
 			
 			Assert.False(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_SingleSlash()
+		public void IsRelativePath_ReturnFalse_WhenPassing_SingleSlash()
 		{
-			var actual = Path.IsLocalPath("/");
+			var actual = Path.IsRelativePath("/");
 			
 			Assert.False(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnTrue_WhenPassing_FileName()
+		public void IsRelativePath_ReturnTrue_WhenPassing_FileName()
 		{
-			var actual = Path.IsLocalPath(FileName);
+			var actual = Path.IsRelativePath(FileName);
 			
 			Assert.True(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnTrue_WhenPassing_FolderName()
+		public void IsRelativePath_ReturnTrue_WhenPassing_FolderName()
 		{
-			var actual = Path.IsLocalPath(FolderName);
+			var actual = Path.IsRelativePath(FolderName);
 			
 			Assert.True(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnFalse_WhenPassing_AbsolutePathToExistingFile()
+		public void IsRelativePath_ReturnFalse_WhenPassing_AbsolutePathToExistingFile()
 		{
-			var actual = Path.IsLocalPath(AbsolutePathToExistingFile);
+			var actual = Path.IsRelativePath(AbsolutePathToExistingFile);
 			
 			Assert.False(actual);
 		}
 		
 		[Test]
-		public void IsLocalPath_ReturnTrue_WhenPassing_LocalPathToFile()
+		public void IsRelativePath_ReturnTrue_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.IsLocalPath(LocalPathToFile);
+			var actual = Path.IsRelativePath(RelativePathToFile);
 			
 			Assert.True(actual);
 		}
@@ -279,9 +279,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void ExtractDirectory_ReturnNameOfFolder_WhenPassing_LocalPathToFile()
+		public void ExtractDirectory_ReturnNameOfFolder_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.ExtractDirectory(LocalPathToFile);
+			var actual = Path.ExtractDirectory(RelativePathToFile);
 			
 			Assert.AreEqual(FolderName, actual);
 		}
@@ -333,9 +333,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void ExtractFileName_ReturnFileName_WhenPassing_LocalPathToFile()
+		public void ExtractFileName_ReturnFileName_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.ExtractFileName(LocalPathToFile);
+			var actual = Path.ExtractFileName(RelativePathToFile);
 			
 			Assert.AreEqual(FileName, actual);
 		}
@@ -395,9 +395,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void ExtractFolderName_ReturnFolderName_WhenPassing_LocalPathToFile()
+		public void ExtractFolderName_ReturnFolderName_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.ExtractFolderName(LocalPathToFile);
+			var actual = Path.ExtractFolderName(RelativePathToFile);
 			
 			Assert.AreEqual(FolderName, actual);
 		}
@@ -489,9 +489,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_LocalPathToFile()
+		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.InsideApplicationPersistentDataPath(LocalPathToFile);
+			var actual = Path.InsideApplicationPersistentDataPath(RelativePathToFile);
 			
 			Assert.False(actual);
 		}
