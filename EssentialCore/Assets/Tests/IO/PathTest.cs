@@ -25,6 +25,126 @@ namespace Tests.IO
 	        StringContainingInvalidCharacters = new string(System.IO.Path.GetInvalidFileNameChars()) + "/" + new string(System.IO.Path.GetInvalidPathChars());
         }
 		
+		// Contain invalid file characters
+
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnTrue_WhenPassing_NullString()
+		{
+			LogAssert.Expect(LogType.Exception, new Regex(""));
+			
+			var actual = Path.ContainsInvalidFileNameCharacters(NullString);
+			
+			Assert.True(actual);
+		}
+
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnFalse_WhenPassing_EmptyString()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(EmptyString);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnTrue_WhenPassing_StringContainingInvalidCharacters()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(StringContainingInvalidCharacters);
+			
+			Assert.True(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnFalse_WhenPassing_FileName()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(FileName);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnFalse_WhenPassing_FolderName()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(FolderName);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnTrue_WhenPassing_RelativePathToFile()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(RelativePathToFile);
+			
+			Assert.True(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidFileNameCharacters_ReturnTrue_WhenPassing_AbsolutePathToExistingFile()
+		{
+			var actual = Path.ContainsInvalidFileNameCharacters(AbsolutePathToExistingFile);
+			
+			Assert.True(actual);
+		}
+		
+		// Contain invalid path characters
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnTrue_WhenPassing_NullString()
+		{
+			LogAssert.Expect(LogType.Exception, new Regex(""));
+			
+			var actual = Path.ContainsInvalidPathCharacters(NullString);
+			
+			Assert.True(actual);
+		}
+
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnFalse_WhenPassing_EmptyString()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(EmptyString);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnTrue_WhenPassing_StringContainingInvalidCharacters()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(StringContainingInvalidCharacters);
+			
+			Assert.True(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnFalse_WhenPassing_FileName()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(FileName);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnFalse_WhenPassing_FolderName()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(FolderName);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnFalse_WhenPassing_RelativePathToFile()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(RelativePathToFile);
+			
+			Assert.False(actual);
+		}
+		
+		[Test]
+		public void ContainsInvalidPathCharacters_ReturnFalse_WhenPassing_AbsolutePathToExistingFile()
+		{
+			var actual = Path.ContainsInvalidPathCharacters(AbsolutePathToExistingFile);
+			
+			Assert.False(actual);
+		}
+
 		// Normalize path - Normalize paths to use them on unix systems
 		
 		[Test]
