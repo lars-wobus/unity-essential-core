@@ -154,7 +154,7 @@ namespace Essential.Core.IO
 		/// <returns>Absolute path to</returns>
 		public static string GetNormalizedApplicationPersistentDataPath(string relativePath = null)
 		{
-			return Normalize(Application.persistentDataPath + "/" + relativePath);
+			return IsAbsolutePath(relativePath) ? null : Normalize(Application.persistentDataPath + "/" + relativePath);
 		}
 
 		/// <summary>
