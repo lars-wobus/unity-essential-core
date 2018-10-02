@@ -18,6 +18,7 @@ namespace Tests.IO
 		private static string AbsolutePathToExistingNonEmptyDirectory => AbsolutePathToUnitTestDump + "/" + FolderName;
 		private static string AbsolutePathToExistingFile => AbsolutePathToExistingNonEmptyDirectory + "/" + FileName;
         private string StringContainingInvalidCharacters { get; set; }
+		private Regex CatchException => new Regex("Exception");
         
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -30,7 +31,7 @@ namespace Tests.IO
 		[Test]
 		public void ContainsInvalidFileNameCharacters_ReturnTrue_WhenPassing_NullString()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex(""));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ContainsInvalidFileNameCharacters(NullString);
 			
@@ -90,7 +91,7 @@ namespace Tests.IO
 		[Test]
 		public void ContainsInvalidPathCharacters_ReturnTrue_WhenPassing_NullString()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex(""));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ContainsInvalidPathCharacters(NullString);
 			
@@ -164,7 +165,7 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void Normalize_ReturnNull_WhenPassing_InvalidCharacters() // TODO InvalidFileCharacters + InvalidPathCharacters
+		public void Normalize_ReturnNull_WhenPassing_StringContainingInvalidCharacters()
 		{
 			var actual = Path.Normalize(StringContainingInvalidCharacters);
 			
@@ -188,22 +189,41 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void Normalize_ReturnStringInLowercase_WhenPassing_StringInUppercase()
+		public void Normalize_ReturnStringInLowercase_WhenPassing_FileName()
 		{
-			const string value = "UPPERCASE_LETTERS";
-			var expected = value.ToLower();
+			var expected = FileName.ToLower();
 			
-			var actual = Path.Normalize("UPPERCASE_LETTERS");
+			var actual = Path.Normalize(FileName);
+			
+			Assert.AreEqual(expected, actual);
+		}
+		
+		[Test]
+		public void Normalize_ReturnStringInLowercase_WhenPassing_FolderName()
+		{
+			var expected = FolderName.ToLower();
+			
+			var actual = Path.Normalize(FolderName);
+			
+			Assert.AreEqual(expected, actual);
+		}
+		
+		[Test]
+		public void Normalize_ReturnRelativePathToFileWithoutBacklashesInLowercase_WhenPassing_RelativePathToFile()
+		{
+			var expected = RelativePathToFile.Replace("\\", "/").ToLower();
+			
+			var actual = Path.Normalize(RelativePathToFile);
 			
 			Assert.AreEqual(expected, actual);
 		}
 
 		[Test]
-		public void Normalize_ReturnRelativePathToFileWithoutBacklashesInLowercase_WhenPassing_RelativePathToFileIncludingBackslashes()
+		public void Normalize_ReturnRelativePathToFileWithoutBacklashesInLowercase_WhenPassing_AbsolutePathToExistingFile()
 		{
-			var expected = RelativePathToFile.Replace("\\", "/").ToLower();
+			var expected = AbsolutePathToExistingFile.Replace("\\", "/").ToLower();
 			
-			var actual = Path.Normalize(RelativePathToFile);
+			var actual = Path.Normalize(AbsolutePathToExistingFile);
 			
 			Assert.AreEqual(expected, actual);
 		}
@@ -229,7 +249,7 @@ namespace Tests.IO
 		[Test]
 		public void IsAbsolutePath_ReturnFalse_WhenPassing_StringContainingInvalidCharacters()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex(""));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.IsAbsolutePath(StringContainingInvalidCharacters);
 			
@@ -305,7 +325,7 @@ namespace Tests.IO
 		[Test]
 		public void IsRelativePath_ReturnFalse_WhenPassing_StringContainingInvalidCharacters()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex(""));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.IsRelativePath(StringContainingInvalidCharacters);
 			
@@ -345,19 +365,19 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void IsRelativePath_ReturnFalse_WhenPassing_AbsolutePathToExistingFile()
-		{
-			var actual = Path.IsRelativePath(AbsolutePathToExistingFile);
-			
-			Assert.False(actual);
-		}
-		
-		[Test]
 		public void IsRelativePath_ReturnTrue_WhenPassing_RelativePathToFile()
 		{
 			var actual = Path.IsRelativePath(RelativePathToFile);
 			
 			Assert.True(actual);
+		}
+		
+		[Test]
+		public void IsRelativePath_ReturnFalse_WhenPassing_AbsolutePathToExistingFile()
+		{
+			var actual = Path.IsRelativePath(AbsolutePathToExistingFile);
+			
+			Assert.False(actual);
 		}
 		
 		// ExtractDirectory
@@ -373,7 +393,7 @@ namespace Tests.IO
 		[Test]
 		public void ExtractDirectory_ReturnEmptyString_WhenPassing_EmptyString()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ExtractDirectory(EmptyString);
 			
@@ -383,7 +403,7 @@ namespace Tests.IO
 		[Test]
 		public void ExtractDirectory_ReturnNull_WhenPassing_StringContainingInvalidCharacters()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ExtractDirectory(StringContainingInvalidCharacters);
 			
@@ -394,6 +414,14 @@ namespace Tests.IO
 		public void ExtractDirectory_ReturnEmptyString_WhenPassing_FileName()
 		{
 			var actual = Path.ExtractDirectory(FileName);
+			
+			Assert.IsEmpty(actual);
+		}
+		
+		[Test]
+		public void ExtractDirectory_ReturnEmptyString_WhenPassing_FolderName()
+		{
+			var actual = Path.ExtractDirectory(FolderName);
 			
 			Assert.IsEmpty(actual);
 		}
@@ -437,7 +465,7 @@ namespace Tests.IO
 		[Test]
 		public void ExtractFileName_ReturnNull_WhenPassing_StringContainingInvalidCharacters()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ExtractFileName(StringContainingInvalidCharacters);
 			
@@ -453,19 +481,19 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void ExtractFileName_ReturnFileName_WhenPassing_RelativePathToFile()
-		{
-			var actual = Path.ExtractFileName(RelativePathToFile);
-			
-			Assert.AreEqual(FileName, actual);
-		}
-		
-		[Test]
 		public void ExtractFileName_ReturnFolderName_WhenPassing_FolderName()
 		{
 			var actual = Path.ExtractFileName(FolderName);
 			
 			Assert.AreEqual(FolderName, actual);
+		}
+		
+		[Test]
+		public void ExtractFileName_ReturnFileName_WhenPassing_RelativePathToFile()
+		{
+			var actual = Path.ExtractFileName(RelativePathToFile);
+			
+			Assert.AreEqual(FileName, actual);
 		}
 		
 		[Test]
@@ -489,7 +517,7 @@ namespace Tests.IO
 		[Test]
 		public void ExtractFolderName_ReturnNull_WhenPassing_EmptyString()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ExtractFolderName(EmptyString);
 			
@@ -499,7 +527,7 @@ namespace Tests.IO
 		[Test]
 		public void ExtractFolderName_ReturnNull_WhenPassing_StringContainingInvalidCharacters()
 		{
-			LogAssert.Expect(LogType.Exception, new Regex("Exception"));
+			LogAssert.Expect(LogType.Exception, CatchException);
 			
 			var actual = Path.ExtractFolderName(StringContainingInvalidCharacters);
 			
@@ -515,14 +543,6 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void ExtractFolderName_ReturnFolderName_WhenPassing_RelativePathToFile()
-		{
-			var actual = Path.ExtractFolderName(RelativePathToFile);
-			
-			Assert.AreEqual(FolderName, actual);
-		}
-		
-		[Test]
 		public void ExtractFolderName_ReturnEmptyString_WhenPassing_FolderName()
 		{
 			var actual = Path.ExtractFolderName(FolderName);
@@ -530,6 +550,14 @@ namespace Tests.IO
 			Assert.IsEmpty(actual);
 		}
 		
+		[Test]
+		public void ExtractFolderName_ReturnFolderName_WhenPassing_RelativePathToFile()
+		{
+			var actual = Path.ExtractFolderName(RelativePathToFile);
+			
+			Assert.AreEqual(FolderName, actual);
+		}
+
 		[Test]
 		public void ExtractFolderName_ReturnFolderName_WhenPassing_AbsolutePathToExistingFile()
 		{
@@ -557,9 +585,49 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void GetNormalizedApplicationPersistentDataPath_ReturnNull_WhenPassing_PersistentSubdirectoryContainsInvalidCharacters()
+		public void GetNormalizedApplicationPersistentDataPath_ReturnNull_WhenPassing_StringContainingInvalidCharacters()
 		{
+			LogAssert.Expect(LogType.Exception, CatchException);
+			
 			var actual = Path.GetNormalizedApplicationPersistentDataPath(StringContainingInvalidCharacters);
+			
+			Assert.IsNull(actual);
+		}
+		
+		[Test]
+		public void GetNormalizedApplicationPersistentDataPath_ReturnSubfolderInApplicationPersistentDataPath_WhenPassing_FileName()
+		{
+			var expected = (Application.persistentDataPath + "/" + FileName).ToLower();
+			
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(FileName);
+			
+			Assert.AreEqual(expected, actual);
+		}
+		
+		[Test]
+		public void GetNormalizedApplicationPersistentDataPath_ReturnSubfolderInApplicationPersistentDataPath_WhenPassing_FolderName()
+		{
+			var expected = (Application.persistentDataPath + "/" + FolderName).ToLower();
+			
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(FolderName);
+			
+			Assert.AreEqual(expected, actual);
+		}
+		
+		[Test]
+		public void GetNormalizedApplicationPersistentDataPath_ReturnSubSubFolderInApplicationPersistentDataPath_WhenPassing_RelativePathToFile()
+		{
+			var expected = (Application.persistentDataPath + "/" + RelativePathToFile).ToLower().Replace("\\", "/"); ; 
+			
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(RelativePathToFile);
+			
+			Assert.AreEqual(expected, actual);
+		}
+		
+		[Test]
+		public void GetNormalizedApplicationPersistentDataPath_ReturnNull_WhenPassing_AbsolutePathToExistingFile()
+		{
+			var actual = Path.GetNormalizedApplicationPersistentDataPath(AbsolutePathToExistingFile);
 			
 			Assert.IsNull(actual);
 		}
@@ -609,14 +677,6 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_RelativePathToFile()
-		{
-			var actual = Path.InsideApplicationPersistentDataPath(RelativePathToFile);
-			
-			Assert.False(actual);
-		}
-		
-		[Test]
 		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_FolderName()
 		{
 			var actual = Path.InsideApplicationPersistentDataPath(FolderName);
@@ -625,9 +685,9 @@ namespace Tests.IO
 		}
 		
 		[Test]
-		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_ApplicationPersistentDataPath()
+		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_RelativePathToFile()
 		{
-			var actual = Path.InsideApplicationPersistentDataPath(Application.persistentDataPath);
+			var actual = Path.InsideApplicationPersistentDataPath(RelativePathToFile);
 			
 			Assert.False(actual);
 		}
@@ -638,6 +698,14 @@ namespace Tests.IO
 			var actual = Path.InsideApplicationPersistentDataPath(AbsolutePathToExistingFile);
 			
 			Assert.True(actual);
+		}
+		
+		[Test]
+		public void InsideApplicationPersistentDataPath_ReturnFalse_WhenPassing_ApplicationPersistentDataPath()
+		{
+			var actual = Path.InsideApplicationPersistentDataPath(Application.persistentDataPath);
+			
+			Assert.False(actual);
 		}
 	}
 }
