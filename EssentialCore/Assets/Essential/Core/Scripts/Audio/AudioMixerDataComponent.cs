@@ -10,7 +10,7 @@ namespace Essential.Core.Audio
 
 		private void Start()
 		{
-			Debug.Log(_data.SerializeToJson());
+			Debug.Log(_data.Serialize());
 			LoadCustomSettings();
 		}
 		
@@ -23,7 +23,7 @@ namespace Essential.Core.Audio
 
 		private void SaveCustomSettings()
 		{
-			Debug.Log(_data.SerializeToJson());
+			Debug.Log(_data.Serialize());
 			// TODO write json to local storage or send data to server
 		}
 		

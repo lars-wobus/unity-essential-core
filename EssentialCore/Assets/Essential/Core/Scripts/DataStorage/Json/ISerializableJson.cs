@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Audio
+﻿namespace Essential.Core.DataStorage.Json
 {
     /// <summary>
     /// Allow data serialization from and to json. 
@@ -12,7 +12,7 @@
         /// <example>
         /// return JsonUtility.ToJson(this);
         /// </example>
-        string SerializeToJson();
+        string Serialize();
         
         /// <summary>
         /// Deserialize data object from json.

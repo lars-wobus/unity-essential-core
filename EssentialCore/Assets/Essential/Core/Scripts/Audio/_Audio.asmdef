@@ -1,7 +1,8 @@
 {
     "name": "_Audio",
     "references": [
-        "_Debugging"
+        "_Debugging",
+        "_Json"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

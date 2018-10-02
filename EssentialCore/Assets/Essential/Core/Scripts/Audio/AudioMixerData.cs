@@ -1,4 +1,5 @@
 ﻿using System;
+using Essential.Core.DataStorage.Json;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -13,7 +14,7 @@ namespace Essential.Core.Audio
 		public AudioMixer AudioMixer => _audioMixer;
 		public ExposedProperty[] ExposedProperties => exposedProperties;
 	
-		public string SerializeToJson()
+		public string Serialize()
 		{
 			return JsonUtility.ToJson(this);
 		}
