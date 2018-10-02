@@ -61,7 +61,7 @@ namespace Tests.IO
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            System.IO.Directory.Delete(AbsolutePathToUnitTestDump);
+            System.IO.Directory.Delete(AbsolutePathToUnitTestDump, true);
         }
         
         // File exist

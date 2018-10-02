@@ -44,14 +44,14 @@ namespace Tests.IO
         {
             if (System.IO.Directory.Exists(AbsolutePathToNonExistingDirectory))
             {
-                System.IO.Directory.Delete(AbsolutePathToNonExistingDirectory);
+                System.IO.Directory.Delete(AbsolutePathToNonExistingDirectory, true);
             }
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            System.IO.Directory.Delete(AbsolutePathToUnitTestDump);
+            System.IO.Directory.Delete(AbsolutePathToUnitTestDump, true);
         }
         
         // Directory name validation
