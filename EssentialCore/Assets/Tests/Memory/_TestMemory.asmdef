@@ -1,0 +1,14 @@
+{
+    "name": "_TestMemory",
+    "references": [
+        "_Memory"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
