@@ -14,13 +14,14 @@ namespace Essential.Core.Memory
 			return CurrentState == null ? CurrentState : _serialize(CurrentState);
 		}
 
-		public void RestoreFromMomento(T storedInstance)
+		public T RestoreFromMomento(T storedInstance)
 		{
 			if (storedInstance == null)
 			{
-				return;
+				return CurrentState;
 			}
 			CurrentState = storedInstance;
+			return CurrentState;
 		}
 
 		private readonly Func<T, T> _serialize = objectInstance =>
