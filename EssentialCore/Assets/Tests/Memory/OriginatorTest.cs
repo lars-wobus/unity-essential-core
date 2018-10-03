@@ -11,7 +11,7 @@ namespace Tests.Memory
         {
             private readonly string _name;
 
-            public DummyClass(string name) // TODO getter und setter für ne private variable mal testen, ob auch equals funzt
+            public DummyClass(string name)
             {
                 _name = name;
             }
