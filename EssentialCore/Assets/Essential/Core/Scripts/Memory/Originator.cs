@@ -4,6 +4,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Essential.Core.Memory
 {
+	// Note: The advantage of an originator: it can hold further data, e.g. load/save counter, etc.
+	
 	public class Originator<T> where T : class 
 	{
 		public T CurrentState { get; set; }
