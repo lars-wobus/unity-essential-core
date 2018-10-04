@@ -1,0 +1,10 @@
+{
+    "name": "_Experimental",
+    "references": [
+        "_Memory"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
