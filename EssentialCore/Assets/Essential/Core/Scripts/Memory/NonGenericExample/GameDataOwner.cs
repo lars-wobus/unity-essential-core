@@ -9,15 +9,6 @@ namespace Essential.Core.Memory.NonGenericExample
     public class GameDataOwner : MonoBehaviour
     {
         /// <summary>
-        /// Specifies the internal state of behavioural classes.
-        /// </summary>
-        [Serializable]
-        public class GameData
-        {
-            public int Index { get; set; }
-        }
-
-        /// <summary>
         /// Internal state.
         /// </summary>
         [SerializeField] private GameData _gameData;

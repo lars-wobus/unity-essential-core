@@ -13,7 +13,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
-		private readonly Originator<GameDataOwner.GameData> _originator = new Originator<GameDataOwner.GameData>();
+		private readonly Originator<GameData> _originator = new Originator<GameData>();
 		
 		/// <summary>
 		/// Reference to the behavioural script which shall be monitored.
@@ -23,7 +23,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
-		private Caretaker<GameDataOwner.GameData> Caretaker { get; set; }
+		private Caretaker<GameData> Caretaker { get; set; }
 		
 		/// <summary>
 		/// Called when application is started.
@@ -50,7 +50,7 @@ namespace Essential.Core.Memory.NonGenericExample
 			}
 			else
 			{
-				Caretaker = new Caretaker<GameDataOwner.GameData>(_originator.SaveToMemento());
+				Caretaker = new Caretaker<GameData>(_originator.SaveToMemento());
 			}
 		}
 
