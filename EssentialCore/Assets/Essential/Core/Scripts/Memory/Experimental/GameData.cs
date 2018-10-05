@@ -28,5 +28,5 @@ namespace Essential.Core.Scripts.Memory.Experimental
 	/// GameData must be serialized, to show its field within the Unity inspector.
 	/// </summary>
 	[Serializable]
-	public class Data2 : GameData<int>{}
+	public class IntGameData : GameData<int>{}
 }
