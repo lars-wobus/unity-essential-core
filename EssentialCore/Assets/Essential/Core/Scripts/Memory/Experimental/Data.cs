@@ -4,5 +4,11 @@ using UnityEngine;
 namespace Essential.Core.Scripts.Memory.Experimental
 {
 	[Serializable]
-	public class ExperimentalGameDataRestorer : GameDataRestorerBase<Data2>{};
+	public class Data<T>
+	{
+		public T a;
+	}
+    
+	[Serializable]
+	public class Data2 : Data<int>{}
 }
