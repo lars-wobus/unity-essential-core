@@ -11,17 +11,17 @@ namespace Essential.Core.Memory
 	public class GameDataRecovery : MonoBehaviour
 	{
 		/// <summary>
-		/// 
+		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
 		private readonly Originator<GameDataOwner.GameData> _originator = new Originator<GameDataOwner.GameData>();
 		
 		/// <summary>
-		/// The other script holding the 
+		/// Reference to the behavioural script which shall be monitored.
 		/// </summary>
 		private GameDataOwner TargetScript { get; set; }
 		
 		/// <summary>
-		/// Used to save an internal state
+		/// Used to save an internal state.
 		/// </summary>
 		private Caretaker<GameDataOwner.GameData> Caretaker { get; set; }
 		
