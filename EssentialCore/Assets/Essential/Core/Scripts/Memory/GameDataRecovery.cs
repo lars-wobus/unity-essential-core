@@ -2,28 +2,46 @@
 
 namespace Essential.Core.Memory
 {
-	// Note: Why not implementing methods from Orginator here? Because of the 'single responsible principle'. 
-	// Moreover multiple versions of the originator might be required someday.
-	// So why not inherting from an abstract version of Originator with type parameter which inherits from MonoBehaviour?
-	// Because something like this: 'public class MementoBehaviour<TBehaviour, TData> : MonoBehaviour' would force us
-	// to implement another interface for TBehaviour, to have access to the Data object.
-	// Another possible solution could be 'public class MementoBehaviour<TBehaviour<TData>>'. Right now I didn't 
-	// spend enought time to evaluate this strategy.
-	
+	/// <summary>
+	/// Saves internal state from another script when user takes focus away from the Unity application to another
+	/// application on his/her device + Restores the previous state from the other script, when the user switches
+	/// bakc to the application.  
+	/// </summary>
 	[RequireComponent(typeof(GameDataRestorer))]
 	public class GameDataRecovery : MonoBehaviour
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		private readonly Originator<GameDataRestorer.Data> _originator = new Originator<GameDataRestorer.Data>();
+		
+		/// <summary>
+		/// The other script holding the 
+		/// </summary>
 		private GameDataRestorer TargetScript { get; set; }
+		
+		/// <summary>
+		/// Used to save an internal state
+		/// </summary>
 		private Caretaker<GameDataRestorer.Data> Caretaker { get; set; }
 		
-		// Use this for initialization
+		/// <summary>
+		/// Called when application is started.
+		/// </summary>
 		private void Start ()
 		{
 			TargetScript = GetComponent<GameDataRestorer>();
 			_originator.CurrentState = TargetScript.Data2;
 		}
 	
+		/// <summary>
+		/// Called when user switches between applications.
+		/// </summary>
+		/// <param name="hasFocus">True when user's focus is on this application, otherwise false.</param>
+		/// <remarks>
+		/// On Android devices when pressing the home button while the on-screen keyboard is shown OnApplicationPause is
+		/// called instead of OnApplicationFocus.
+		/// </remarks>
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			if (hasFocus)
