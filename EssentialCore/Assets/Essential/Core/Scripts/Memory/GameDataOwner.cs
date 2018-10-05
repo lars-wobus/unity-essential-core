@@ -12,23 +12,23 @@ namespace Essential.Core.Memory
         /// Specifies the internal state of behavioural classes.
         /// </summary>
         [Serializable]
-        public class Data
+        public class GameData
         {
-            public int a;
+            public int _index;
         }
 
         /// <summary>
         /// Internal state.
         /// </summary>
-        [SerializeField] private Data _data;
+        [SerializeField] private GameData _gameData;
 
         /// <summary>
         /// Get/Set internal state.
         /// </summary>
-        public Data Data2
+        public GameData Data
         {
-            get { return _data; }
-            set { _data = value; }
+            get { return _gameData; }
+            set { _gameData = value; }
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Essential.Core.Memory
         /// </summary>
         public void Update()
         {
-            _data.a++;
+            Data._index++;
         }
     }
 }

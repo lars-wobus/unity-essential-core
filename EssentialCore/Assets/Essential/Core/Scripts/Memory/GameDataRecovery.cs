@@ -7,31 +7,31 @@ namespace Essential.Core.Memory
 	/// application on his/her device + Restores the previous state from the other script, when the user switches
 	/// bakc to the application.  
 	/// </summary>
-	[RequireComponent(typeof(GameDataRestorer))]
+	[RequireComponent(typeof(GameDataOwner))]
 	public class GameDataRecovery : MonoBehaviour
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		private readonly Originator<GameDataRestorer.Data> _originator = new Originator<GameDataRestorer.Data>();
+		private readonly Originator<GameDataOwner.GameData> _originator = new Originator<GameDataOwner.GameData>();
 		
 		/// <summary>
 		/// The other script holding the 
 		/// </summary>
-		private GameDataRestorer TargetScript { get; set; }
+		private GameDataOwner TargetScript { get; set; }
 		
 		/// <summary>
 		/// Used to save an internal state
 		/// </summary>
-		private Caretaker<GameDataRestorer.Data> Caretaker { get; set; }
+		private Caretaker<GameDataOwner.GameData> Caretaker { get; set; }
 		
 		/// <summary>
 		/// Called when application is started.
 		/// </summary>
 		private void Start ()
 		{
-			TargetScript = GetComponent<GameDataRestorer>();
-			_originator.CurrentState = TargetScript.Data2;
+			TargetScript = GetComponent<GameDataOwner>();
+			_originator.CurrentState = TargetScript.Data;
 		}
 	
 		/// <summary>
@@ -46,11 +46,11 @@ namespace Essential.Core.Memory
 		{
 			if (hasFocus)
 			{
-				TargetScript.Data2 = _originator.RestoreFromMomento(Caretaker.Memento);
+				TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
 			}
 			else
 			{
-				Caretaker = new Caretaker<GameDataRestorer.Data>(_originator.SaveToMemento());
+				Caretaker = new Caretaker<GameDataOwner.GameData>(_originator.SaveToMemento());
 			}
 		}
 
