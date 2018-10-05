@@ -4,5 +4,5 @@ using UnityEngine;
 namespace Essential.Core.Scripts.Memory.Experimental
 {
 	[Serializable]
-	public class ExperimentalGameDataRestorer : GameDataRestorerBase<Data2>{};
+	public class GenericGameDataOwner : GameDataOwnerBase<Data2>{};
 }

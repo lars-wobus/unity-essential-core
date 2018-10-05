@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Essential.Core.Scripts.Memory.Experimental
 {
-	public abstract class MementoBehaviourBase<TGameDataRestorer, TData> : MonoBehaviour where TGameDataRestorer : GameDataRestorerBase<TData> where TData : GameData<int>
+	public abstract class GameDataRecoveryBase<TGameDataRestorer, TData> : MonoBehaviour where TGameDataRestorer : GameDataOwnerBase<TData> where TData : GameData<int>
 	{
 		private readonly Originator<TData> _originator = new Originator<TData>();
 		private TGameDataRestorer TargetScript { get; set; }

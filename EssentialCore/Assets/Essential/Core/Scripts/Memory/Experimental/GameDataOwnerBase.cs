@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Essential.Core.Scripts.Memory.Experimental
 {
 	[Serializable]
-	public abstract class GameDataRestorerBase<T> : MonoBehaviour where T : GameData<int>
+	public abstract class GameDataOwnerBase<T> : MonoBehaviour where T : GameData<int>
 	{
 		[SerializeField] private T _data;
 
