@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace Essential.Core.Scripts.Memory.Experimental
+namespace Essential.Core.Memory.GenericExample
 {
 	/// <summary>
 	/// Serialized version of a GameDataOwner holding a single integer value.

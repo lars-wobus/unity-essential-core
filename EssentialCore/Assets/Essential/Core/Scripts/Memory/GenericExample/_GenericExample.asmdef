@@ -1,5 +1,5 @@
 {
-    "name": "_Experimental",
+    "name": "_GenericExample",
     "references": [
         "_Memory"
     ],

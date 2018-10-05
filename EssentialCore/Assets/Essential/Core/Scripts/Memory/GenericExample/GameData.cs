@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Essential.Core.Scripts.Memory.Experimental
+namespace Essential.Core.Memory.GenericExample
 {
 	/// <summary>
 	/// Specifies the internal state of behavioural classes.

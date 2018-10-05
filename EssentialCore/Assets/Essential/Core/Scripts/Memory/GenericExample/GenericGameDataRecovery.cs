@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Scripts.Memory.Experimental
+﻿namespace Essential.Core.Memory.GenericExample
 {
 	/// <inheritdoc />
 	public class GenericGameDataRecovery : GameDataRecoveryBase<GenericGameDataOwner, IntGameData>{}
