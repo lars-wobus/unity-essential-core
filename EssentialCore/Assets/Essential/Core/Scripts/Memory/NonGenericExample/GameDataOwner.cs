@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Essential.Core.Memory
+namespace Essential.Core.Memory.NonGenericExample
 {
     /// <summary>
     /// Example behaviour. Its internal state can be restored by another behaviour. 
