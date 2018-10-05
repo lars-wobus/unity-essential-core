@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Essential.Core.Memory
 {
-    public class GameDataRestorer : MonoBehaviour
+    public class GameDataOwner : MonoBehaviour
     {
         [Serializable]
         public class Data
