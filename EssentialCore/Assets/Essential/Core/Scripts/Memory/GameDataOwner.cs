@@ -14,7 +14,7 @@ namespace Essential.Core.Memory
         [Serializable]
         public class GameData
         {
-            public int _index;
+            public int Index { get; set; }
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Essential.Core.Memory
         /// </summary>
         public void Update()
         {
-            Data._index++;
+            Data.Index++;
         }
     }
 }
