@@ -6,7 +6,6 @@ namespace Essential.Core.Memory.GenericExample
 	/// <summary>
 	/// Example behaviour. Its internal state can be restored by another behaviour. 
 	/// </summary>
-	[Serializable]
 	public abstract class GameDataOwnerBase<T> : MonoBehaviour
 	{
 		/// <summary>
