@@ -6,6 +6,9 @@ namespace Essential.Core.Memory.GenericExample
 	/// <summary>
 	/// Specifies the internal state of behavioural classes.
 	/// </summary>
+	/// <remarks>
+	/// Class must be marked as serializable to prevent occurence of SerializationException. 
+	/// </remarks>
 	[Serializable]
 	public class GameData<T>
 	{
