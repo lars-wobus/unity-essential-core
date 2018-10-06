@@ -33,11 +33,17 @@ namespace Essential.Core.Memory.GenericExample
 			_originator.CurrentState = TargetScript.Data;
 		}
 
+		/// <summary>
+		/// Restore previous state from memento.
+		/// </summary>
 		private void RestorePreviousState()
 		{
 			TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
 		}
 
+		/// <summary>
+		/// Save current state to memento.
+		/// </summary>
 		private void SaveCurrentState()
 		{
 			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
