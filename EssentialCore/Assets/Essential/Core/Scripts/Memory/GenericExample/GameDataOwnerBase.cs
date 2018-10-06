@@ -7,7 +7,7 @@ namespace Essential.Core.Memory.GenericExample
 	/// Example behaviour. Its internal state can be restored by another behaviour. 
 	/// </summary>
 	[Serializable]
-	public abstract class GameDataOwnerBase<T> : MonoBehaviour where T : GameData<int>
+	public abstract class GameDataOwnerBase<T> : MonoBehaviour
 	{
 		/// <summary>
 		/// Internal state.
@@ -21,14 +21,6 @@ namespace Essential.Core.Memory.GenericExample
 		{
 			get { return _data; }
 			set { _data = value; }
-		}
-
-		/// <summary>
-		/// Update is used to constantly modify own state. 
-		/// </summary>
-		public void Update()
-		{
-			Data.Index++;
 		}
 	}
 }
