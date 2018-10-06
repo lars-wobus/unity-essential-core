@@ -32,7 +32,17 @@ namespace Essential.Core.Memory.GenericExample
 			TargetScript = GetComponent<TGameDataRestorer>();
 			_originator.CurrentState = TargetScript.Data;
 		}
-	
+
+		private void RestorePreviousState()
+		{
+			TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+		}
+
+		private void SaveCurrentState()
+		{
+			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
+		}
+
 		/// <summary>
 		/// Called when user switches between applications.
 		/// </summary>
@@ -45,11 +55,11 @@ namespace Essential.Core.Memory.GenericExample
 		{
 			if (hasFocus)
 			{
-				TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+				RestorePreviousState();
 			}
 			else
 			{
-				Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
+				SaveCurrentState();
 			}
 		}
 	}
