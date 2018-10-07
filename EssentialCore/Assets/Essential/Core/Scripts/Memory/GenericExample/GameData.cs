@@ -9,18 +9,19 @@ namespace Essential.Core.Memory.GenericExample
 	/// <remarks>
 	/// Class must be marked as serializable to prevent occurence of SerializationException. 
 	/// </remarks>
+	/// <typeparam name="TData">Type of data to be encapsulated.</typeparam>
 	[Serializable]
-	public class GameData<T>
+	public class GameData<TData>
 	{
 		/// <summary>
 		/// Single value describing the internal state of a behavioural script at a specific moment.
 		/// </summary>
-		[SerializeField] private T _value;
+		[SerializeField] private TData _value;
 
 		/// <summary>
 		/// Get/Set index.
 		/// </summary>
-		public T Index
+		public TData Index
 		{
 			get { return _value; }
 			set { _value = value;}

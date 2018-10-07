@@ -6,17 +6,18 @@ namespace Essential.Core.Memory
 	/// <summary>
 	/// Example behaviour. Its internal state can be restored by another behaviour. 
 	/// </summary>
-	public abstract class DataOwnerBase<T> : MonoBehaviour
+	/// <typeparam name="TData">Type of data to own.</typeparam>
+	public abstract class DataOwnerBase<TData> : MonoBehaviour
 	{
 		/// <summary>
 		/// Internal state.
 		/// </summary>
-		[SerializeField] private T _data;
+		[SerializeField] private TData _data;
 
 		/// <summary>
 		/// Get/Set internal state.
 		/// </summary>
-		public T Data
+		public TData Data
 		{
 			get { return _data; }
 			set { _data = value; }
