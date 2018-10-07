@@ -7,7 +7,7 @@ namespace Essential.Core.Memory.GenericExample
 	/// application on his/her device + Restores the previous state from the other script, when the user switches
 	/// bakc to the application.  
 	/// </summary>
-	public abstract class GameDataRecoveryBase<TGameDataRestorer, TData> : MonoBehaviour where TGameDataRestorer : GameDataOwnerBase<TData> where TData : GameData<int>
+	public abstract class GameDataRecoveryBase<TGameDataRestorer, TData> : MonoBehaviour where TGameDataRestorer : GameDataOwnerBase<TData>
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.

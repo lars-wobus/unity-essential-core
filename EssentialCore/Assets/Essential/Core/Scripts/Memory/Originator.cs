@@ -8,7 +8,7 @@ namespace Essential.Core.Memory
 	/// Allows to save and restore states.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class Originator<T> where T : class 
+	public class Originator<T>
 	{
 		/// <summary>
 		/// Current internal state.
@@ -33,6 +33,7 @@ namespace Essential.Core.Memory
 		/// <returns>Internal state after adopting or rejecting the input.</returns>
 		public T RestoreFromMomento(T storedInstance)
 		{
+			// ReSharper disable once HeapView.BoxingAllocation
 			if (storedInstance == null)
 			{
 				return CurrentState;
