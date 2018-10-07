@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Memory
 {
 	/// <summary>
 	/// Saves internal state from another script when user takes focus away from the Unity application to another

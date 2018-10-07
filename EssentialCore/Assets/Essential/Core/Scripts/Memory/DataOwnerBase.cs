@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Memory
 {
 	/// <summary>
 	/// Example behaviour. Its internal state can be restored by another behaviour. 
