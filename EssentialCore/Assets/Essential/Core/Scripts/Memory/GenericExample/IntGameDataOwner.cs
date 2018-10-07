@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Serialized version of a GameDataOwner holding a single integer value.
 	/// </summary>
-	public class GenericGameDataOwner : GameDataOwnerBase<IntGameData>
+	public class IntGameDataOwner : DataOwnerBase<IntGameData>
 	{
 		/// <summary>
 		/// Update is used to constantly modify own state. 

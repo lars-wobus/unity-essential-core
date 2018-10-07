@@ -9,7 +9,7 @@ namespace Essential.Core.Memory.GenericExample
 	/// </summary>
 	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class GameDataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : GameDataOwnerBase<TData>
+	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : DataOwnerBase<TData>
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
