@@ -7,20 +7,20 @@ namespace Essential.Core.Memory
 	/// <summary>
 	/// Allows to save and restore states.
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public class Originator<T>
+	/// <typeparam name="TData">Type of data to be saved.</typeparam>
+	public class Originator<TData>
 	{
 		/// <summary>
 		/// Current internal state.
 		/// </summary>
-		public T CurrentState { get; set; }
+		public TData CurrentState { get; set; }
 		// place for additional data that is not part of the state being saved in memento, e.g. load/save counter, etc.
 
 		/// <summary>
 		/// Create memento that stores the originator's current internal state.
 		/// </summary>
 		/// <returns>Copy of its own internal state.</returns>
-		public T SaveToMemento()
+		public TData SaveToMemento()
 		{
 			// ReSharper disable once HeapView.BoxingAllocation
 			return CurrentState == null ? CurrentState : _serialize(CurrentState);
@@ -31,7 +31,7 @@ namespace Essential.Core.Memory
 		/// </summary>
 		/// <param name="storedInstance">Any internal state from the past.</param>
 		/// <returns>Internal state after adopting or rejecting the input.</returns>
-		public T RestoreFromMomento(T storedInstance)
+		public TData RestoreFromMomento(TData storedInstance)
 		{
 			// ReSharper disable once HeapView.BoxingAllocation
 			if (storedInstance == null)
@@ -45,7 +45,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Create copy of your current internal state. 
 		/// </summary>
-		private readonly Func<T, T> _serialize = objectInstance =>
+		private readonly Func<TData, TData> _serialize = objectInstance =>
 		{
 			var memoryStream = new MemoryStream();
 			var binaryFormatter = new BinaryFormatter();
@@ -54,7 +54,7 @@ namespace Essential.Core.Memory
 			binaryFormatter.Serialize(memoryStream, objectInstance);
 			memoryStream.Seek(0, SeekOrigin.Begin);
 
-			var objectCopy = (T) binaryFormatter.Deserialize(memoryStream);
+			var objectCopy = (TData) binaryFormatter.Deserialize(memoryStream);
 			memoryStream.Close();
 			return objectCopy;
 		};

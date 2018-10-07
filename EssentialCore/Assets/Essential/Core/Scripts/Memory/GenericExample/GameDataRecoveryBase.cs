@@ -7,7 +7,9 @@ namespace Essential.Core.Memory.GenericExample
 	/// application on his/her device + Restores the previous state from the other script, when the user switches
 	/// bakc to the application.  
 	/// </summary>
-	public abstract class GameDataRecoveryBase<TGameDataRestorer, TData> : MonoBehaviour where TGameDataRestorer : GameDataOwnerBase<TData>
+	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
+	/// <typeparam name="TData">Type of data to be saved.</typeparam>
+	public abstract class GameDataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : GameDataOwnerBase<TData>
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
@@ -17,7 +19,7 @@ namespace Essential.Core.Memory.GenericExample
 		/// <summary>
 		/// Reference to the behavioural script which shall be monitored.
 		/// </summary>
-		private TGameDataRestorer TargetScript { get; set; }
+		private TComponent TargetScript { get; set; }
 		
 		/// <summary>
 		/// Used to save an internal state.
@@ -29,7 +31,7 @@ namespace Essential.Core.Memory.GenericExample
 		/// </summary>
 		private void Start ()
 		{
-			TargetScript = GetComponent<TGameDataRestorer>();
+			TargetScript = GetComponent<TComponent>();
 			_originator.CurrentState = TargetScript.Data;
 		}
 
