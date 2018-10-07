@@ -72,4 +72,62 @@ namespace Essential.Core.Memory
 			}
 		}
 	}
+	
+	public abstract class DataRecoveryBase<TComponent> : MonoBehaviour where TComponent : DataOwnerBase<string>
+	{
+		/// <summary>
+		/// Reference to the behavioural script which shall be monitored.
+		/// </summary>
+		private TComponent TargetScript { get; set; }
+		
+		/// <summary>
+		/// Used to save an internal state.
+		/// </summary>
+		private Caretaker<string> Caretaker { get; set; }
+		
+		/// <summary>
+		/// Called when application is started.
+		/// </summary>
+		private void Start ()
+		{
+			TargetScript = GetComponent<TComponent>();
+			//_originator.CurrentState = TargetScript.Data;
+		}
+
+		/// <summary>
+		/// Restore previous state from memento.
+		/// </summary>
+		private void RestorePreviousState()
+		{
+			TargetScript.Data = Caretaker.Memento;
+		}
+
+		/// <summary>
+		/// Save current state to memento.
+		/// </summary>
+		private void SaveCurrentState()
+		{
+			Caretaker = new Caretaker<string>(TargetScript.Data);
+		}
+
+		/// <summary>
+		/// Called when user switches between applications.
+		/// </summary>
+		/// <param name="hasFocus">True when user's focus is on this application, otherwise false.</param>
+		/// <remarks>
+		/// On Android devices when pressing the home button while the on-screen keyboard is shown OnApplicationPause is
+		/// called instead of OnApplicationFocus.
+		/// </remarks>
+		private void OnApplicationFocus(bool hasFocus)
+		{
+			if (hasFocus)
+			{
+				RestorePreviousState();
+			}
+			else
+			{
+				SaveCurrentState();
+			}
+		}
+	}
 }
