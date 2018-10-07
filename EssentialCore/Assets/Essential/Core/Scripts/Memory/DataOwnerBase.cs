@@ -2,6 +2,7 @@
 
 namespace Essential.Core.Memory
 {
+	/// <inheritdoc />
 	/// <summary>
 	/// Example behaviour. Its internal state can be restored by another behaviour. 
 	/// </summary>

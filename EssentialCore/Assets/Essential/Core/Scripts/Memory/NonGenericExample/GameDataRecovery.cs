@@ -2,6 +2,7 @@
 
 namespace Essential.Core.Memory.NonGenericExample
 {
+	/// <inheritdoc />
 	/// <summary>
 	/// Saves internal state from another script when user takes focus away from the Unity application to another
 	/// application on his/her device + Restores the previous state from the other script, when the user switches

@@ -1,5 +1,6 @@
 ﻿namespace Essential.Core.Memory.GenericExample
 {
+	/// <inheritdoc />
 	/// <summary>
 	/// Serialized version of a GameDataOwner holding a single integer value.
 	/// </summary>
