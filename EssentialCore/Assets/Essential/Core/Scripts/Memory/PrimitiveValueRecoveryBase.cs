@@ -23,6 +23,11 @@ namespace Essential.Core.Memory
 		private TComponent TargetScript { get; set; }
 		
 		/// <summary>
+		/// Used to save an internal state.
+		/// </summary>
+		private Caretaker<TData> Caretaker { get; set; }
+		
+		/// <summary>
 		/// Called when application is started.
 		/// </summary>
 		private void Start ()
@@ -35,8 +40,8 @@ namespace Essential.Core.Memory
 		/// </summary>
 		private void RestorePreviousState()
 		{
-			//TODO what happens when primitive type is string? Its reference is passed by value.
-			TargetScript.Data = _originator.CurrentState; //_originator.RestoreFromMomento(Caretaker.Memento);
+			TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+			//Debug.Break();
 		}
 
 		/// <summary>
@@ -44,10 +49,10 @@ namespace Essential.Core.Memory
 		/// </summary>
 		private void SaveCurrentState()
 		{
-			// TODO intentional misuse of originators currentstate plus bypassing deep copy through serialization could introduce errors, when collections are stored within selected struct
-			//Caretaker = new Caretaker<TData>(_originator.CurrentState);
+			// Additional statement. Not necessary for primitive types, but really important when working with structs
 			_originator.CurrentState = TargetScript.Data;
 			
+			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
 		}
 
 		/// <summary>

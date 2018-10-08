@@ -42,6 +42,7 @@ namespace Essential.Core.Memory
 		private void RestorePreviousState()
 		{
 			TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+			//Debug.Break();
 		}
 
 		/// <summary>
