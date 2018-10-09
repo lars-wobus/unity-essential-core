@@ -10,7 +10,7 @@ namespace Essential.Core.Memory
 	/// </summary>
 	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class PrimitiveValueRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : DataOwnerBase<TData> where TData : struct
+	public abstract class BundleRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : DataOwnerBase<TData> where TData : struct
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
