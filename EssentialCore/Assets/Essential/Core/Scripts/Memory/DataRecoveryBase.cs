@@ -10,7 +10,7 @@ namespace Essential.Core.Memory
 	/// </summary>
 	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : IRecoverable<TData> where TData : class
+	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : IRecoverable<TData>
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
@@ -45,7 +45,7 @@ namespace Essential.Core.Memory
 		{
 			//TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
 			_originator.RestoreFromMomento(Caretaker.Memento);
-			Debug.Break();
+			//Debug.Break();
 		}
 
 		/// <summary>
