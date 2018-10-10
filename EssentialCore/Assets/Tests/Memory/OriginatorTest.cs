@@ -6,7 +6,7 @@ namespace Tests.Memory
 {
     public class OriginatorTest
     {
-        [Serializable]
+        /*[Serializable]
         private class DummyClass
         {
             private readonly string _name;
@@ -91,6 +91,6 @@ namespace Tests.Memory
             Originator.RestoreFromMomento(new DummyClass("something else"));
             
             Assert.AreNotSame(Expected, Originator.CurrentState);
-        }
+        }*/
     }
 }

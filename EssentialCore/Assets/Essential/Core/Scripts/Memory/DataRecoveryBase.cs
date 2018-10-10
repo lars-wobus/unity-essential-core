@@ -10,12 +10,12 @@ namespace Essential.Core.Memory
 	/// </summary>
 	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : DataOwnerBase<TData> where TData : class
+	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : IRecoverable<TData> where TData : class
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
-		private readonly Originator<TData> _originator = new Originator<TData>();
+		private Originator<TData> _originator;
 		
 		/// <summary>
 		/// Reference to the behavioural script which shall be monitored.
@@ -33,7 +33,9 @@ namespace Essential.Core.Memory
 		private void Start ()
 		{
 			TargetScript = GetComponent<TComponent>();
-			_originator.CurrentState = TargetScript.Data;
+			//_originator.CurrentState = TargetScript.Data;
+			// ReSharper disable once HeapView.BoxingAllocation
+			_originator	= new Originator<TData>(TargetScript);
 		}
 
 		/// <summary>
@@ -41,8 +43,9 @@ namespace Essential.Core.Memory
 		/// </summary>
 		private void RestorePreviousState()
 		{
-			TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
-			//Debug.Break();
+			//TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+			_originator.RestoreFromMomento(Caretaker.Memento);
+			Debug.Break();
 		}
 
 		/// <summary>

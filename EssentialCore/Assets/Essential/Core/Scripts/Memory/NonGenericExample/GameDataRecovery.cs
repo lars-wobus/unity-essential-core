@@ -14,7 +14,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
-		private readonly Originator<GameData> _originator = new Originator<GameData>();
+		private Originator<GameData> _originator;
 		
 		/// <summary>
 		/// Reference to the behavioural script which shall be monitored.
@@ -32,7 +32,8 @@ namespace Essential.Core.Memory.NonGenericExample
 		private void Start ()
 		{
 			TargetScript = GetComponent<GameDataOwner>();
-			_originator.CurrentState = TargetScript.Data;
+			//_originator.CurrentState = TargetScript.Data;
+			_originator	= new Originator<GameData>(TargetScript);
 		}
 	
 		/// <summary>

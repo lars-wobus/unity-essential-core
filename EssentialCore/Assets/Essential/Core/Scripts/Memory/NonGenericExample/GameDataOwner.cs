@@ -6,7 +6,7 @@ namespace Essential.Core.Memory.NonGenericExample
     /// <summary>
     /// Example behaviour. Its internal state can be restored by another behaviour. 
     /// </summary>
-    public class GameDataOwner : MonoBehaviour
+    public class GameDataOwner : MonoBehaviour, IRecoverable<GameData>
     {
         /// <summary>
         /// Internal state.
