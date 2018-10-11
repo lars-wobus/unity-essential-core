@@ -32,7 +32,6 @@ namespace Essential.Core.Memory.NonGenericExample
 		private void Start ()
 		{
 			TargetScript = GetComponent<GameDataOwner>();
-			//_originator.CurrentState = TargetScript.Data;
 			_originator	= new Originator<GameData>(TargetScript);
 		}
 	
@@ -48,7 +47,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		{
 			if (hasFocus)
 			{
-				TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
+				_originator.RestoreFromMomento(Caretaker.Memento);
 			}
 			else
 			{
