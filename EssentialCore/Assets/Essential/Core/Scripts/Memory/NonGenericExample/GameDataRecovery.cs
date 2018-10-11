@@ -17,11 +17,6 @@ namespace Essential.Core.Memory.NonGenericExample
 		private Originator<GameData> _originator;
 		
 		/// <summary>
-		/// Reference to the behavioural script which shall be monitored.
-		/// </summary>
-		private GameDataOwner TargetScript { get; set; }
-		
-		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
 		private Caretaker<GameData> Caretaker { get; set; }
@@ -31,8 +26,8 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// </summary>
 		private void Start ()
 		{
-			TargetScript = GetComponent<GameDataOwner>();
-			_originator	= new Originator<GameData>(TargetScript);
+			var targetScript = GetComponent<GameDataOwner>();
+			_originator	= new Originator<GameData>(targetScript);
 		}
 	
 		/// <summary>

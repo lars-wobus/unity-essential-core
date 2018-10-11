@@ -18,11 +18,6 @@ namespace Essential.Core.Memory
 		private Originator<TData> _originator;
 		
 		/// <summary>
-		/// Reference to the behavioural script which shall be monitored.
-		/// </summary>
-		private TComponent TargetScript { get; set; }
-		
-		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
 		private Caretaker<TData> Caretaker { get; set; }
@@ -32,10 +27,8 @@ namespace Essential.Core.Memory
 		/// </summary>
 		private void Start ()
 		{
-			TargetScript = GetComponent<TComponent>();
-			//_originator.CurrentState = TargetScript.Data;
-			// ReSharper disable once HeapView.BoxingAllocation
-			_originator	= new Originator<TData>(TargetScript);
+			var targetScript = GetComponent<IRecoverable<TData>>();
+			_originator	= new Originator<TData>(targetScript);
 		}
 
 		/// <summary>
