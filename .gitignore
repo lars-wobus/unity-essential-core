@@ -56,3 +56,5 @@ EssentialCore/Assets/Essential/Core/Scripts/IO/FileReader.cs
 EssentialCore/Assets/Essential/Core/Scripts/IO/FileReader.cs.meta
 EssentialCore/Assets/Essential/Core/Scripts/IO/FileWriter.cs
 EssentialCore/Assets/Essential/Core/Scripts/IO/FileWriter.cs.meta
+EssentialCore/Assets/Essential/Core/Scripts/Event/Dispatcher
+EssentialCore/Assets/Essential/Core/Scripts/Event/Dispatcher.meta
