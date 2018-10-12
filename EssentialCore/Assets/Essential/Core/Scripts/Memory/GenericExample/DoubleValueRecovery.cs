@@ -1,5 +1,5 @@
 ﻿namespace Essential.Core.Memory.GenericExample
 {
 	/// <inheritdoc />
-	public class DoubleValueRecovery : DataRecoveryBase<DoubleValueOwner, double>{}
+	public class DoubleValueRecovery : DataRecoveryBase<double>{}
 }

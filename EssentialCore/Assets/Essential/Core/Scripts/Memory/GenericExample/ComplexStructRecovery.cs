@@ -1,5 +1,5 @@
 ﻿namespace Essential.Core.Memory.GenericExample
 {
     /// <inheritdoc />
-    public class ComplexStructRecovery : DataRecoveryBase<ComplexStructOwner, ComplexStruct>{}
+    public class ComplexStructRecovery : DataRecoveryBase<ComplexStruct>{}
 }

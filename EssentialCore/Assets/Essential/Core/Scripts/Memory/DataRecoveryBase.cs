@@ -8,9 +8,8 @@ namespace Essential.Core.Memory
 	/// application on his/her device + Restores the previous state from the other script, when the user switches
 	/// bakc to the application.  
 	/// </summary>
-	/// <typeparam name="TComponent">Script with public accessto its internal data.</typeparam>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class DataRecoveryBase<TComponent, TData> : MonoBehaviour where TComponent : IRecoverable<TData>
+	public abstract class DataRecoveryBase<TData> : MonoBehaviour
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
