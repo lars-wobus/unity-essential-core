@@ -29,30 +29,21 @@ namespace Essential.Core.Memory.NonGenericExample
 			var targetScript = GetComponent<GameDataOwner>();
 			_originator	= new Originator<GameData>(targetScript);
 		}
-	
+		
 		/// <summary>
-		/// Called when user switches between applications.
+		/// Restore previous state from memento.
 		/// </summary>
-		/// <param name="hasFocus">True when user's focus is on this application, otherwise false.</param>
-		/// <remarks>
-		/// On Android devices when pressing the home button while the on-screen keyboard is shown OnApplicationPause is
-		/// called instead of OnApplicationFocus.
-		/// </remarks>
-		private void OnApplicationFocus(bool hasFocus)
+		public void RestorePreviousState()
 		{
-			if (hasFocus)
-			{
-				_originator.RestoreFromMomento(Caretaker.Memento);
-			}
-			else
-			{
-				Caretaker = new Caretaker<GameData>(_originator.SaveToMemento());
-			}
+			_originator.RestoreFromMomento(Caretaker.Memento);
 		}
 
-		/*private void OnApplicationPause(bool pauseStatus)
+		/// <summary>
+		/// Save current state to memento.
+		/// </summary>
+		public void SaveCurrentState()
 		{
-			throw new System.NotImplementedException();
-		}*/
+			Caretaker = new Caretaker<GameData>(_originator.SaveToMemento());
+		}
 	}
 }

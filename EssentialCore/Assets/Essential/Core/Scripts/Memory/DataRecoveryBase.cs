@@ -33,7 +33,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Restore previous state from memento.
 		/// </summary>
-		private void RestorePreviousState()
+		public void RestorePreviousState()
 		{
 			//TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
 			_originator.RestoreFromMomento(Caretaker.Memento);
@@ -43,7 +43,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Save current state to memento.
 		/// </summary>
-		private void SaveCurrentState()
+		public void SaveCurrentState()
 		{
 			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
 		}
@@ -56,7 +56,7 @@ namespace Essential.Core.Memory
 		/// On Android devices when pressing the home button while the on-screen keyboard is shown OnApplicationPause is
 		/// called instead of OnApplicationFocus.
 		/// </remarks>
-		private void OnApplicationFocus(bool hasFocus)
+		/*private void OnApplicationFocus(bool hasFocus)
 		{
 			if (hasFocus)
 			{
@@ -66,6 +66,6 @@ namespace Essential.Core.Memory
 			{
 				SaveCurrentState();
 			}
-		}
+		}*/
 	}
 }
