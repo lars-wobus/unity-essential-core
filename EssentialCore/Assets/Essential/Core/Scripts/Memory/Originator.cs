@@ -13,14 +13,14 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Current internal state.
 		/// </summary>
-		private IRecoverable<TData> CurrentState { get; set; }
+		private IRecoverable<TData> TargetScript { get; }
 		// place for additional data that is not part of the state being saved in memento, e.g. load/save counter, etc.
 
 		public Originator(IRecoverable<TData> customBehaviour)
 		{
-			CurrentState = customBehaviour;
+			TargetScript = customBehaviour;
 		}
-		
+
 		/// <summary>
 		/// Create memento that stores the originator's current internal state.
 		/// </summary>
@@ -28,7 +28,7 @@ namespace Essential.Core.Memory
 		public TData SaveToMemento()
 		{
 			// ReSharper disable once HeapView.BoxingAllocation
-			return (CurrentState == null || CurrentState.Data == null) ? default(TData) : _serialize(CurrentState.Data);
+			return (TargetScript == null || TargetScript.Data == null) ? default(TData) : _serialize(TargetScript.Data);
 		}
 
 		/// <summary>
@@ -41,10 +41,10 @@ namespace Essential.Core.Memory
 			// ReSharper disable once HeapView.BoxingAllocation
 			if (storedInstance == null)
 			{
-				return CurrentState.Data;
+				return TargetScript.Data;
 			}
-			CurrentState.Data = storedInstance;
-			return CurrentState.Data;
+			
+			return TargetScript.Data = storedInstance;
 		}
 
 		/// <summary>
