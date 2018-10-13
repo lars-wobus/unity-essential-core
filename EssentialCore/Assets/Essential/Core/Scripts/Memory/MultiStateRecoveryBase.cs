@@ -118,6 +118,7 @@ namespace Essential.Core.Memory
 		public void ClearStates()
 		{
 			Caretaker.Memento.Clear();
+			MultiStateMonitoring?.OnStatesCleared();
 		}
 	}
 }

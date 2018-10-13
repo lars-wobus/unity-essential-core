@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Essential.Core.Memory.GenericExample
 {
@@ -7,6 +8,7 @@ namespace Essential.Core.Memory.GenericExample
 		public IntEvent StateSaved;
 		public IntEvent StateRestored;
 		public IntEvent StateRemoved;
+		public UnityEvent StatesCleared;
 		public IntEvent RestorationFailed;
 		public IntEvent RemovingFailed;
 		
@@ -23,6 +25,11 @@ namespace Essential.Core.Memory.GenericExample
 		public void OnStateRemoved(int index)
 		{
 			StateRemoved.Invoke(index);
+		}
+		
+		public void OnStatesCleared()
+		{
+			StatesCleared.Invoke();
 		}
 
 		public void OnRestorationFailed(int index)

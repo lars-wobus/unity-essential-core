@@ -9,6 +9,7 @@ namespace Essential.Core.Memory.GenericExample
 		public event Action<int> StateSaved;
 		public event Action<int> StateRestored;
 		public event Action<int> StateRemoved;
+		public event Action StatesCleared;
 		public event Action<int> RestorationFailed;
 		public event Action<int> RemovingFailed;
 	
@@ -25,6 +26,11 @@ namespace Essential.Core.Memory.GenericExample
 		public void OnStateRemoved(int index)
 		{
 			StateRemoved?.Invoke(index);
+		}
+		
+		public void OnStatesCleared()
+		{
+			StatesCleared.Invoke();
 		}
 
 		public void OnRestorationFailed(int index)
