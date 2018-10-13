@@ -387,8 +387,8 @@ GameObject:
   - component: {fileID: 213750655}
   - component: {fileID: 213750659}
   - component: {fileID: 213750657}
-  - component: {fileID: 213750658}
   - component: {fileID: 213750656}
+  - component: {fileID: 213750658}
   m_Layer: 0
   m_Name: MultiStateRecovery
   m_TagString: Untagged

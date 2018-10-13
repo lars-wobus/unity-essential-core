@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Memory.GenericExample
 {
-	public class UnityEventMonitor : MonoBehaviour, IMultiStateMonitoring
+	public class MultiStateUnityEventBasedMonitor : MonoBehaviour, IMultiStateMonitoring
 	{
 		public IntEvent StateSaved;
 		public IntEvent StateRestored;

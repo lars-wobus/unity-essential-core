@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Essential.Core.Memory.GenericExample
 {
 	[Serializable]
-	public class EventActionMonitor : MonoBehaviour, IMultiStateMonitoring
+	public class MultiStateActionBasedMonitor : MonoBehaviour, IMultiStateMonitoring
 	{
 		public event Action<int> StateSaved;
 		public event Action<int> StateRestored;
