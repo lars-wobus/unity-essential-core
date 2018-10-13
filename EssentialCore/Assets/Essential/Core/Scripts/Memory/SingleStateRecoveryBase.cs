@@ -23,12 +23,18 @@ namespace Essential.Core.Memory
 		private Caretaker<TData> Caretaker { get; set; }
 		
 		/// <summary>
+		/// Optional MonoBehaviour providing functions to inform listeners. 
+		/// </summary>
+		private ISingleStateMonitoring SingleStateMonitoring { get; set; }
+		
+		/// <summary>
 		/// Called when application is started.
 		/// </summary>
 		private void Start ()
 		{
 			var targetScript = GetComponent<IRecoverable<TData>>();
-			Originator	= new Originator<TData>(targetScript);
+			Originator = new Originator<TData>(targetScript);
+			SingleStateMonitoring = GetComponent<ISingleStateMonitoring>();
 		}
 
 		/// <summary>
@@ -38,6 +44,7 @@ namespace Essential.Core.Memory
 		public void RestorePreviousState()
 		{
 			Originator.RestoreFromMomento(Caretaker.Memento);
+			SingleStateMonitoring?.OnStateRestored();
 			//Debug.Break();
 		}
 
@@ -48,6 +55,7 @@ namespace Essential.Core.Memory
 		public void SaveCurrentState()
 		{
 			Caretaker = new Caretaker<TData>(Originator.SaveToMemento());
+			SingleStateMonitoring?.OnStateSaved();
 		}
 	}
 }
