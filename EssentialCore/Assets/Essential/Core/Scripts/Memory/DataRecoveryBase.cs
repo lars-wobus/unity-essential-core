@@ -4,10 +4,11 @@ namespace Essential.Core.Memory
 {
 	/// <inheritdoc />
 	/// <summary>
-	/// Saves internal state from another script when user takes focus away from the Unity application to another
-	/// application on his/her device + Restores the previous state from the other script, when the user switches
-	/// bakc to the application.  
+	/// Saves and restores the internal state from another script.
 	/// </summary>
+	/// <remarks>
+	/// Works well with MonoBehaviour.OnApplicationFocus(bool) or MonoBehaviour.OnApplicationPause(bool).
+	/// </remarks>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
 	public abstract class DataRecoveryBase<TData> : MonoBehaviour
 	{
@@ -35,7 +36,6 @@ namespace Essential.Core.Memory
 		/// </summary>
 		public void RestorePreviousState()
 		{
-			//TargetScript.Data = _originator.RestoreFromMomento(Caretaker.Memento);
 			_originator.RestoreFromMomento(Caretaker.Memento);
 			//Debug.Break();
 		}
@@ -47,25 +47,5 @@ namespace Essential.Core.Memory
 		{
 			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
 		}
-
-		/// <summary>
-		/// Called when user switches between applications.
-		/// </summary>
-		/// <param name="hasFocus">True when user's focus is on this application, otherwise false.</param>
-		/// <remarks>
-		/// On Android devices when pressing the home button while the on-screen keyboard is shown OnApplicationPause is
-		/// called instead of OnApplicationFocus.
-		/// </remarks>
-		/*private void OnApplicationFocus(bool hasFocus)
-		{
-			if (hasFocus)
-			{
-				RestorePreviousState();
-			}
-			else
-			{
-				SaveCurrentState();
-			}
-		}*/
 	}
 }
