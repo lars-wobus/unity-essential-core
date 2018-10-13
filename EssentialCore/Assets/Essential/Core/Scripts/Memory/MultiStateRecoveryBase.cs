@@ -28,7 +28,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Optional MonoBehaviour providing functions to inform listeners. 
 		/// </summary>
-		private IMonitoring Monitoring { get; set; }
+		private IMultiStateMonitoring MultiStateMonitoring { get; set; }
 
 		/// <summary>
 		/// Return number of saved states.
@@ -44,7 +44,7 @@ namespace Essential.Core.Memory
 			var targetScript = GetComponent<IRecoverable<TData>>();
 			Originator	= new Originator<TData>(targetScript);
 			Caretaker = new Caretaker<List<TData>>(new List<TData>());
-			Monitoring = GetComponent<IMonitoring>();
+			MultiStateMonitoring = GetComponent<IMultiStateMonitoring>();
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace Essential.Core.Memory
 		public void SaveCurrentState()
 		{
 			Caretaker.Memento.Add(Originator.SaveToMemento());
-			Monitoring?.OnStateSaved(SavedStates - 1);
+			MultiStateMonitoring?.OnStateSaved(SavedStates - 1);
 		}
 
 		/// <summary>
@@ -86,12 +86,12 @@ namespace Essential.Core.Memory
 		{
 			if (!HasState(index))
 			{
-				Monitoring?.OnRestorationFailed(index);
+				MultiStateMonitoring?.OnRestorationFailed(index);
 				return;
 			}
 			
 			Originator.RestoreFromMomento(Caretaker.Memento[index]);
-			Monitoring?.OnStateRestored(index);
+			MultiStateMonitoring?.OnStateRestored(index);
 		}
 
 		/// <summary>
@@ -103,12 +103,12 @@ namespace Essential.Core.Memory
 		{
 			if (!HasState(index))
 			{
-				Monitoring.OnRemovingFailed(index);
+				MultiStateMonitoring.OnRemovingFailed(index);
 				return;
 			}
 			
 			Caretaker.Memento.RemoveAt(index);
-			Monitoring?.OnStateRemoved(index);
+			MultiStateMonitoring?.OnStateRemoved(index);
 		}
 
 		/// <summary>
