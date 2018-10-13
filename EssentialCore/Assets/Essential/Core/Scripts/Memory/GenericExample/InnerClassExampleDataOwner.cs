@@ -23,7 +23,7 @@ namespace Essential.Core.Memory.GenericExample
             // Note: OuterClass must initialize InnerClass or InnerClass must be tagged as [Serializable] to prevent NullReferenceException
             Data.State = !Data.State;
             Number++;
-            Debug.Log(Data.State);
+            //Debug.Log(Data.State);
         }
     }
 }

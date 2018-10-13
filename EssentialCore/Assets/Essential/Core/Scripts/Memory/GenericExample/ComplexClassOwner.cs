@@ -27,7 +27,7 @@ namespace Essential.Core.Memory.GenericExample
 			}
 			Data.Bar[0].Name = _alphabet[_random.Next(0, 26)].ToString();
 
-			Debug.Log(Data.Name+" "+Data.Names + " " + Data.Bar[0].Name);
+			//Debug.Log(Data.Name+" "+Data.Names + " " + Data.Bar[0].Name);
 		}
 	};
 }
