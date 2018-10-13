@@ -15,7 +15,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
-		private Originator<TData> _originator;
+		private Originator<TData> Originator { get; set; }
 		
 		/// <summary>
 		/// Used to save an internal state.
@@ -28,7 +28,7 @@ namespace Essential.Core.Memory
 		private void Start ()
 		{
 			var targetScript = GetComponent<IRecoverable<TData>>();
-			_originator	= new Originator<TData>(targetScript);
+			Originator	= new Originator<TData>(targetScript);
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
-			_originator.RestoreFromMomento(Caretaker.Memento);
+			Originator.RestoreFromMomento(Caretaker.Memento);
 			//Debug.Break();
 		}
 
@@ -47,7 +47,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
+			Caretaker = new Caretaker<TData>(Originator.SaveToMemento());
 		}
 	}
 }
