@@ -34,6 +34,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Restore previous state from memento.
 		/// </summary>
+		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
 			_originator.RestoreFromMomento(Caretaker.Memento);
@@ -43,6 +44,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Save current state to memento.
 		/// </summary>
+		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
 			Caretaker = new Caretaker<TData>(_originator.SaveToMemento());
