@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &213750655
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1679116299}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -543,7 +543,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1679116299}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -1838,7 +1838,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 960542179}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -1866,7 +1866,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 960542179}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -1935,7 +1935,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1411456662}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1411456662}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -2228,7 +2228,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1083499696}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -2256,7 +2256,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1083499696}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -2325,7 +2325,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1549986343}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -2353,7 +2353,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1549986343}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -2539,7 +2539,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1166539774}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -2567,7 +2567,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 500844794}
+        - m_Target: {fileID: 1166539774}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:

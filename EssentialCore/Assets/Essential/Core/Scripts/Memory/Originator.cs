@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace Essential.Core.Memory
 {
@@ -27,6 +28,7 @@ namespace Essential.Core.Memory
 		/// <returns>Copy of its own internal state.</returns>
 		public TData SaveToMemento()
 		{
+			Debug.Log(JsonUtility.ToJson(_serialize(TargetScript.Data)) + " " +TargetScript.Data);
 			// ReSharper disable once HeapView.BoxingAllocation
 			return (TargetScript == null || TargetScript.Data == null) ? default(TData) : _serialize(TargetScript.Data);
 		}
@@ -43,7 +45,7 @@ namespace Essential.Core.Memory
 			{
 				return TargetScript.Data;
 			}
-			
+			Debug.Log(JsonUtility.ToJson(storedInstance) + " " + storedInstance);
 			return TargetScript.Data = storedInstance;
 		}
 
