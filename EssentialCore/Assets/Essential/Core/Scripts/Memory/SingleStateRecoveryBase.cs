@@ -10,7 +10,7 @@ namespace Essential.Core.Memory
 	/// Works well with MonoBehaviour.OnApplicationFocus(bool) or MonoBehaviour.OnApplicationPause(bool).
 	/// </remarks>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class DataRecoveryBase<TData> : MonoBehaviour
+	public abstract class SingleStateRecoveryBase<TData> : MonoBehaviour
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
