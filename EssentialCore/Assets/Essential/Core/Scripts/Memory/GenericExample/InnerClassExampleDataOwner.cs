@@ -23,14 +23,6 @@ namespace Essential.Core.Memory.GenericExample
             set { _data.Number = value; }
         }
         
-        /*private void Update()
-        {
-            // Note: OuterClass must initialize InnerClass or InnerClass must be tagged as [Serializable] to prevent NullReferenceException
-            Data.State = !Data.State;
-            Number++;
-            //Debug.Log(Data.State);
-        }*/
-        
         public void StartUpdatingValues()
         {
             if (Coroutine != null)

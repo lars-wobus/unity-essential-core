@@ -13,14 +13,6 @@ namespace Essential.Core.Memory.GenericExample
 	{
 		private readonly char[] _alphabet = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
 		private readonly Random _random = new Random();
-		
-		/// <summary>
-		/// Update is used to constantly modify own state. 
-		/// </summary>
-		/*public void Update()
-		{
-			Data = _alphabet[_random.Next(0, 26)].ToString();
-		}*/
 
 		protected override IEnumerator UpdateValues()
 		{

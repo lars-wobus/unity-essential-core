@@ -9,14 +9,6 @@ namespace Essential.Core.Memory.GenericExample
 	/// </summary>
 	public class DoubleValueOwner : DataOwnerBase<double>
 	{
-		/// <summary>
-		/// Update is used to constantly modify own state. 
-		/// </summary>
-		/*public void Update()
-		{
-			Data += 0.5;
-		}*/
-
 		protected override IEnumerator UpdateValues()
 		{
 			while (true)
