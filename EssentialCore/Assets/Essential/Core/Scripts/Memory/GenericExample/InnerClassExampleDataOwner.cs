@@ -25,7 +25,7 @@ namespace Essential.Core.Memory.GenericExample
         
         public void StartUpdatingValues()
         {
-            if (Coroutine != null)
+            if (Coroutine != null || !gameObject.activeSelf)
             {
                 return;
             }
@@ -35,7 +35,7 @@ namespace Essential.Core.Memory.GenericExample
 
         public void StopUpdatingValues()
         {
-            if (Coroutine == null)
+            if (Coroutine == null || !gameObject.activeSelf)
             {
                 return;
             }

@@ -30,7 +30,7 @@ namespace Essential.Core.Memory
 
 		public void StartUpdatingValues()
 		{
-			if (Coroutine != null)
+			if (Coroutine != null || !gameObject.activeSelf)
 			{
 				return;
 			}
@@ -40,7 +40,7 @@ namespace Essential.Core.Memory
 
 		public void StopUpdatingValues()
 		{
-			if (Coroutine == null)
+			if (Coroutine == null | !gameObject.activeSelf)
 			{
 				return;
 			}

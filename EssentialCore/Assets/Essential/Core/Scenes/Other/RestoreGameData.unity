@@ -161,8 +161,8 @@ GameObject:
   - component: {fileID: 213750655}
   - component: {fileID: 213750659}
   - component: {fileID: 213750657}
-  - component: {fileID: 213750656}
   - component: {fileID: 213750658}
+  - component: {fileID: 213750656}
   m_Layer: 0
   m_Name: MultiStateRecovery
   m_TagString: Untagged
@@ -311,9 +311,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 213750654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2b05f8d0e311848b0af446b2264801, type: 3}
+  m_Script: {fileID: 11500000, guid: d9d4a574d3dbd88449da68e38c5b80ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _savedStates: 0
+  _activeState: -1
 --- !u!114 &213750659
 MonoBehaviour:
   m_ObjectHideFlags: 0
