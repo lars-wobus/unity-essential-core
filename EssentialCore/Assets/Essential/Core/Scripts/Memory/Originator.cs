@@ -46,7 +46,7 @@ namespace Essential.Core.Memory
 				return TargetScript.Data;
 			}
 			Debug.Log(JsonUtility.ToJson(storedInstance) + " " + storedInstance);
-			return TargetScript.Data = storedInstance;
+			return TargetScript.Data = _serialize(storedInstance);
 		}
 
 		/// <summary>
