@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Essential.Core.Memory.GenericExample
 {
     public class InnerClassExampleDataOwner : MonoBehaviour, IRecoverable<InnerClass>
     {
-        [SerializeField] private InnerClassExampleData _data; 
+        private const int SecondsToWait = 1;
+
+        [SerializeField] private InnerClassExampleData _data;
+        
+        private Coroutine Coroutine { get; set; }
         
         public InnerClass Data
         {
@@ -18,12 +23,45 @@ namespace Essential.Core.Memory.GenericExample
             set { _data.Number = value; }
         }
         
-        private void Update()
+        /*private void Update()
         {
             // Note: OuterClass must initialize InnerClass or InnerClass must be tagged as [Serializable] to prevent NullReferenceException
             Data.State = !Data.State;
             Number++;
             //Debug.Log(Data.State);
+        }*/
+        
+        public void StartUpdatingValues()
+        {
+            if (Coroutine != null)
+            {
+                return;
+            }
+			
+            Coroutine = StartCoroutine(UpdateValues());
+        }
+
+        public void StopUpdatingValues()
+        {
+            if (Coroutine == null)
+            {
+                return;
+            }
+			
+            StopCoroutine(Coroutine);
+            Coroutine = null;
+        }
+
+        private IEnumerator UpdateValues()
+        {
+            while (true)
+            {
+                // Note: OuterClass must initialize InnerClass or InnerClass must be tagged as [Serializable] to prevent NullReferenceException
+                Data.State = !Data.State;
+                Number++;
+                //Debug.Log(Data.State);
+                yield return new WaitForSeconds(SecondsToWait);
+            }
         }
     }
 }

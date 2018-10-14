@@ -1,4 +1,7 @@
-﻿namespace Essential.Core.Memory.GenericExample
+﻿using System.Collections;
+using UnityEngine;
+
+namespace Essential.Core.Memory.GenericExample
 {
 	/// <inheritdoc />
 	/// <summary>
@@ -9,9 +12,18 @@
 		/// <summary>
 		/// Update is used to constantly modify own state. 
 		/// </summary>
-		public void Update()
+		/*public void Update()
 		{
 			Data += 0.5;
+		}*/
+
+		protected override IEnumerator UpdateValues()
+		{
+			while (true)
+			{
+				Data += 0.5;
+				yield return new WaitForSeconds(SecondsToWait);
+			}
 		}
 	};
 }

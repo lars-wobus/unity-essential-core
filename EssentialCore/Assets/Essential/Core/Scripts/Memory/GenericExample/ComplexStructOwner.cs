@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Random = System.Random;
 
@@ -16,7 +17,7 @@ namespace Essential.Core.Memory.GenericExample
         /// <summary>
         /// Update is used to constantly modify own state. 
         /// </summary>
-        public void Update()
+        /*public void Update()
         {
             //Data.Number += 1;
             //Data.Name = _alphabet[_random.Next(0, 26)].ToString();
@@ -28,6 +29,24 @@ namespace Essential.Core.Memory.GenericExample
             Data.Bar[0].Name = _alphabet[_random.Next(0, 26)].ToString();
 
             //Debug.Log(Data.Indices[0] + " " + Data.Names[0] + " " + Data.Names[1] + " " + Data.Bar[0].Name);
+        }*/
+
+        protected override IEnumerator UpdateValues()
+        {
+            while (true)
+            {
+                //Data.Number += 1;
+                //Data.Name = _alphabet[_random.Next(0, 26)].ToString();
+                Data.Indices[0]--;
+                for (var index = 0; index < Data.Names.Count; ++index)
+                {
+                    Data.Names[index] = _alphabet[_random.Next(0, 26)].ToString();
+                }
+                Data.Bar[0].Name = _alphabet[_random.Next(0, 26)].ToString();
+    
+                //Debug.Log(Data.Indices[0] + " " + Data.Names[0] + " " + Data.Names[1] + " " + Data.Bar[0].Name);
+                yield return new WaitForSeconds(SecondsToWait);
+            }
         }
     };
 } 

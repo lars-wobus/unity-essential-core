@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Essential.Core.Memory
 {
@@ -9,10 +10,14 @@ namespace Essential.Core.Memory
 	/// <typeparam name="TData">Type of data to own.</typeparam>
 	public abstract class DataOwnerBase<TData> : MonoBehaviour, IRecoverable<TData>
 	{
+		protected const int SecondsToWait = 1;
+
 		/// <summary>
 		/// Internal state.
 		/// </summary>
 		[SerializeField] private TData _data;
+
+		private Coroutine Coroutine { get; set; }
 
 		/// <summary>
 		/// Get/Set internal state.
@@ -22,5 +27,28 @@ namespace Essential.Core.Memory
 			get { return _data; }
 			set { _data = value; }
 		}
+
+		public void StartUpdatingValues()
+		{
+			if (Coroutine != null)
+			{
+				return;
+			}
+			
+			Coroutine = StartCoroutine(UpdateValues());
+		}
+
+		public void StopUpdatingValues()
+		{
+			if (Coroutine == null)
+			{
+				return;
+			}
+			
+			StopCoroutine(Coroutine);
+			Coroutine = null;
+		}
+
+		protected abstract IEnumerator UpdateValues();
 	}
 }

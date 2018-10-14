@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Collections;
 using System.Linq;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Essential.Core.Memory.GenericExample
 {
@@ -15,9 +17,18 @@ namespace Essential.Core.Memory.GenericExample
 		/// <summary>
 		/// Update is used to constantly modify own state. 
 		/// </summary>
-		public void Update()
+		/*public void Update()
 		{
 			Data = _alphabet[_random.Next(0, 26)].ToString();
+		}*/
+
+		protected override IEnumerator UpdateValues()
+		{
+			while (true)
+			{
+				Data = _alphabet[_random.Next(0, 26)].ToString();
+				yield return new WaitForSeconds(SecondsToWait);
+			}
 		}
 	};
 }
