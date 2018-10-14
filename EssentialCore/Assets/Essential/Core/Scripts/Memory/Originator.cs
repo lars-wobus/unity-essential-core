@@ -36,6 +36,9 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Restore internal state from passed memento.
 		/// </summary>
+		/// <remarks>
+		/// The serialization allows to restore a specific state multiple times and ensures that the input parameter stays unchanged.
+		/// </remarks>
 		/// <param name="storedInstance">Any internal state from the past.</param>
 		/// <returns>Internal state after adopting or rejecting the input.</returns>
 		public TData RestoreFromMomento(TData storedInstance)
