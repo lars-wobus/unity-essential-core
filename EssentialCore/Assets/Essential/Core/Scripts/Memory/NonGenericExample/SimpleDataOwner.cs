@@ -6,20 +6,20 @@ namespace Essential.Core.Memory.NonGenericExample
     /// <summary>
     /// Example behaviour. Its internal state can be restored by another behaviour. 
     /// </summary>
-    public class GameDataOwner : MonoBehaviour, IRecoverable<GameData>
+    public class SimpleDataOwner : MonoBehaviour, IRecoverable<SimpleData>
     {
         /// <summary>
         /// Internal state.
         /// </summary>
-        [SerializeField] private GameData _gameData;
+        [SerializeField] private SimpleData _simpleData;
 
         /// <summary>
         /// Get/Set internal state.
         /// </summary>
-        public GameData Data
+        public SimpleData Data
         {
-            get { return _gameData; }
-            set { _gameData = value; }
+            get { return _simpleData; }
+            set { _simpleData = value; }
         }
 
         /// <summary>

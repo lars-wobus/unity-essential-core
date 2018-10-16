@@ -7,7 +7,7 @@ namespace Essential.Core.Memory.NonGenericExample
 	/// Specifies the internal state of behavioural classes.
 	/// </summary>
 	[Serializable]
-	public class GameData
+	public class SimpleData
 	{
 		/// <summary>
 		/// Single number describing the internal state of a behavioural script at a specific moment.

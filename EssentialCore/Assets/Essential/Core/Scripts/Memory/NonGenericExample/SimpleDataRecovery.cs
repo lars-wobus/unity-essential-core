@@ -8,26 +8,26 @@ namespace Essential.Core.Memory.NonGenericExample
 	/// application on his/her device + Restores the previous state from the other script, when the user switches
 	/// bakc to the application.  
 	/// </summary>
-	[RequireComponent(typeof(GameDataOwner))]
-	public class GameDataRecovery : MonoBehaviour
+	[RequireComponent(typeof(SimpleDataOwner))]
+	public class SimpleDataRecovery : MonoBehaviour
 	{
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
 		/// </summary>
-		private Originator<GameData> _originator;
+		private Originator<SimpleData> _originator;
 		
 		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
-		private Caretaker<GameData> Caretaker { get; set; }
+		private Caretaker<SimpleData> Caretaker { get; set; }
 		
 		/// <summary>
 		/// Called when application is started.
 		/// </summary>
 		private void Start ()
 		{
-			var targetScript = GetComponent<GameDataOwner>();
-			_originator	= new Originator<GameData>(targetScript);
+			var targetScript = GetComponent<SimpleDataOwner>();
+			_originator	= new Originator<SimpleData>(targetScript);
 		}
 		
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Caretaker = new Caretaker<GameData>(_originator.SaveToMemento());
+			Caretaker = new Caretaker<SimpleData>(_originator.SaveToMemento());
 		}
 	}
 }
