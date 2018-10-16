@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Memory.NonGenericExample
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="MonoBehaviour" />
     /// <summary>
     /// Example behaviour. Its internal state can be restored by another behaviour. 
     /// </summary>

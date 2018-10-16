@@ -33,6 +33,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// <summary>
 		/// Restore previous state from memento.
 		/// </summary>
+		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
 			_originator.RestoreFromMomento(Caretaker.Memento);
@@ -41,6 +42,7 @@ namespace Essential.Core.Memory.NonGenericExample
 		/// <summary>
 		/// Save current state to memento.
 		/// </summary>
+		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
 			Caretaker = new Caretaker<GameData>(_originator.SaveToMemento());
