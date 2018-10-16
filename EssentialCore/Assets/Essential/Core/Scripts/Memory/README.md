@@ -23,5 +23,10 @@ The simplified version of this pattern allows to store exactly one internal stat
 To use this version, one has to implement a similar interface and replace a parent class. 
 ![Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-2.png)
 
+## FAQ
+### How do I know which state is currently in use?
+In some implementations of the Memento pattern I have seen additional fields in the Caretaker class for those tasks. Extending the Recovery MonoBehaviours would also be possible. But both strategies would violate the Single Responsible Principle<sup>2</sup>. That's why I have decided to provide interfaces to monitor any changes. So I let the user decide to implement a proper MonoBehaviour to track this data. 
+
 ## Footnotes:
-1 Preliminary name - if you knows a better name or similar solutions, then please let me know it.
+1) Preliminary name - if you knows a better name or similar solutions, then please let me know it.
+2) Thats also the reason why the Originator and Caretaker are ordinary classes.
