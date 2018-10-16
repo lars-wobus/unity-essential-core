@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
     [Serializable]
     public struct ComplexStruct

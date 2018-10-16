@@ -1,7 +1,8 @@
 ﻿using System;
+using Essential.Core.Memory;
 using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
 	[Serializable]
 	public class InnerClass

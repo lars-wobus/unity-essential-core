@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
 	public class Logger : MonoBehaviour
 	{

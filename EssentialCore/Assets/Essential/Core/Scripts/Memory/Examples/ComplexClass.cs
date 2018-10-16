@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
 	[Serializable]
 	public class ComplexClass

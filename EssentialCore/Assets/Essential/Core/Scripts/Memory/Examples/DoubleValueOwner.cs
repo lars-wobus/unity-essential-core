@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Essential.Core.Memory;
 using UnityEngine;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
 	/// <inheritdoc />
 	/// <summary>

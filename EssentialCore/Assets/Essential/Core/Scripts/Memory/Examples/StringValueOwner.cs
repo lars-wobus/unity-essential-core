@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Linq;
+using Essential.Core.Memory;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
 	/// <inheritdoc />
 	/// <summary>

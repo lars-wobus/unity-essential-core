@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Essential.Core.Memory.GenericExample
+namespace Essential.Core.Scripts.Memory.Examples
 {
     /// <inheritdoc />
     /// <summary>
