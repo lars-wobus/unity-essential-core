@@ -26,6 +26,8 @@ To use this version, one has to implement a similar interface and replace a pare
 ## FAQ
 ### How do I know which state is currently in use?
 In some implementations of the Memento pattern I have seen additional fields in the Caretaker class for those tasks. Extending the Recovery MonoBehaviours would also be possible. But both strategies would violate the Single Responsible Principle<sup>2</sup>. That's why I have decided to provide interfaces to monitor any changes. So I let the user decide to implement a proper MonoBehaviour to track this data. 
+### What's the advantage of the interfaces to monitor changes?
+The user can decide if his script should handle or forward incoming events. To forward events he is complete free in choosing c# delegates, actions, UnityEvents or something completely different, I haven't heared yet.
 
 ## Footnotes:
 1) Preliminary name - if you knows a better name or similar solutions, then please let me know it.
