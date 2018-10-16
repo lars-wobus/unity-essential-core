@@ -140,11 +140,7 @@ Transform:
   m_Children:
   - {fileID: 500844793}
   - {fileID: 1083499695}
-  - {fileID: 960542178}
-  - {fileID: 1679116298}
-  - {fileID: 1166539773}
-  - {fileID: 1411456661}
-  - {fileID: 1549986342}
+  - {fileID: 506103014}
   - {fileID: 213750655}
   - {fileID: 1993177502}
   - {fileID: 534937943}
@@ -161,8 +157,8 @@ GameObject:
   - component: {fileID: 213750655}
   - component: {fileID: 213750659}
   - component: {fileID: 213750657}
-  - component: {fileID: 213750658}
   - component: {fileID: 213750656}
+  - component: {fileID: 213750658}
   m_Layer: 0
   m_Name: MultiStateRecovery
   m_TagString: Untagged
@@ -183,7 +179,7 @@ Transform:
   - {fileID: 986821969}
   - {fileID: 1257313557}
   m_Father: {fileID: 187739964}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &213750656
 MonoBehaviour:
@@ -210,7 +206,7 @@ MonoBehaviour:
           m_StringArgument: 'MultiState: State saved'
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Essential.Core.Memory.GenericExample.IntEvent, _GenericExample, Version=0.0.0.0,
+    m_TypeName: Essential.Core.Scripts.Memory.Examples.IntEvent, _Examples, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   StateRestored:
     m_PersistentCalls:
@@ -226,7 +222,7 @@ MonoBehaviour:
           m_StringArgument: 'MultiState: State restored'
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Essential.Core.Memory.GenericExample.IntEvent, _GenericExample, Version=0.0.0.0,
+    m_TypeName: Essential.Core.Scripts.Memory.Examples.IntEvent, _Examples, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   StateRemoved:
     m_PersistentCalls:
@@ -242,7 +238,7 @@ MonoBehaviour:
           m_StringArgument: 'MultiState: State removed'
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Essential.Core.Memory.GenericExample.IntEvent, _GenericExample, Version=0.0.0.0,
+    m_TypeName: Essential.Core.Scripts.Memory.Examples.IntEvent, _Examples, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   StatesCleared:
     m_PersistentCalls:
@@ -274,7 +270,7 @@ MonoBehaviour:
           m_StringArgument: 'MultiState: Restoration failed'
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Essential.Core.Memory.GenericExample.IntEvent, _GenericExample, Version=0.0.0.0,
+    m_TypeName: Essential.Core.Scripts.Memory.Examples.IntEvent, _Examples, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   RemovingFailed:
     m_PersistentCalls:
@@ -290,7 +286,7 @@ MonoBehaviour:
           m_StringArgument: 'MultiState: Removing failed'
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Essential.Core.Memory.GenericExample.IntEvent, _GenericExample, Version=0.0.0.0,
+    m_TypeName: Essential.Core.Scripts.Memory.Examples.IntEvent, _Examples, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &213750657
 MonoBehaviour:
@@ -575,7 +571,7 @@ GameObject:
   - component: {fileID: 500844792}
   - component: {fileID: 500844794}
   m_Layer: 0
-  m_Name: NonGenericExample
+  m_Name: SimpleExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ed3744567e8e8b4483b4c250e8f646a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameData:
+  _simpleData:
     _index: 0
 --- !u!4 &500844793
 Transform:
@@ -620,6 +616,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdd61b1f7ad2dc46a8f140ac789b640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &506103013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506103014}
+  m_Layer: 0
+  m_Name: OtherSingleStateExamples
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &506103014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 506103013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 960542178}
+  - {fileID: 1679116298}
+  - {fileID: 1166539773}
+  - {fileID: 1411456661}
+  - {fileID: 1549986342}
+  m_Father: {fileID: 187739964}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534937942
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +676,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 187739964}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &534937944
 MonoBehaviour:
@@ -933,26 +962,26 @@ GameObject:
   - component: {fileID: 960542179}
   - component: {fileID: 960542181}
   m_Layer: 0
-  m_Name: DoubleValueExample
+  m_Name: SingleDoubleValueExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &960542178
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 960542177}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1103077327}
   - {fileID: 1562877310}
-  m_Father: {fileID: 187739964}
-  m_RootOrder: 2
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &960542179
 MonoBehaviour:
@@ -1109,7 +1138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1083499695
 Transform:
   m_ObjectHideFlags: 0
@@ -1348,26 +1377,26 @@ GameObject:
   - component: {fileID: 1166539774}
   - component: {fileID: 1166539776}
   m_Layer: 0
-  m_Name: ClassRecovery
+  m_Name: ComplexClassRecovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1166539773
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1166539772}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1321103970}
   - {fileID: 2060439626}
-  m_Father: {fileID: 187739964}
-  m_RootOrder: 4
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1166539774
 MonoBehaviour:
@@ -1824,12 +1853,12 @@ GameObject:
   - component: {fileID: 1411456662}
   - component: {fileID: 1411456664}
   m_Layer: 0
-  m_Name: StructRecovery
+  m_Name: ComplexStructRecovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1411456661
 Transform:
   m_ObjectHideFlags: 0
@@ -1842,8 +1871,8 @@ Transform:
   m_Children:
   - {fileID: 1368879533}
   - {fileID: 1592561278}
-  m_Father: {fileID: 187739964}
-  m_RootOrder: 5
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1411456662
 MonoBehaviour:
@@ -1934,21 +1963,21 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1549986342
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1549986341}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1157133974}
   - {fileID: 1818561441}
-  m_Father: {fileID: 187739964}
-  m_RootOrder: 6
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1549986343
 MonoBehaviour:
@@ -2322,26 +2351,26 @@ GameObject:
   - component: {fileID: 1679116299}
   - component: {fileID: 1679116301}
   m_Layer: 0
-  m_Name: StringDataRecovery
+  m_Name: SingleStringValueRecovery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1679116298
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1679116297}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1182012748}
   - {fileID: 425442814}
-  m_Father: {fileID: 187739964}
-  m_RootOrder: 3
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1679116299
 MonoBehaviour:
@@ -2707,7 +2736,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 187739964}
-  m_RootOrder: 8
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1993177503
 MonoBehaviour:
