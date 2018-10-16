@@ -1875,10 +1875,11 @@ creates</panel_attributes>
       <x>3088</x>
       <y>744</y>
       <w>104</w>
-      <h>72</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-scans</panel_attributes>
+keeps
+up to date</panel_attributes>
     <additional_attributes>110.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
@@ -2074,10 +2075,11 @@ creates</panel_attributes>
       <x>3088</x>
       <y>352</y>
       <w>104</w>
-      <h>72</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-scans</panel_attributes>
+keeps
+up to date</panel_attributes>
     <additional_attributes>110.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
