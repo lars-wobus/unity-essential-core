@@ -8,8 +8,9 @@
 * The generic implementation comes with a drawback.
 * Internal states of custom scripts must be made public.
 * This problem can be avoided by implementing special versions of the Originator class and the Recovery MonoBehaviour.
-* But then you will not witness the simplicity and the beauty of this Recovery pattern.
+* But then you will not witness the simplicity and the beauty of this pattern.
 * The main goal of this pattern is to provide an easy access to save and restore internal states of existing MonoBehaviours.
+* Just as in the case of the Memento pattern saved states will not be exposed.
 
 The general version of this pattern.
 ![Image of Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-1.png)
@@ -23,4 +24,4 @@ To use this version, one has to implement a similar interface and replace a pare
 ![Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-2.png)
 
 ## Footnotes:
-1 Preliminary name - if you knows a better name, then please let me know it.
+1 Preliminary name - if you knows a better name or similar solutions, then please let me know it.
