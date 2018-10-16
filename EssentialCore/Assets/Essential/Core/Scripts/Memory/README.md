@@ -18,10 +18,15 @@ To use its full potential, one has to serialize the data for the internal state,
 define a MonoBehaviour to save and restore states. Optionally one can create a MonoBehaviour to monitor events. 
 Important note: All MonoBehaviours must be attached to the same gameobject.
 ![Image describes which interfaces and MonoBehaviours must be used for the general version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-2.png)
-The simplified version of this pattern allows to store exactly one internal state.
-![Image of simplified version of Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-1.png)
-To use this version, one has to implement a similar interface and replace a parent class. 
-![Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-2.png)
+
+<details>
+<summary>The simplified version of this pattern allows to store exactly one internal state.</summary>
+<img src="https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-1.png" 
+     alt="Image of simplified version of Recovery Pattern">
+To use this version, one has to implement a similar interface and replace a parent class.
+  <img src="https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-2.png" 
+     alt="Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern">
+</details>
 
 ## FAQ
 ### How do I know which state is currently in use?
