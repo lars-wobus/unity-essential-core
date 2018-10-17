@@ -3,8 +3,7 @@
 * The scripts in this directory allow saving and restoring internal states.
 * Some might recognize the similarities to the memento pattern.
 * But in contrast to the original pattern, this alternative version is less restrictive.
-* Any kind of serialized data can be saved and restored, including primitive data types, strings, structs and classes.
-* Right now, I haven't tested enums yet.
+* Any kind of serialized data can be saved and restored, including primitive data types, strings, enums, structs and classes.
 * The generic implementation comes with a drawback.
 * Internal states of custom scripts must be made public.
 * This problem can be avoided by implementing special versions of the Originator class and the Recovery MonoBehaviour.
