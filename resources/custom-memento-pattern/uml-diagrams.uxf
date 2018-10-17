@@ -1780,8 +1780,7 @@ uses</panel_attributes>
       <w>136</w>
       <h>32</h>
     </coordinates>
-    <panel_attributes>lt=.
-IMultiStateMonitoring</panel_attributes>
+    <panel_attributes>IMultiStateMonitoring</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1792,7 +1791,7 @@ IMultiStateMonitoring</panel_attributes>
       <w>80</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 try to
 use</panel_attributes>
     <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
@@ -1817,7 +1816,6 @@ use</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>template=TData: Object
-lt=.
 IRecoverable</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1865,7 +1863,7 @@ Memento</panel_attributes>
       <w>360</w>
       <h>200</h>
     </coordinates>
-    <panel_attributes>lt=&lt;..
+    <panel_attributes>lt=&lt;.
 creates</panel_attributes>
     <additional_attributes>430.0;230.0;10.0;230.0;10.0;10.0</additional_attributes>
   </element>
@@ -1877,7 +1875,7 @@ creates</panel_attributes>
       <w>104</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 keeps
 up to date</panel_attributes>
     <additional_attributes>110.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
@@ -1981,8 +1979,7 @@ uses</panel_attributes>
       <w>136</w>
       <h>32</h>
     </coordinates>
-    <panel_attributes>lt=.
-ISingleStateMonitoring</panel_attributes>
+    <panel_attributes>ISingleStateMonitoring</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1993,7 +1990,7 @@ ISingleStateMonitoring</panel_attributes>
       <w>104</w>
       <h>64</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 try to use</panel_attributes>
     <additional_attributes>110.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
   </element>
@@ -2017,7 +2014,6 @@ try to use</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>template=TData: Object
-lt=.
 IRecoverable</panel_attributes>
     <additional_attributes/>
   </element>
@@ -2065,7 +2061,7 @@ Memento</panel_attributes>
       <w>360</w>
       <h>200</h>
     </coordinates>
-    <panel_attributes>lt=&lt;..
+    <panel_attributes>lt=&lt;.
 creates</panel_attributes>
     <additional_attributes>430.0;230.0;10.0;230.0;10.0;10.0</additional_attributes>
   </element>
@@ -2077,7 +2073,7 @@ creates</panel_attributes>
       <w>104</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
+    <panel_attributes>lt=&lt;.
 keeps
 up to date</panel_attributes>
     <additional_attributes>110.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
@@ -2177,7 +2173,6 @@ CustomMonitor</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>template=TData: Object
-lt=.
 IRecoverable</panel_attributes>
     <additional_attributes/>
   </element>
@@ -2189,8 +2184,7 @@ IRecoverable</panel_attributes>
       <w>136</w>
       <h>32</h>
     </coordinates>
-    <panel_attributes>lt=.
-ISingleStateMonitoring</panel_attributes>
+    <panel_attributes>ISingleStateMonitoring</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2344,7 +2338,6 @@ CustomMonitor</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>template=TData: Object
-lt=.
 IRecoverable</panel_attributes>
     <additional_attributes/>
   </element>
@@ -2356,8 +2349,7 @@ IRecoverable</panel_attributes>
       <w>136</w>
       <h>32</h>
     </coordinates>
-    <panel_attributes>lt=.
-IMultiStateMonitoring</panel_attributes>
+    <panel_attributes>IMultiStateMonitoring</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
