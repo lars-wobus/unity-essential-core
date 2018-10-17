@@ -463,6 +463,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &422353660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 422353661}
+  - component: {fileID: 422353662}
+  m_Layer: 0
+  m_Name: OnApplicationFocus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &422353661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422353660}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1957585601}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &422353662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 422353660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7556a41cae38494395ce97e06699cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _focused:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1957585602}
+        m_MethodName: RestorePreviousState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _focusLost:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1957585602}
+        m_MethodName: SaveCurrentState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &425442813
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +683,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1074857261}
+        - m_Target: {fileID: 1074857259}
           m_MethodName: SaveCurrentState
           m_Mode: 1
           m_Arguments:
@@ -639,7 +711,7 @@ MonoBehaviour:
     KeyUp:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1074857261}
+        - m_Target: {fileID: 1074857259}
           m_MethodName: RestorePreviousState
           m_Mode: 1
           m_Arguments:
@@ -744,6 +816,7 @@ Transform:
   - {fileID: 1411456661}
   - {fileID: 1549986342}
   - {fileID: 1074857262}
+  - {fileID: 1957585601}
   m_Father: {fileID: 187739964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -875,7 +948,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1074857259}
+        - m_Target: {fileID: 1074857261}
+          m_MethodName: StartUpdatingValues
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1957585604}
           m_MethodName: StartUpdatingValues
           m_Mode: 1
           m_Arguments:
@@ -980,7 +1064,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1074857259}
+        - m_Target: {fileID: 1074857261}
+          m_MethodName: StopUpdatingValues
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1957585604}
           m_MethodName: StopUpdatingValues
           m_Mode: 1
           m_Arguments:
@@ -1113,7 +1208,7 @@ MonoBehaviour:
   _focused:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074857261}
+      - m_Target: {fileID: 1074857259}
         m_MethodName: RestorePreviousState
         m_Mode: 1
         m_Arguments:
@@ -1129,7 +1224,7 @@ MonoBehaviour:
   _focusLost:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1074857261}
+      - m_Target: {fileID: 1074857259}
         m_MethodName: SaveCurrentState
         m_Mode: 1
         m_Arguments:
@@ -1241,6 +1336,103 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &976882070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976882071}
+  - component: {fileID: 976882072}
+  m_Layer: 0
+  m_Name: InputEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976882071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976882070}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1957585601}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976882072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976882070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e30ca2360bab4349a102d51a4015cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyboardButtons:
+  - name: Save current State
+    keycode: 49
+    KeyDown:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    KeyUp:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1957585602}
+          m_MethodName: SaveCurrentState
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    KeyPressed:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - name: Restore previous state
+    keycode: 50
+    KeyDown:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    KeyUp:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1957585602}
+          m_MethodName: RestorePreviousState
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    KeyPressed:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!1 &986821968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,11 +1513,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1074857262}
-  - component: {fileID: 1074857259}
   - component: {fileID: 1074857261}
+  - component: {fileID: 1074857259}
   - component: {fileID: 1074857260}
   m_Layer: 0
-  m_Name: ComplexEnumExample
+  m_Name: SimpleEnumExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1339,10 +1531,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074857258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f31684ad00dcf04da0fb907b1657a9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd64917fc9a9094dbc964b687181072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: 0
 --- !u!114 &1074857260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,7 +1556,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 'ComplexEnum: State saved'
+          m_StringArgument: 'SimpleEnum: State saved'
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -1381,7 +1572,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 'ComplexEnum: State restored'
+          m_StringArgument: 'SimpleEnum: State restored'
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -1394,9 +1585,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074857258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d913923b247e354686784cd404e0d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c1c4fe084467c344ac32616bab1288e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _data: 0
 --- !u!4 &1074857262
 Transform:
   m_ObjectHideFlags: 0
@@ -3000,6 +3192,105 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1957585600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1957585601}
+  - component: {fileID: 1957585604}
+  - component: {fileID: 1957585602}
+  - component: {fileID: 1957585603}
+  m_Layer: 0
+  m_Name: ComplexEnumExample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1957585601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957585600}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 422353661}
+  - {fileID: 976882071}
+  m_Father: {fileID: 506103014}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957585602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957585600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d913923b247e354686784cd404e0d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1957585603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957585600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9564b93d13648a948bbb700ec831b619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateSaved:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1993177503}
+        m_MethodName: WriteOnConsole
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 'ComplexEnum: State saved'
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  StateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1993177503}
+        m_MethodName: WriteOnConsole
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 'ComplexEnum: State restored'
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1957585604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957585600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f31684ad00dcf04da0fb907b1657a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: 0
 --- !u!1 &1993177501
 GameObject:
   m_ObjectHideFlags: 0
