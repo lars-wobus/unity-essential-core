@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using Essential.Core.Memory;
 using UnityEngine;
@@ -16,9 +17,11 @@ namespace Essential.Core.Scripts.Memory.Examples
 
 		protected override IEnumerator UpdateValues()
 		{
+			var max = Enum.GetValues(typeof(ComplexEnum)).Cast<int>().Max();
+
 			while (true)
 			{
-				Data = (ComplexEnum) _random.Next(0, 7) | (ComplexEnum) _random.Next(0, 7);
+				Data = (ComplexEnum) _random.Next(0, max);
 				Debug.Log(Data);
 				
 				yield return new WaitForSeconds(SecondsToWait);
