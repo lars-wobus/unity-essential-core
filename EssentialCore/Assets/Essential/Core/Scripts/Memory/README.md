@@ -28,10 +28,16 @@ To use this version, one has to implement a similar interface and replace a pare
 </details>
 
 ## FAQ
+### What happens inside?
+When the current internal state of a class or MonoBehaviour should be saved the exposed data will be serialized and deserialized to create a copy of it. When a state should be restored the same process is done. Depending on the type of data this would not always be necessary. I have renounced to implement an optimized Originator for this kind of data. On the one hand it would inflate the package size. On the other hand users could forget to switch back to the original version, when data becomes more complex later in the development. So an optimized version would only introduce new runtime problems.
 ### How do I know which state is currently in use?
 In some implementations of the Memento pattern I have seen additional fields in the Caretaker class for those tasks. Extending the Recovery MonoBehaviours would also be possible. But both strategies would violate the Single Responsible Principle<sup>2</sup>. That's why I have decided to provide interfaces to monitor any changes. So I let the user decide to implement a proper MonoBehaviour to track this data. 
 ### What's the advantage of the interfaces to monitor changes?
-The user can decide if his script should handle or forward incoming events. To forward events he is complete free in choosing c# delegates, actions, UnityEvents or something completely different, I haven't heared yet.
+The user can decide if his script should handle or forward incoming events. To forward events he is free in choosing c# delegates, actions, UnityEvents or something completely different, I haven't heared yet.
+### How can I apply this strategy to my complex classes containing data which should not be serialized.
+1) Create another class to store all of the serializable parts.
+2) Let your complex class implement the provided interface.
+3) Add some custom logic within the required getter and setter methods. In general to read and write values. Note that you have to create at least one instance of your new class at some point in the application!
 
 ## Footnotes:
 1) Preliminary name - if you knows a better name or similar solutions, then please let me know it.
