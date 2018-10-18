@@ -1693,7 +1693,7 @@ ISingleStateMonitoring</panel_attributes>
     <coordinates>
       <x>2944</x>
       <y>656</y>
-      <w>328</w>
+      <w>352</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>template=TData: Object
@@ -1702,8 +1702,8 @@ Originator
 -_serialize: Func(storedInstance: TData): TData
 --
 +Originator(customBehaviour: IRecoverable&lt;TData&gt;)
-+SaveToMemento(): TData
-+RestoreFromMomento(storedInstance: TData): TData
++SaveStateToMemento(): TData
++RestoreStateFromMomento(storedInstance: TData): TData
 
 </panel_attributes>
     <additional_attributes/>
@@ -1751,14 +1751,14 @@ template=TData: Object
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3224</x>
+      <x>3248</x>
       <y>688</y>
-      <w>152</w>
+      <w>128</w>
       <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -1896,7 +1896,7 @@ up to date</panel_attributes>
     <coordinates>
       <x>2944</x>
       <y>264</y>
-      <w>328</w>
+      <w>352</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>template=TData: Object
@@ -1905,8 +1905,8 @@ Originator
 -_serialize: Func(storedInstance: TData): TData
 --
 +Originator(customBehaviour: IRecoverable&lt;TData&gt;)
-+SaveToMemento(): TData
-+RestoreFromMomento(storedInstance: TData): TData
++SaveStateToMemento(): TData
++RestoreStateFromMomento(storedInstance: TData): TData
 
 </panel_attributes>
     <additional_attributes/>
@@ -1950,14 +1950,14 @@ template=TData: Object
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3224</x>
+      <x>3248</x>
       <y>296</y>
-      <w>152</w>
+      <w>128</w>
       <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 uses</panel_attributes>
-    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
