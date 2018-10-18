@@ -1,6 +1,9 @@
 # Recovery Pattern<sup>1</sup>
 
-* The scripts in this directory allow saving and restoring internal states.
+## Summary
+The provided scripts can be used to save and restore internal states of other objects temporarily. This can be useful, when end-users switch back and forth between applications. Another use-case could be to repeat previous operations. A custom AI could also follow footprints left in the snow or imitate the players last move. As one can imagine, there are many more areas of application.
+
+## Description
 * Some might recognize the similarities to the <i>Memento</i> pattern.
 * But in contrast to the original pattern, this alternative version is less restrictive.
 * Any kind of serialized data can be saved and restored, including primitive data types, strings, enums, structs and classes.
