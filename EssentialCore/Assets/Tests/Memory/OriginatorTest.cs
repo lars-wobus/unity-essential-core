@@ -44,7 +44,7 @@ namespace Tests.Memory
         [Test]
         public void SaveToMemento_ReturnNull_When_CurrentStateWasNull()
         {
-            Assert.IsNull(Originator.SaveToMemento());
+            Assert.IsNull(Originator.SaveStateToMemento());
         }
         
         [Test]
@@ -52,7 +52,7 @@ namespace Tests.Memory
         {
             Originator.CurrentState = Expected;
 
-            var actual = Originator.SaveToMemento();
+            var actual = Originator.SaveStateToMemento();
             
             Assert.AreNotSame(Expected, actual);
         }
@@ -60,7 +60,7 @@ namespace Tests.Memory
         [Test]
         public void RestoreFromMomento_ReturnNull_WhenPassing_NullAndCurrentStateWasStillNull()
         {
-            Originator.RestoreFromMomento(null);
+            Originator.RestoreStateFromMomento(null);
             
             Assert.IsNull(Originator.CurrentState);
         }
@@ -70,7 +70,7 @@ namespace Tests.Memory
         {
             Originator.CurrentState = Expected;
 
-            Originator.RestoreFromMomento(null);
+            Originator.RestoreStateFromMomento(null);
             
             Assert.AreEqual(Expected, Originator.CurrentState);
         }
@@ -78,7 +78,7 @@ namespace Tests.Memory
         [Test]
         public void RestoreFromMomento_ReturnSameObject_WhenPassing_Object()
         {
-            Originator.RestoreFromMomento(Expected);
+            Originator.RestoreStateFromMomento(Expected);
             
             Assert.AreEqual(Expected, Originator.CurrentState);
         }
@@ -88,7 +88,7 @@ namespace Tests.Memory
         {
             Originator.CurrentState = Expected;
 
-            Originator.RestoreFromMomento(new DummyClass("something else"));
+            Originator.RestoreStateFromMomento(new DummyClass("something else"));
             
             Assert.AreNotSame(Expected, Originator.CurrentState);
         }*/

@@ -26,7 +26,7 @@ namespace Essential.Core.Memory
 		/// Create memento that stores the originator's current internal state.
 		/// </summary>
 		/// <returns>Copy of its own internal state.</returns>
-		public TData SaveToMemento()
+		public TData SaveStateToMemento()
 		{
 			Debug.Log(JsonUtility.ToJson(_serialize(TargetScript.Data)) + " " +TargetScript.Data);
 			// ReSharper disable once HeapView.BoxingAllocation
@@ -41,7 +41,7 @@ namespace Essential.Core.Memory
 		/// </remarks>
 		/// <param name="storedInstance">Any internal state from the past.</param>
 		/// <returns>Internal state after adopting or rejecting the input.</returns>
-		public TData RestoreFromMomento(TData storedInstance)
+		public TData RestoreStateFromMomento(TData storedInstance)
 		{
 			// ReSharper disable once HeapView.BoxingAllocation
 			if (storedInstance == null)

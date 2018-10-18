@@ -37,7 +37,7 @@ namespace Essential.Core.Scripts.Memory.Examples
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
-			_originator.RestoreFromMomento(Caretaker.Memento);
+			_originator.RestoreStateFromMomento(Caretaker.Memento);
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Essential.Core.Scripts.Memory.Examples
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Caretaker = new Caretaker<SimpleData>(_originator.SaveToMemento());
+			Caretaker = new Caretaker<SimpleData>(_originator.SaveStateToMemento());
 		}
 	}
 }

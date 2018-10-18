@@ -71,7 +71,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Caretaker.Memento.Add(Originator.SaveToMemento());
+			Caretaker.Memento.Add(Originator.SaveStateToMemento());
 			MultiStateMonitoring?.OnStateSaved(SavedStates - 1);
 		}
 
@@ -88,7 +88,7 @@ namespace Essential.Core.Memory
 				return;
 			}
 			
-			Originator.RestoreFromMomento(Caretaker.Memento[index]);
+			Originator.RestoreStateFromMomento(Caretaker.Memento[index]);
 			MultiStateMonitoring?.OnStateRestored(index);
 		}
 
