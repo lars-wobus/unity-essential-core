@@ -3,12 +3,12 @@
 ## Summary
 The provided scripts can be used to save and restore internal states of other objects temporarily. This can be useful, when end-users switch back and forth between applications. Another use-case could be to repeat previous operations. A custom AI could also follow footprints left in the snow or imitate the players last move. As one can imagine, there are many more areas of application.
 
-## Description
+## Remarks
 * Some might recognize the similarities to the <i>Memento</i> pattern.
 * But in contrast to the original pattern, this alternative version is less restrictive.
 * Any kind of serialized data can be saved and restored, including primitive data types, strings, enums, structs and classes.
 * The generic implementation comes with a drawback.
-* Internal states of custom scripts habe to be public.
+* Internal states of custom scripts must be made accessible to all other scripts.
 * This problem can be avoided by implementing special versions of the <i>Originator</i> class and the <i>Recovery MonoBehaviour</i>.
 * But then you will not witness the simplicity and the beauty of this pattern.
 * The main goal of this pattern is to provide an easy access to save and restore internal states of existing <i>MonoBehaviours</i>.
@@ -16,8 +16,7 @@ The provided scripts can be used to save and restore internal states of other ob
 
 The general version of this pattern.
 ![Image of Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-1.png)
-To use its full potential, one has to serialize the data for the internal state, implement the owner of the data and 
-define a <i>MonoBehaviour</i> to save and restore states. Optionally one can create a <i>MonoBehaviour</i> to monitor events. 
+To use its full potential, one has to serialize the data defining the internal state, implement the owner of the data and specify a <i>MonoBehaviour</i> to save and restore states. Optionally one can create a <i>MonoBehaviour</i> to monitor events. 
 Important note: All <i>MonoBehaviours</i> must be attached to the same <i>Gameobject</i>.
 ![Image describes which interfaces and MonoBehaviours must be used for the general version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-2.png)
 
@@ -25,7 +24,7 @@ Important note: All <i>MonoBehaviours</i> must be attached to the same <i>Gameob
 <summary>The simplified version of this pattern allows to store exactly one internal state.</summary>
 <img src="https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-1.png" 
      alt="Image of simplified version of Recovery Pattern">
-To use this version, one has to implement a similar interface and replace a parent class.
+To use this version, one has to implement a similar interface and replace one parent class.
   <img src="https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/single-state-recovery-2.png" 
      alt="Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern">
 </details>
@@ -34,7 +33,7 @@ To use this version, one has to implement a similar interface and replace a pare
 ### What happens inside?
 When the current internal state of a class or <i>MonoBehaviour</i> should be saved, the exposed data will be serialized and deserialized to create a copy of it. When a state should be restored, the same process is done. Depending on the type of data, this would not always be necessary. I have renounced to implement an optimized <i>Originator</i> for this kind of data. On the one hand it would inflate the package size. On the other hand users could forget to switch back to the original version, when data becomes more complex later in the development. So an optimized version would only introduce new runtime problems.
 ### How do I know which state is currently in use?
-In some implementations of the <i>Memento</i> pattern, I have seen additional fields in the <i>Caretaker</i> class for those tasks. Extending the <i>Recovery MonoBehaviours</i> would also be possible. But both strategies would violate the <i>Single Responsible Principle</i><sup>2</sup>. That's why I have decided to provide interfaces to monitor any changes. So I let the user decide to implement a proper <i>MonoBehaviour</i> to track this data. 
+In some implementations of the <i>Memento</i> pattern, I have seen additional fields in the <i>Caretaker</i> class for those tasks. Extending the <i>Recovery MonoBehaviours</i> would also be possible. But both strategies would violate the <i>Single Responsible Principle</i><sup>2</sup>. That's why I have decided to provide interfaces to monitor any changes. Thus the developer is responsible to keep this data up to date.
 ### What's the advantage of the interfaces to monitor changes?
 The user can create multiple <i>MonoBehaviours</i> for different purposes. Some could handle incoming events by themself, while others could forward events to their own listeners. Moreover the user is free in choosing <i>C# Delegates, Actions, UnityEvents</i> or something completely different, I haven't heard yet.
 ### How can I apply this strategy to my complex classes containing data which should not be serialized.
