@@ -36,8 +36,8 @@ To use this version, one has to implement a similar interface and replace one pa
 
 ## Possible Changes until Version 1.0 is released.
 * The root namespace could be changed.
-* As one might already notice, the <i>Caretaker's</i> current implementation does not play a major role. That's why the <i>Recovery MonoBehaviours</i> and the <i>Caretaker</i> class could become one single <i>MonoBehaviour</i> in future.
-* For a better understanding of the module, the interface and the <i>MonoBehaviour</i>, specifically designed to hold a single memento, might be removed. 
+* As one might already notice, the <i>Caretaker's</i> current implementation does not play a major role. That's why the <i>Recovery MonoBehaviours</i> and the <i>Caretaker</i> class could become one single <i>MonoBehaviour</i> in future<sup>3</sup>.
+* For a better understanding of the module, the interface and the <i>MonoBehaviour</i>, specifically designed to hold a single <i>Memento</i>, might be removed. 
 
 ## FAQ
 ### What happens inside?
@@ -54,3 +54,4 @@ The user can create multiple <i>MonoBehaviours</i> for different purposes. Some 
 ## Footnotes:
 1) Preliminary name - if you know a better name or similar solutions, then please let me know it.
 2) Thats also the reason why the <i>Originator</i> and <i>Caretaker</i> are ordinary classes.
+3) This would also mean to return to the original structure of <i>Memento</i> pattern .
