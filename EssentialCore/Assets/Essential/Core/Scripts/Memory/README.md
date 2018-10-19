@@ -29,6 +29,16 @@ To use this version, one has to implement a similar interface and replace one pa
      alt="Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern">
 </details>
 
+## Remaining tasks until version 1.0 is released
+* Full description about the configuration of GameObjects.
+* Example scene where the player is able to navigate a character through a level and to repeat the steps made earlier.
+* Complete coverage with <i>Unit Tests</i> for all scripts inside the root folder.
+
+## Possible Changes until Version 1.0 is released.
+* The root namespace could be changed.
+* As one might already notice, the <i>Caretaker's</i> current implementation does not play a major role. That's why the <i>Recovery MonoBehaviours</i> and the <i>Caretaker</i> class could become one single <i>MonoBehaviour</i> in future.
+* For a better understanding of the module, the interface and the <i>MonoBehaviour</i>, specifically designed to hold a single memento, might be removed. 
+
 ## FAQ
 ### What happens inside?
 When the current internal state of a class or <i>MonoBehaviour</i> should be saved, the exposed data will be serialized and deserialized to create a copy of it. When a state should be restored, the same process is done. Depending on the type of data, this would not always be necessary. I have renounced to implement an optimized <i>Originator</i> for this kind of data. On the one hand it would inflate the package size. On the other hand users could forget to switch back to the original version, when data becomes more complex later in the development. So an optimized version would only introduce new runtime problems.
