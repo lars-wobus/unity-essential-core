@@ -11,7 +11,7 @@ The provided scripts can be used to save and restore internal states of other ob
 * Internal states of custom scripts must be made accessible to all other scripts.
 * This problem can be avoided by implementing special versions of the <i>Originator</i> class and the <i>Recovery MonoBehaviour</i>.
 * But then you will not witness the simplicity and the beauty of this pattern.
-* The main goal of this pattern is to provide an easy access to save and restore internal states of existing <i>MonoBehaviours</i>.
+* The main goal of this pattern is to provide users an easy access to save and restore internal states of their existing <i>MonoBehaviours</i>.
 * Just as in the case of the <i>Memento</i> pattern saved states will not be exposed.
 
 The general version of this pattern.
