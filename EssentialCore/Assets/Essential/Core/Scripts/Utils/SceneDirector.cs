@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Essential.Core.Event.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -10,12 +11,11 @@ namespace Essential.Core.Utils
 	public class SceneDirector : MonoBehaviour
 	{
 		[SerializeField] private UnityScene[] _scenes;
-		[SerializeField] private UnityEvent _sceneLoaded;
-		private IProgressHandler ProgressHandler { get; set; }
+		private IDownloadHandler EventHandler { get; set; }
 
 		private void Start()
 		{
-			ProgressHandler = GetComponent<IProgressHandler>();
+			EventHandler = GetComponent<IDownloadHandler>();
 		}
 		
 		public void StartLoadingSceneReferencedInCollection(int sceneIndex)
@@ -26,7 +26,7 @@ namespace Essential.Core.Utils
 			{
 				throw new NotSupportedException("Loading scene has already begun: " + scene.SceneName);
 			}
-			
+
 			StartCoroutine(LoadSceneByNameAsync(scene));
 		}
 
@@ -36,13 +36,13 @@ namespace Essential.Core.Utils
 			
 			while (!scene.AsyncOperation.isDone)
 			{
-				ProgressHandler?.OnProgressChanged(scene.AsyncOperation.progress);
+				EventHandler?.OnProgressChanged(scene.AsyncOperation.progress);
+				yield return null;
 			}
 			
 			scene.AsyncOperation.allowSceneActivation = false;
 			
-			_sceneLoaded.Invoke();
-			yield return null;
+			EventHandler?.OnComplete();
 		}
 
 		private UnityScene FindScene(int sceneIndex)
