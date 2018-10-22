@@ -1,7 +1,6 @@
 {
-    "name": "_Utils",
+    "name": "_EventInterfaces",
     "references": [
-        "_EventInterfaces",
         "_AtomicEventInterfaces"
     ],
     "optionalUnityReferences": [],

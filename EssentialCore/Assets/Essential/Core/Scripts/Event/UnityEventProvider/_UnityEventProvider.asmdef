@@ -1,5 +1,5 @@
 {
-    "name": "_Utils",
+    "name": "_UnityEventProvider",
     "references": [
         "_EventInterfaces",
         "_AtomicEventInterfaces"

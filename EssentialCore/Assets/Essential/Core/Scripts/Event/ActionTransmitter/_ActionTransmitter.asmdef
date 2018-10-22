@@ -1,5 +1,5 @@
 {
-    "name": "_Utils",
+    "name": "_ActionTransmitter",
     "references": [
         "_EventInterfaces",
         "_AtomicEventInterfaces"

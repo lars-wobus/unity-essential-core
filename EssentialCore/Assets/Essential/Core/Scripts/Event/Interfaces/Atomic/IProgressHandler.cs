@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Utils
+﻿namespace Essential.Core.Event.Interfaces
 {
 	public interface IProgressHandler
 	{
