@@ -14,8 +14,9 @@ The provided scripts can be used to save and restore internal states of other ob
 * The main goal of this pattern is to provide users an easy access to save and restore internal states of their existing <i>MonoBehaviours</i>.
 * Just as in the case of the <i>Memento</i> pattern saved states will not be exposed.
 
-The general version of this pattern.
+### Current implementation
 ![Image of Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-1.png)
+### Sight of developers
 To use its full potential, one has to serialize the data defining the internal state, implement the owner of the data and specify a <i>MonoBehaviour</i> to save and restore states. Optionally one can create a <i>MonoBehaviour</i> to monitor events. 
 Important note: All <i>MonoBehaviours</i> must be attached to the same <i>Gameobject</i>.
 ![Image describes which interfaces and MonoBehaviours must be used for the general version of the Recovery Pattern](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-memento-pattern/multi-state-recovery-2.png)
@@ -34,9 +35,9 @@ To use this version, one has to implement a similar interface and replace one pa
 * Example scene where the player is able to navigate a character through a level and to repeat the steps made earlier.
 * Complete coverage with <i>Unit Tests</i> for all scripts inside the root folder.
 
-## Possible Changes until Version 1.0 is released.
+## Possible changes until Version 1.0 is released.
 * The root namespace could be changed.
-* As one might already notice, the <i>Caretaker's</i> current implementation does not play a major role. That's why the <i>Recovery MonoBehaviours</i> and the <i>Caretaker</i> class could become one single <i>MonoBehaviour</i> in future<sup>3</sup>.
+* ~~As one might already notice, the <i>Caretaker's</i> current implementation does not play a major role. That's why the <i>Recovery MonoBehaviours</i> and the <i>Caretaker</i> class could become one single <i>MonoBehaviour</i> in future<sup>3</sup>.~~ (done!)
 * For a better understanding of the module, the interface and the <i>MonoBehaviour</i>, specifically designed to hold a single <i>Memento</i>, might be removed. 
 
 ## FAQ
