@@ -20,7 +20,7 @@ namespace Essential.Core.Scripts.Memory.Examples
 		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
-		private Caretaker<SimpleData> Caretaker { get; set; }
+		private SimpleData Memento { get; set; }
 		
 		/// <summary>
 		/// Called when application is started.
@@ -37,7 +37,7 @@ namespace Essential.Core.Scripts.Memory.Examples
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
-			_originator.RestoreStateFromMomento(Caretaker.Memento);
+			_originator.RestoreStateFromMomento(Memento);
 		}
 
 		/// <summary>
@@ -46,7 +46,7 @@ namespace Essential.Core.Scripts.Memory.Examples
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Caretaker = new Caretaker<SimpleData>(_originator.SaveStateToMemento());
+			Memento = _originator.SaveStateToMemento();
 		}
 	}
 }
