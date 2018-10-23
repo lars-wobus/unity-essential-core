@@ -16,12 +16,6 @@
 		private IStateMonitor StateMonitor { get; set; }
 
 		/// <summary>
-		/// Return number of saved states.
-		/// </summary>
-		// ReSharper disable once MemberCanBePrivate.Global
-		public int SavedStates => Memento.Count;
-		
-		/// <summary>
 		/// Called when application is started.
 		/// </summary>
 		private new void Start ()
@@ -31,32 +25,21 @@
 		}
 
 		/// <summary>
-		/// Check if index is valid.
-		/// </summary>
-		/// <param name="index">Used to identify a specific state within the collection of previously saved states.</param>
-		/// <returns>True if index points to existing state.</returns>
-		private bool HasState(int index)
-		{
-			return index >= 0 && index < SavedStates;
-		}
-
-		/// <summary>
 		/// Restore previous state from memento.
 		/// </summary>
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
 			RestoreState(SavedStates - 1);
-			//Debug.Break();
 		}
 		
 		/// <summary>
 		/// Save current state.
 		/// </summary>
 		// ReSharper disable once UnusedMember.Global
-		public void SaveCurrentState()
+		public new void SaveCurrentState()
 		{
-			Memento.Add(Originator.SaveStateToMemento());
+			base.SaveCurrentState();
 			StateMonitor?.OnStateSaved(SavedStates - 1);
 		}
 
@@ -65,15 +48,14 @@
 		/// </summary>
 		/// <param name="index">Specifies which saved state should be restored.</param>
 		// ReSharper disable once MemberCanBePrivate.Global
-		public void RestoreState(int index)
+		public new void RestoreState(int index)
 		{
-			if (!HasState(index))
+			if (!base.RestoreState(index))
 			{
 				StateMonitor?.OnRestorationFailed(index);
 				return;
 			}
-			
-			Originator.RestoreStateFromMomento(Memento[index]);
+
 			StateMonitor?.OnStateRestored(index);
 		}
 
@@ -82,15 +64,14 @@
 		/// </summary>
 		/// <param name="index">Specifies which saved state should be removed.</param>
 		// ReSharper disable once UnusedMember.Global
-		public void RemoveState(int index)
+		public new void RemoveState(int index)
 		{
-			if (!HasState(index))
+			if (!base.RemoveState(index))
 			{
-				StateMonitor.OnRemovingFailed(index);
+				StateMonitor?.OnRemovingFailed(index);
 				return;
 			}
-			
-			Memento.RemoveAt(index);
+
 			StateMonitor?.OnStateRemoved(index);
 		}
 
@@ -98,9 +79,9 @@
 		/// Remove all saved states.
 		/// </summary>
 		// ReSharper disable once UnusedMember.Global
-		public void ClearStates()
+		public new void ClearStates()
 		{
-			Memento.Clear();
+			base.ClearStates();
 			StateMonitor?.OnStatesCleared();
 		}
 	}
