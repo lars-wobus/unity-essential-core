@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Memory
+﻿namespace Essential.Core.Scripts.Memory.Examples
 {
 	public interface ISingleStateMonitoring
 	{
