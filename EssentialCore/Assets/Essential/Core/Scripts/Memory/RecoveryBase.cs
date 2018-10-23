@@ -11,7 +11,7 @@ namespace Essential.Core.Memory
 	/// Works well with MonoBehaviour.OnApplicationFocus(bool) or MonoBehaviour.OnApplicationPause(bool).
 	/// </remarks>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class MultiStateRecoveryBase<TData> : Caretaker<TData>
+	public abstract class RecoveryBase<TData> : Caretaker<TData>
 	{
 		/// <summary>
 		/// Optional MonoBehaviour providing functions to inform listeners. 
