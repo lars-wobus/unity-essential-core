@@ -13,7 +13,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Save/Restore internal state of an originator.
 		/// </summary>
-		private List<TData> Memento { get; set; }
+		private List<TData> SavedStates { get; set; }
 
 		/// <summary>
 		/// Used to save and restore the internal state of a behavioural script.
@@ -24,7 +24,7 @@ namespace Essential.Core.Memory
 		/// Return number of saved states.
 		/// </summary>
 		// ReSharper disable once MemberCanBeProtected.Global
-		public int SavedStates => Memento.Count;
+		public int Count => SavedStates.Count;
 		
 		/// <summary>
 		/// Called when application is started.
@@ -33,7 +33,7 @@ namespace Essential.Core.Memory
 		{
 			var targetScript = GetComponent<IRecoverable<TData>>();
 			Originator = new Originator<TData>(targetScript);
-			Memento = new List<TData>();
+			SavedStates = new List<TData>();
 		}
 		
 		/// <summary>
@@ -44,7 +44,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once MemberCanBePrivate.Global
 		public bool HasState(int index)
 		{
-			return index >= 0 && index < SavedStates;
+			return index >= 0 && index < Count;
 		}
 
 		/// <summary>
@@ -52,7 +52,7 @@ namespace Essential.Core.Memory
 		/// </summary>
 		protected void SaveCurrentState()
 		{
-			Memento.Add(Originator.SaveStateToMemento());
+			SavedStates.Add(Originator.SaveStateToMemento());
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace Essential.Core.Memory
 				return false;
 			}
 			
-			Originator.RestoreStateFromMomento(Memento[index]);
+			Originator.RestoreStateFromMomento(SavedStates[index]);
 			return true;
 		}
 
@@ -81,7 +81,7 @@ namespace Essential.Core.Memory
 				return false;
 			}
 			
-			Memento.RemoveAt(index);
+			SavedStates.RemoveAt(index);
 			return true;
 		}
 
@@ -90,7 +90,7 @@ namespace Essential.Core.Memory
 		/// </summary>
 		protected void ClearStates()
 		{
-			Memento.Clear();
+			SavedStates.Clear();
 		}
 	}
 }

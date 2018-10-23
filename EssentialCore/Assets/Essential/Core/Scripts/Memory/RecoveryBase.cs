@@ -30,7 +30,7 @@
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
-			RestoreState(SavedStates - 1);
+			RestoreState(Count - 1);
 		}
 		
 		/// <summary>
@@ -40,7 +40,7 @@
 		public new void SaveCurrentState()
 		{
 			base.SaveCurrentState();
-			StateMonitor?.OnStateSaved(SavedStates - 1);
+			StateMonitor?.OnStateSaved(Count - 1);
 		}
 
 		/// <summary>
