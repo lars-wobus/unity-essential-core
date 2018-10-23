@@ -11,18 +11,8 @@ namespace Essential.Core.Memory
 	/// Works well with MonoBehaviour.OnApplicationFocus(bool) or MonoBehaviour.OnApplicationPause(bool).
 	/// </remarks>
 	/// <typeparam name="TData">Type of data to be saved.</typeparam>
-	public abstract class MultiStateRecoveryBase<TData> : MonoBehaviour
+	public abstract class MultiStateRecoveryBase<TData> : Caretaker<TData>
 	{
-		/// <summary>
-		/// Used to save and restore the internal state of a behavioural script.
-		/// </summary>
-		private Originator<TData> Originator { get; set; }
-
-		/// <summary>
-		/// Used to save an internal state.
-		/// </summary>
-		private List<TData> Mementos { get; set; }
-		
 		/// <summary>
 		/// Optional MonoBehaviour providing functions to inform listeners. 
 		/// </summary>
@@ -32,16 +22,14 @@ namespace Essential.Core.Memory
 		/// Return number of saved states.
 		/// </summary>
 		// ReSharper disable once MemberCanBePrivate.Global
-		public int SavedStates => Mementos.Count;
+		public int SavedStates => Memento.Count;
 		
 		/// <summary>
 		/// Called when application is started.
 		/// </summary>
-		private void Start ()
+		private new void Start ()
 		{
-			var targetScript = GetComponent<IRecoverable<TData>>();
-			Originator	= new Originator<TData>(targetScript);
-			Mementos = new List<TData>();
+			base.Start();
 			MultiStateMonitoring = GetComponent<IMultiStateMonitoring>();
 		}
 
@@ -71,7 +59,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			Mementos.Add(Originator.SaveStateToMemento());
+			Memento.Add(Originator.SaveStateToMemento());
 			MultiStateMonitoring?.OnStateSaved(SavedStates - 1);
 		}
 
@@ -88,7 +76,7 @@ namespace Essential.Core.Memory
 				return;
 			}
 			
-			Originator.RestoreStateFromMomento(Mementos[index]);
+			Originator.RestoreStateFromMomento(Memento[index]);
 			MultiStateMonitoring?.OnStateRestored(index);
 		}
 
@@ -105,7 +93,7 @@ namespace Essential.Core.Memory
 				return;
 			}
 			
-			Mementos.RemoveAt(index);
+			Memento.RemoveAt(index);
 			MultiStateMonitoring?.OnStateRemoved(index);
 		}
 
@@ -115,7 +103,7 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void ClearStates()
 		{
-			Mementos.Clear();
+			Memento.Clear();
 			MultiStateMonitoring?.OnStatesCleared();
 		}
 	}
