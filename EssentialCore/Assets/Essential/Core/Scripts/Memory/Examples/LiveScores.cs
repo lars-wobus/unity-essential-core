@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Essential.Core.Scripts.Memory.Examples
 {
-    public class LiveScores : MonoBehaviour, IMultiStateMonitoring
+    public class LiveScores : MonoBehaviour, IStateMonitor
     {
         [SerializeField] private int _savedStates;
         [SerializeField] private int _activeState = -1;

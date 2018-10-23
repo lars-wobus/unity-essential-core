@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Essential.Core.Scripts.Memory.Examples
 {
-	public class MultiStateUnityEventBasedMonitor : MonoBehaviour, IMultiStateMonitoring
+	public class StateUnityEventBasedMonitor : MonoBehaviour, IStateMonitor
 	{
 		public IntEvent StateSaved;
 		public IntEvent StateRestored;

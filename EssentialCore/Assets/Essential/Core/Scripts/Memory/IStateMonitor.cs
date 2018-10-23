@@ -1,6 +1,6 @@
 ﻿namespace Essential.Core.Memory
 {
-    public interface IMultiStateMonitoring
+    public interface IStateMonitor
     {
         void OnStateSaved(int index);
         void OnStateRestored(int index);

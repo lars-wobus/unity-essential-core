@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace Essential.Core.Memory
+﻿namespace Essential.Core.Memory
 {
 	/// <inheritdoc />
 	/// <summary>
@@ -16,7 +13,7 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Optional MonoBehaviour providing functions to inform listeners. 
 		/// </summary>
-		private IMultiStateMonitoring MultiStateMonitoring { get; set; }
+		private IStateMonitor StateMonitor { get; set; }
 
 		/// <summary>
 		/// Return number of saved states.
@@ -30,7 +27,7 @@ namespace Essential.Core.Memory
 		private new void Start ()
 		{
 			base.Start();
-			MultiStateMonitoring = GetComponent<IMultiStateMonitoring>();
+			StateMonitor = GetComponent<IStateMonitor>();
 		}
 
 		/// <summary>
@@ -60,7 +57,7 @@ namespace Essential.Core.Memory
 		public void SaveCurrentState()
 		{
 			Memento.Add(Originator.SaveStateToMemento());
-			MultiStateMonitoring?.OnStateSaved(SavedStates - 1);
+			StateMonitor?.OnStateSaved(SavedStates - 1);
 		}
 
 		/// <summary>
@@ -72,12 +69,12 @@ namespace Essential.Core.Memory
 		{
 			if (!HasState(index))
 			{
-				MultiStateMonitoring?.OnRestorationFailed(index);
+				StateMonitor?.OnRestorationFailed(index);
 				return;
 			}
 			
 			Originator.RestoreStateFromMomento(Memento[index]);
-			MultiStateMonitoring?.OnStateRestored(index);
+			StateMonitor?.OnStateRestored(index);
 		}
 
 		/// <summary>
@@ -89,12 +86,12 @@ namespace Essential.Core.Memory
 		{
 			if (!HasState(index))
 			{
-				MultiStateMonitoring.OnRemovingFailed(index);
+				StateMonitor.OnRemovingFailed(index);
 				return;
 			}
 			
 			Memento.RemoveAt(index);
-			MultiStateMonitoring?.OnStateRemoved(index);
+			StateMonitor?.OnStateRemoved(index);
 		}
 
 		/// <summary>
@@ -104,7 +101,7 @@ namespace Essential.Core.Memory
 		public void ClearStates()
 		{
 			Memento.Clear();
-			MultiStateMonitoring?.OnStatesCleared();
+			StateMonitor?.OnStatesCleared();
 		}
 	}
 }
