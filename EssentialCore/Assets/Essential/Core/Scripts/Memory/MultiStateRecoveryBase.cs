@@ -21,7 +21,6 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
-		//private Caretaker<List<TData>> Caretaker { get; set; }
 		private List<TData> Mementos { get; set; }
 		
 		/// <summary>
@@ -33,7 +32,6 @@ namespace Essential.Core.Memory
 		/// Return number of saved states.
 		/// </summary>
 		// ReSharper disable once MemberCanBePrivate.Global
-		//public int SavedStates => Caretaker?.Memento.Count ?? 0;
 		public int SavedStates => Mementos.Count;
 		
 		/// <summary>
@@ -43,7 +41,6 @@ namespace Essential.Core.Memory
 		{
 			var targetScript = GetComponent<IRecoverable<TData>>();
 			Originator	= new Originator<TData>(targetScript);
-			//Caretaker = new Caretaker<List<TData>>(new List<TData>());
 			Mementos = new List<TData>();
 			MultiStateMonitoring = GetComponent<IMultiStateMonitoring>();
 		}
@@ -74,7 +71,6 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			//Caretaker.Memento.Add(Originator.SaveStateToMemento());
 			Mementos.Add(Originator.SaveStateToMemento());
 			MultiStateMonitoring?.OnStateSaved(SavedStates - 1);
 		}
@@ -92,7 +88,6 @@ namespace Essential.Core.Memory
 				return;
 			}
 			
-			//Originator.RestoreStateFromMomento(Caretaker.Memento[index]);
 			Originator.RestoreStateFromMomento(Mementos[index]);
 			MultiStateMonitoring?.OnStateRestored(index);
 		}
@@ -110,7 +105,6 @@ namespace Essential.Core.Memory
 				return;
 			}
 			
-			//Caretaker.Memento.RemoveAt(index);
 			Mementos.RemoveAt(index);
 			MultiStateMonitoring?.OnStateRemoved(index);
 		}
@@ -121,7 +115,6 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void ClearStates()
 		{
-			//Caretaker.Memento.Clear();
 			Mementos.Clear();
 			MultiStateMonitoring?.OnStatesCleared();
 		}

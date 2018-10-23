@@ -20,7 +20,6 @@ namespace Essential.Core.Memory
 		/// <summary>
 		/// Used to save an internal state.
 		/// </summary>
-		//private Caretaker<TData> Caretaker { get; set; }
 		private TData Memento { get; set; }
 		
 		/// <summary>
@@ -44,7 +43,6 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void RestorePreviousState()
 		{
-			//Originator.RestoreStateFromMomento(Caretaker.Memento);
 			Originator.RestoreStateFromMomento(Memento);
 			SingleStateMonitoring?.OnStateRestored();
 			//Debug.Break();
@@ -56,7 +54,6 @@ namespace Essential.Core.Memory
 		// ReSharper disable once UnusedMember.Global
 		public void SaveCurrentState()
 		{
-			//Caretaker = new Caretaker<TData>(Originator.SaveStateToMemento());
 			Memento = Originator.SaveStateToMemento();
 			SingleStateMonitoring?.OnStateSaved();
 		}
