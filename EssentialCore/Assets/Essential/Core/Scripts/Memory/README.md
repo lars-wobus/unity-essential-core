@@ -30,6 +30,9 @@ To use this version, one has to implement a similar interface and replace one pa
      alt="Image describes which interfaces and MonoBehaviours must be used for the simplified version of the Recovery Pattern">
 </details>
 
+## Important notes:
+- Vector2, Vector3, Vector4 and Quaternion cannot be tracked. Unity serialization is different to the serialization of .Net using BinaryFormatter.
+
 ## Remaining tasks until version 1.0 is released
 * Full description about the configuration of GameObjects.
 * Example scene where the player is able to navigate a character through a level and to repeat the steps made earlier.
