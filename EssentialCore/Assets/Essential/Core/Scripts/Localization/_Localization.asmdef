@@ -1,3 +1,10 @@
-﻿{
-	"name": "_Localization"
+{
+    "name": "_Localization",
+    "references": [
+        "Unity.TextMeshPro"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }
