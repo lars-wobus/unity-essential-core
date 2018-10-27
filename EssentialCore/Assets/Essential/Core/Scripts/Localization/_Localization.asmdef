@@ -1,7 +1,8 @@
 {
     "name": "_Localization",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "_IO"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

@@ -1,0 +1,7 @@
+{
+  "items":[
+    {"id":"volume", "text": "Lautstärke"},
+    {"id":"speech", "text": "Sprache"},
+    {"id":"effects", "text": "Effekte"}
+  ]
+}
