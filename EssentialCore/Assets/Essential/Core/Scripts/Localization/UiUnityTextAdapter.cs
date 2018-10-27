@@ -6,6 +6,7 @@ namespace Essential.Core.Localization
 	public class UiUnityTextAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{
 		[SerializeField] private Text _text;
+		[SerializeField] private string _id;
 		
 		private IRegistry Registry { get; set; }
 

@@ -6,6 +6,7 @@ namespace Essential.Core.Localization
 	public class UiTextMeshProAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{
 		[SerializeField] private TextMeshProUGUI _text;
+		[SerializeField] private string _id;
 		
 		private IRegistry Registry { get; set; }
 
