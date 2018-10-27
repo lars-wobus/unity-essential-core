@@ -27,3 +27,8 @@ Canvas elements. But it centralizes all scripts having an effect on the displaye
 ## Structure of custom scripts
 - Scripts could check if they are connected to UI elements. This could be done on application start or while still working in the Unity Editor.
 - If the type of the UI element is already known, custom scripts can be implemented which do not have to call methods like GetComponent().
+
+## Optimization
+- While thinking about scene management, I came to the conclusion, that scripts must (un-)register themself to some kind of localization manager. That gave me the idea to implement the (Object) Adapter Pattern.
+
+![The image shows the benefit of using the adapter pattern for localization](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-adapter-pattern---localization/custom-adapter-pattern.png)
