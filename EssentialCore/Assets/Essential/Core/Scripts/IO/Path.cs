@@ -178,5 +178,23 @@ namespace Essential.Core.IO
 
 			return string.Compare(normalizedPath, normalizedRoot, StringComparison.Ordinal) != 0 && normalizedPath.StartsWith(normalizedRoot);
 		}
+
+		/// <summary>
+		/// Combine strings into path.
+		/// </summary>
+		/// <param name="paths">Specifiy path to file or directory.</param>
+		/// <returns>Path on success or null on fail.</returns>
+		public static string Combine(params string[] paths)
+		{
+			try
+			{
+				return System.IO.Path.Combine(paths);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
+			}
+		}
 	}
 }

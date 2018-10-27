@@ -105,5 +105,28 @@ namespace Essential.Core.IO
                 return false;
             }
         }
+
+        /// <summary>
+        /// Open file to read all text and close it automatically when finished.
+        /// </summary>
+        /// <param name="filePath">Absolute path to an existing file.</param>
+        /// <returns>File content on success or null on fail.</returns>
+        public static string ReadAllText(string filePath)
+        {
+            if (!Exists(filePath))
+            {
+                return null;
+            }
+            
+            try
+            {
+                return System.IO.File.ReadAllText(filePath);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+                return null;
+            }
+        }
     }
 }
