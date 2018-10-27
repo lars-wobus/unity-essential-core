@@ -1,0 +1,12 @@
+{
+    "name": "_LocalizationEditor",
+    "references": [
+        "_Localization"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
