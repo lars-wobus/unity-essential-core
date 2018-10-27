@@ -3,5 +3,6 @@
     public interface ITextComponent
     {
         void SetText(string text);
+        string GetId();
     }
 }

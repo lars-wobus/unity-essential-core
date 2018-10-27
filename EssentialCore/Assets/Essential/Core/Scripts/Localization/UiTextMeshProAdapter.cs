@@ -1,10 +1,12 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Essential.Core.Localization
 {
 	public class UiTextMeshProAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{
+		[SerializeField] private LocalizedTextRegistry _registry;
 		[SerializeField] private TextMeshProUGUI _text;
 		[SerializeField] private string _id;
 		
@@ -12,8 +14,16 @@ namespace Essential.Core.Localization
 
 		private void Start()
 		{
-			Registry = GetComponent<IRegistry>();
+			//Registry = GetComponent<IRegistry>();
+			Register(_registry);
+			//StartCoroutine(WaitToRegister());
 		}
+
+		/*private IEnumerator WaitToRegister()
+		{
+			yield return null;
+			Register(_registry);
+		}*/
 		
 		private void OnDestroy()
 		{
@@ -29,6 +39,11 @@ namespace Essential.Core.Localization
 			}
 		
 			text.text = value;
+		}
+		
+		public string GetId()
+		{
+			return _id;
 		}
 
 		public void Register(IRegistry registry)

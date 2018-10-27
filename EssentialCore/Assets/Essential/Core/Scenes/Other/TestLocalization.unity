@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140d32c29f1afc4489d3970aa1ad34c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _registry: {fileID: 737345313}
   _text: {fileID: 521136406}
+  _id: volume
 --- !u!1 &382292560
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +382,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 737345311}
+  - component: {fileID: 737345313}
+  - component: {fileID: 737345312}
   m_Layer: 0
   m_Name: Localization
   m_TagString: Untagged
@@ -402,6 +406,30 @@ Transform:
   m_Father: {fileID: 804413087}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &737345312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737345310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8915e6dc5649c4eb9b375a040c0f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rootFolder: 0
+  _sampleFile: settings_de.json
+--- !u!114 &737345313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 737345310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f484b29055958c4faacbd116e3d6b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &804413086
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +839,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d4a897fd1b897439c27086026dbca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _registry: {fileID: 737345313}
   _text: {fileID: 1478753644}
+  _id: unknown
 --- !u!1 &1799952772
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,10 +6,12 @@ namespace Essential.Core.Localization
 	public class LocalizedTextRegistry : MonoBehaviour, IRegistry
 	{
 		private List<IRegisterable> RegisteredTextElements { get; set; }
+		private LocalizationManager Manager { get; set; }
 
 		private void Awake()
 		{
 			RegisteredTextElements = new List<IRegisterable>();
+			Manager = GetComponent<LocalizationManager>();
 		}
 
 		public bool Register(IRegisterable element)
@@ -21,6 +23,7 @@ namespace Essential.Core.Localization
 			}
 			
 			list.Add(element);
+			Manager.UpdateText(element as ITextComponent); // TODO ugly
 			return true;
 		}
 		
