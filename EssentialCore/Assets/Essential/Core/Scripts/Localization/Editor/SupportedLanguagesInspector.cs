@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace Essential.Core.Scripts.Localization.Editor
 {
+	/// <summary>
+	/// Custom inspector to define specific sets culture identifiers.
+	/// </summary>
 	[CustomEditor(typeof(SupportedLanguages))]
 	public class SupportedLanguagesInspector : UnityEditor.Editor
 	{
