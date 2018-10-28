@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activeCultureType: 2
   _list:
-  - bg-BG
-  - sk-SK
+  - lv-LV
+  - hi-IN
