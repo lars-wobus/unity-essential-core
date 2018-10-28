@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _registry: {fileID: 737345313}
+  _registryTag: 0
   _text: {fileID: 521136406}
   _id: volume
 --- !u!1 &382292560
@@ -386,7 +387,7 @@ GameObject:
   - component: {fileID: 737345312}
   m_Layer: 0
   m_Name: Localization
-  m_TagString: Untagged
+  m_TagString: Localization
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,6 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _registry: {fileID: 737345313}
+  _registryTag: 0
   _text: {fileID: 1478753644}
   _id: unknown
 --- !u!1 &1799952772
