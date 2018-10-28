@@ -1,13 +1,19 @@
 ﻿using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
 using UnityEngine;
 
 namespace Essential.Core.Localization
 {
+	/// <summary>
+	/// Create scriptable object to store supported culture identifiers.
+	/// </summary>
 	public static class MakeSupportedLanguage {
-		[MenuItem("Assets/Create/Essential/Localization")]
-		public static void CreateMyAsset()
+		
+		/// <summary>
+		/// Create asset if no asset with the same name already exists in the active folder.
+		/// </summary>
+		[MenuItem("Assets/Create/Essential/Localization/SupportedLanguages")]
+		public static void CreateAsset()
 		{
 			var assetPath = CreateAssetPath();
 
@@ -28,6 +34,10 @@ namespace Essential.Core.Localization
 			Selection.activeObject = asset;
 		}
 
+		/// <summary>
+		/// Create asset name and path to a single path.
+		/// </summary>
+		/// <returns>Valid asset path.</returns>
 		private static string CreateAssetPath()
 		{
 			var fileName = typeof(SupportedLanguage).Name + ".asset";
@@ -35,6 +45,10 @@ namespace Essential.Core.Localization
 			return Path.Combine(folder, fileName);
 		}
 
+		/// <summary>
+		/// Get selected folder, folder of selected asset or root folder if nothing was selected. 
+		/// </summary>
+		/// <returns>Valid asset folder.</returns>
 		private static string GetActiveFolder()
 		{
 			var path = "Assets";
@@ -52,6 +66,11 @@ namespace Essential.Core.Localization
 			return path;
 		}
 
+		/// <summary>
+		/// Check if an asset can be found.
+		/// </summary>
+		/// <param name="assetPath">Possible location of an asset.</param>
+		/// <returns>True if an asset could be found or False when if no asset could be found.</returns>
 		private static bool AssetExists(string assetPath)
 		{
 			return AssetDatabase.LoadAssetAtPath<SupportedLanguage>(assetPath) != null;
