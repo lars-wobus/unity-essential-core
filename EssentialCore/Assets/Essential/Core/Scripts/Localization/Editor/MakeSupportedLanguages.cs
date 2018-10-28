@@ -12,8 +12,8 @@ namespace Essential.Core.Localization.Editor
 	/// <summary>
 	/// Create scriptable object to store supported culture identifiers.
 	/// </summary>
-	public static class MakeSupportedLanguage {
-		
+	public static class MakeSupportedLanguages
+	{
 		/// <summary>
 		/// Create asset if no asset with the same name already exists in the active folder.
 		/// </summary>
@@ -75,7 +75,7 @@ namespace Essential.Core.Localization.Editor
 		/// Check if an asset can be found.
 		/// </summary>
 		/// <param name="assetPath">Possible location of an asset.</param>
-		/// <returns>True if an asset could be found or False when if no asset could be found.</returns>
+		/// <returns>True if an asset could be found or False if no asset could be found.</returns>
 		private static bool AssetExists(string assetPath)
 		{
 			return AssetDatabase.LoadAssetAtPath<SupportedLanguages>(assetPath) != null;
