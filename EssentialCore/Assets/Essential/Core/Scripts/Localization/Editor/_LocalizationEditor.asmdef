@@ -1,7 +1,8 @@
 {
     "name": "_LocalizationEditor",
     "references": [
-        "_Localization"
+        "_Localization",
+        "_Tagging"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
