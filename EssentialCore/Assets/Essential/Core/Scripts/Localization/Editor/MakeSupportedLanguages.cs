@@ -17,7 +17,7 @@ namespace Essential.Core.Localization.Editor
 		/// <summary>
 		/// Create asset if no asset with the same name already exists in the active folder.
 		/// </summary>
-		[MenuItem("Assets/Create/Essential/Localization/SupportedLanguages")]
+		[MenuItem("Essential/Localization/Create/SupportedLanguages")]
 		public static void CreateAsset()
 		{
 			var assetPath = CreateAssetPath();
@@ -84,7 +84,7 @@ namespace Essential.Core.Localization.Editor
 		/// <summary>
 		/// Print names of all cultures on console.
 		/// </summary>
-		[MenuItem("Assets/Create/Essential/Localization/PrintCutultureIdentifiersOnConsole")]
+		[MenuItem("Essential/Localization/PrintCutultureIdentifiersOnConsole")]
 		private static void PrintAllCultureIdentifiers()
 		{
 			var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
