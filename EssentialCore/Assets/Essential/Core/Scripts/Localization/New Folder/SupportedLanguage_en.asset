@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SupportedLanguage_en
   m_EditorClassIdentifier: 
   list:
-  - en-US
-  - is-IS
+  - lv-LV
+  - hi-IN
   objectName: SupportedLanguage
   colorIsRandom: 0
