@@ -9,8 +9,8 @@ using UnityEngine;
 
 namespace Essential.Core.Scripts.Localization.Editor
 {
-	[CustomEditor(typeof(SupportedLanguage))]
-	public class SupportedLanguageInspector : UnityEditor.Editor
+	[CustomEditor(typeof(SupportedLanguages))]
+	public class SupportedLanguagesInspector : UnityEditor.Editor
 	{
 		/// <summary>
 		/// Active culture type represents global filter.
@@ -45,6 +45,7 @@ namespace Essential.Core.Scripts.Localization.Editor
 		/// </summary>
 		private void OnEnable()
 		{
+			CultureType = (CultureTypes) serializedObject.FindProperty("_activeCultureType").intValue;
 			RebuildReorderableList();
 		}
 
@@ -53,9 +54,12 @@ namespace Essential.Core.Scripts.Localization.Editor
 		/// </summary>
 		public override void OnInspectorGUI()
 		{
-			serializedObject.Update();			
+			serializedObject.Update();
+			
 			CultureType = (CultureTypes) EditorGUILayout.EnumPopup("CultureType", CultureType);
 			ReorderableList.DoLayoutList();
+
+			serializedObject.FindProperty("_activeCultureType").intValue = (int) CultureType;
 			serializedObject.ApplyModifiedProperties();
 		}
 
@@ -67,7 +71,7 @@ namespace Essential.Core.Scripts.Localization.Editor
 		{
 			var array = GetAlphabeticallySortedArrayOfCultureNames();
 			
-			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("list"), true, true, true, true);
+			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_list"), true, true, true, true);
 			ReorderableList.drawElementCallback = (Rect rect, int listIndex, bool isAvtive, bool isFocused) =>
 			{
 				var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(listIndex);
@@ -141,6 +145,7 @@ namespace Essential.Core.Scripts.Localization.Editor
 		/// </summary>
 		private void OnActiveCultureTypeChanged()
 		{
+			//serializedObject.FindProperty("_activeCultureType").intValue = (int) CultureType;
 			RebuildReorderableList();
 		}
 	}

@@ -25,7 +25,7 @@ namespace Essential.Core.Localization
 				return;
 			}
 			
-			var asset = ScriptableObject.CreateInstance<SupportedLanguage>();
+			var asset = ScriptableObject.CreateInstance<SupportedLanguages>();
 			AssetDatabase.CreateAsset(asset, assetPath);
 			AssetDatabase.SaveAssets();
 
@@ -40,7 +40,7 @@ namespace Essential.Core.Localization
 		/// <returns>Valid asset path.</returns>
 		private static string CreateAssetPath()
 		{
-			var fileName = typeof(SupportedLanguage).Name + ".asset";
+			var fileName = typeof(SupportedLanguages).Name + ".asset";
 			var folder = GetActiveFolder();
 			return Path.Combine(folder, fileName);
 		}
@@ -73,7 +73,7 @@ namespace Essential.Core.Localization
 		/// <returns>True if an asset could be found or False when if no asset could be found.</returns>
 		private static bool AssetExists(string assetPath)
 		{
-			return AssetDatabase.LoadAssetAtPath<SupportedLanguage>(assetPath) != null;
+			return AssetDatabase.LoadAssetAtPath<SupportedLanguages>(assetPath) != null;
 		}
 	}
 }
