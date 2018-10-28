@@ -36,6 +36,8 @@ namespace Essential.Core.Localization.Editor
 			{
 				streamWriter.Write(fileContent);
 			}
+
+			JumpToAsset(absoluteFilePath);
 		}
 
 		/// <summary>
@@ -68,7 +70,7 @@ namespace Essential.Core.Localization.Editor
 				return;
 			}
 			
-			System.IO.Directory.CreateDirectory(absoluteDirectoryPath);
+			Directory.CreateDirectory(absoluteDirectoryPath);
 		}
 
 		/// <summary>
@@ -94,6 +96,21 @@ namespace Essential.Core.Localization.Editor
 		private static bool AssetExists(string absoluteAssetPath)
 		{
 			return File.Exists(absoluteAssetPath);
+		}
+
+		/// <summary>
+		/// Jump to asset in project window.
+		/// </summary>
+		/// <param name="absoluteFilePath">Absolute path of new asset.</param>
+		private static void JumpToAsset(string absoluteFilePath)
+		{
+			var parentPath = Directory.GetParent(Application.dataPath).FullName;
+			var normalizedPath = parentPath.Replace("\\", "/");
+			var relativeFilePath = absoluteFilePath.Replace(normalizedPath+"/", "");
+			
+			AssetDatabase.Refresh();
+
+			Selection.activeObject = AssetDatabase.LoadMainAssetAtPath(relativeFilePath);
 		}
 	}
 }
