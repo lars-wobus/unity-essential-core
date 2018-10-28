@@ -15,14 +15,7 @@ namespace Essential.Core.Localization.UI
 		{
 			//Registry = GetComponent<IRegistry>();
 			Register(_registry);
-			//StartCoroutine(WaitToRegister());
 		}
-
-		/*private IEnumerator WaitToRegister()
-		{
-			yield return null;
-			Register(_registry);
-		}*/
 
 		private void OnDestroy()
 		{

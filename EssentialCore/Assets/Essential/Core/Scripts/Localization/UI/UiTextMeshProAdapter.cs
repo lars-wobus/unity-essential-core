@@ -8,21 +8,14 @@ namespace Essential.Core.Localization.UI
 		[SerializeField] private LocalizedTextRegistry _registry;
 		[SerializeField] private TextMeshProUGUI _text;
 		[SerializeField] private string _id;
-		
-		private IRegistry Registry { get; set; }
 
+		//private IRegistry Registry { get; set; }
+		
 		private void Start()
 		{
 			//Registry = GetComponent<IRegistry>();
 			Register(_registry);
-			//StartCoroutine(WaitToRegister());
 		}
-
-		/*private IEnumerator WaitToRegister()
-		{
-			yield return null;
-			Register(_registry);
-		}*/
 		
 		private void OnDestroy()
 		{
