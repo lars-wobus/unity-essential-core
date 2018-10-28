@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Essential.Core.Localization.Editor
 {
+	/// <summary>
+	/// Create json template in StreamingAssets subfolder.
+	/// </summary>
 	public static class CreateJsonFileInStreamingAssets
 	{
 		/// <summary>
