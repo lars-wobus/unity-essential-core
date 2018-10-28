@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+
+using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -75,5 +80,18 @@ namespace Essential.Core.Localization
 		{
 			return AssetDatabase.LoadAssetAtPath<SupportedLanguages>(assetPath) != null;
 		}
+
+		/// <summary>
+		/// Print names of all cultures on console.
+		/// </summary>
+		[MenuItem("Assets/Create/Essential/Localization/PrintCutultureIdentifiersOnConsole")]
+		private static void PrintAllCultureIdentifiers()
+		{
+			var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
+			var identifiers = cultures.Select(element => element.Name).ToArray();
+			System.Array.Sort(identifiers, StringComparer.InvariantCulture);
+			Debug.Log(string.Join("\n", identifiers));
+		}
 	}
 }
+#endif
