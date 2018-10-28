@@ -71,7 +71,7 @@ namespace Essential.Core.Scripts.Localization.Editor
 		{
 			var array = GetAlphabeticallySortedArrayOfCultureNames();
 			
-			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_list"), true, true, true, true);
+			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_identifiers"), true, true, true, true);
 			ReorderableList.drawElementCallback = (Rect rect, int listIndex, bool isAvtive, bool isFocused) =>
 			{
 				var element = ReorderableList.serializedProperty.GetArrayElementAtIndex(listIndex);

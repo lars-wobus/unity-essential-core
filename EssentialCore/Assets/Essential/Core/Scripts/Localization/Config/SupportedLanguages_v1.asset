@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: SupportedLanguages_v1
   m_EditorClassIdentifier: 
   _activeCultureType: 2
-  _list:
+  _identifiers:
   - lv-LV
   - hi-IN
