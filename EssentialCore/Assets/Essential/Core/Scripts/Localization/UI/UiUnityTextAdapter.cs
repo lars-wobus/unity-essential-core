@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Tagging;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Essential.Core.Localization.UI
@@ -6,15 +7,18 @@ namespace Essential.Core.Localization.UI
 	public class UiUnityTextAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{
 		[SerializeField] private LocalizedTextRegistry _registry;
+		[SerializeField] private Tags _registryTag = Tags.Localization;
 		[SerializeField] private Text _text;
 		[SerializeField] private string _id;
 		
-		//private IRegistry Registry { get; set; }
+		private IRegistry Registry { get; set; }
 
 		private void Start()
 		{
-			//Registry = GetComponent<IRegistry>();
-			Register(_registry);
+			var tagname = StringValueAttribute.GetStringValue(_registryTag);
+			Registry = GameObject.FindGameObjectWithTag(tagname).GetComponent<IRegistry>();
+			//Register(_registry);
+			Register(Registry);
 		}
 
 		private void OnDestroy()

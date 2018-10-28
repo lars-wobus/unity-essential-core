@@ -2,7 +2,8 @@
     "name": "_Localization",
     "references": [
         "Unity.TextMeshPro",
-        "_IO"
+        "_IO",
+        "_Tagging"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
