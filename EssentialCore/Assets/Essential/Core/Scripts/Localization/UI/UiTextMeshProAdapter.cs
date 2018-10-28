@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-namespace Essential.Core.Localization
+namespace Essential.Core.Localization.UI
 {
 	public class UiTextMeshProAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{

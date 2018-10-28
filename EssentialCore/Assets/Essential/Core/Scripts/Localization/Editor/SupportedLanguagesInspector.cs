@@ -4,12 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Essential.Core.Localization;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Essential.Core.Scripts.Localization.Editor
+namespace Essential.Core.Localization.Editor
 {
 	/// <summary>
 	/// Custom inspector to define specific sets culture identifiers.

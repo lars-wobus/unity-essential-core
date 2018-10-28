@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Essential.Core.Localization
+namespace Essential.Core.Localization.UI
 {
 	public class UiUnityTextAdapter : MonoBehaviour, ITextComponent, IRegisterable
 	{

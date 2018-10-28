@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Essential.Core.Localization
+namespace Essential.Core.Localization.Editor
 {
 	/// <summary>
 	/// Create scriptable object to store supported culture identifiers.
@@ -89,7 +89,7 @@ namespace Essential.Core.Localization
 		{
 			var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
 			var identifiers = cultures.Select(element => element.Name).ToArray();
-			System.Array.Sort(identifiers, StringComparer.InvariantCulture);
+			Array.Sort(identifiers, StringComparer.InvariantCulture);
 			Debug.Log(string.Join("\n", identifiers));
 		}
 	}
