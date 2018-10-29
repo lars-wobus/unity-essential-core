@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Localization
+﻿namespace Essential.Core.Localization.Interfaces
 {
 	public interface ILocalizedTextRegistry
 	{

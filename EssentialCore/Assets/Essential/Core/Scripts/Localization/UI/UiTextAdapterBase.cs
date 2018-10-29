@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Localization.Interfaces;
+using UnityEngine;
 
 namespace Essential.Core.Localization.UI
 {

@@ -1,4 +1,5 @@
-﻿using Essential.Core.Tagging;
+﻿using Essential.Core.Localization.Interfaces;
+using Essential.Core.Tagging;
 using UnityEngine;
 
 namespace Essential.Core.Localization
