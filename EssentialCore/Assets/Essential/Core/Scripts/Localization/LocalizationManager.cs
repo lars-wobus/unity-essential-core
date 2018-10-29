@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Essential.Core.IO;
 using UnityEngine;
 
 namespace Essential.Core.Localization
 {
-	//[RequireComponent(typeof(LocalizedTextRegistry))]
 	public class LocalizationManager : MonoBehaviour
 	{
 		[SerializeField] private StreamingAssetsPathSubfolder _rootFolder = StreamingAssetsPathSubfolder.Localization;
-
 		[SerializeField] private string _sampleFile = "settings_de.json";
 		
-		//private LocalizedTextRegistry Registry { get; set; }
 		private Dictionary<string, string> Language { get; set; }
 	
 		// Use this for initialization
 		private void Awake ()
 		{
-			//Registry = GetComponent<LocalizedTextRegistry>();
 			Language = new Dictionary<string, string>();
 
 			var folderName = _rootFolder.ToString("g");
