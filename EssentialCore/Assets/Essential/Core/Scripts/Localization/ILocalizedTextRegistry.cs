@@ -1,6 +1,6 @@
 ﻿namespace Essential.Core.Localization
 {
-	public interface IRegistry
+	public interface ILocalizedTextRegistry
 	{
 		bool Register(ITextComponent element);
 		bool Unregister(ITextComponent element);

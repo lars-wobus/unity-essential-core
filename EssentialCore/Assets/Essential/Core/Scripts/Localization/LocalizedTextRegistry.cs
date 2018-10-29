@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Essential.Core.Localization
 {
 	[RequireComponent(typeof(LocalizationManager))]
-	public class LocalizedTextRegistry : MonoBehaviour, IRegistry
+	public class LocalizedTextRegistry : MonoBehaviour, ILocalizedTextRegistry
 	{
 		private List<ITextComponent> RegisteredTextElements { get; set; }
 		private LocalizationManager Manager { get; set; }

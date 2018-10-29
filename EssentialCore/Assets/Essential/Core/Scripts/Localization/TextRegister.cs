@@ -5,7 +5,7 @@ namespace Essential.Core.Localization
 {
 	public class TextRegister : MonoBehaviour
 	{
-		private IRegistry TextRegistry { get; set; }
+		private ILocalizedTextRegistry TextRegistry { get; set; }
 		
 		private void Start ()
 		{
@@ -33,7 +33,7 @@ namespace Essential.Core.Localization
 			}
 		}
 
-		private IRegistry FindRegistry()
+		private ILocalizedTextRegistry FindRegistry()
 		{
 			var tagname = StringValueAttribute.GetStringValue(Tags.Localization);
 			var registry = GameObject.FindGameObjectWithTag(tagname);
@@ -45,7 +45,7 @@ namespace Essential.Core.Localization
 			}
 			#endif
 
-			return (registry == null)? null : registry.GetComponent<IRegistry>();
+			return (registry == null)? null : registry.GetComponent<ILocalizedTextRegistry>();
 		}
 	}
 }
