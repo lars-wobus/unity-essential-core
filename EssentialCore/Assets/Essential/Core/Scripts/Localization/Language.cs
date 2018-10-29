@@ -6,7 +6,7 @@ namespace Essential.Core.Localization
 {
 	public class Language
 	{
-		public Dictionary<string, string> Vocabulary { get; private set; }
+		public Dictionary<string, string> Vocabulary { get; }
 
 		public Language()
 		{
