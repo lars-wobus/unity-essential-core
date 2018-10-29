@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 
 using System.IO;
+using Essential.Core.Localization.Data;
 using Essential.Core.Tagging;
 using UnityEditor;
 using UnityEngine;

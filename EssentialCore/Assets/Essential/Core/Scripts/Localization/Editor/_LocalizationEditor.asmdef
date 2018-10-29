@@ -2,7 +2,8 @@
     "name": "_LocalizationEditor",
     "references": [
         "_Localization",
-        "_Tagging"
+        "_Tagging",
+        "_LocalizationData"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

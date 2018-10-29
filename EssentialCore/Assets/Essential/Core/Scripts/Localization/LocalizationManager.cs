@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Essential.Core.IO;
+using Essential.Core.Localization.Data;
 using UnityEngine;
 
 namespace Essential.Core.Localization
