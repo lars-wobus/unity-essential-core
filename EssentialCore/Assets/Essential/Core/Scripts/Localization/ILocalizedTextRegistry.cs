@@ -2,7 +2,7 @@
 {
 	public interface ILocalizedTextRegistry
 	{
-		bool Register(ITextComponent element);
-		bool Unregister(ITextComponent element);
+		bool Register(ILocalizedTextComponent element);
+		bool Unregister(ILocalizedTextComponent element);
 	}
 }

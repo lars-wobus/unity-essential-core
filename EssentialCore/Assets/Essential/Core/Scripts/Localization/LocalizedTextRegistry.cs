@@ -6,16 +6,16 @@ namespace Essential.Core.Localization
 	[RequireComponent(typeof(LocalizationManager))]
 	public class LocalizedTextRegistry : MonoBehaviour, ILocalizedTextRegistry
 	{
-		private List<ITextComponent> RegisteredTextElements { get; set; }
-		private LocalizationManager Manager { get; set; }
+		private List<ILocalizedTextComponent> RegisteredTextElements { get; set; }
+		private ILocalizationManager Manager { get; set; }
 
 		private void Awake()
 		{
-			RegisteredTextElements = new List<ITextComponent>();
-			Manager = GetComponent<LocalizationManager>();
+			RegisteredTextElements = new List<ILocalizedTextComponent>();
+			Manager = GetComponent<ILocalizationManager>();
 		}
 
-		public bool Register(ITextComponent element)
+		public bool Register(ILocalizedTextComponent element)
 		{
 			var list = RegisteredTextElements;
 			if (list.Contains(element))
@@ -28,7 +28,7 @@ namespace Essential.Core.Localization
 			return true;
 		}
 		
-		public bool Unregister(ITextComponent element)
+		public bool Unregister(ILocalizedTextComponent element)
 		{
 			return RegisteredTextElements.Remove(element);
 		}

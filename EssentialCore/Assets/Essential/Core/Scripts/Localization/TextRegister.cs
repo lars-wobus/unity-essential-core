@@ -10,7 +10,7 @@ namespace Essential.Core.Localization
 		private void Start ()
 		{
 			TextRegistry = FindRegistry();
-			var textAdapters = GetComponentsInChildren<ITextComponent>();
+			var textAdapters = GetComponentsInChildren<ILocalizedTextComponent>();
 			foreach (var textAdapter in textAdapters)
 			{
 				TextRegistry?.Register(textAdapter);
@@ -26,7 +26,7 @@ namespace Essential.Core.Localization
 		/// </remarks>
 		private void OnDestroy()
 		{
-			var textAdapters = GetComponentsInChildren<ITextComponent>();
+			var textAdapters = GetComponentsInChildren<ILocalizedTextComponent>();
 			foreach (var textAdapter in textAdapters)
 			{
 				TextRegistry?.Unregister(textAdapter);

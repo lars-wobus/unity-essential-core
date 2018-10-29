@@ -2,7 +2,7 @@
 
 namespace Essential.Core.Localization.UI
 {
-	public abstract class UiTextAdapterBase : MonoBehaviour, ITextComponent
+	public abstract class UiTextAdapterBase : MonoBehaviour, ILocalizedTextComponent
 	{
 		[SerializeField] private string _id;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Essential.Core.Localization
 {
-	public class LocalizationManager : MonoBehaviour
+	public class LocalizationManager : MonoBehaviour, ILocalizationManager
 	{
 		[SerializeField] private StreamingAssetsPathSubfolder _rootFolder = StreamingAssetsPathSubfolder.Localization;
 		[SerializeField] private string _sampleFile = "settings_de.json";
@@ -39,9 +39,9 @@ namespace Essential.Core.Localization
 			}
 		}
 
-		public void UpdateText(ITextComponent text)
+		public void UpdateText(ILocalizedTextComponent localizedText)
 		{
-			var id = text.Id;
+			var id = localizedText.Id;
 
 			if (!Language.ContainsKey(id))
 			{
@@ -49,7 +49,7 @@ namespace Essential.Core.Localization
 			}
 
 			var value = Language[id];
-			text.SetText(value);
+			localizedText.SetText(value);
 		}
 	}
 }
