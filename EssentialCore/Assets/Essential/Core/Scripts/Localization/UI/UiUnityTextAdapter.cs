@@ -3,25 +3,13 @@ using UnityEngine.UI;
 
 namespace Essential.Core.Localization.UI
 {
-	public class UiUnityTextAdapter : MonoBehaviour, ITextComponent
+	public class UiUnityTextAdapter : UiTextAdapterBase
 	{
 		[SerializeField] private Text _text;
-		[SerializeField] private string _id;
 
-		public void SetText(string value)
+		public override void SetText(string value)
 		{
-			var text = _text;
-			if (text == null)
-			{
-				return;
-			}
-		
-			text.text = value;
-		}
-
-		public string GetId()
-		{
-			return _id;
+			if (_text != null) _text.text = value;
 		}
 	}
 }
