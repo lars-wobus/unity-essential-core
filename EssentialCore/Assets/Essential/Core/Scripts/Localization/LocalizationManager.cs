@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Essential.Core.IO;
 using Essential.Core.Localization.Data;
 using Essential.Core.Localization.Interfaces;
@@ -9,7 +10,7 @@ namespace Essential.Core.Localization
 	public class LocalizationManager : MonoBehaviour, ILocalizationManager
 	{
 		[SerializeField] private StreamingAssetsPathSubfolder _rootFolder = StreamingAssetsPathSubfolder.Localization;
-		[SerializeField] private string _sampleFile = "settings_de.json";
+		//[SerializeField] private string _sampleFile = "settings_de.json";
 		[SerializeField] private string _activeLanguage = "de";
 
 		private Dictionary<string, Language> Languages { get; set; }
@@ -17,29 +18,61 @@ namespace Essential.Core.Localization
 		private void Awake ()
 		{
 			Languages = new Dictionary<string, Language>();
-			Languages.Add(_activeLanguage, new Language());
+			//Languages.Add(_activeLanguage, new Language());
 
 			var folderName = _rootFolder.ToString("g");
-			var filePath = Path.Combine(Application.streamingAssetsPath, folderName, _sampleFile);
+			/*var filePath = Path.Combine(Application.streamingAssetsPath, folderName, _sampleFile);
 
 			var normalizedFilePath = Path.Normalize(filePath);
-			LoadLocalizedText(normalizedFilePath);
+			LoadLocalizedText(normalizedFilePath);*/
+
+			var folderPath = Path.Combine(Application.streamingAssetsPath, folderName);
+			var absoluteFilePaths = Directory.GetAllFiles(folderPath).Where(element => !element.EndsWith(".meta"));
+			foreach (var absoluteFilePath in absoluteFilePaths)
+			{
+				var localizationData = ReadLocalizationDataFromFile(absoluteFilePath);
+				var langaugeIdentifier = ExtractLanguageIdentifier(absoluteFilePath);
+				var language = GetLanguage(langaugeIdentifier);
+				ExpandVocabulary(language.Vocabulary, localizationData);
+			}
 		}
 
-		private void LoadLocalizedText(string absoluteFilePath)
+		private Language GetLanguage(string languageIdentifier)
 		{
-			var text = File.ReadAllText(absoluteFilePath);
-			if (text == null)
+			if (!Languages.ContainsKey(languageIdentifier))
 			{
-				return;
+				Languages.Add(languageIdentifier, new Language());
 			}
+			
+			return Languages[languageIdentifier];
+		}
 
-			var localizationData = JsonUtility.FromJson<LocalizationData>(text);
+		private string ExtractLanguageIdentifier(string absoluteFilePath)
+		{
+			return Path.ExtractFileNameWithoutExtension(absoluteFilePath).Split('_')[1];
+		}
+
+		/*private void LoadLocalizedText(string absoluteFilePath)
+		{
+			var localizationData = ReadLocalizationDataFromFile(absoluteFilePath);
 			var vocabulary = Languages[_activeLanguage].Vocabulary;
 			
+			ExpandVocabulary(vocabulary, localizationData);
+		}*/
+
+		private LocalizationData ReadLocalizationDataFromFile(string absoluteFilePath)
+		{
+			var text = File.ReadAllText(absoluteFilePath);
+			Debug.Log(absoluteFilePath);
+			return text == null ? null : JsonUtility.FromJson<LocalizationData>(text);
+		}
+
+		private static void ExpandVocabulary(IDictionary<string, string> vocabulary, LocalizationData localizationData)
+		{
 			foreach (var item in localizationData.items)
 			{
 				vocabulary.Add(item.id, item.text);
+				Debug.Log(item.id  + " " + item.text);
 			}
 		}
 

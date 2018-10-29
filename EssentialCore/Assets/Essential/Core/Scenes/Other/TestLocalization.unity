@@ -415,8 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootFolder: 0
-  _sampleFile: settings_en.json
-  _activeLanguage: en
+  _activeLanguage: de
 --- !u!114 &737345313
 MonoBehaviour:
   m_ObjectHideFlags: 0

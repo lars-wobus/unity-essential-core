@@ -128,6 +128,24 @@ namespace Essential.Core.IO
 				return null;
 			}
 		}
+		
+		/// <summary>
+		/// Extract name without extension from file path.
+		/// </summary>
+		/// <param name="filePath">Absolute or relative path to (non-)existing file.</param>
+		/// <returns>File name without extension or null.</returns>
+		public static string ExtractFileNameWithoutExtension(string filePath)
+		{
+			try
+			{
+				return System.IO.Path.GetFileNameWithoutExtension(filePath);
+			}
+			catch (Exception exception)
+			{
+				Debug.LogException(exception);
+				return null;
+			}
+		}
 
 		/// <summary>
 		/// Extract name of folder from file path.
