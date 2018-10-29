@@ -4,7 +4,7 @@ namespace Essential.Core.Localization
 {
 	public interface IRegistry
 	{
-		bool Register(IRegisterable element);
-		bool Unregister(IRegisterable element);
+		bool Register(ITextComponent element);
+		bool Unregister(ITextComponent element);
 	}
 }
