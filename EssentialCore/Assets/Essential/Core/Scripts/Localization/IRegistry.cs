@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Essential.Core.Localization
+﻿namespace Essential.Core.Localization
 {
 	public interface IRegistry
 	{

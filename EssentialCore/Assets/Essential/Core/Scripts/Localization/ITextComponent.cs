@@ -2,7 +2,7 @@
 {
     public interface ITextComponent
     {
-        void SetText(string text);
         string Id { get; }
+        void SetText(string text);
     }
 }

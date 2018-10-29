@@ -1,5 +1,4 @@
-﻿using Essential.Core.Tagging;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Essential.Core.Localization.UI
