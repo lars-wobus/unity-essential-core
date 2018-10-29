@@ -4,20 +4,13 @@ using UnityEngine;
 
 namespace Essential.Core.Localization
 {
-	public class Language : MonoBehaviour
+	public class Language
 	{
-		private Dictionary<string, string> Vocabulary { get; set; }
-		public CultureTypes CultureType = CultureTypes.SpecificCultures;
-		public CultureInfo CultureInfo;
+		public Dictionary<string, string> Vocabulary { get; private set; }
 
-		private void Start()
+		public Language()
 		{
-			var cultures = CultureInfo.GetCultures(CultureType);
-			foreach (var cultureInfo in cultures)
-			{
-				Debug.Log(cultureInfo.Name);
-			}
-
+			Vocabulary = new Dictionary<string, string>();
 		}
 	}
 }
