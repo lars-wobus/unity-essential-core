@@ -1,11 +1,10 @@
 # Localization
 
 ## Observation
-I have seen people attaching scripts for localization directly on the gameobjects containing Unity's standard UI Text components,
+I have seen people attaching scripts for localization directly onto gameobjects, containing Unity's standard UI Text components,
 CrispyText components or TextMeshPro Text components. This can become very confusing depending on the amount of Text components.
-Object nesting, especially within Canvas elements, can have a large impact on the implementation time.
 
-## How to avoid this problem?
+So object nesting, especially within Canvas elements, can have a large impact on the implementation time. But how to avoid this problem?
 My favorite strategy is to outsource all scripts related to localization. It does not reduce the amount of nested objects within
 Canvas elements. But it centralizes all scripts having an effect on the displayed language.
 
@@ -29,6 +28,6 @@ Canvas elements. But it centralizes all scripts having an effect on the displaye
 - If the type of the UI element is already known, custom scripts can be implemented which do not have to call methods like GetComponent().
 
 ## Optimization
-- While thinking about scene management, I came to the conclusion, that scripts must (un-)register themself to some kind of localization manager. That gave me the idea to implement the (Object) Adapter Pattern.
+- While thinking about scene management, I came to the conclusion, that scripts must (un-)register themself to some kind of localization manager. That gave me the idea to implement the (Object) Adapter Pattern. Later on I came to the conclusion to separate the logic for (un-)registration and the logic to change displayed text depending on the selected language. But the Adapter pattern still exists. Even if it all current adaptees have the same required property, which means that the adapter is not really necessary at the moment.
 
 ![The image shows the benefit of using the adapter pattern for localization](https://github.com/lars-wobus/unity-essential-core/blob/master/resources/custom-adapter-pattern---localization/custom-adapter-pattern.png)
