@@ -1,8 +1,9 @@
 ﻿using System;
+using Essential.Core.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Essential.Core.Utils
+namespace Essential.Core.SceneManagement
 {
 	[Serializable]
 	public class UnityScene

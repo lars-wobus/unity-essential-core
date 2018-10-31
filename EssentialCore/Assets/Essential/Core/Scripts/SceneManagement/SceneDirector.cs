@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using Essential.Core.Event.Interfaces;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace Essential.Core.Utils
+namespace Essential.Core.SceneManagement
 {	
 	public class SceneDirector : MonoBehaviour
 	{
