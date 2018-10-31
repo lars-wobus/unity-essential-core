@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/Essential/Core/Scenes/Other/TestLoadingScenes.unity
     guid: 866d383b97f650c4f860d4a811eebf9b
+  - enabled: 0
+    path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
+    guid: ae181e021ae7c0f43ba14c59c27cdb82
   m_configObjects: {}

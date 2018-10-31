@@ -5,6 +5,6 @@ namespace Essential.Core.SceneManagement
 {
     public class SceneCollection : MonoBehaviour
     {
-        [SerializeField] private UnityScene[] _scenes;
+        [SerializeField] public UnityScene[] _scenes;
     }
 }

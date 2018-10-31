@@ -441,6 +441,8 @@ MonoBehaviour:
   - _sceneName: TestLoadingScenes
     _loadSceneMode: 0
     _loadProgress: 0
+    _enabledInBuildSettings: 0
+    _path: 
 --- !u!114 &1383001134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,12 +455,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scenes:
-  - _sceneName: 
+  - _sceneName: TestLoadingScenes
     _loadSceneMode: 0
     _loadProgress: 0
-  - _sceneName: 
-    _loadSceneMode: 1
+    _enabledInBuildSettings: 0
+    _path: Assets/Essential/Core/Scenes/Other/TestLoadingScenes.unity
+  - _sceneName: TestAudio
+    _loadSceneMode: 0
     _loadProgress: 0
-  - _sceneName: 
-    _loadSceneMode: 1
-    _loadProgress: 1
+    _enabledInBuildSettings: 0
+    _path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
