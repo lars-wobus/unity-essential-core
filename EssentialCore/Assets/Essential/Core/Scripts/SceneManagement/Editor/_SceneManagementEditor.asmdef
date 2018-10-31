@@ -1,0 +1,12 @@
+{
+    "name": "_SceneManagementEditor",
+    "references": [
+        "_SceneManagement"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
