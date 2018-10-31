@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using System.Reflection;
@@ -9,7 +8,6 @@ namespace Essential.Core.SceneManagement.Editor
 	[CustomEditor(typeof(SceneCollection))]
 	public class SceneCollectionInspector : UnityEditor.Editor
 	{
-
 		private static readonly int RectOffsetX = 10;
 		private static readonly int LabelWidthInChildren = 60;
 		private static readonly string Title = "Scenes";
