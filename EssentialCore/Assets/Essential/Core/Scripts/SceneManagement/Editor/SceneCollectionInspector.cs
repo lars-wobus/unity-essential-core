@@ -34,11 +34,11 @@ namespace Essential.Core.SceneManagement.Editor
 
 		private void OnEnable()
 		{	
-			var type = typeof(UnityScene);
+			var type = typeof(SceneConfiguration);
 			var depth = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Length;
 			var expandedPropertyHeight = (depth + 1) * EditorGUIUtility.singleLineHeight;
 			
-			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_scenes"), true, true, true, true);
+			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_scenesConfigurations"), true, true, true, true);
 			
 			ReorderableList.elementHeight = expandedPropertyHeight;
 			
@@ -65,7 +65,7 @@ namespace Essential.Core.SceneManagement.Editor
 		private void KeepListOfScenesUpToDate()
 		{
 			SceneCollection = (SceneCollection) target;
-			var list = SceneCollection._scenes.ToList();
+			var list = SceneCollection.SceneConfigurations.ToList();
 
 			var scenes = EditorBuildSettings.scenes;
 			for( var index = 0; index < scenes.Length; ++index)
@@ -78,7 +78,7 @@ namespace Essential.Core.SceneManagement.Editor
 					continue;
 				}
 				
-				var sceneParams = new UnityScene();
+				var sceneParams = new SceneConfiguration();
 				sceneParams.SceneName = Path.GetFileNameWithoutExtension(scene.path);
 				sceneParams.Path = scene.path;
 				sceneParams.EnabledInBuildSettings = scene.enabled;
@@ -87,10 +87,10 @@ namespace Essential.Core.SceneManagement.Editor
 
 			// Override to save changes
 			EditorBuildSettings.scenes = scenes;
-			SceneCollection._scenes = list.ToArray();
+			SceneCollection.SceneConfigurations = list.ToArray();
 		}
 
-		private static UnityScene FindScene(IEnumerable<UnityScene> scenes, string path)
+		private static SceneConfiguration FindScene(IEnumerable<SceneConfiguration> scenes, string path)
 		{
 			return scenes.FirstOrDefault(element => element.Path == path);
 		}

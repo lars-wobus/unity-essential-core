@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace Essential.Core.SceneManagement
 {
 	[Serializable]
-	public class UnityScene
+	public class SceneConfiguration
 	{
 		[SerializeField] private string _sceneName;
 		[SerializeField] private LoadSceneMode _loadSceneMode;
@@ -16,14 +16,8 @@ namespace Essential.Core.SceneManagement
 
 		public string SceneName
 		{
-			get
-			{
-				return _sceneName;
-			}
-			set
-			{
-				_sceneName = value;
-			}
+			get { return _sceneName; }
+			set { _sceneName = value; }
 		}
 
 		public LoadSceneMode LoadSceneMode => _loadSceneMode;
@@ -32,26 +26,14 @@ namespace Essential.Core.SceneManagement
 
 		public bool EnabledInBuildSettings
 		{
-			get
-			{
-				return _enabledInBuildSettings;
-			}
-			set
-			{
-				_enabledInBuildSettings = value;
-			}
+			get { return _enabledInBuildSettings; }
+			set { _enabledInBuildSettings = value; }
 		}
-		
+
 		public string Path
 		{
-			get
-			{
-				return _path;
-			}
-			set
-			{
-				_path = value;
-			}
+			get { return _path; }
+			set { _path = value; }
 		}
 	}
 }

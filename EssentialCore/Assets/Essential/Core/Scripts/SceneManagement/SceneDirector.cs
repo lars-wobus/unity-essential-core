@@ -8,7 +8,7 @@ namespace Essential.Core.SceneManagement
 {	
 	public class SceneDirector : MonoBehaviour
 	{
-		[SerializeField] private UnityScene[] _scenes;
+		[SerializeField] private SceneConfiguration[] _scenesConfiguration;
 		private IDownloadHandler EventHandler { get; set; }
 
 		private void Start()
@@ -28,29 +28,29 @@ namespace Essential.Core.SceneManagement
 			StartCoroutine(LoadSceneByNameAsync(scene));
 		}
 
-		private IEnumerator LoadSceneByNameAsync(UnityScene scene)
+		private IEnumerator LoadSceneByNameAsync(SceneConfiguration sceneConfiguration)
 		{
-			scene.AsyncOperation = SceneManager.LoadSceneAsync(scene.SceneName, scene.LoadSceneMode);
+			sceneConfiguration.AsyncOperation = SceneManager.LoadSceneAsync(sceneConfiguration.SceneName, sceneConfiguration.LoadSceneMode);
 			
-			while (!scene.AsyncOperation.isDone)
+			while (!sceneConfiguration.AsyncOperation.isDone)
 			{
-				EventHandler?.OnProgressChanged(scene.AsyncOperation.progress);
+				EventHandler?.OnProgressChanged(sceneConfiguration.AsyncOperation.progress);
 				yield return null;
 			}
 			
-			scene.AsyncOperation.allowSceneActivation = false;
+			sceneConfiguration.AsyncOperation.allowSceneActivation = false;
 			
 			EventHandler?.OnComplete();
 		}
 
-		private UnityScene FindScene(int sceneIndex)
+		private SceneConfiguration FindScene(int sceneIndex)
 		{
-			if (sceneIndex < 0 || sceneIndex >= _scenes.Length)
+			if (sceneIndex < 0 || sceneIndex >= _scenesConfiguration.Length)
 			{
 				throw new ArgumentOutOfRangeException(nameof(sceneIndex));
 			}
 			
-			return _scenes[sceneIndex];
+			return _scenesConfiguration[sceneIndex];
 		}
 
 		public void FinalizeSceneLoading(int sceneIndex)
