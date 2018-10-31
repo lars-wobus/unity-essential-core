@@ -1,3 +1,12 @@
-﻿{
-	"name": "_SceneManagement"
+{
+    "name": "_SceneManagement",
+    "references": [
+        "_EventInterfaces",
+        "_AtomicEventInterfaces",
+        "_Utils"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }
