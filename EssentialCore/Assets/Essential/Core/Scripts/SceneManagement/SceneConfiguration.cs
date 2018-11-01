@@ -9,15 +9,22 @@ namespace Essential.Core.SceneManagement
 	public class SceneConfiguration
 	{
 		[SerializeField] private string _sceneName;
+		[SerializeField] private string _path;
 		[SerializeField] private LoadSceneMode _loadSceneMode;
 		[SerializeField] private UpdateProgress _loadProgress;
 		[SerializeField] private bool _enabledInBuildSettings;
-		[SerializeField] private string _path;
-
+		[SerializeField] private bool _allowSceneActivation;
+		
 		public string SceneName
 		{
 			get { return _sceneName; }
 			set { _sceneName = value; }
+		}
+		
+		public string Path
+		{
+			get { return _path; }
+			set { _path = value; }
 		}
 
 		public LoadSceneMode LoadSceneMode => _loadSceneMode;
@@ -30,10 +37,11 @@ namespace Essential.Core.SceneManagement
 			set { _enabledInBuildSettings = value; }
 		}
 
-		public string Path
+		public bool AllowSceneActivation
 		{
-			get { return _path; }
-			set { _path = value; }
+			get { return _allowSceneActivation; }
+			set { _allowSceneActivation = value; }
 		}
+		
 	}
 }

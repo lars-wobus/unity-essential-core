@@ -405,7 +405,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1383001132}
   - component: {fileID: 1383001133}
-  - component: {fileID: 1383001134}
   m_Layer: 0
   m_Name: SceneDirector
   m_TagString: Untagged
@@ -437,31 +436,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a1a2e7cb1b3e9478553b489af2c9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneName: TestLoadingScenes
-    _loadSceneMode: 0
-    _loadProgress: 0
-    _enabledInBuildSettings: 0
-    _path: 
---- !u!114 &1383001134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1383001131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c715a3798762d94d8f30844d6ebdb0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scenes:
-  - _sceneName: TestLoadingScenes
-    _loadSceneMode: 0
-    _loadProgress: 0
-    _enabledInBuildSettings: 0
-    _path: Assets/Essential/Core/Scenes/Other/TestLoadingScenes.unity
-  - _sceneName: TestAudio
-    _loadSceneMode: 0
-    _loadProgress: 0
-    _enabledInBuildSettings: 0
-    _path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
+  _scenesConfiguration: []

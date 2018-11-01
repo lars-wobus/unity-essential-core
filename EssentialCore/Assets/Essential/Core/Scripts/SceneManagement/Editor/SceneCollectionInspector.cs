@@ -33,14 +33,27 @@ namespace Essential.Core.SceneManagement.Editor
 		}
 
 		private void OnEnable()
-		{	
+		{
 			var type = typeof(SceneConfiguration);
 			var depth = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Length;
-			var expandedPropertyHeight = (depth + 1) * EditorGUIUtility.singleLineHeight;
+			var expandedPropertyHeight = depth * EditorGUIUtility.singleLineHeight;
 			
+			InitializeReorderableList(expandedPropertyHeight);
+			
+			InitializeArray();
+		}
+
+		private void InitializeArray()
+		{
+			SceneCollection = (SceneCollection) target;
+			SceneCollection.SceneConfigurations = new SceneConfiguration[0];
+		}
+
+		private void InitializeReorderableList(float elementHeight)
+		{
 			ReorderableList = new ReorderableList(serializedObject, serializedObject.FindProperty("_scenesConfigurations"), true, true, true, true);
 			
-			ReorderableList.elementHeight = expandedPropertyHeight;
+			ReorderableList.elementHeight = elementHeight + EditorGUIUtility.singleLineHeight;
 			
 			ReorderableList.drawHeaderCallback = rect => {
 				EditorGUI.LabelField (rect, Title);	
@@ -55,8 +68,7 @@ namespace Essential.Core.SceneManagement.Editor
 				element.isExpanded = true;
 				
 				var position = new Rect(rect.x + RectOffsetX, rect.y,
-					EditorGUIUtility.currentViewWidth - LabelWidthInChildren,
-					depth * EditorGUIUtility.singleLineHeight);
+					EditorGUIUtility.currentViewWidth - LabelWidthInChildren, elementHeight);
 				
 				EditorGUI.PropertyField(position, element, GUIContent.none, element.hasChildren);
 			};
@@ -64,9 +76,8 @@ namespace Essential.Core.SceneManagement.Editor
 
 		private void KeepListOfScenesUpToDate()
 		{
-			SceneCollection = (SceneCollection) target;
 			var list = SceneCollection.SceneConfigurations.ToList();
-
+			
 			var scenes = EditorBuildSettings.scenes;
 			for( var index = 0; index < scenes.Length; ++index)
 			{

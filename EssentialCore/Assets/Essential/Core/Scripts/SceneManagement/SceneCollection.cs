@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Essential.Core.SceneManagement
 {
-    public class SceneCollection : MonoBehaviour
+    public class SceneCollection : ScriptableObject
     {
         [SerializeField] private SceneConfiguration[] _scenesConfigurations;
 
