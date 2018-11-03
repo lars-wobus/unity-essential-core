@@ -87,7 +87,7 @@ namespace Essential.Core.SceneManagement.Editor
 			{
 				var scene = EditorBuildSettings.scenes[index];
 				var unityScene = FindScene(list, scene.path);
-				Debug.Log(unityScene?.SceneName+" "+scene.path);
+				
 				if (unityScene != null)
 				{
 					scenes[index].enabled = unityScene.EnabledInBuildSettings;
