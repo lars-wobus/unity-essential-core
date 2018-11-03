@@ -39,6 +39,15 @@ namespace Essential.Core.SceneManagement
 			}
 		}
 		
+		public void ActivateAutoLoadedScenes()
+		{
+			var sceneConfigurations = _sceneCollection.GetRequiredScenes();
+			foreach (var scene in sceneConfigurations)
+			{
+				scene.AsyncOperation.allowSceneActivation = true;
+			}
+		}
+		
 		public void StartLoadingSceneReferencedInCollection(int sceneIndex)
 		{
 			var scene = FindScene(sceneIndex);

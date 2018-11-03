@@ -21,21 +21,21 @@ MonoBehaviour:
     _loadOnStart: 0
   - _sceneName: TestToggleScripts
     _path: Assets/Essential/Core/Scenes/Other/TestToggleScripts.unity
-    _loadSceneMode: 0
+    _loadSceneMode: 1
     _loadProgress: 0
     _enabledInBuildSettings: 1
     _allowSceneActivation: 0
     _loadOnStart: 1
   - _sceneName: TestUserInput
     _path: Assets/Essential/Core/Scenes/Other/TestUserInput.unity
-    _loadSceneMode: 0
+    _loadSceneMode: 1
     _loadProgress: 0
     _enabledInBuildSettings: 1
     _allowSceneActivation: 0
     _loadOnStart: 1
   - _sceneName: TestPlayerMovementImitation
     _path: Assets/Essential/Core/Scenes/Other/TestPlayerMovementImitation.unity
-    _loadSceneMode: 0
+    _loadSceneMode: 1
     _loadProgress: 0
     _enabledInBuildSettings: 1
     _allowSceneActivation: 0
