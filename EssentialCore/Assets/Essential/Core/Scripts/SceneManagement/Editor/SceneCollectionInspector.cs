@@ -37,10 +37,14 @@ namespace Essential.Core.SceneManagement.Editor
 			var type = typeof(SceneConfiguration);
 			var depth = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Length;
 			var expandedPropertyHeight = depth * EditorGUIUtility.singleLineHeight;
+
+			SceneCollection = (SceneCollection) target;
+			if (SceneCollection.SceneConfigurations == null)
+			{
+				InitializeArray();
+			}
 			
 			InitializeReorderableList(expandedPropertyHeight);
-			
-			InitializeArray();
 		}
 
 		private void InitializeArray()
@@ -83,6 +87,7 @@ namespace Essential.Core.SceneManagement.Editor
 			{
 				var scene = EditorBuildSettings.scenes[index];
 				var unityScene = FindScene(list, scene.path);
+				Debug.Log(unityScene?.SceneName+" "+scene.path);
 				if (unityScene != null)
 				{
 					scenes[index].enabled = unityScene.EnabledInBuildSettings;
