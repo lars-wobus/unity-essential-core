@@ -405,6 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383001132}
   - component: {fileID: 1383001133}
+  - component: {fileID: 1383001134}
   m_Layer: 0
   m_Name: SceneDirector
   m_TagString: Untagged
@@ -436,4 +437,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a1a2e7cb1b3e9478553b489af2c9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenesConfiguration: []
+  _sceneCollection: {fileID: 11400000, guid: ef13cf7fd4aa9134bab9207f71a3f8a0, type: 2}
+--- !u!114 &1383001134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383001131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6019fd3b663c34347bc9be3bd4806373, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProgressChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Essential.Core.Scripts.Event.UnityEventProvider.FloatEvent, _UnityEventProvider,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  DownloadComplete:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

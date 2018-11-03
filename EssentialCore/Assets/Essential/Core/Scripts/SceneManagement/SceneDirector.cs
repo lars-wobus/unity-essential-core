@@ -8,7 +8,8 @@ namespace Essential.Core.SceneManagement
 {	
 	public class SceneDirector : MonoBehaviour
 	{
-		[SerializeField] private SceneConfiguration[] _scenesConfiguration;
+		//[SerializeField] private SceneConfiguration[] _scenesConfiguration;
+		[SerializeField] private SceneCollection _sceneCollection;
 		private IDownloadHandler EventHandler { get; set; }
 
 		private void Start()
@@ -45,12 +46,14 @@ namespace Essential.Core.SceneManagement
 
 		private SceneConfiguration FindScene(int sceneIndex)
 		{
-			if (sceneIndex < 0 || sceneIndex >= _scenesConfiguration.Length)
+			//if (sceneIndex < 0 || sceneIndex >= _scenesConfiguration.Length)
+			if (sceneIndex < 0 || sceneIndex >= _sceneCollection.SceneConfigurations.Length)
 			{
 				throw new ArgumentOutOfRangeException(nameof(sceneIndex));
 			}
 			
-			return _scenesConfiguration[sceneIndex];
+			//return _scenesConfiguration[sceneIndex];
+			return _sceneCollection.SceneConfigurations[sceneIndex];
 		}
 
 		public void FinalizeSceneLoading(int sceneIndex)

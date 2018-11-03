@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Essential.Core.SceneManagement
 {
@@ -10,6 +11,11 @@ namespace Essential.Core.SceneManagement
         {
             get { return _scenesConfigurations; }
             set { _scenesConfigurations = value; }
+        }
+
+        public SceneConfiguration[] GetRequiredScenes()
+        {
+            return _scenesConfigurations.Where(element => element.LoadOnStart == true).ToArray();
         }
     }
 }
