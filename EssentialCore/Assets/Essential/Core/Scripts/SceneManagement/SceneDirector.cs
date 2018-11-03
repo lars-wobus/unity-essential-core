@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Essential.Core.Event.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,27 @@ namespace Essential.Core.SceneManagement
 		private void Start()
 		{
 			EventHandler = GetComponent<IDownloadHandler>();
+
+			AutoLoad();
+		}
+
+		private void AutoLoad()
+		{
+			var sceneConfigurations = _sceneCollection.GetRequiredScenes();
+			StartCoroutine(LoadScenesSequentiallyInBackground(sceneConfigurations));
+		}
+
+		private IEnumerator LoadScenesSequentiallyInBackground(IEnumerable<SceneConfiguration> sceneConfigurations)
+		{
+			foreach (var scene in sceneConfigurations)
+			{
+				if (scene.AsyncOperation != null)
+				{
+					throw new NotSupportedException("Loading scene has already begun: " + scene.SceneName);
+				}
+
+				yield return StartCoroutine(LoadSceneByNameAsync(scene));
+			}
 		}
 		
 		public void StartLoadingSceneReferencedInCollection(int sceneIndex)
@@ -33,15 +55,18 @@ namespace Essential.Core.SceneManagement
 		{
 			sceneConfiguration.AsyncOperation = SceneManager.LoadSceneAsync(sceneConfiguration.SceneName, sceneConfiguration.LoadSceneMode);
 			
-			while (!sceneConfiguration.AsyncOperation.isDone)
+			// BUG: isDone and allowSceneActivation = false does not like each other
+			/*while (!sceneConfiguration.AsyncOperation.isDone)
 			{
 				EventHandler?.OnProgressChanged(sceneConfiguration.AsyncOperation.progress);
 				yield return null;
-			}
+			}*/
 			
 			sceneConfiguration.AsyncOperation.allowSceneActivation = false;
 			
 			EventHandler?.OnComplete();
+
+			yield return null;
 		}
 
 		private SceneConfiguration FindScene(int sceneIndex)
