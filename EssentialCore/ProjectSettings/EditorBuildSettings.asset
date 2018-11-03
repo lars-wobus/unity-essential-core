@@ -5,10 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Essential/Core/Scenes/Other/TestLoadingScenes.unity
     guid: 866d383b97f650c4f860d4a811eebf9b
   - enabled: 0
     path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
     guid: ae181e021ae7c0f43ba14c59c27cdb82
+  - enabled: 1
+    path: Assets/Essential/Core/Scenes/Other/TestToggleScripts.unity
+    guid: bdea497a2a3c1ba48a5da2cb20ff91aa
+  - enabled: 1
+    path: Assets/Essential/Core/Scenes/Other/TestUserInput.unity
+    guid: 811b3c3b7dbe92c43a6cd6edd772c50b
+  - enabled: 1
+    path: Assets/Essential/Core/Scenes/Other/TestPlayerMovementImitation.unity
+    guid: 7a7af6992392f3a43a621496e8d04f51
   m_configObjects: {}

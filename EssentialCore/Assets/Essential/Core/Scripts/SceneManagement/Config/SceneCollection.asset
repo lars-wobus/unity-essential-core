@@ -12,15 +12,36 @@ MonoBehaviour:
   m_Name: SceneCollection
   m_EditorClassIdentifier: 
   _scenesConfigurations:
-  - _sceneName: TestAudio
-    _path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
-    _loadSceneMode: 0
-    _loadProgress: 0
-    _enabledInBuildSettings: 0
-    _allowSceneActivation: 0
-    _loadOnStart: 0
   - _sceneName: TestLoadingScenes
     _path: Assets/Essential/Core/Scenes/Other/TestLoadingScenes.unity
+    _loadSceneMode: 0
+    _loadProgress: 0
+    _enabledInBuildSettings: 1
+    _allowSceneActivation: 0
+    _loadOnStart: 0
+  - _sceneName: TestToggleScripts
+    _path: Assets/Essential/Core/Scenes/Other/TestToggleScripts.unity
+    _loadSceneMode: 0
+    _loadProgress: 0
+    _enabledInBuildSettings: 1
+    _allowSceneActivation: 0
+    _loadOnStart: 1
+  - _sceneName: TestUserInput
+    _path: Assets/Essential/Core/Scenes/Other/TestUserInput.unity
+    _loadSceneMode: 0
+    _loadProgress: 0
+    _enabledInBuildSettings: 1
+    _allowSceneActivation: 0
+    _loadOnStart: 1
+  - _sceneName: TestPlayerMovementImitation
+    _path: Assets/Essential/Core/Scenes/Other/TestPlayerMovementImitation.unity
+    _loadSceneMode: 0
+    _loadProgress: 0
+    _enabledInBuildSettings: 1
+    _allowSceneActivation: 0
+    _loadOnStart: 1
+  - _sceneName: TestAudio
+    _path: Assets/Essential/Core/Scenes/Other/TestAudio.unity
     _loadSceneMode: 0
     _loadProgress: 0
     _enabledInBuildSettings: 0
