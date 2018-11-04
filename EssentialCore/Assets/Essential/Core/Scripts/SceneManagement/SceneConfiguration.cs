@@ -29,7 +29,12 @@ namespace Essential.Core.SceneManagement
 		}
 
 		public LoadSceneMode LoadSceneMode => _loadSceneMode;
-		public UpdateProgress LoadProgress => _loadProgress;
+
+		public UpdateProgress LoadProgress
+		{
+			get { return _loadProgress; }
+			set { _loadProgress = value; }
+		}
 		public AsyncOperation AsyncOperation { get; set; }
 
 		public bool EnabledInBuildSettings
