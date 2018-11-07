@@ -1,11 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Essential.Core.Event.Interfaces;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Essential.Core.SceneManagement
 {
 	public class SceneHierarchy : MonoBehaviour
-	{		
+	{
+		private ITaskCompleteHandler EventHandler;
+
+		private void Start()
+		{
+			EventHandler = GetComponent<IDownloadHandler>();
+			
+			// SceneManager.activeSceneChanged -> restore changes
+			// SceneManager.sceneLoaded -> add to list and wait for activation
+		}
+		
 		public static bool SceneExists(string sceneName)
 		{
 			if (Application.CanStreamedLevelBeLoaded(sceneName)) return true;
@@ -25,10 +38,9 @@ namespace Essential.Core.SceneManagement
 
 		private void LoadScene(string sceneName, LoadSceneMode loadSceneMode)
 		{
-			if (SceneExists(sceneName))
-			{
-				SceneManager.LoadScene(sceneName, loadSceneMode);
-			}
+			if (!SceneExists(sceneName)) return;
+			SceneManager.LoadScene(sceneName, loadSceneMode);
+			EventHandler?.OnComplete();
 		}
 		
 		public void LoadSceneSingleAsync(string sceneName)
@@ -48,11 +60,9 @@ namespace Essential.Core.SceneManagement
 				yield break;
 			}
 			
-			var asyncLoad = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-			asyncLoad.allowSceneActivation = false;
+			var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
+			asyncOperation.allowSceneActivation = false;
 		
-			//_asyncOperations.Add(asyncLoad);
-			//_onLoadFinished.Invoke();
 			yield return null;
 		}
 	}
