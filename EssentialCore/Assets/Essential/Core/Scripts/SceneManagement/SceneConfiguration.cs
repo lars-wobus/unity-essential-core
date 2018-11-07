@@ -15,6 +15,8 @@ namespace Essential.Core.SceneManagement
 		[SerializeField] private bool _enabledInBuildSettings;
 		[SerializeField] private bool _allowSceneActivation;
 		[SerializeField] private bool _loadOnStart;
+
+		[NonSerialized] private AsyncOperation _asyncOperation;
 		
 		public string SceneName
 		{
@@ -35,7 +37,12 @@ namespace Essential.Core.SceneManagement
 			get { return _loadProgress; }
 			set { _loadProgress = value; }
 		}
-		public AsyncOperation AsyncOperation { get; set; }
+
+		public AsyncOperation AsyncOperation
+		{
+			get { return _asyncOperation;}
+			set { _asyncOperation = value; }
+		}
 
 		public bool EnabledInBuildSettings
 		{
