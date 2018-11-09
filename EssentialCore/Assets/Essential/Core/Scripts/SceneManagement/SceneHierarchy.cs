@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using Essential.Core.Event.Interfaces;
+using Essential.Core.SceneManagement.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,18 +7,22 @@ namespace Essential.Core.SceneManagement
 {
 	public class SceneHierarchy : MonoBehaviour
 	{
-		private IDownloadHandler EventHandler;
+		private ISceneLoad<string> SceneLoad { get; set; }
 
 		private void Start()
 		{
-			EventHandler = GetComponent<IDownloadHandler>();
+			SceneLoad = GetComponent<ISceneLoad<string>>();
 		}
 		
-		public static bool SceneExists(string sceneName)
+		private static bool SceneExists(string sceneName)
 		{
-			if (Application.CanStreamedLevelBeLoaded(sceneName)) return true;
-			Debug.LogWarning("Scene does not exist.");
-			return false;
+			if (Application.CanStreamedLevelBeLoaded(sceneName))
+			{
+				Debug.LogWarning("Scene does not exist.");
+				return false;
+			}
+
+			return true;
 		}
 		
 		public void LoadSceneSingle(string sceneName)
@@ -33,9 +37,15 @@ namespace Essential.Core.SceneManagement
 
 		private void LoadScene(string sceneName, LoadSceneMode loadSceneMode)
 		{
-			if (!SceneExists(sceneName)) return;
+			if (!SceneExists(sceneName))
+			{
+				return;
+			}
+			
+			SceneLoad?.OnSceneLoading(sceneName, 0.0f);
 			SceneManager.LoadScene(sceneName, loadSceneMode);
-			EventHandler?.OnComplete();
+			SceneLoad?.OnSceneLoading(sceneName, 1.0f);
+			SceneLoad?.OnSceneLoaded(sceneName);
 		}
 		
 		public void LoadSceneSingleAsync(string sceneName)
@@ -55,17 +65,22 @@ namespace Essential.Core.SceneManagement
 				yield break;
 			}
 			
+			// Note: When one scene was loaded in single mode, then all other scenes loaded in additive mode
+			// will wait at 0 progress until the first scene is activated. It is not clear, if a bug returns 0
+			// or if they really needs to load afterwards
+			
+			SceneLoad?.OnSceneLoading(sceneName, 0.0f);
 			var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
 			asyncOperation.allowSceneActivation = false;
 			
 			while (asyncOperation.progress < 0.9f)
 			{
-				EventHandler?.OnProgressChanged(asyncOperation.progress);
+				SceneLoad?.OnSceneLoading(sceneName, asyncOperation.progress);
 				yield return null;
 			}
 
-			EventHandler?.OnProgressChanged(1.0f);
-			EventHandler?.OnComplete();
+			SceneLoad?.OnSceneLoading(sceneName, 1.0f);
+			SceneLoad?.OnSceneLoaded(sceneName);
 		}
 	}
 }
