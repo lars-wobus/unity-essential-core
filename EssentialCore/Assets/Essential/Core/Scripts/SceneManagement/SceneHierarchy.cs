@@ -12,6 +12,11 @@ namespace Essential.Core.SceneManagement
 		private void Start()
 		{
 			SceneLoad = GetComponent<ISceneLoad<string>>();
+			if (SceneLoad != null)
+			{
+				SceneLoad.LoadScene = LoadScene;
+				SceneLoad.LoadSceneAsync = LoadSceneInsideCoroutine;
+			}
 		}
 		
 		private static bool SceneExists(string sceneName)
@@ -24,21 +29,12 @@ namespace Essential.Core.SceneManagement
 
 			return true;
 		}
-		
-		public void LoadSceneSingle(string sceneName)
-		{
-			LoadScene(sceneName, LoadSceneMode.Single);
-		}
-		
-		public void LoadSceneAdditive(string sceneName)
-		{
-			LoadScene(sceneName, LoadSceneMode.Additive);
-		}
 
 		private void LoadScene(string sceneName, LoadSceneMode loadSceneMode)
 		{
 			if (!SceneExists(sceneName))
 			{
+				SceneLoad?.OnSceneLoadFailure(sceneName);
 				return;
 			}
 			
@@ -47,21 +43,17 @@ namespace Essential.Core.SceneManagement
 			SceneLoad?.OnSceneLoading(sceneName, 1.0f);
 			SceneLoad?.OnSceneLoaded(sceneName);
 		}
-		
-		public void LoadSceneSingleAsync(string sceneName)
+
+		private void LoadSceneInsideCoroutine(string sceneName, LoadSceneMode loadSceneMode)
 		{
-			StartCoroutine(LoadSceneAsync(sceneName, LoadSceneMode.Single));
-		}
-		
-		public void LoadSceneAdditiveAsync(string sceneName)
-		{
-			StartCoroutine(LoadSceneAsync(sceneName, LoadSceneMode.Additive));
+			StartCoroutine(LoadSceneAsync(sceneName, loadSceneMode));
 		}
 		
 		private IEnumerator LoadSceneAsync(string sceneName, LoadSceneMode loadSceneMode)
 		{
 			if (!SceneExists(sceneName))
 			{
+				SceneLoad?.OnSceneLoadFailure(sceneName);
 				yield break;
 			}
 			
