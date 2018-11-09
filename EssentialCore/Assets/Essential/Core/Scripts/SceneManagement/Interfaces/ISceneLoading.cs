@@ -2,9 +2,9 @@
 
 namespace Essential.Core.SceneManagement.Interfaces
 {
-	public interface ISceneLoading<T1>
+	public interface ISceneLoading<T>
 	{
-		event Action<T1, float> SceneLoading;
-		void OnSceneLoading(T1 value1, float progress);
+		event Action<T, float> SceneLoading;
+		void OnSceneLoading(T value, float progress);
 	}
 }
