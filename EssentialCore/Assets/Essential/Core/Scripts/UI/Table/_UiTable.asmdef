@@ -1,0 +1,11 @@
+{
+    "name": "_UiTable",
+    "references": [
+        "_UiTableData",
+        "Unity.TextMeshPro"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
