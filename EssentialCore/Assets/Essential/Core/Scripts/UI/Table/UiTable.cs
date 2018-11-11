@@ -11,16 +11,14 @@ namespace Essential.Core.UI.Table
 	public class UiTable : MonoBehaviour
 	{
 		[SerializeField] private TableData _tableData;
-		[SerializeField] private GameObject _textPrefab;
-		[SerializeField] private GameObject _rowPrefab;
 		[SerializeField] private Transform _tableBody;
-		[SerializeField] private GameObject _columnPrefab;
+		[SerializeField] private TableStyle _style;
 		
 		private ITable Table { get; set; }
 
 		private void Start()
 		{
-			Table = new Table(_textPrefab, _rowPrefab, _columnPrefab);
+			Table = new Table(_style);
 
 			//Debug.Log(JsonUtility.ToJson(_tableData));
 			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});

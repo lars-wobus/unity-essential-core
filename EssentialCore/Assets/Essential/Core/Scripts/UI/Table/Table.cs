@@ -8,15 +8,11 @@ namespace Essential.Core.UI.Table
 {
 	public class Table : ITable
 	{
-		private readonly GameObject _textPrefab;
-		private readonly GameObject _rowPrefab;
-		private readonly GameObject _columnPrefab;
-
-		public Table(GameObject textPrefab, GameObject rowPrefab, GameObject columnPrefab)
+		private ITableStyle Style { get; }
+		
+		public Table(ITableStyle style)
 		{
-			_textPrefab = textPrefab;
-			_rowPrefab = rowPrefab;
-			_columnPrefab = columnPrefab;
+			Style = style;
 		}
 
 		public GameObject CreateCell(TableCellType type, Transform parent)
@@ -25,19 +21,19 @@ namespace Essential.Core.UI.Table
 			{
 				case TableCellType.Empty:
 				{
-					return Object.Instantiate(_textPrefab, parent);
+					return Object.Instantiate(Style.Empty, parent);
 				}
 				case TableCellType.Text:
 				{
-					return Object.Instantiate(_textPrefab, parent);
+					return Object.Instantiate(Style.Text, parent);
 				}
 				case TableCellType.Row:
 				{
-					return Object.Instantiate(_rowPrefab, parent);
+					return Object.Instantiate(Style.Row, parent);
 				}
 				case TableCellType.Column:
 				{
-					return Object.Instantiate(_columnPrefab, parent);
+					return Object.Instantiate(Style.Column, parent);
 				}
 				default:
 				{
