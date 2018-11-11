@@ -11,6 +11,8 @@ namespace Essential.Core.UI.Table
 {
 	public class UiTable : MonoBehaviour
 	{
+		private static int MaxDepth = 10;
+		
 		[SerializeField] private TableData _tableData;
 		[SerializeField] private Transform _tableBody;
 		[SerializeField] private TableStyle _style;
@@ -29,6 +31,12 @@ namespace Essential.Core.UI.Table
 
 		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent, int depth)
 		{
+			if (depth > MaxDepth)
+			{
+				Debug.LogWarning("Max Depth Reached");
+				return;
+			}
+			
 			foreach (var cell in cells)
 			{
 				switch (cell.Type)
