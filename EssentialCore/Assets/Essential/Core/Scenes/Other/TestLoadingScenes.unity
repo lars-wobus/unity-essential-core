@@ -325,7 +325,7 @@ MonoBehaviour:
       _refs:
       - i like trains
     - _id: 3
-      _type: 1
+      _type: 0
       _refs:
       - hello
       - world
