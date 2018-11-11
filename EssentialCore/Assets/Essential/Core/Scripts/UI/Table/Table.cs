@@ -1,5 +1,5 @@
 ﻿using System;
-using Essential.Core.Scripts.UI.Table.Data;
+using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Essential.Core.Scripts.UI.Table.Data;
 using UnityEngine;
 
 namespace Essential.Core.UI.Table.Data

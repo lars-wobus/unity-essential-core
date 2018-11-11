@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.Scripts.UI.Table.Data
+﻿namespace Essential.Core.UI.Table.Data
 {
 	public enum TableCellType {
 		Empty,
