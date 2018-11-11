@@ -97,12 +97,25 @@ namespace Essential.Core.UI.Table
 			}
 		}
 
+		public void CreateCustomRow(string owerId, string playerNo, string controls, string defaultText, string lives, string description)
+		{
+			_tableData.AddCell("---1", TableCellType.StaticText, new List<string>{playerNo, controls});
+			_tableData.AddCell("---2", TableCellType.DynamicText, new List<string>{defaultText});
+			_tableData.AddCell("---3", TableCellType.StaticText, new List<string>{lives, description});
+			_tableData.AddCell("---4", TableCellType.Row, new List<string>{"---1", "---2", "---3"});
+			var first = _tableData.FindTableCell(owerId);
+			if (first != null) first.Refs.Add("---4");
+		}
+
 		public void Render()
 		{
 			//_tableData.AddCell("-1", TableCellType.Row, new List<string>{"7"});
 			_tableData.AddCell("-1", TableCellType.DynamicText, new List<string>{"7"});
 			var first = _tableData.FindTableCell("1");
 			if (first != null) first.Refs.Add("-1");
+
+			CreateCustomRow("1", "player1", "gamepad", "nothing", "5", "Has no items");
+			
 			var root = TableData.FindCells(_tableData.Body, new List<string> {_tableData.Body[0].Id});
 			BuildTableRecursive(root, _tableBody, 0);
 			ChangeBackgroundColors(_tableBody);
@@ -112,6 +125,7 @@ namespace Essential.Core.UI.Table
 		private void Update()
 		{
 			TextRegistry.UpdateText("-1", (i++).ToString());
+			TextRegistry.UpdateText("---2", (i++).ToString());
 		}
 	}
 }
