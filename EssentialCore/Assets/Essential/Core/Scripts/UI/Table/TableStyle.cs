@@ -11,9 +11,13 @@ namespace Essential.Core.UI.Table
         [SerializeField] private GameObject _rowElement;
         [SerializeField] private GameObject _columnElement;
 
+        [SerializeField] private Color[] _rowColors;
+
         public GameObject Empty => _emptyElement;
         public GameObject Text => _textElement;
         public GameObject Row => _rowElement;
         public GameObject Column => _columnElement;
+
+        public Color[] Colors => _rowColors;
     }
 }

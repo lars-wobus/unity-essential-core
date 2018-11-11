@@ -210,6 +210,31 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224867418010000882, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39406869c5e6cd4bb82d78f8baad426, type: 2}
   m_IsPrefabAsset: 0
@@ -323,7 +348,7 @@ MonoBehaviour:
       _refs:
       - 2
       - 3
-      - 4
+      - 10
   _tableBody: {fileID: 303906681}
   _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
 --- !u!1 &112840124

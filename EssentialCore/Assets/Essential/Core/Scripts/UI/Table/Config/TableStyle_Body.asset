@@ -19,3 +19,6 @@ MonoBehaviour:
     type: 2}
   _columnElement: {fileID: 1008678107938238, guid: 50313b1f909e39348b97963fd4d0b23a,
     type: 2}
+  _rowColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}

@@ -5,6 +5,7 @@ using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Essential.Core.UI.Table
 {
@@ -24,7 +25,7 @@ namespace Essential.Core.UI.Table
 			Render();
 		}
 
-		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent)
+		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent, int depth)
 		{
 			foreach (var cell in cells)
 			{
@@ -51,7 +52,7 @@ namespace Essential.Core.UI.Table
 					case TableCellType.Column:
 					{
 						var layoutElement = Table.CreateCell(cell.Type, parent).transform;
-						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), layoutElement);
+						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), layoutElement, depth + 1);
 						break;
 					}
 					default:
@@ -62,10 +63,33 @@ namespace Essential.Core.UI.Table
 			}
 		}
 
+		private void ChangeBackgroundColors(Transform parent)
+		{
+			var primeChild = parent.GetChild(0);
+			if (primeChild == null)
+			{
+				return;
+			}
+
+			var index = 0;
+			foreach (Transform child in primeChild)
+			{
+				Debug.Log(child);
+				var image = child.GetComponent<Image>();
+				if (image == null)
+				{
+					continue;
+				}
+				
+				image.color = _style.Colors[index++ % _style.Colors.Length];
+			}
+		}
+
 		public void Render()
 		{
 			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});
-			BuildTableRecursive(root, _tableBody);
+			BuildTableRecursive(root, _tableBody, 0);
+			ChangeBackgroundColors(_tableBody);
 		}
 	}
 }
