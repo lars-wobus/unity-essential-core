@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using Essential.Core.Scripts.UI.Table.Data;
+using UnityEngine;
 
 namespace Essential.Core.UI.Table.Interfaces
 {
     public interface ITable
     {
-        Transform AddRow(Transform parent);
-        Transform AddColumn(Transform parent);
+        GameObject CreateCell(TableCellType type, Transform parent);
     }
 }

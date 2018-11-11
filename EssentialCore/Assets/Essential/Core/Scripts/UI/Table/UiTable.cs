@@ -20,7 +20,7 @@ namespace Essential.Core.UI.Table
 
 		private void Start()
 		{
-			Table = new Table(_rowPrefab, _columnPrefab);
+			Table = new Table(_textPrefab, _rowPrefab, _columnPrefab);
 
 			//Debug.Log(JsonUtility.ToJson(_tableData));
 			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});
@@ -37,7 +37,7 @@ namespace Essential.Core.UI.Table
 					{
 						foreach (var content in cell.Refs)
 						{
-							Instantiate(_textPrefab, parent);
+							Table.CreateCell(cell.Type, parent);
 						}
 						break;
 					}
@@ -45,21 +45,16 @@ namespace Essential.Core.UI.Table
 					{
 						foreach (var content in cell.Refs)
 						{
-							var text = Instantiate(_textPrefab, parent).GetComponent<TMP_Text>();
+							var text = Table.CreateCell(cell.Type, parent).GetComponent<TMP_Text>();
 							text.text = content;
 						}
 						break;
 					}
 					case TableCellType.Row:
-					{
-						var row = Table.AddRow(parent);
-						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), row);
-						break;
-					}
 					case TableCellType.Column:
 					{
-						var column = Table.AddColumn(parent);
-						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), column);
+						var layoutElement = Table.CreateCell(cell.Type, parent).transform;
+						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), layoutElement);
 						break;
 					}
 					default:
