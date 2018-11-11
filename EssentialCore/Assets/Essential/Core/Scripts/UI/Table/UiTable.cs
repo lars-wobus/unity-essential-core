@@ -21,8 +21,7 @@ namespace Essential.Core.UI.Table
 			Table = new Table(_style);
 
 			//Debug.Log(JsonUtility.ToJson(_tableData));
-			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});
-			BuildTableRecursive(root, _tableBody);
+			Render();
 		}
 
 		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent)
@@ -61,6 +60,12 @@ namespace Essential.Core.UI.Table
 					}	
 				}
 			}
+		}
+
+		public void Render()
+		{
+			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});
+			BuildTableRecursive(root, _tableBody);
 		}
 	}
 }
