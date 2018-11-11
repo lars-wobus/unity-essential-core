@@ -2,7 +2,8 @@
 {
 	public enum TableCellType {
 		Empty,
-		Text,
+		StaticText,
+		DynamicText,
 		Row,
 		Column
 	}

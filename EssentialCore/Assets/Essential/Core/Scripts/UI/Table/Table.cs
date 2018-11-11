@@ -23,7 +23,7 @@ namespace Essential.Core.UI.Table
 				{
 					return Object.Instantiate(Style.Empty, parent);
 				}
-				case TableCellType.Text:
+				case TableCellType.StaticText:
 				{
 					return Object.Instantiate(Style.Text, parent);
 				}

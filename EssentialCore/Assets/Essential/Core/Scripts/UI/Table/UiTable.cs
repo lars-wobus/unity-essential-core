@@ -21,7 +21,7 @@ namespace Essential.Core.UI.Table
 		{
 			Table = new Table(_style);
 
-			//Debug.Log(JsonUtility.ToJson(_tableData));
+			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();
 		}
 
@@ -39,7 +39,16 @@ namespace Essential.Core.UI.Table
 						}
 						break;
 					}
-					case TableCellType.Text:
+					case TableCellType.StaticText:
+					{
+						foreach (var content in cell.Refs)
+						{
+							var text = Table.CreateCell(cell.Type, parent).GetComponent<TMP_Text>();
+							text.text = content;
+						}
+						break;
+					}
+					case TableCellType.DynamicText:
 					{
 						foreach (var content in cell.Refs)
 						{

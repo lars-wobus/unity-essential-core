@@ -308,37 +308,37 @@ MonoBehaviour:
       - 2
       - 3
     - _id: 5
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
       - 4
     - _id: 6
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
       - 4
     - _id: 7
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
       - 4
     - _id: 8
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
       - 4
     - _id: 9
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
       - 4
     - _id: 10
-      _type: 2
+      _type: 1
       _refs:
       - 2
       - 3
