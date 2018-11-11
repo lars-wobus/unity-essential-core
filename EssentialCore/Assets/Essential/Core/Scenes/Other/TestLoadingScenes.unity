@@ -334,12 +334,7 @@ MonoBehaviour:
       _refs:
       - 2
       - 3
-  _textPrefab: {fileID: 1246101948395826, guid: 0a0265086d0a6b64c8c32c9690ed9bbe,
-    type: 2}
-  _rowPrefab: {fileID: 1824454707537552, guid: bc9069effa974db46a05449c5e34e101, type: 2}
   _tableBody: {fileID: 1829856330}
-  _columnPrefab: {fileID: 1008678107938238, guid: 50313b1f909e39348b97963fd4d0b23a,
-    type: 2}
   _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
 --- !u!1 &112840124
 GameObject:
@@ -1639,12 +1634,7 @@ MonoBehaviour:
       - '#2'
       - '#3'
       - '#4'
-  _textPrefab: {fileID: 1246101948395826, guid: 0a0265086d0a6b64c8c32c9690ed9bbe,
-    type: 2}
-  _rowPrefab: {fileID: 1824454707537552, guid: bc9069effa974db46a05449c5e34e101, type: 2}
   _tableBody: {fileID: 1800903377}
-  _columnPrefab: {fileID: 1008678107938238, guid: 50313b1f909e39348b97963fd4d0b23a,
-    type: 2}
   _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
 --- !u!1 &1383001131
 GameObject:
