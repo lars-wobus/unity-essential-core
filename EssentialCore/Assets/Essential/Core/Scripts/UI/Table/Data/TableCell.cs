@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Essential.Core.Scripts.UI.Table.Data;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Essential.Core.UI.Table.Data
 	public class TableCell : TableCellBase<string>
 	{
 		[SerializeField] private TableCellType _type;
-		[SerializeField] private string[] _refs;
+		[SerializeField] private List<string> _refs;
 		
 		public TableCellType Type
 		{
@@ -16,7 +17,7 @@ namespace Essential.Core.UI.Table.Data
 			set { _type = value; }
 		}
 		
-		public string[] Refs
+		public List<string> Refs
 		{
 			get { return _refs; }
 			set { _refs = value; }

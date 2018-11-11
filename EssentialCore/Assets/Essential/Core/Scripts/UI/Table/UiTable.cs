@@ -87,7 +87,10 @@ namespace Essential.Core.UI.Table
 
 		public void Render()
 		{
-			var root = TableData.FindCells(_tableData.Body, new[] {_tableData.Body[0].Id});
+			_tableData.AddCell("-1", TableCellType.Row, new List<string>{"7"});
+			var first = _tableData.FindTableCell("1");
+			if (first != null) first.Refs.Add("-1");
+			var root = TableData.FindCells(_tableData.Body, new List<string> {_tableData.Body[0].Id});
 			BuildTableRecursive(root, _tableBody, 0);
 			ChangeBackgroundColors(_tableBody);
 		}
