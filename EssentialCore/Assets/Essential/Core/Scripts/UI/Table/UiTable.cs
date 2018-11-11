@@ -17,12 +17,12 @@ namespace Essential.Core.UI.Table
 		[SerializeField] private TableStyle _style;
 		
 		private ITable Table { get; set; }
-		private TableTextRegistry TextRegistry { get; set; }
+		private TextRegistry TextRegistry { get; set; }
 
 		private void Start()
 		{
 			Table = new Table(_style);
-			TextRegistry = new TableTextRegistry();
+			TextRegistry = new TextRegistry();
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();

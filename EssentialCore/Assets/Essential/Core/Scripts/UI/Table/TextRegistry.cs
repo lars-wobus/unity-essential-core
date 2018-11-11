@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class TableTextRegistry
+	public class TextRegistry
 	{
 		private readonly Dictionary<string, TMP_Text> _texts = new Dictionary<string, TMP_Text>();
 
