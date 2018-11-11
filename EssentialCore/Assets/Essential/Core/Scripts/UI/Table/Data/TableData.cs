@@ -13,12 +13,12 @@ namespace Essential.Core.UI.Table.Data
 
         public List<TableCell> Body => _body;
 
-        public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, List<string> ids)
+        public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, ICollection<string> ids)
         {
             return cells.Where(element => ids.Contains(element.Id));
         }
 
-        public void AddCell(string id, TableCellType type, List<string> refs)
+        public void AddCell(string id, TableCellType type, ICollection<string> refs)
         {
             var cell = new TableCell(){ Id = id, Type = type, Refs = refs};
             _body.Add(cell);

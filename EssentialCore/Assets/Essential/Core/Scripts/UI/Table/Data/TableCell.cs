@@ -9,7 +9,7 @@ namespace Essential.Core.UI.Table.Data
 	public class TableCell : TableCellBase<string>
 	{
 		[SerializeField] private TableCellType _type;
-		[SerializeField] private List<string> _refs;
+		[SerializeField] private List<string> _refs = new List<string>();
 		
 		public TableCellType Type
 		{
@@ -17,10 +17,10 @@ namespace Essential.Core.UI.Table.Data
 			set { _type = value; }
 		}
 		
-		public List<string> Refs
+		public ICollection<string> Refs
 		{
 			get { return _refs; }
-			set { _refs = value; }
+			set { _refs.Clear(); _refs.AddRange(value); }
 		}
 	}
 }
