@@ -2,11 +2,9 @@
 
 namespace Essential.Core.UI.Table.Interfaces
 {
-    public interface ITableBody
+    public interface ITable
     {
-        Transform Root { get; }
-        
         Transform AddRow(Transform parent);
-        void RemoveRow();
+        Transform AddColumn(Transform parent);
     }
 }

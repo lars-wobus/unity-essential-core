@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Essential.Core.UI.Table.Data;
 using UnityEngine;
 
-[Serializable]
-public class TableData
+namespace Essential.Core.UI.Table.Data
 {
-    [SerializeField] private TableCell[] _cells;
-
-    public TableCell[] Cells => _cells;
-
-    public TableCell FindCell(string id)
+    [Serializable]
+    public class TableData
     {
-        return _cells.FirstOrDefault(element => element.Id == id);
-    }
-    
-    public IEnumerable<TableCell> FindCells(string[] ids)
-    {
-        return _cells.Where(element => ids.Contains(element.Id));
+        [SerializeField] private TableCell[] _body;
+
+        public TableCell[] Body => _body;
+
+        public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, string[] ids)
+        {
+            return cells.Where(element => ids.Contains(element.Id));
+        }
     }
 }

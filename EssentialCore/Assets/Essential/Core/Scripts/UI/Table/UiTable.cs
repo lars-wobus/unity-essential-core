@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Essential.Core.Scripts.UI.Table.Data;
 using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
@@ -12,25 +13,24 @@ namespace Essential.Core.UI.Table
 	{
 		[SerializeField] private TableData _tableData;
 		[SerializeField] private GameObject _textPrefab;
+		[SerializeField] private Transform TableBodyGo;
+		[SerializeField] private GameObject _rowPrefab;
+		[SerializeField] private GameObject _columnPrefab;
 		
-		private ITableHead TableHead { get; set; }
-		private ITableBody TableBody { get; set; }
+		private ITable Table { get; set; }
 
 		private void Start()
 		{
-			TableHead = GetComponent<ITableHead>();
-			TableBody = GetComponent<ITableBody>();
+			Table = new Table(_rowPrefab, _columnPrefab);
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
-			//_tableData.RootCell;
-			BuildTableRecursive(_tableData.Cells, TableBody.Root);
+			BuildTableRecursive(TableData.FindCells(_tableData.Body, new[]{_tableData.Body[0].Id}), TableBodyGo);
 		}
 
 		public void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent)
 		{
 			foreach (var cell in cells)
 			{
-				Debug.Log(cell.Type);
 				switch (cell.Type)
 				{
 					case TableCellType.Empty:
@@ -52,16 +52,14 @@ namespace Essential.Core.UI.Table
 					}
 					case TableCellType.Row:
 					{
-						Debug.Log("Row " + cell.Id);
 						var row = AddRow(parent);
-						Debug.Log("Row " + row);
-						BuildTableRecursive(_tableData.FindCells(cell.Refs), row);
+						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), row);
 						break;
 					}
 					case TableCellType.Column:
 					{
-						Transform column = null;
-						BuildTableRecursive(_tableData.FindCells(cell.Refs), column);
+						var column = AddColumn(parent);
+						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), column);
 						break;
 					}
 					default:
@@ -72,24 +70,14 @@ namespace Essential.Core.UI.Table
 			}
 		}
 
-		public void AddColumn()
+		public Transform AddColumn(Transform parent)
 		{
-			TableHead.AddColumn();
-		}
-
-		public void RemoveColumn()
-		{
-			TableHead.RemoveColumn();
+			return Table.AddColumn(parent);
 		}
 
 		public Transform AddRow(Transform parent)
 		{
-			return TableBody.AddRow(parent);
-		}
-
-		public void RemoveRow()
-		{
-			TableBody.RemoveRow();
+			return Table.AddRow(parent);
 		}
 	}
 }
