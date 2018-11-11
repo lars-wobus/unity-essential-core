@@ -8,9 +8,9 @@ namespace Essential.Core.UI.Table.Data
     [Serializable]
     public class TableData
     {
-        [SerializeField] private TableCell[] _body;
+        [SerializeField] private List<TableCell> _body;
 
-        public TableCell[] Body => _body;
+        public List<TableCell> Body => _body;
 
         public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, string[] ids)
         {
