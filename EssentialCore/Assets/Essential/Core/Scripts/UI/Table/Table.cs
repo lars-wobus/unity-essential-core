@@ -24,6 +24,7 @@ namespace Essential.Core.UI.Table
 					return Object.Instantiate(Style.Empty, parent);
 				}
 				case TableCellType.StaticText:
+				case TableCellType.DynamicText:
 				{
 					return Object.Instantiate(Style.Text, parent);
 				}

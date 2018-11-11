@@ -281,7 +281,7 @@ MonoBehaviour:
   _tableData:
     _body:
     - _id: 1
-      _type: 3
+      _type: 4
       _refs:
       - 2
       - 3
@@ -308,43 +308,43 @@ MonoBehaviour:
       - 2
       - 3
     - _id: 5
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 6
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 7
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 8
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 9
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 10
-      _type: 1
+      _type: 3
       _refs:
       - 2
       - 3
       - 4
     - _id: 11
-      _type: 2
+      _type: 3
       _refs:
       - 2
       - 3

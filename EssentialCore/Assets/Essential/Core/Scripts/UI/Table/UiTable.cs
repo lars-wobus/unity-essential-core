@@ -16,10 +16,12 @@ namespace Essential.Core.UI.Table
 		[SerializeField] private TableStyle _style;
 		
 		private ITable Table { get; set; }
+		private TableTextRegistry TextRegistry { get; set; }
 
 		private void Start()
 		{
 			Table = new Table(_style);
+			TextRegistry = new TableTextRegistry();
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();
@@ -54,6 +56,7 @@ namespace Essential.Core.UI.Table
 						{
 							var text = Table.CreateCell(cell.Type, parent).GetComponent<TMP_Text>();
 							text.text = content;
+							TextRegistry.Register(cell.Id, text);
 						}
 						break;
 					}
@@ -96,12 +99,19 @@ namespace Essential.Core.UI.Table
 
 		public void Render()
 		{
-			_tableData.AddCell("-1", TableCellType.Row, new List<string>{"7"});
+			//_tableData.AddCell("-1", TableCellType.Row, new List<string>{"7"});
+			_tableData.AddCell("-1", TableCellType.DynamicText, new List<string>{"7"});
 			var first = _tableData.FindTableCell("1");
 			if (first != null) first.Refs.Add("-1");
 			var root = TableData.FindCells(_tableData.Body, new List<string> {_tableData.Body[0].Id});
 			BuildTableRecursive(root, _tableBody, 0);
 			ChangeBackgroundColors(_tableBody);
+		}
+
+		private int i = 0;
+		private void Update()
+		{
+			TextRegistry.UpdateText("-1", (i++).ToString());
 		}
 	}
 }
