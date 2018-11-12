@@ -26,6 +26,9 @@ namespace Essential.Core.UI.Table
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();
+
+
+			//Interlocked.Increment(ref COUNTER); // TODO
 		}
 
 		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent, int depth)

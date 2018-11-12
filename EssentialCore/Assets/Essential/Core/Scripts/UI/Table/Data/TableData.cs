@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Essential.Core.UI.Table.Data
@@ -14,18 +15,22 @@ namespace Essential.Core.UI.Table.Data
 
         public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, ICollection<string> ids)
         {
-            return cells.Where(element => ids.Contains(element.Id));
+            return ids.Count == 0 ? null : cells.Where(element => ids.Contains(element.Id));
         }
 
         public void AddCell(string id, TableCellType type, ICollection<string> refs)
         {
-            var cell = new TableCell(){ Id = id, Type = type, Refs = refs};
-            _body.Add(cell);
+            _body.Add(new TableCell()
+            {
+                Id = id,
+                Type = type,
+                Refs = refs
+            });
         }
 
         public TableCell FindTableCell(string id)
         {
-            return _body.FirstOrDefault(element => element.Id == id);;
+            return string.IsNullOrEmpty(id) ? null : _body.FirstOrDefault(element => element.Id == id);
         }
     }
 }
