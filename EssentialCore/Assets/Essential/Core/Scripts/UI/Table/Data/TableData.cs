@@ -10,14 +10,7 @@ namespace Essential.Core.UI.Table.Data
     public class TableData
     {
         [SerializeField] private List<TableCell> _body;
-
-        public List<TableCell> Body => _body;
-
-        public static IEnumerable<TableCell> FindCells(IEnumerable<TableCell> cells, ICollection<string> ids)
-        {
-            return ids.Count == 0 ? null : cells.Where(element => ids.Contains(element.Id));
-        }
-
+        
         public void AddCell(string id, TableCellType type, ICollection<string> refs)
         {
             _body.Add(new TableCell()
@@ -28,9 +21,19 @@ namespace Essential.Core.UI.Table.Data
             });
         }
 
-        public TableCell FindTableCell(string id)
+        public TableCell GetRootCell()
+        {
+            return (_body.Count == 0)? null : _body[0];
+        }
+
+        public TableCell FindCell(string id)
         {
             return string.IsNullOrEmpty(id) ? null : _body.FirstOrDefault(element => element.Id == id);
+        }
+        
+        public IEnumerable<TableCell> FindCells(ICollection<string> ids)
+        {
+            return ids.Count == 0 ? null : _body.Where(element => ids.Contains(element.Id));
         }
     }
 }

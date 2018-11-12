@@ -28,9 +28,6 @@ namespace Essential.Core.UI.Table
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();
-
-
-			//Interlocked.Increment(ref COUNTER); // TODO
 		}
 
 		private void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent, int depth)
@@ -76,7 +73,7 @@ namespace Essential.Core.UI.Table
 					case TableCellType.Column:
 					{
 						var layoutElement = Table.CreateCell(cell.Type, parent).transform;
-						BuildTableRecursive(TableData.FindCells(_tableData.Body, cell.Refs), layoutElement, depth + 1);
+						BuildTableRecursive(_tableData.FindCells(cell.Refs), layoutElement, depth + 1);
 						break;
 					}
 					default:
@@ -93,7 +90,7 @@ namespace Essential.Core.UI.Table
 			_tableData.AddCell("---2", TableCellType.DynamicText, new []{defaultText});
 			_tableData.AddCell("---3", TableCellType.StaticText, new []{lives, description});
 			_tableData.AddCell("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
-			var first = _tableData.FindTableCell(owerId);
+			var first = _tableData.FindCell(owerId);
 			if (first != null) first.Refs.Add("---4");
 		}
 
@@ -101,13 +98,13 @@ namespace Essential.Core.UI.Table
 		{
 			//_tableData.AddCell("-1", TableCellType.Row, new List<string>{"7"});
 			_tableData.AddCell("-1", TableCellType.DynamicText, new []{"7"});
-			var first = _tableData.FindTableCell("1");
+			var first = _tableData.FindCell("1");
 			if (first != null) first.Refs.Add("-1");
 
 			CreateCustomRow("1", "player1", "gamepad", "nothing", "5", "Has no items");
 			
-			var root = TableData.FindCells(_tableData.Body, new []{_tableData.Body[0].Id});
-			BuildTableRecursive(root, _tableBody, 0);
+			var root = _tableData.GetRootCell();
+			BuildTableRecursive(new[]{root}, _tableBody, 0);
 			
 			Decorator?.UpdateColors(_tableBody.GetChild(0), _style);
 		}
