@@ -235,6 +235,26 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 224455613412804644, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224867418010000882, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39406869c5e6cd4bb82d78f8baad426, type: 2}
   m_IsPrefabAsset: 0
@@ -247,6 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 92524580}
   - component: {fileID: 92524582}
+  - component: {fileID: 92524581}
   m_Layer: 0
   m_Name: UiTable (1)
   m_TagString: Untagged
@@ -267,6 +288,17 @@ Transform:
   m_Father: {fileID: 1057086061}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92524581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92524579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565df91d8459cbe48a6b729130e2d507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &92524582
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,11 +18,13 @@ namespace Essential.Core.UI.Table
 		
 		private ITable Table { get; set; }
 		private TextRegistry TextRegistry { get; set; }
+		private ITableDecorator Decorator { get; set; }
 
 		private void Start()
 		{
 			Table = new Table(_style);
 			TextRegistry = new TextRegistry();
+			Decorator = GetComponent<ITableDecorator>();
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
 			Render();
@@ -85,28 +87,6 @@ namespace Essential.Core.UI.Table
 			}
 		}
 
-		private void ChangeBackgroundColors(Transform parent)
-		{
-			var primeChild = parent.GetChild(0);
-			if (primeChild == null)
-			{
-				return;
-			}
-
-			var index = 0;
-			foreach (Transform child in primeChild)
-			{
-				Debug.Log(child);
-				var image = child.GetComponent<Image>();
-				if (image == null)
-				{
-					continue;
-				}
-				
-				image.color = _style.Colors[index++ % _style.Colors.Length];
-			}
-		}
-
 		public void CreateCustomRow(string owerId, string playerNo, string controls, string defaultText, string lives, string description)
 		{
 			_tableData.AddCell("---1", TableCellType.StaticText, new []{playerNo, controls});
@@ -128,7 +108,8 @@ namespace Essential.Core.UI.Table
 			
 			var root = TableData.FindCells(_tableData.Body, new []{_tableData.Body[0].Id});
 			BuildTableRecursive(root, _tableBody, 0);
-			ChangeBackgroundColors(_tableBody);
+			
+			Decorator?.UpdateColors(_tableBody.GetChild(0), _style);
 		}
 
 		private int i = 0;
