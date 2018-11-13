@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 92524580}
   - component: {fileID: 92524582}
   - component: {fileID: 92524581}
+  - component: {fileID: 92524583}
+  - component: {fileID: 92524584}
   m_Layer: 0
   m_Name: UiTable (1)
   m_TagString: Untagged
@@ -383,6 +385,44 @@ MonoBehaviour:
       - 10
   _tableBody: {fileID: 303906681}
   _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
+--- !u!114 &92524583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92524579}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889ae44f552f21a47be74ff35bb5aba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 92524582}
+        m_MethodName: Render
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &92524584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 92524579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ec6979ff6cc044badfbfe4e44d1832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &112840124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,6 +1963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1361720402}
   - component: {fileID: 1361720404}
+  - component: {fileID: 1361720403}
   m_Layer: 0
   m_Name: UiTable
   m_TagString: Untagged
@@ -1943,6 +1984,33 @@ Transform:
   m_Father: {fileID: 1057086061}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1361720403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1361720401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889ae44f552f21a47be74ff35bb5aba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1361720404}
+        m_MethodName: Render
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1361720404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,7 +2025,7 @@ MonoBehaviour:
   _tableData:
     _body:
     - _id: 1
-      _type: 2
+      _type: 3
       _refs:
       - 2
     - _id: 2
