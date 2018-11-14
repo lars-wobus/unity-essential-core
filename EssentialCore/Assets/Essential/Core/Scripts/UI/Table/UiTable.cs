@@ -10,6 +10,8 @@ namespace Essential.Core.UI.Table
 {
 	public class UiTable : MonoBehaviour
 	{
+		private const int MaxDepth = 10;
+		
 		[SerializeField] private TableData _tableData;
 		[SerializeField] private Transform _tableBody;
 		[SerializeField] private TableStyle _style;
@@ -19,7 +21,7 @@ namespace Essential.Core.UI.Table
 
 		private void Awake()
 		{
-			TableDrawer = new TableDrawer(new Table(_style), _tableData);
+			TableDrawer = new TableDrawer(new Table(_style));
 			Decorator = GetComponent<ITableDecorator>();
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
@@ -28,8 +30,7 @@ namespace Essential.Core.UI.Table
 		
 		public void Render()
 		{
-			var root = _tableData.GetRootCell();
-			TableDrawer?.CreateTable(new[]{root}, _tableBody, 0);	
+			CreateTable(new[]{"1"}, _tableBody, 0);
 			Decorator?.UpdateColors(_tableBody.GetChild(0), _style);
 		}
 
@@ -42,6 +43,18 @@ namespace Essential.Core.UI.Table
 		public TableCell GetRoot()
 		{
 			return _tableData.GetRootCell();
+		}
+
+		private void CreateTable(ICollection<string> refs, Transform parent, int depth)
+		{
+			if (depth > MaxDepth)
+			{
+				Debug.LogWarning("Max Depth Reached");
+				return;
+			}
+			
+			var cells = _tableData.FindCells(refs);
+			TableDrawer.CreateTable(cells, parent, depth + 1, CreateTable);
 		}
 	}
 }
