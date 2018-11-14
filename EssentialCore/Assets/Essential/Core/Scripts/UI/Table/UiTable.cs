@@ -5,53 +5,54 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class UiTable : MonoBehaviour
-	{
-		private const int MaxDepth = 10;
-		
-		[SerializeField] private TableData _tableData;
-		[SerializeField] private Transform _tableBody;
-		[SerializeField] private TableStyle _style;
-		
-		private ITableDecorator Decorator { get; set; }
-		private TableLayout TableLayout { get; set; }
+    public class UiTable : MonoBehaviour
+    {
+        private const int MaxDepth = 10;
 
-		private void Awake()
-		{
-			TableLayout = new TableLayout(new Table(_style));
-			Decorator = GetComponent<ITableDecorator>();
+        [SerializeField] private TableData _tableData;
+        [SerializeField] private Transform _tableBody;
+        [SerializeField] private TableStyle _style;
 
-			Debug.Log(JsonUtility.ToJson(_tableData));
-			Render();
-		}
-		
-		public void Render()
-		{
-			CreateTable(new[]{"1"}, _tableBody, 0);
-			Decorator?.UpdateColors(_tableBody.GetChild(0), _style);
-		}
+        private ITableDecorator Decorator { get; set; }
+        private TableLayout TableLayout { get; set; }
 
-		public void Add(string id, TableCellType type, ICollection<string> refs)
-		{
-			_tableData.AddCell(id, type, refs);
-			// TODO Render
-		}
+        private void Awake()
+        {
+            var table = new Table(_style);
+            TableLayout = new TableLayout(table);
+            Decorator = GetComponent<ITableDecorator>();
 
-		public TableCell GetRoot()
-		{
-			return _tableData.GetRootCell();
-		}
+            Debug.Log(JsonUtility.ToJson(_tableData));
+           
+            CreateTable(new[] {"1"}, _tableBody, 0);
+            Decorator?.UpdateColors(GetRootItem(), _style);
+        }
 
-		private void CreateTable(ICollection<string> refs, Transform parent, int depth)
-		{
-			if (depth > MaxDepth)
-			{
-				Debug.LogWarning("Max Depth Reached");
-				return;
-			}
-			
-			var cells = _tableData.FindCells(refs);
-			TableLayout.CreateTable(cells, parent, depth + 1, CreateTable);
-		}
-	}
+        protected void CreateTable(ICollection<string> refs, Transform parent, int depth)
+        {
+            if (depth > MaxDepth)
+            {
+                Debug.LogWarning("Max Depth Reached");
+                return;
+            }
+
+            var cells = _tableData.FindCells(refs);
+            TableLayout.CreateTable(cells, parent, depth + 1, CreateTable);
+        }
+
+        protected Transform GetRootItem()
+        {
+            return _tableBody.GetChild(0);
+        }
+        
+        protected TableCell GetRootData()
+        {
+            return _tableData.GetRootCell();
+        }
+
+        protected void AddItemData(string id, TableCellType type, ICollection<string> refs)
+        {
+            _tableData.AddCell(id, type, refs);
+        }
+    }
 }

@@ -9,17 +9,20 @@ namespace Essential.Core.UI.Table
 		private CustomTableBuilder()
 		{
 			CreateCustomRow("player1", "gamepad", "nothing", "5", "Has no items");
-			Render();
+			//Render();
 		}
 		
 		public void CreateCustomRow(string playerNo, string controls, string defaultText, string lives, string description)
 		{
-			Add("---1", TableCellType.StaticText, new []{playerNo, controls});
-			Add("---2", TableCellType.DynamicText, new []{defaultText});
-			Add("---3", TableCellType.StaticText, new []{lives, description});
-			Add("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
+			AddItemData("---1", TableCellType.StaticText, new []{playerNo, controls});
+			AddItemData("---2", TableCellType.DynamicText, new []{defaultText});
+			AddItemData("---3", TableCellType.StaticText, new []{lives, description});
+			AddItemData("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
 			
-			GetRoot()?.Refs.Add("---4");
+			GetRootData()?.Refs.Add("---4");
+
+			var parent = GetRootItem();
+			CreateTable(new[]{"--4"}, parent, 1);
 		}
 	}
 }
