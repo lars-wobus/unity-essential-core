@@ -13,6 +13,7 @@ namespace Essential.Core.UI.Table.Data
         
         public void AddCell(string id, TableCellType type, ICollection<string> refs)
         {
+            Debug.Log(id);
             _body.Add(new TableCell()
             {
                 Id = id,

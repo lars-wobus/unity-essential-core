@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Essential.Core.UI.Table
         private ITableDecorator Decorator { get; set; }
         private TableLayout TableLayout { get; set; }
 
-        private void Awake()
+        protected void Awake()
         {
             var table = new Table(_style);
             TableLayout = new TableLayout(table);

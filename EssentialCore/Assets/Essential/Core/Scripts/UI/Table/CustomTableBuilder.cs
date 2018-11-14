@@ -5,11 +5,11 @@ namespace Essential.Core.UI.Table
 {
 	public class CustomTableBuilder : UiTable
 	{
-		// Test
-		private CustomTableBuilder()
+		protected new void Awake()
 		{
+			base.Awake();
+			// Test
 			CreateCustomRow("player1", "gamepad", "nothing", "5", "Has no items");
-			//Render();
 		}
 		
 		public void CreateCustomRow(string playerNo, string controls, string defaultText, string lives, string description)
@@ -22,7 +22,7 @@ namespace Essential.Core.UI.Table
 			GetRootData()?.Refs.Add("---4");
 
 			var parent = GetRootItem();
-			CreateTable(new[]{"--4"}, parent, 1);
+			CreateTable(new[]{"---4"}, parent, 1);
 		}
 	}
 }
