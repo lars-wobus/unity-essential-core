@@ -29,7 +29,7 @@ namespace Essential.Core.UI.Table
 		public void Render()
 		{
 			var root = _tableData.GetRootCell();
-			TableDrawer?.BuildTableRecursive(new[]{root}, _tableBody, 0);	
+			TableDrawer?.CreateTable(new[]{root}, _tableBody, 0);	
 			Decorator?.UpdateColors(_tableBody.GetChild(0), _style);
 		}
 

@@ -22,7 +22,7 @@ namespace Essential.Core.UI.Table
 			TextRegistry = new TextRegistry();
 		}
 	
-		public void BuildTableRecursive(IEnumerable<TableCell> cells, Transform parent, int depth)
+		public void CreateTable(IEnumerable<TableCell> cells, Transform parent, int depth)
 		{
 			if (depth > MaxDepth)
 			{
@@ -65,7 +65,7 @@ namespace Essential.Core.UI.Table
 					case TableCellType.Column:
 					{
 						var layoutElement = Table.CreateItem(cell.Type, parent).transform;
-						BuildTableRecursive(Data.FindCells(cell.Refs), layoutElement, depth + 1);
+						CreateTable(Data.FindCells(cell.Refs), layoutElement, depth + 1);
 						break;
 					}
 					default:
