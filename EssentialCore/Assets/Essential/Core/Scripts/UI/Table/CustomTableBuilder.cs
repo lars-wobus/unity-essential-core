@@ -3,27 +3,23 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class CustomTableBuilder : MonoBehaviour
+	public class CustomTableBuilder : UiTable
 	{
-		private UiTable UiTable { get; set; }
-	
+		// Test
+		private CustomTableBuilder()
+		{
+			CreateCustomRow("player1", "gamepad", "nothing", "5", "Has no items");
+			Render();
+		}
+		
 		public void CreateCustomRow(string playerNo, string controls, string defaultText, string lives, string description)
 		{
-			UiTable.Add("---1", TableCellType.StaticText, new []{playerNo, controls});
-			UiTable.Add("---2", TableCellType.DynamicText, new []{defaultText});
-			UiTable.Add("---3", TableCellType.StaticText, new []{lives, description});
-			UiTable.Add("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
+			Add("---1", TableCellType.StaticText, new []{playerNo, controls});
+			Add("---2", TableCellType.DynamicText, new []{defaultText});
+			Add("---3", TableCellType.StaticText, new []{lives, description});
+			Add("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
 			
-			UiTable.GetRoot()?.Refs.Add("---4");
-		}
-
-		private void Start()
-		{
-			UiTable = GetComponent<UiTable>();
-			
-			// Test
-			CreateCustomRow("player1", "gamepad", "nothing", "5", "Has no items");
-			UiTable.Render();
+			GetRoot()?.Refs.Add("---4");
 		}
 	}
 }
