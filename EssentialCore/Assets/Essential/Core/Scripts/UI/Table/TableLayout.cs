@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class TableDrawer
+	public class TableLayout
 	{
 		private ITable Table { get; }
 		private TextRegistry TextRegistry { get; }
 
-		public TableDrawer(ITable table)
+		public TableLayout(ITable table)
 		{
 			Table = table;
 			TextRegistry = new TextRegistry();

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Essential.Core.UI.Table
 {
@@ -17,11 +14,11 @@ namespace Essential.Core.UI.Table
 		[SerializeField] private TableStyle _style;
 		
 		private ITableDecorator Decorator { get; set; }
-		private TableDrawer TableDrawer { get; set; }
+		private TableLayout TableLayout { get; set; }
 
 		private void Awake()
 		{
-			TableDrawer = new TableDrawer(new Table(_style));
+			TableLayout = new TableLayout(new Table(_style));
 			Decorator = GetComponent<ITableDecorator>();
 
 			Debug.Log(JsonUtility.ToJson(_tableData));
@@ -54,7 +51,7 @@ namespace Essential.Core.UI.Table
 			}
 			
 			var cells = _tableData.FindCells(refs);
-			TableDrawer.CreateTable(cells, parent, depth + 1, CreateTable);
+			TableLayout.CreateTable(cells, parent, depth + 1, CreateTable);
 		}
 	}
 }
