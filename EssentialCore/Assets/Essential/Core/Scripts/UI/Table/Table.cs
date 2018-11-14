@@ -15,7 +15,7 @@ namespace Essential.Core.UI.Table
 			Style = style;
 		}
 
-		public GameObject CreateCell(TableCellType type, Transform parent)
+		public GameObject CreateItem(TableCellType type, Transform parent)
 		{
 			switch (type)
 			{

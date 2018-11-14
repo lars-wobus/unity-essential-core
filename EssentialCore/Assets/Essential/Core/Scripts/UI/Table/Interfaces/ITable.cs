@@ -5,6 +5,6 @@ namespace Essential.Core.UI.Table.Interfaces
 {
     public interface ITable
     {
-        GameObject CreateCell(TableCellType type, Transform parent);
+        GameObject CreateItem(TableCellType type, Transform parent);
     }
 }

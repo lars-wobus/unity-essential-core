@@ -38,7 +38,7 @@ namespace Essential.Core.UI.Table
 					{
 						for(var index = 0; index < cell.Refs.Count; ++index)
 						{
-							Table.CreateCell(cell.Type, parent);
+							Table.CreateItem(cell.Type, parent);
 						}
 						break;
 					}
@@ -46,7 +46,7 @@ namespace Essential.Core.UI.Table
 					{
 						foreach (var content in cell.Refs)
 						{
-							var text = Table.CreateCell(cell.Type, parent).GetComponent<TMP_Text>();
+							var text = Table.CreateItem(cell.Type, parent).GetComponent<TMP_Text>();
 							text.text = content;
 						}
 						break;
@@ -55,7 +55,7 @@ namespace Essential.Core.UI.Table
 					{
 						foreach (var content in cell.Refs)
 						{
-							var text = Table.CreateCell(cell.Type, parent).GetComponent<TMP_Text>();
+							var text = Table.CreateItem(cell.Type, parent).GetComponent<TMP_Text>();
 							text.text = content;
 							TextRegistry.Register(cell.Id, text);
 						}
@@ -64,7 +64,7 @@ namespace Essential.Core.UI.Table
 					case TableCellType.Row:
 					case TableCellType.Column:
 					{
-						var layoutElement = Table.CreateCell(cell.Type, parent).transform;
+						var layoutElement = Table.CreateItem(cell.Type, parent).transform;
 						BuildTableRecursive(Data.FindCells(cell.Refs), layoutElement, depth + 1);
 						break;
 					}
