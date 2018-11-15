@@ -38,7 +38,7 @@ namespace Essential.Core.UI.Table
             }
 
             var cells = _tableData.FindCells(refs);
-            TableLayout.CreateTable(cells, parent, depth + 1, CreateTable);
+            TableLayout.ExpandTable(cells, parent, depth + 1, CreateTable);
         }
 
         protected Transform GetRootItem()

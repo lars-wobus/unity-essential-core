@@ -18,7 +18,7 @@ namespace Essential.Core.UI.Table
 			TextRegistry = new TextRegistry();
 		}
 	
-		public void CreateTable(IEnumerable<TableCell> cells, Transform parent, int depth, Action<ICollection<string>, Transform, int> hasChildren)
+		public void ExpandTable(IEnumerable<TableCell> cells, Transform parent, int depth, Action<ICollection<string>, Transform, int> hasChildren)
 		{
 			foreach (var cell in cells)
 			{
