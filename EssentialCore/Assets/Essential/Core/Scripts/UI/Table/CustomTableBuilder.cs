@@ -22,7 +22,7 @@ namespace Essential.Core.UI.Table
 			GetRootData()?.Refs.Add("---4");
 
 			var parent = GetRootItem();
-			CreateTable(new[]{"---4"}, parent, 1);
+			FillTable(new[]{"---4"}, parent, 1);
 		}
 	}
 }

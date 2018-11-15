@@ -25,11 +25,11 @@ namespace Essential.Core.UI.Table
 
             Debug.Log(JsonUtility.ToJson(_tableData));
            
-            CreateTable(new[] {"1"}, _tableBody, 0);
+            FillTable(new[] {"1"}, _tableBody, 0);
             Decorator?.UpdateColors(GetRootItem(), _style);
         }
 
-        protected void CreateTable(ICollection<string> refs, Transform parent, int depth)
+        protected void FillTable(ICollection<string> refs, Transform parent, int depth)
         {
             if (depth > MaxDepth)
             {
@@ -38,7 +38,7 @@ namespace Essential.Core.UI.Table
             }
 
             var cells = _tableData.FindCells(refs);
-            TableLayout.ExpandTable(cells, parent, depth + 1, CreateTable);
+            TableLayout.ExpandTable(cells, parent, depth + 1, FillTable);
         }
 
         protected Transform GetRootItem()
