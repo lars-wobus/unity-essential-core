@@ -10,7 +10,7 @@ namespace Essential.Core.UI.Table
 	public class TableLayout
 	{
 		private ITable Table { get; }
-		private TextRegistry TextRegistry { get; }
+		private ITextRegistry<TMP_Text> TextRegistry { get; }
 
 		public TableLayout(ITable table)
 		{

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Essential.Core.UI.Table.Interfaces;
 using TMPro;
 using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class TextRegistry
+	public class TextRegistry : ITextRegistry<TMP_Text>
 	{
 		private readonly Dictionary<string, TMP_Text> _texts = new Dictionary<string, TMP_Text>();
 
