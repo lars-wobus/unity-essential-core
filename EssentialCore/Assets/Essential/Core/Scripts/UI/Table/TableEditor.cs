@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-    public class UiTable : MonoBehaviour
+    public class TableEditor : MonoBehaviour
     {
         private const int MaxDepth = 10;
 

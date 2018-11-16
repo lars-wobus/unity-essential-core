@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class CustomTableBuilder : UiTable
+	public class CustomTableEditor : TableEditor
 	{
 		protected new void Awake()
 		{
