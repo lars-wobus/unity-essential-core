@@ -15,7 +15,7 @@ namespace Essential.Core.UI.Table
 		public TableLayout(ITable table)
 		{
 			Table = table;
-			TextRegistry = new TextRegistry();
+			TextRegistry = new TextMeshProTextRegistry();
 		}
 	
 		public void ExpandTable(IEnumerable<TableCell> cells, Transform parent, int depth, Action<ICollection<string>, Transform, int> hasChildren)

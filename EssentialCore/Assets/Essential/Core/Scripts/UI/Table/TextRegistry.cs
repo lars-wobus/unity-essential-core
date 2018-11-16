@@ -6,24 +6,34 @@ using UnityEngine;
 
 namespace Essential.Core.UI.Table
 {
-	public class TextRegistry : ITextRegistry<TMP_Text>
+	public abstract class TextRegistry<T> : ITextRegistry<T>
 	{
-		private readonly Dictionary<string, TMP_Text> _texts = new Dictionary<string, TMP_Text>();
+		private readonly Dictionary<string, T> _textStore = new Dictionary<string, T>();
 
-		public void Register(string id, TMP_Text text)
+		public void Register(string id, T text)
 		{
-			if (_texts.ContainsKey(id))
+			if (_textStore.ContainsKey(id))
 			{
 				Debug.LogWarning("Key already in use: " + id);
 				return;
 			}
 			
-			_texts.Add(id, text);
+			_textStore.Add(id, text);
 		}
-		
-		public void UpdateText(string id, string content)
+
+		protected T FindText(string id)
 		{
-			var text = _texts.FirstOrDefault(keyValuePair => keyValuePair.Key == id).Value;
+			return _textStore.FirstOrDefault(keyValuePair => keyValuePair.Key == id).Value;
+		}
+
+		public abstract void UpdateText(string id, string content);
+	}
+
+	public class TextMeshProTextRegistry : TextRegistry<TMP_Text>
+	{
+		public override void UpdateText(string id, string content)
+		{
+			var text = FindText(id);
 			if (text == null)
 			{
 				return;
